@@ -9,12 +9,12 @@ package Presentacion;
  *
  * @author nicolasgutierrez
  */
-public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
+public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Cancelar_colaboracion_a_Propuesta
+     * Creates new form Dejar_de_Seguir_Usuario
      */
-    public Cancelar_colaboracion_a_Propuesta() {
+    public Dejar_de_Seguir_Usuario() {
         initComponents();
     }
 
