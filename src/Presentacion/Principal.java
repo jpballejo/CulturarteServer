@@ -27,7 +27,96 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jPopupMenu3 = new javax.swing.JPopupMenu();
+        jPopupMenu4 = new javax.swing.JPopupMenu();
+        menuprincipal = new javax.swing.JMenuBar();
+        menuusuarios = new javax.swing.JMenu();
+        altadeperfil = new javax.swing.JMenuItem();
+        consultadecolaborador = new javax.swing.JMenuItem();
+        consultadeproponente = new javax.swing.JMenuItem();
+        seguirusuario = new javax.swing.JMenuItem();
+        dejardeseguir = new javax.swing.JMenuItem();
+        menupropuestas = new javax.swing.JMenu();
+        altapropuesta = new javax.swing.JMenuItem();
+        consultapropuesta = new javax.swing.JMenuItem();
+        consultapropuestaporestado = new javax.swing.JMenuItem();
+        modificarpropuesta = new javax.swing.JMenuItem();
+        menucolaboraciones = new javax.swing.JMenu();
+        cancelarcolaboracion = new javax.swing.JMenuItem();
+        consultacolaboracion = new javax.swing.JMenuItem();
+        registrarcolaboracion = new javax.swing.JMenuItem();
+        menucategoria = new javax.swing.JMenu();
+        altacategoria = new javax.swing.JMenuItem();
+
+        jScrollPane1.setViewportView(jEditorPane1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        altadeperfil.setBackground(null);
+        altadeperfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                altadeperfilMouseClicked(evt);
+            }
+        });
+        altadeperfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altadeperfilActionPerformed(evt);
+            }
+        });
+        menuusuarios.add(altadeperfil);
+
+        consultadecolaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultadecolaboradorActionPerformed(evt);
+            }
+        });
+        menuusuarios.add(consultadecolaborador);
+
+        consultadeproponente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultadeproponenteActionPerformed(evt);
+            }
+        });
+        menuusuarios.add(consultadeproponente);
+
+        menuusuarios.add(seguirusuario);
+
+        dejardeseguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dejardeseguirActionPerformed(evt);
+            }
+        });
+        menuusuarios.add(dejardeseguir);
+
+        menuprincipal.add(menuusuarios);
+
+        menupropuestas.add(altapropuesta);
+
+        menupropuestas.add(consultapropuesta);
+
+        menupropuestas.add(consultapropuestaporestado);
+
+        menupropuestas.add(modificarpropuesta);
+
+        menuprincipal.add(menupropuestas);
+
+        menucolaboraciones.add(cancelarcolaboracion);
+
+        menucolaboraciones.add(consultacolaboracion);
+
+        menucolaboraciones.add(registrarcolaboracion);
+
+        menuprincipal.add(menucolaboraciones);
+
+        menucategoria.add(altacategoria);
+
+        menuprincipal.add(menucategoria);
+
+        setJMenuBar(menuprincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +126,31 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void altadeperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altadeperfilActionPerformed
+A        // TODO add your handling code here:
+    }//GEN-LAST:event_altadeperfilActionPerformed
+
+    private void altadeperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altadeperfilMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_altadeperfilMouseClicked
+
+    private void consultadeproponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultadeproponenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultadeproponenteActionPerformed
+
+    private void consultadecolaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultadecolaboradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultadecolaboradorActionPerformed
+
+    private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dejardeseguirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +188,29 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem altacategoria;
+    private javax.swing.JMenuItem altadeperfil;
+    private javax.swing.JMenuItem altapropuesta;
+    private javax.swing.JMenuItem cancelarcolaboracion;
+    private javax.swing.JMenuItem consultacolaboracion;
+    private javax.swing.JMenuItem consultadecolaborador;
+    private javax.swing.JMenuItem consultadeproponente;
+    private javax.swing.JMenuItem consultapropuesta;
+    private javax.swing.JMenuItem consultapropuestaporestado;
+    private javax.swing.JMenuItem dejardeseguir;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JPopupMenu jPopupMenu3;
+    private javax.swing.JPopupMenu jPopupMenu4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu menucategoria;
+    private javax.swing.JMenu menucolaboraciones;
+    private javax.swing.JMenuBar menuprincipal;
+    private javax.swing.JMenu menupropuestas;
+    private javax.swing.JMenu menuusuarios;
+    private javax.swing.JMenuItem modificarpropuesta;
+    private javax.swing.JMenuItem registrarcolaboracion;
+    private javax.swing.JMenuItem seguirusuario;
     // End of variables declaration//GEN-END:variables
 }
