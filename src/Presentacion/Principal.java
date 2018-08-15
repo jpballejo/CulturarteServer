@@ -139,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void altadeperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altadeperfilActionPerformed
-A        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_altadeperfilActionPerformed
 
     private void altadeperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altadeperfilMouseClicked
