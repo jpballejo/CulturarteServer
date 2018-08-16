@@ -23,11 +23,10 @@ public class ContUsuario implements iConUsuario {
         }
             return instance;
     }
-    
 
     @Override
     public void cargarUsuarios() {
-    
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -36,7 +35,7 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public List<dtProponente> listarProponentes() {
+    public List<String> listarProponentes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -46,12 +45,12 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public List<dtColaborador> listarColaboradores() {
+    public List<String> listarColaboradores() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public dtColaborador infoColaborador(String idColaborador) {
+    public dtUsuario infoColaborador(String idColaborador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -80,5 +79,7 @@ public class ContUsuario implements iConUsuario {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+
+   
     
 }

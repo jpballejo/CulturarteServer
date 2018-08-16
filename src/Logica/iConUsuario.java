@@ -15,10 +15,10 @@ public interface iConUsuario {
     
     public abstract void cargarUsuarios();
     public abstract void agregarUsu(dtUsuario usuario);
-    public abstract List<dtProponente> listarProponentes();
+    public abstract List<String> listarProponentes();
     public abstract dtUsuario infoProponente(String idProponente);
-    public abstract List<dtColaborador> listarColaboradores();
-    public abstract dtColaborador infoColaborador(String idColaborador);
+    public abstract List<String> listarColaboradores();
+    public abstract dtUsuario infoColaborador(String idColaborador);
     public abstract List<dtPropuesta> listarPropuestas(String idColaborador);
     public abstract List<dtColaborador> listarColaboradores(String idPropuesta);
     public abstract dtColaboraciones seleccionarColaborador(String idColaborador);
