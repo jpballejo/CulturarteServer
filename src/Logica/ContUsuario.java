@@ -5,10 +5,29 @@
  */
 package Logica;
 
+import java.util.Map;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class ContUsuario implements iConUsuario {
+  
+  //  private Map<String, Usuario> usuarios;
+    private static ContUsuario instance;
+    
+    public static ContUsuario getInstance() {
+        if(instance==null){
+            instance= new ContUsuario();
+        }
+            return instance;
+    }
+    
+
+    @Override
+    public void cargarUsuarios() {
+    
+    }
+    
     
 }

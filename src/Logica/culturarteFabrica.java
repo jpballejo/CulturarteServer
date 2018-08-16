@@ -28,6 +28,9 @@ public class culturarteFabrica {
             iConColaboracion ic= this.getIContColaboracion();
             iConUsuario iu= this.getIContUsuario();
             iConPropuesta ip= this.getIContPropuesta();
+            ic.cargarColaboracion();
+            iu.cargarUsuarios();
+            ip.cargarPropuestas();
         }
     
         public iConColaboracion getIContColaboracion(){

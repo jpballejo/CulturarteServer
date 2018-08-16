@@ -10,5 +10,20 @@ package Logica;
  * @author nicolasgutierrez
  */
 public class ContPropuesta implements iConPropuesta {
+
+    private static ContPropuesta instance;
+    
+    public static ContPropuesta getInstance() {
+        if(instance==null){
+            instance= new ContPropuesta();
+        }
+            return instance;
+    }
+    
+    
+    @Override
+    public void cargarPropuestas() {
+      
+    }
     
 }

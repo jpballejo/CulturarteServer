@@ -10,5 +10,5 @@ package Logica;
  * @author nicolasgutierrez
  */
 public interface iConPropuesta {
-    
+    public abstract void cargarPropuestas();
 }

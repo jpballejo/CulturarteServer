@@ -10,5 +10,19 @@ package Logica;
  * @author nicolasgutierrez
  */
 public class ContColaboracion implements iConColaboracion{
+
+    private static ContColaboracion instance;
+    
+    public static ContColaboracion getInstance() {
+        if(instance==null){
+            instance= new ContColaboracion();
+        }
+            return instance;
+    }
+    
+    @Override
+    public void cargarColaboracion() {
+        
+    }
     
 }

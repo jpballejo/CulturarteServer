@@ -11,4 +11,5 @@ package Logica;
  */
 public interface iConColaboracion {
     
+    public abstract void cargarColaboracion();
 }
