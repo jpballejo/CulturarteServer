@@ -19,30 +19,33 @@ public class culturarteFabrica {
         }
         return instance;
     }
-
-    private culturarteFabrica() {
-
-    }
-
-    public void cargarDatosPrueba() {
-        iConColaboracion ic = this.getIContColaboracion();
-        iConUsuario iu = this.getIContUsuario();
-        iConPropuesta ip = this.getIContPropuesta();
-    }
-
-    public iConColaboracion getIContColaboracion() {
-        iConColaboracion icc = ContColaboracion.getInstance();
-        return icc;
-    }
-
-    public iConUsuario getIContUsuario() {
-        iConUsuario icu = ContUsuario.getInstance();
-        return icu;
-    }
-
-    public iConPropuesta getIContPropuesta() {
-        iConPropuesta icp = ContPropuesta.getInstance();
-        return icp;
-    }
-
+    
+        private culturarteFabrica(){
+            
+        }
+        
+        public void cargarDatosPrueba(){
+            iConColaboracion ic= this.getIContColaboracion();
+            iConUsuario iu= this.getIContUsuario();
+            iConPropuesta ip= this.getIContPropuesta();
+            ic.cargarColaboracion();
+            iu.cargarUsuarios();
+            ip.cargarPropuestas();
+        }
+    
+        public iConColaboracion getIContColaboracion(){
+            iConColaboracion icc= ContColaboracion.getInstance();
+            return icc;
+        }
+        
+        public iConUsuario getIContUsuario(){
+            iConUsuario icu= ContUsuario.getInstance();
+            return icu;
+        }
+        
+        public iConPropuesta getIContPropuesta(){
+            iConPropuesta icp= ContPropuesta.getInstance();
+            return icp;
+        }
+    
 }
