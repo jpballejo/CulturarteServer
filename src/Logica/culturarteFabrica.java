@@ -10,39 +10,39 @@ package Logica;
  * @author nicolasgutierrez
  */
 public class culturarteFabrica {
-    
+
     private static culturarteFabrica instance;
-    
+
     public static culturarteFabrica getInstance() {
-        if(instance==null){
-            instance= new culturarteFabrica();
+        if (instance == null) {
+            instance = new culturarteFabrica();
         }
-            return instance;
+        return instance;
     }
-    
-        private culturarteFabrica(){
-            
-        }
-        
-        public void cargarDatosPrueba(){
-            iConColaboracion ic= this.getIContColaboracion();
-            iConUsuario iu= this.getIContUsuario();
-            iConPropuesta ip= this.getIContPropuesta();
-        }
-    
-        public iConColaboracion getIContColaboracion(){
-            iConColaboracion icc= ContColaboracion.getInstance();
-            return icc;
-        }
-        
-        public iConUsuario getIContUsuario(){
-            iConUsuario icu= ContUsuario.getInstance();
-            return icu;
-        }
-        
-        public iConPropuesta getIContPropuesta(){
-            iConPropuesta icp= ContPropuesta.getInstance();
-            return icp;
-        }
-    
+
+    private culturarteFabrica() {
+
+    }
+
+    public void cargarDatosPrueba() {
+        iConColaboracion ic = this.getIContColaboracion();
+        iConUsuario iu = this.getIContUsuario();
+        iConPropuesta ip = this.getIContPropuesta();
+    }
+
+    public iConColaboracion getIContColaboracion() {
+        iConColaboracion icc = ContColaboracion.getInstance();
+        return icc;
+    }
+
+    public iConUsuario getIContUsuario() {
+        iConUsuario icu = ContUsuario.getInstance();
+        return icu;
+    }
+
+    public iConPropuesta getIContPropuesta() {
+        iConPropuesta icp = ContPropuesta.getInstance();
+        return icp;
+    }
+
 }
