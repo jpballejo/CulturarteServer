@@ -32,7 +32,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableproponente = new javax.swing.JTable();
+        tablecolaborador = new javax.swing.JTable();
         labelnickname = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablepropuestas1 = new javax.swing.JTable();
@@ -61,7 +61,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         });
         jScrollPane1.setViewportView(jTable1);
 
-        tableproponente.setModel(new javax.swing.table.DefaultTableModel(
+        tablecolaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,7 +72,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
                 "Nombre", "Apellido", "Email", "Nacimiento"
             }
         ));
-        jScrollPane2.setViewportView(tableproponente);
+        jScrollPane2.setViewportView(tablecolaborador);
 
         tablepropuestas1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,7 +153,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelimagen;
     private javax.swing.JLabel labelnickname;
-    private javax.swing.JTable tableproponente;
+    private javax.swing.JTable tablecolaborador;
     private javax.swing.JTable tablepropuestas1;
     // End of variables declaration//GEN-END:variables
 }
