@@ -66,8 +66,6 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             tablepropuestas.getColumnModel().getColumn(0).setHeaderValue("Titulo");
         }
 
-        jLabel1.setText("Propuestas");
-
         tablepropuesta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -80,10 +78,6 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             }
         ));
         jScrollPane2.setViewportView(tablepropuesta);
-
-        jLabel5.setText("Monto total recaudado");
-
-        jLabel3.setText("Estado");
 
         tablecolaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,8 +92,6 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         ));
         jScrollPane3.setViewportView(tablecolaboradores);
 
-        jLabel2.setText("Colaboradores");
-
         tablecolaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -112,18 +104,6 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             }
         ));
         jScrollPane4.setViewportView(tablecolaborador);
-
-        jLabel4.setText("Colaborador");
-
-        txtnickcolaborador.setText("Seleccione uno");
-
-        jLabel6.setText("Tipo de retorno");
-
-        jLabel7.setText("Monto");
-
-        btnaceptar.setText("Aceptar");
-
-        btncancelar.setText("Cancelar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

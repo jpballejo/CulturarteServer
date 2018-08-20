@@ -12,4 +12,22 @@ package Logica;
 public class propEstado {
 
     private dtFecha fecha;
+    
+//METODOS//
+    
+
+//CONSTRUCTOR//
+    public propEstado(dtFecha fecha) {
+        this.fecha = fecha;
+    }
+  
+//GETTER//
+    public dtFecha getFecha() {
+        return fecha;
+    }
+    
+//SETTER//
+    public void setFecha(dtFecha fecha) {
+        this.fecha = fecha;
+    }
 }

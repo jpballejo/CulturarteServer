@@ -15,6 +15,58 @@ public class dtColabAProp {
     int montoColaborado;
     dtFecha fecha;
     dtHora hora;
-    enumRetorno retorno;
+    enumRetorno retorno;    
+    
+//CONSTRUCTOR//
+    public dtColabAProp(String nombre, int montoColaborado, dtFecha fecha, dtHora hora, enumRetorno retorno) {
+        this.nombre = nombre;
+        this.montoColaborado = montoColaborado;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.retorno = retorno;
+    }
 
+//GETTERS//
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getMontoColaborado() {
+        return montoColaborado;
+    }
+
+    public dtFecha getFecha() {
+        return fecha;
+    }
+
+    public dtHora getHora() {
+        return hora;
+    }
+
+    public enumRetorno getRetorno() {
+        return retorno;
+    }
+
+//SETTERS//
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setMontoColaborado(int montoColaborado) {
+        this.montoColaborado = montoColaborado;
+    }
+
+    public void setFecha(dtFecha fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setHora(dtHora hora) {
+        this.hora = hora;
+    }
+
+    public void setRetorno(enumRetorno retorno) {
+        this.retorno = retorno;
+    }
+
+    
 }

@@ -13,4 +13,37 @@ public class dtProponente {
 
     private String direccion, biografia, sitioWeb;
 
+//CONSTRUCTOR//
+    public dtProponente(String direccion, String biografia, String sitioWeb) {
+        this.direccion = direccion;
+        this.biografia = biografia;
+        this.sitioWeb = sitioWeb;
+    }
+
+//GETTERS//
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public String getSitioWeb() {
+        return sitioWeb;
+    }
+
+//SETTERS// 
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
+    public void setSitioWeb(String sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+
 }

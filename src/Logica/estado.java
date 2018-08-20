@@ -13,4 +13,21 @@ public class estado {
 
     private String nombre;
 
+//METODOS//
+    
+//CONSTRUCTOR//
+    public estado(String nombre) {
+        this.nombre = nombre;
+    }
+
+//GETTER//
+    public String getNombre() {
+        return nombre;
+    }
+    
+//SETTER//
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
 }

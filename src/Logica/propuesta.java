@@ -16,6 +16,7 @@ public class propuesta {
     int precioEntrada, montoRequerido;
 
     
+    //METODOS//
     public boolean sosPropuesta(String idPropuesta){
     return true;
     }
@@ -30,4 +31,87 @@ public class propuesta {
     return prop;
     }
 
+    
+    //CONSTRUCTORES//
+    public propuesta() {}
+    
+    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.lugar = lugar;
+        this.fecharealizacion = fecharealizacion;
+        this.fechapublicada = fechapublicada;
+        this.precioEntrada = precioEntrada;
+        this.montoRequerido = montoRequerido;
+    }
+
+    //GETTERS
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public dtFecha getFecharealizacion() {
+        return fecharealizacion;
+    }
+
+    public dtFecha getFechapublicada() {
+        return fechapublicada;
+    }
+
+    public int getPrecioEntrada() {
+        return precioEntrada;
+    }
+
+    public int getMontoRequerido() {
+        return montoRequerido;
+    }
+    
+    //SETTERS//
+     public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public void setFecharealizacion(dtFecha fecharealizacion) {
+        this.fecharealizacion = fecharealizacion;
+    }
+
+    public void setFechapublicada(dtFecha fechapublicada) {
+        this.fechapublicada = fechapublicada;
+    }
+
+    public void setPrecioEntrada(int precioEntrada) {
+        this.precioEntrada = precioEntrada;
+    }
+
+    public void setMontoRequerido(int montoRequerido) {
+        this.montoRequerido = montoRequerido;
+    }
+
+    
+    
 }

@@ -29,11 +29,15 @@ dtColaborador dtcol=new dtColaborador();
 
 
 public String getRetornos(){
-String s = "a";
+String s = "retorno";
 return s;
 }
 
 public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
 }
-   
+
+//CONSTRUCTOR//
+    public colaborador() {
+    }
+
 }
