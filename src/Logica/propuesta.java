@@ -15,4 +15,19 @@ public class propuesta {
     dtFecha fecharealizacion, fechapublicada;
     int precioEntrada, montoRequerido;
 
+    
+    public boolean sosPropuesta(String idPropuesta){
+    return true;
+    }
+
+    public propuesta getPropuesta(){
+    propuesta prop=new propuesta();
+    return prop;
+    }
+
+    public propuesta getPropExistentes(){
+    propuesta prop=new propuesta();
+    return prop;
+    }
+
 }

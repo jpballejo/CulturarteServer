@@ -13,4 +13,9 @@ public class proponente extends usuario {
 
     private String direccion, biografia, web;
 
+    public dtPropuesta getPropuestas(String idPropuesta){
+    dtPropuesta prop=new dtPropuesta();
+    return prop;
+    }
+
 }

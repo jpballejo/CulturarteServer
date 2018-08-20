@@ -16,4 +16,16 @@ public class colProp {
     int montocolaborado;
     enumRetorno retorno;
 
+    
+    public void sosColProp(String idPropuesta){
+    }
+    
+    public dtColaborador getColProp(){
+    dtColaborador dtcol=new dtColaborador();
+    return dtcol;
+    }
+    
+    public void altaColaboracionEnPropuesta(String idPropuesta){
+        
+    }
 }

@@ -10,14 +10,14 @@ package Logica;
  * @author nicolasgutierrez
  */
 public class culturarteFabrica {
-
+    
     private static culturarteFabrica instance;
-
+    
     public static culturarteFabrica getInstance() {
-        if (instance == null) {
-            instance = new culturarteFabrica();
+        if(instance==null){
+            instance= new culturarteFabrica();
         }
-        return instance;
+            return instance;
     }
     
         private culturarteFabrica(){
