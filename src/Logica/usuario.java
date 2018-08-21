@@ -5,12 +5,15 @@
  */
 package Logica;
 
+import java.util.Map;
+
 /**
  *
  * @author Esteban Menendez
  */
 public class usuario {
 
+    private Map<String, usuario> seguidos;
     private String nickname, nombre, apellido, email, imagen;
     dtFecha nacimiento;
 
@@ -82,4 +85,14 @@ public class usuario {
         this.nacimiento = nacimiento;
     }
 
+    
+    //OPERACIONES
+    
+    public boolean loSigue(String nick) {
+        return this.seguidos.containsKey(nick);
+    }
+    
+    public void seguir(usuario us) {
+        this.seguidos.put(us.getNickname(), us);
+    }
 }
