@@ -86,4 +86,24 @@ public class colProp {
         this.propColaborada = propColaborada;
     }
 
+    //METODOS//
+    
+    public void sosColProp(String idPropuesta){
+    }
+    
+   
+    
+    public void altaColaboracionEnPropuesta(String idPropuesta){
+    }
+
+//CONSTRUCTOR//
+
+    public colProp(dtFecha fecha, dtHora hora, int montocolaborado, enumRetorno retorno) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.montocolaborado = montocolaborado;
+        this.retorno = retorno;
+    }
+    
+   
 }

@@ -140,4 +140,16 @@ public class propuesta {
         this.montoRequerido = montoRequerido;
     }
 
-}
+    
+    //METODOS//
+    public boolean sosPropuesta(String idPropuesta){
+    return true;
+    }
+
+  
+
+    
+  
+  }
+
+   

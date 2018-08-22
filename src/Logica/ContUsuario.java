@@ -14,12 +14,14 @@ import java.util.Map;
  * @author nicolasgutierrez
  */
 public class ContUsuario implements iConUsuario {
- private  Map<String,usuario>usuariosSistemas= new HashMap<String,usuario>();
+
  
+    private Map<String, usuario> usuarios= new HashMap<String,usuario>();
  public boolean existeUsuario(String nickName){
-     if(usuariosSistemas.get(nickName)!=null){return true;}return false;
+     if(usuarios.get(nickName)!=null){return true;}return false;
 }
         
+  
     private static ContUsuario instance;
     
     public static ContUsuario getInstance() {
@@ -76,7 +78,22 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public void seguir(String nicknameSeguidor, String nicknameASeguir) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        usuario us=this.usuarios.get(nicknameSeguidor);
+        if(us!=null){
+            usuario as=this.usuarios.get(nicknameASeguir);
+            if(as==null)
+                //throw el usuario a seguir no existe
+            if(!us.loSigue(nicknameASeguir)) {
+                us.seguir(as);
+            } 
+            else {
+                //throw ya lo sigue
+            }
+        }
+        else{
+            //throw no existe el usuario
+        }
+            
     }
 
     @Override

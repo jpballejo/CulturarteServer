@@ -13,6 +13,10 @@ import java.util.Map;
  * @author Esteban Menendez
  */
 public class colaborador extends usuario{
+
+public boolean sosColaborador(){
+    return true;
+    }
     
     public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
         super(nickname, nombre, apellido, email, imagen, nacimiento);

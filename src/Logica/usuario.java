@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.Map;
+
 /**
  *
  * @author Esteban Menendez
