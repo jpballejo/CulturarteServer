@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,12 @@ import java.util.Map;
  * @author nicolasgutierrez
  */
 public class ContUsuario implements iConUsuario {
-  
-  //  private Map<String, Usuario> usuarios;
+ private  Map<String,usuario>usuariosSistemas= new HashMap<String,usuario>();
+ 
+ public boolean existeUsuario(String nickName){
+     if(usuariosSistemas.get(nickName)!=null){return true;}return false;
+}
+        
     private static ContUsuario instance;
     
     public static ContUsuario getInstance() {
