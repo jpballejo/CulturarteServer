@@ -15,6 +15,7 @@ public class dtColProp {
     dtFecha fecha;
     dtHora hora;
     int montoColaborado;
+
     
 //CONSTRUCTOR//
     public dtColProp(String nickname, String retorno, dtFecha fecha, dtHora hora, int montoColaborado) {
