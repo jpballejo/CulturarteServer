@@ -39,6 +39,7 @@ public class proponente extends usuario {
         return web;
     }
     
+    
     //SETTERS//
 
     public void setDireccion(String direccion) {
