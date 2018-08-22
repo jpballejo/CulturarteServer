@@ -9,8 +9,40 @@ package Logica;
  *
  * @author Esteban Menendez
  */
-public class dtProponente {
+public class dtProponente extends dtUsuario{
 
     private String direccion, biografia, sitioWeb;
 
+    public dtProponente(String nombre, String apellido, String nickname, String imagen, String email, dtFecha fechaNac, String direccion, String biografia, String sitioWeb) {
+        super(nombre, apellido, nickname, imagen, email, fechaNac);
+   this.direccion=direccion;
+   this.biografia=biografia;
+   this.sitioWeb=sitioWeb;
+          
+    }
+
+    /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @return the biografia
+     */
+    public String getBiografia() {
+        return biografia;
+    }
+
+    /**
+     * @return the sitioWeb
+     */
+    public String getSitioWeb() {
+        return sitioWeb;
+    }
+
+    
+
+   
 }
