@@ -128,8 +128,9 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public colProp seleccionarColaboracion(String nickusuario, String titulo) {
-        usuario u=this.usuarios.get(nickusuario);
-        return u.seleccioonarColaboracion(titulo);
+        colaborador c=(colaborador)this.usuarios.get(nickusuario);
+        this.usuariorecordado=c;
+        return c.seleccioonarColaboracion(titulo);
     }
     
     
