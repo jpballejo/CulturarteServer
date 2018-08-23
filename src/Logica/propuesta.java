@@ -14,6 +14,7 @@ public class propuesta {
     private String titulo, descripcion, imagen, lugar;
     private dtFecha fecharealizacion;
 
+
     public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido) {
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -151,5 +152,3 @@ public class propuesta {
     
   
   }
-
-   

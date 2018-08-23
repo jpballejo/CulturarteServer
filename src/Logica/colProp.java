@@ -16,86 +16,20 @@ public class colProp {
     private int montocolaborado;
     private enumRetorno retorno;
 
-    /**
-     * @return the fecha
-     */
-    public dtFecha getFecha() {
-        return fecha;
-    }
-
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(dtFecha fecha) {
-        this.fecha = fecha;
-    }
-
-    /**
-     * @return the hora
-     */
-    public dtHora getHora() {
-        return hora;
-    }
-
-    /**
-     * @param hora the hora to set
-     */
-    public void setHora(dtHora hora) {
-        this.hora = hora;
-    }
-
-    /**
-     * @return the montocolaborado
-     */
-    public int getMontocolaborado() {
-        return montocolaborado;
-    }
-
-    /**
-     * @param montocolaborado the montocolaborado to set
-     */
-    public void setMontocolaborado(int montocolaborado) {
-        this.montocolaborado = montocolaborado;
-    }
-
-    /**
-     * @return the retorno
-     */
-    public enumRetorno getRetorno() {
-        return retorno;
-    }
-
-    /**
-     * @param retorno the retorno to set
-     */
-    public void setRetorno(enumRetorno retorno) {
-        this.retorno = retorno;
-    }
-
-    /**
-     * @return the propColaborada
-     */
-    public propuesta getPropColaborada() {
-        return propColaborada;
-    }
-
-    /**
-     * @param propColaborada the propColaborada to set
-     */
-    public void setPropColaborada(propuesta propColaborada) {
-        this.propColaborada = propColaborada;
-    }
 
     //METODOS//
     
     public void sosColProp(String idPropuesta){
     }
     
-   
+    public dtColaborador getColProp(){
+    dtColaborador dtcol=null;
+    return dtcol;
+    }
     
     public void altaColaboracionEnPropuesta(String idPropuesta){
     }
-
+public propuesta getPropColaborada(){return null;}
 //CONSTRUCTOR//
 
     public colProp(dtFecha fecha, dtHora hora, int montocolaborado, enumRetorno retorno) {
@@ -105,5 +39,38 @@ public class colProp {
         this.retorno = retorno;
     }
     
-   
+    //GETTERS//
+    public dtFecha getFecha() {
+        return fecha;
+    }
+
+    public dtHora getHora() {
+        return hora;
+    }
+
+    public int getMontocolaborado() {
+        return montocolaborado;
+    }
+
+    public enumRetorno getRetorno() {
+        return retorno;
+    }
+    
+    //SETTERS//
+    public void setFecha(dtFecha fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setHora(dtHora hora) {
+        this.hora = hora;
+    }
+
+    public void setMontocolaborado(int montocolaborado) {
+        this.montocolaborado = montocolaborado;
+    }
+
+    public void setRetorno(enumRetorno retorno) {
+        this.retorno = retorno;
+    }
+
 }

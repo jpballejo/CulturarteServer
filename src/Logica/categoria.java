@@ -13,6 +13,7 @@ public class categoria {
 
     private String nombre;
 
+
     /**
      * @return the nombre
      */
@@ -26,5 +27,5 @@ public class categoria {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 }
+

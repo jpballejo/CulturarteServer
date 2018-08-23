@@ -33,17 +33,4 @@ public class dtFecha {
         return anio;
     }
 
-//SETTERS//
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-
-    public void setAnio(String anio) {
-        this.anio = anio;
-    }
-
 }

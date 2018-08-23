@@ -16,6 +16,7 @@ public class proponente extends usuario {
     private final Map<String,propuesta> propuestasUsuario = new HashMap<String,propuesta>();//diccionario con clave string
     private String direccion;
 
+
     private String biografia, web;
 
     public proponente(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String direccion, String biografia, String web) {
@@ -80,4 +81,11 @@ public class proponente extends usuario {
     public void setWeb(String web) {
         this.web = web;
     }
+
+    //METODOS//
+    public dtPropuesta getPropuestas(String idPropuesta){
+    dtPropuesta prop=new dtPropuesta(web, direccion, web, web, web, biografia, idPropuesta, nacimiento, nacimiento, 0, 0);
+    return prop;
+    }
+
 }

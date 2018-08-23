@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public class usuario {
 
+
     protected 
             String nickname
             ,nombre, 
@@ -21,89 +22,16 @@ public class usuario {
             imagen;
    protected dtFecha nacimiento;
 
-    /**
-     * @return the nickname
-     */
-    public String getNickname() {
-        return nickname;
+    private Map<String, usuario> seguidos;
+   
+    //METODOS
+    public dtPropuestasProponente getPropuestas() {
+        dtPropuestasProponente dtpp = new dtPropuestasProponente(email, nickname);
+        return dtpp;
     }
 
-    /**
-     * @param nickname the nickname to set
-     */
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return the apellido
-     */
-    public String getApellido() {
-        return apellido;
-    }
-
-    /**
-     * @param apellido the apellido to set
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the imagen
-     */
-    public String getImagen() {
-        return imagen;
-    }
-
-    /**
-     * @param imagen the imagen to set
-     */
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    /**
-     * @return the nacimiento
-     */
-    public dtFecha getNacimiento() {
-        return nacimiento;
-    }
-
-    /**
-     * @param nacimiento the nacimiento to set
-     */
-    public void setNacimiento(dtFecha nacimiento) {
-        this.nacimiento = nacimiento;
-    }
+    //CONSTRUCTORES//
+    public usuario() {}
 
     public usuario(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
         this.nickname = nickname;
@@ -114,6 +42,66 @@ public class usuario {
         this.nacimiento = nacimiento;
     }
 
+    //GETTERS//
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public dtFecha getNacimiento() {
+        return nacimiento;
+    }
+
+    //SETTERS//
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public void setNacimiento(dtFecha nacimiento) {
+        this.nacimiento = nacimiento;
+    }
+
     
+    //OPERACIONES
+    
+    public boolean loSigue(String nick) {
+        return this.seguidos.containsKey(nick);
+    }
+    
+    public void seguir(usuario us) {
+        this.seguidos.put(us.getNickname(), us);
+    }
+
 }
 

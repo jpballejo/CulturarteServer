@@ -22,6 +22,7 @@ public class ContUsuario implements iConUsuario {
 }
         
   
+
     private static ContUsuario instance;
     
     public static ContUsuario getInstance() {

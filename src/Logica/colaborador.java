@@ -14,16 +14,44 @@ import java.util.Map;
  */
 public class colaborador extends usuario{
 
+private final Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
+    
+public void agregarolaboracion(colProp colaboracion){
+colaboracionesUsuario.put(colaboracion.getPropColaborada().getTitulo(), colaboracion);
+}
+
 public boolean sosColaborador(){
     return true;
     }
     
+
     public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
         super(nickname, nombre, apellido, email, imagen, nacimiento);
     }
-    
-    private final Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
-public void agregarolaboracion(colProp colaboracion){
-colaboracionesUsuario.put(colaboracion.getPropColaborada().getTitulo(), colaboracion);
+
+public dtColaborador getColaboradores(){
+
+    dtColaborador dtcol=null;
+    return dtcol;
 }
+
+public dtColaborador getColaborador(){
+
+    return null;
+}
+    
+
+
+
+
+public String getRetornos(){
+String s = "retorno";
+return s;
+}
+
+public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
+
+}
+
+
 }
