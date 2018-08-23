@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import Persistencia.usuariosPersistencia;
 /**
  *
  * @author nicolasgutierrez
@@ -24,8 +24,10 @@ public class ContUsuario implements iConUsuario {
 
  
     private Map<String, usuario> usuarios= new HashMap<String,usuario>();
+    
+    
  public boolean existeUsuario(String nickName){
-     if(usuarios.get(nickName)!=null){return true;}return false;
+     if(usuarios.containsKey(nickName)== true){return true;}return false;
 }
         
   
@@ -48,8 +50,21 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public void agregarUsu(dtUsuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void agregarUsu(dtUsuario dtusu) {
+        dtProponente proponente = (dtProponente)dtusu;
+   if(proponente!=null){
+    proponente usuProp= new proponente((proponente.getNickname()), proponente.getNombre(), proponente.getApellido(), proponente.getEmail(), proponente.getImagen()
+            , proponente.getFechaNac(), proponente.getDireccion(),proponente.getBiografia(),proponente.getSitioWeb());
+    usuarios.put(usuProp.getNickname(), usuProp);  
+    
+   }
+   dtColaborador colaborador = (dtColaborador)dtusu;
+   if (colaborador!=null){
+   colaborador usuCola= new colaborador(colaborador.getNickname(),colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(),colaborador.getImagen(),colaborador.getFechaNac());
+   usuarios.put(usuCola.getNickname(),usuCola);
+   }
+   
+    
     }
 
     @Override
