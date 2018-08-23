@@ -24,6 +24,6 @@ public interface iConColaboracion {
     public abstract dtColabAProp seleccionarColaboración(String idPropuesta); 
     public abstract List<dtColaboraciones> listarColaboraciones();
     public abstract dtColProp seleccionarColaboracion(String nickusuario, String titulo);
-    public abstract void eliminar();
+    public abstract void eliminar() throws Exception;
 
 }

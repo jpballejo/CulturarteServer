@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Persistencia;
- 
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -31,13 +30,23 @@ public class ConexionDB {
     public ConexionDB(){};
     //Para hacer ConexionDB singleton descomentar
     //public static Connection getConexion() {
+    public Connection getConn(){
+        Connection con=null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
+    }
     public Connection getConexion() {
         if (conexion == null) {
             try {
+                
                 Driver driver = new com.mysql.jdbc.Driver();
                 DriverManager.registerDriver(driver);
                 conexion = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
-            } catch (SQLException ex) {
+                } catch (SQLException ex) {
                 ex.printStackTrace();
                 Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
             }

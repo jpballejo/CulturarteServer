@@ -5,7 +5,10 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 /**
  *
@@ -87,6 +90,19 @@ public class proponente extends usuario {
     dtPropuesta prop=new dtPropuesta(web, direccion, web, web, web, biografia, idPropuesta, nacimiento, nacimiento, 0, 0);
     return prop;
     }
+    
+    public List<dtPropuesta> getTodasPropuestas(){
+        List<dtPropuesta> retornar=new ArrayList<dtPropuesta>();
+        Iterator it= this.propuestasUsuario.keySet().iterator();
+        while(it.hasNext()){
+            String key=(String) it.next();
+            propuesta p=this.propuestasUsuario.get(key);
+            dtPropuesta dtp= new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido());
+            retornar.add(dtp);
+        }
+        return retornar;
+    }
+  
    
        
 }
