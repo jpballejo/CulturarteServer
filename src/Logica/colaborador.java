@@ -39,10 +39,10 @@ return s;
 public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
 }
 
-    @Override
+  //  @Override
     public colProp seleccioonarColaboracion(String titulo){
-        
-        return null;
+        return this.colaboracionesUsuario.get(titulo);
+       
     }
     
     @Override
@@ -56,7 +56,7 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
         super(nickname, nombre, apellido, email, imagen, nacimiento);
     }
  
-
+    
 
 
 }

@@ -29,7 +29,9 @@ public class colProp {
     
     public void altaColaboracionEnPropuesta(String idPropuesta){
     }
-public propuesta getPropColaborada(){return null;}
+    public propuesta getPropColaborada(){  
+    return this.propColaborada;
+}
 //CONSTRUCTOR//
 
     public colProp(dtFecha fecha, dtHora hora, int montocolaborado, enumRetorno retorno) {

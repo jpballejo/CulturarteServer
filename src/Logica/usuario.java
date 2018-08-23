@@ -121,12 +121,8 @@ public class usuario {
         
     }
     
-    public colProp seleccioonarColaboracion(String titulo){
-    throw new UnsupportedOperationException("Not supported yet.");
-    }
+    
 
-  /*  public colProp seleccioonarColaboracion(String titulo){
-        
-    } */
+    
 
 }
