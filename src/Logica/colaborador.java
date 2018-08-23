@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 /**
@@ -14,34 +15,20 @@ import java.util.Map;
  */
 public class colaborador extends usuario{
 
-private final Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
+private Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
     
-public void agregarolaboracion(colProp colaboracion){
-colaboracionesUsuario.put(colaboracion.getPropColaborada().getTitulo(), colaboracion);
-}
-
 public boolean sosColaborador(){
     return true;
     }
     
-
-    public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
-        super(nickname, nombre, apellido, email, imagen, nacimiento);
-    }
-
 public dtColaborador getColaboradores(){
-
-    dtColaborador dtcol=null;
-    return dtcol;
-}
-
-public dtColaborador getColaborador(){
 
     return null;
 }
-    
 
-
+public dtColaborador getColaborador(){
+return null;
+}
 
 
 public String getRetornos(){
@@ -50,8 +37,26 @@ return s;
 }
 
 public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
-
 }
+
+    @Override
+    public colProp seleccioonarColaboracion(String titulo){
+        
+        return null;
+    }
+    
+    @Override
+    public void eliminarColaboracion(colProp c){
+        this.colaboracionesUsuario.remove(c.getPropColaborada().getTitulo());
+    }
+
+   
+
+    public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
+        super(nickname, nombre, apellido, email, imagen, nacimiento);
+    }
+ 
+
 
 
 }

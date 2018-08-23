@@ -87,5 +87,6 @@ public class proponente extends usuario {
     dtPropuesta prop=new dtPropuesta(web, direccion, web, web, web, biografia, idPropuesta, nacimiento, nacimiento, 0, 0);
     return prop;
     }
-
+   
+       
 }

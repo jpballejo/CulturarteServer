@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -103,5 +104,29 @@ public class usuario {
         this.seguidos.put(us.getNickname(), us);
     }
 
-}
+   
+    public String getNacimientoString() {
+        String retorno= this.nacimiento.getDia()+"/"+this.nacimiento.getMes()+"/"+this.nacimiento.getAnio();
+        return retorno;
+    }
 
+   
+    
+    public void dejardeSeguir(usuario us){
+        this.seguidos.remove(us.getNickname(), us);
+    }
+
+
+    public void eliminarColaboracion(colProp c){
+        
+    }
+    
+    public colProp seleccioonarColaboracion(String titulo){
+    throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+  /*  public colProp seleccioonarColaboracion(String titulo){
+        
+    } */
+
+}

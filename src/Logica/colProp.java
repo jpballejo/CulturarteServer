@@ -73,4 +73,5 @@ public propuesta getPropColaborada(){return null;}
         this.retorno = retorno;
     }
 
+ 
 }
