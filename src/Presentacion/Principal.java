@@ -58,9 +58,13 @@ public class Principal extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jEditorPane1);
 
+        jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        jInternalFrame1.setVisible(true);
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -75,6 +79,9 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        menuusuarios.setText("Usuarios");
+
+        altadeperfil.setText("Alta de Perfil");
         altadeperfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 altadeperfilMouseClicked(evt);
@@ -87,6 +94,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(altadeperfil);
 
+        consultadecolaborador.setText("Consulta perfil de Colaborador");
         consultadecolaborador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultadecolaboradorActionPerformed(evt);
@@ -94,6 +102,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(consultadecolaborador);
 
+        consultadeproponente.setText("Consulta de perfil de Proponente");
         consultadeproponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultadeproponenteActionPerformed(evt);
@@ -101,8 +110,10 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(consultadeproponente);
 
+        seguirusuario.setText("Seguir Usuario");
         menuusuarios.add(seguirusuario);
 
+        dejardeseguir.setText("Dejar de Seguir a Usuario");
         dejardeseguir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dejardeseguirActionPerformed(evt);
@@ -112,24 +123,43 @@ public class Principal extends javax.swing.JFrame {
 
         menuprincipal.add(menuusuarios);
 
+        menupropuestas.setText("Propuestas");
+
+        altapropuesta.setText("Alta de Propuesta");
         menupropuestas.add(altapropuesta);
 
+        consultapropuesta.setText("Consulta de Propuesta");
         menupropuestas.add(consultapropuesta);
 
+        consultapropuestaporestado.setText("Consulta de Propuesta por estado");
         menupropuestas.add(consultapropuestaporestado);
 
+        modificarpropuesta.setText("Modificar datos Propuesta");
         menupropuestas.add(modificarpropuesta);
 
         menuprincipal.add(menupropuestas);
 
+        menucolaboraciones.setText("Colaboraciones");
+
+        cancelarcolaboracion.setText("Cancelar Colaboracion");
+        cancelarcolaboracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarcolaboracionActionPerformed(evt);
+            }
+        });
         menucolaboraciones.add(cancelarcolaboracion);
 
+        consultacolaboracion.setText("Consulta de Colaboracion");
         menucolaboraciones.add(consultacolaboracion);
 
+        registrarcolaboracion.setText("Registrar Colaboracion");
         menucolaboraciones.add(registrarcolaboracion);
 
         menuprincipal.add(menucolaboraciones);
 
+        menucategoria.setText("Categoria");
+
+        altacategoria.setText("Alta de Categoria");
         menucategoria.add(altacategoria);
 
         menuprincipal.add(menucategoria);
@@ -169,6 +199,10 @@ public class Principal extends javax.swing.JFrame {
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dejardeseguirActionPerformed
+
+    private void cancelarcolaboracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarcolaboracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelarcolaboracionActionPerformed
 
     /**
      * @param args the command line arguments
