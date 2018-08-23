@@ -5,9 +5,14 @@
  */
 package Logica;
 
+import Persistencia.cancelarcolaboracionPersistencia;
+import Persistencia.seguirdejardeseguirPersistencia;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +32,8 @@ public class ContUsuario implements iConUsuario {
 
     private static ContUsuario instance;
     private usuario usuariorecordado;
+    private seguirdejardeseguirPersistencia seguirdejardeseguir= new seguirdejardeseguirPersistencia();
+    private cancelarcolaboracionPersistencia cancelarcolab= new cancelarcolaboracionPersistencia();
     
     public static ContUsuario getInstance() {
         if(instance==null){
@@ -46,13 +53,26 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public List<String> listarProponentes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<String> listarProponentes(String nick) {
+        List<String> retornar=new ArrayList<String>();
+        Set set = usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            usuario aux=(proponente) mentry.getValue();        
+            if (aux.getNickname().contains(nick)){
+                retornar.add(aux.getNickname());
+            }
+           
+        }       
+        return retornar;
     }
 
     @Override
-    public dtUsuario infoProponente(String idProponente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public dtProponente infoProponente(String idProponente) {
+        proponente p=(proponente)usuarios.get(idProponente);
+        dtProponente res= new dtProponente(p.getNombre(),p.getApellido(),p.getNickname(),p.getImagen(),p.getEmail(),p.getNacimiento(),p.getDireccion(),p.getBiografia(),p.getWeb());
+        return res;
     }
 
     @Override
@@ -66,8 +86,9 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public List<dtPropuesta> listarPropuestas(String idColaborador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<dtPropuesta> listarPropuestas(String idProponente) {
+        proponente p= (proponente)this.usuarios.get(idProponente);
+        return p.getTodasPropuestas();
     }
 
     @Override
@@ -88,6 +109,8 @@ public class ContUsuario implements iConUsuario {
             if(as==null) //throw el usuario a seguir no existe
                 throw new Exception("El usuario "+nicknameASeguir+ " que desea seguir no existe");
             if(!us.loSigue(nicknameASeguir)) {
+                boolean res= this.seguirdejardeseguir.seguir(us, as);
+                if(res)
                 us.seguir(as);
             } 
             else {
@@ -113,6 +136,8 @@ public class ContUsuario implements iConUsuario {
             if(!us.loSigue(nicknameADejarDeSeguir))
                 throw new Exception("El usuario "+nicknameADejarDeSeguir+ " no se encuentra entre tus usuarios seguidos");
             else{
+                boolean res= this.seguirdejardeseguir.dejardeseguir(us, adds);
+                if(res)
                 us.dejardeSeguir(adds);
                 }
         }
@@ -122,8 +147,12 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public void eliminarColaboracion(colProp col) {
-       this.usuariorecordado.eliminarColaboracion(col);
+    public void eliminarColaboracion(colProp col) throws Exception {
+        boolean res= this.cancelarcolab.cancelarColaboracion(this.usuariorecordado.getNickname(), col);
+        if(res)
+            this.usuariorecordado.eliminarColaboracion(col);
+        else
+            throw new Exception("Imposible eliminar la colaboracion");
     }
 
     @Override

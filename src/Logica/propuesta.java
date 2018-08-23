@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author Esteban Menendez
@@ -13,6 +15,8 @@ public class propuesta {
 
     private String titulo, descripcion, imagen, lugar;
     private dtFecha fecharealizacion;
+    private List<estado> estados;
+    private categoria categoria;
 
 
     public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido) {
@@ -35,6 +39,10 @@ public class propuesta {
     public String getTitulo() {
         return titulo;
     }
+    
+    public String getEstadoActual(){
+        return estados.get(0).getNombre();
+    }
 
     /**
      * @param titulo the titulo to set
@@ -48,6 +56,10 @@ public class propuesta {
      */
     public String getDescripcion() {
         return descripcion;
+    }
+    
+    public String getCategoria() {
+        return categoria.getNombre();
     }
 
     /**

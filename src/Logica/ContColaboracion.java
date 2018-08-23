@@ -89,7 +89,7 @@ public class ContColaboracion implements iConColaboracion{
     }
 
     @Override
-    public void eliminar() {
+    public void eliminar() throws Exception{
         this.cUsuario.eliminarColaboracion(this.colaboracion);
     }
     

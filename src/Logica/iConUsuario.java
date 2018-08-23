@@ -15,8 +15,8 @@ public interface iConUsuario {
     
     public abstract void cargarUsuarios();
     public abstract void agregarUsu(dtUsuario usuario);
-    public abstract List<String> listarProponentes();
-    public abstract dtUsuario infoProponente(String idProponente);
+    public abstract List<String> listarProponentes(String nick);
+    public abstract dtProponente infoProponente(String idProponente);
     public abstract List<String> listarColaboradores();
     public abstract dtUsuario infoColaborador(String idColaborador);
     public abstract List<dtPropuesta> listarPropuestas(String idColaborador);
@@ -24,7 +24,7 @@ public interface iConUsuario {
     public abstract dtColaboraciones seleccionarColaborador(String idColaborador);
     public abstract void seguir(String nicknameSeguidor, String nicknameASeguir) throws Exception;
     public abstract void dejarDeSeguir(String nicknameSeguidor, String nicknameADejarDeSeguir)throws Exception;
-    public abstract void eliminarColaboracion(colProp col);
+    public abstract void eliminarColaboracion(colProp col) throws Exception;
     public abstract colProp seleccionarColaboracion(String nickusuario, String titulo); //original devuelve dt
     
 }
