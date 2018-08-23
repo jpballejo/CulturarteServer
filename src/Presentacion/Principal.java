@@ -5,17 +5,35 @@
  */
 package Presentacion;
 
+import Logica.culturarteFabrica;
+import Logica.iConColaboracion;
+import Logica.iConPropuesta;
+import Logica.iConUsuario;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class Principal extends javax.swing.JFrame {
 
+    
+    private iConUsuario ICU;
+    private iConColaboracion ICC;
+    private iConPropuesta ICP;
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        
+        //   this.setJMenuBar(jMenuBar1); 
+        //   this.jMenuBar1.setVisible(true);
+           
+           
+           culturarteFabrica Fabrica= culturarteFabrica.getInstance();
+           ICU=Fabrica.getIContUsuario();
+           ICC=Fabrica.getIContColaboracion();
+           ICP=Fabrica.getIContPropuesta();
     }
 
     /**
@@ -37,6 +55,10 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         menuprincipal = new javax.swing.JMenuBar();
         menuusuarios = new javax.swing.JMenu();
         altadeperfil = new javax.swing.JMenuItem();
@@ -76,6 +98,10 @@ public class Principal extends javax.swing.JFrame {
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        jMenuBar2.add(jMenu3);
+
+        jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,6 +186,11 @@ public class Principal extends javax.swing.JFrame {
         menucategoria.setText("Categoria");
 
         altacategoria.setText("Alta de Categoria");
+        altacategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altacategoriaActionPerformed(evt);
+            }
+        });
         menucategoria.add(altacategoria);
 
         menuprincipal.add(menucategoria);
@@ -198,11 +229,18 @@ public class Principal extends javax.swing.JFrame {
 
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
+        Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
+        ddsu.setVisible(true);
     }//GEN-LAST:event_dejardeseguirActionPerformed
 
     private void cancelarcolaboracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarcolaboracionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarcolaboracionActionPerformed
+
+    private void altacategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altacategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_altacategoriaActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -233,8 +271,12 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            //@Override
             public void run() {
+                
                 new Principal().setVisible(true);
+                
+                
             }
         });
     }
@@ -254,7 +296,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;
