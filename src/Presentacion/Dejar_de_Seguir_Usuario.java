@@ -5,12 +5,16 @@
  */
 package Presentacion;
 
+import Logica.iConUsuario;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
 
+    
+    private iConUsuario ICP;
     /**
      * Creates new form Dejar_de_Seguir_Usuario
      */
@@ -18,6 +22,10 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    public Dejar_de_Seguir_Usuario(iConUsuario icp) {
+        initComponents();
+        this.ICP=icp;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +40,12 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtseguidor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+
+        btndejardeseguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndejardeseguirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,6 +80,21 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btndejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndejardeseguirActionPerformed
+                try{
+        ICP.dejarDeSeguir(txtseguidor.getText(), txtadejardeseguir.getText());
+        
+        javax.swing.JOptionPane.showMessageDialog(null,"Se completo el dejar de seguir");
+        // TODO add your handling code here:
+        }catch(Exception ex){
+         javax.swing.JOptionPane.showMessageDialog(null,ex);
+        }
+        
+         this.txtseguidor.setText("");
+         this.txtadejardeseguir.setText("");
+// TODO add your handling code here:
+    }//GEN-LAST:event_btndejardeseguirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

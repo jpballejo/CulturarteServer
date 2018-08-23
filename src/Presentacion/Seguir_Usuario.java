@@ -5,12 +5,16 @@
  */
 package Presentacion;
 
+import Logica.iConUsuario;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class Seguir_Usuario extends javax.swing.JInternalFrame {
 
+    
+    private iConUsuario ICP;
     /**
      * Creates new form Seguir_Usuario
      */
@@ -32,6 +36,12 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtaseguir = new javax.swing.JTextField();
         btnseguir = new javax.swing.JButton();
+
+        btnseguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnseguirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,6 +76,21 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnseguirActionPerformed
+
+        try{
+        ICP.seguir(txtseguidor.getText(), txtaseguir.getText());
+        
+        javax.swing.JOptionPane.showMessageDialog(null,"Seguimiento realizado con exito");
+        // TODO add your handling code here:
+        }catch(Exception ex){
+         javax.swing.JOptionPane.showMessageDialog(null,ex);
+        }
+        
+        this.txtseguidor.setText("");
+        this.txtaseguir.setText("");
+    }//GEN-LAST:event_btnseguirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

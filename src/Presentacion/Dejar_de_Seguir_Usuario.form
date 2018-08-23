@@ -57,6 +57,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Dejar de Seguir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btndejardeseguirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtadejardeseguir">
     </Component>
