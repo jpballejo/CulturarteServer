@@ -32,5 +32,12 @@ public class dtFecha {
     public String getAnio() {
         return anio;
     }
+    
+    public String getFecha(){
+    String fecha=null;
+    fecha = this.dia+"/"+this.mes+"/"+this.anio;
+    
+    return fecha;
+    }
 
 }
