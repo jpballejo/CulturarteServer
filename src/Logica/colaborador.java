@@ -5,11 +5,58 @@
  */
 package Logica;
 
+import java.util.HashMap;
+
+import java.util.Map;
+
 /**
  *
  * @author Esteban Menendez
  */
 public class colaborador extends usuario{
+
+private Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
     
+public boolean sosColaborador(){
+    return true;
+    }
     
+public dtColaborador getColaboradores(){
+
+    return null;
+}
+
+public dtColaborador getColaborador(){
+return null;
+}
+
+
+public String getRetornos(){
+String s = "retorno";
+return s;
+}
+
+public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
+}
+
+  //  @Override
+    public colProp seleccioonarColaboracion(String titulo){
+        return this.colaboracionesUsuario.get(titulo);
+       
+    }
+    
+    @Override
+    public void eliminarColaboracion(colProp c){
+        this.colaboracionesUsuario.remove(c.getPropColaborada().getTitulo());
+    }
+
+   
+
+    public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
+        super(nickname, nombre, apellido, email, imagen, nacimiento);
+    }
+ 
+    
+
+
 }

@@ -13,4 +13,29 @@ public class dtColaboraciones {
 
     private String nickname, idPropuesta;
 
+//CONSTRUCTOR//
+    public dtColaboraciones(String nickname, String idPropuesta) {
+        this.nickname = nickname;
+        this.idPropuesta = idPropuesta;
+    }
+
+//GETTERS//
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getIdPropuesta() {
+        return idPropuesta;
+    }
+
+//SETTERS//
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setIdPropuesta(String idPropuesta) {
+        this.idPropuesta = idPropuesta;
+    }
+
+    
 }

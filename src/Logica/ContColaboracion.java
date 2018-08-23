@@ -14,6 +14,9 @@ import java.util.List;
 public class ContColaboracion implements iConColaboracion{
 
     private static ContColaboracion instance;
+    private colProp colaboracion;
+    private ContUsuario cUsuario=ContUsuario.getInstance();
+    
     
     public static ContColaboracion getInstance() {
         if(instance==null){
@@ -79,12 +82,15 @@ public class ContColaboracion implements iConColaboracion{
 
     @Override
     public dtColProp seleccionarColaboracion(String nickusuario, String titulo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       colProp cp=(colProp)this.cUsuario.seleccionarColaboracion(nickusuario, titulo);
+       this.colaboracion=cp;
+       dtColProp dtcp= new dtColProp(nickusuario,cp.getRetorno().toString(),cp.getFecha(),cp.getHora(),cp.getMontocolaborado());
+       return dtcp;
     }
 
     @Override
     public void eliminar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.cUsuario.eliminarColaboracion(this.colaboracion);
     }
     
 }

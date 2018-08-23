@@ -15,4 +15,21 @@ public class dtInfoProp {
     //Lista usuarios;
     float montoRecaudado;
 
+//CONSTRUCTOR//
+    public dtInfoProp(float montoRecaudado) {
+        this.montoRecaudado = montoRecaudado;
+    }
+
+//GETTER//
+    public float getMontoRecaudado() {
+        return montoRecaudado;
+    }
+
+//SETTER//
+    public void setMontoRecaudado(float montoRecaudado) {
+        this.montoRecaudado = montoRecaudado;
+    }
+
+    
+    
 }
