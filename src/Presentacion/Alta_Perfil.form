@@ -178,14 +178,17 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFT_fechaNac">
           <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new MaskFormatter(&quot;dd/mm/yyyy&quot;);&#xa;" type="code"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="dd/mm/yyyy" subtype="-1" type="1"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Fecha de nacimiento"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFT_fechaNacActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Alta_Perfil_jFT_fechaNac"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -308,10 +311,7 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jT_direccion" min="-2" pref="164" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="jT_web" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jT_web" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>

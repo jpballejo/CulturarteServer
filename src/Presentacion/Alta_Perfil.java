@@ -99,8 +99,7 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha Nacimiento:");
 
-        jFT_fechaNac.setFormatterFactory(new MaskFormatter("dd/mm/yyyy");
-        );
+        jFT_fechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/mm/yyyy"))));
         jFT_fechaNac.setToolTipText("Fecha de nacimiento");
         jFT_fechaNac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,9 +236,7 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jT_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jT_web)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                            .addComponent(jT_web)))
                     .addComponent(jScrollPane1))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
