@@ -73,11 +73,14 @@
         </DimensionLayout>
       </Layout>
     </Container>
+<<<<<<< HEAD
     <Component class="javax.swing.JMenuItem" name="jMenuItem1">
       <Properties>
         <Property name="text" type="java.lang.String" value="jMenuItem1"/>
       </Properties>
     </Component>
+=======
+>>>>>>> RamaJp
     <Container class="javax.swing.JMenuBar" name="jMenuBar2">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">

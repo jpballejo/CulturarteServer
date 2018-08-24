@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class usuariosPersistencia {
     ConexionDB conexion;
 
-    public void altaUsuario(dtUsuario dtUsu){
+    public void altaUsuario(dtUsuario dtUsu) throws Exception{
         try {
             String sqlUsu=null,sqlProp=null,sqlCol=null;
             Statement st=conexion.getConn().createStatement();
@@ -31,14 +31,16 @@ public class usuariosPersistencia {
                 st.executeUpdate(sqlProp);
                 conexion.getConn().close();
             }
+            
             dtColaborador dtCol = (dtColaborador)dtUsu;
             if(dtCol!=null){
+                sqlUsu = "INSERT INTO usuario (idUsuario,nombre,apellido,email,fechaNacimiento, imagen)VALUES("+dtCol.getNickname()+","+dtCol.getNombre()+","+dtCol.getApellido()+","+dtCol.getEmail()+","+dtCol.getFechaNac().getFecha()+","+dtCol.getImagen()+")";
                 sqlCol="INSERT INTO colaborador VALUES ("+dtCol.getNickname()+")";
                 st.executeUpdate(sqlCol);
                 conexion.getConn().close();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(usuariosPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            throw new Exception("Error al insertar los datos en la BD");
         }
     
     }

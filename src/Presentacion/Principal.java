@@ -55,7 +55,10 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+<<<<<<< HEAD
         jMenuItem1 = new javax.swing.JMenuItem();
+=======
+>>>>>>> RamaJp
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -99,8 +102,11 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+<<<<<<< HEAD
         jMenuItem1.setText("jMenuItem1");
 
+=======
+>>>>>>> RamaJp
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
 
@@ -141,11 +147,14 @@ public class Principal extends javax.swing.JFrame {
         menuusuarios.add(consultadeproponente);
 
         seguirusuario.setText("Seguir Usuario");
+<<<<<<< HEAD
         seguirusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seguirusuarioActionPerformed(evt);
             }
         });
+=======
+>>>>>>> RamaJp
         menuusuarios.add(seguirusuario);
 
         dejardeseguir.setText("Dejar de Seguir a Usuario");
@@ -177,11 +186,14 @@ public class Principal extends javax.swing.JFrame {
         menucolaboraciones.setText("Colaboraciones");
 
         cancelarcolaboracion.setText("Cancelar Colaboracion");
+<<<<<<< HEAD
         cancelarcolaboracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarcolaboracionActionPerformed(evt);
             }
         });
+=======
+>>>>>>> RamaJp
         menucolaboraciones.add(cancelarcolaboracion);
 
         consultacolaboracion.setText("Consulta de Colaboracion");
@@ -195,11 +207,14 @@ public class Principal extends javax.swing.JFrame {
         menucategoria.setText("Categoria");
 
         altacategoria.setText("Alta de Categoria");
+<<<<<<< HEAD
         altacategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 altacategoriaActionPerformed(evt);
             }
         });
+=======
+>>>>>>> RamaJp
         menucategoria.add(altacategoria);
 
         menuprincipal.add(menucategoria);
@@ -318,7 +333,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+<<<<<<< HEAD
     private javax.swing.JMenuItem jMenuItem1;
+=======
+>>>>>>> RamaJp
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;

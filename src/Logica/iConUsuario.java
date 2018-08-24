@@ -14,9 +14,10 @@ import java.util.List;
 public interface iConUsuario {
     
     public abstract void cargarUsuarios();
-    public abstract void agregarUsu(dtUsuario usuario);
-    public abstract List<String> listarProponentes(String nick);
-    public abstract dtProponente infoProponente(String idProponente);
+
+    public abstract void agregarUsu(dtUsuario usuario)throws Exception;
+    public abstract List<String> listarProponentes();
+    public abstract dtUsuario infoProponente(String idProponente);
     public abstract List<String> listarColaboradores();
     public abstract dtUsuario infoColaborador(String idColaborador);
     public abstract List<dtPropuesta> listarPropuestas(String idColaborador);

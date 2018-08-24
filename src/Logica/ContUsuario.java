@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.Exception;
 import Persistencia.usuariosPersistencia;
 /**
  *
@@ -22,13 +23,14 @@ import Persistencia.usuariosPersistencia;
  */
 public class ContUsuario implements iConUsuario {
 
- 
+ usuariosPersistencia usuPer;
     private Map<String, usuario> usuarios= new HashMap<String,usuario>();
     
     
  public boolean existeUsuario(String nickName){
      if(usuarios.containsKey(nickName)== true){return true;}return false;
-}
+
+ }
         
   
 
@@ -44,30 +46,42 @@ public class ContUsuario implements iConUsuario {
             return instance;
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Override
     public void cargarUsuarios() {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void agregarUsu(dtUsuario dtusu) {
+    public void agregarUsu(dtUsuario dtusu) throws Exception {
+    try {
         dtProponente proponente = (dtProponente)dtusu;
    if(proponente!=null){
-    proponente usuProp= new proponente((proponente.getNickname()), proponente.getNombre(), proponente.getApellido(), proponente.getEmail(), proponente.getImagen()
-            , proponente.getFechaNac(), proponente.getDireccion(),proponente.getBiografia(),proponente.getSitioWeb());
-    usuarios.put(usuProp.getNickname(), usuProp);  
-    
+            
+                proponente usuProp= new proponente((proponente.getNickname()), proponente.getNombre(), proponente.getApellido(), proponente.getEmail(), proponente.getImagen()
+                        , proponente.getFechaNac(), proponente.getDireccion(),proponente.getBiografia(),proponente.getSitioWeb());
+                usuarios.put(usuProp.getNickname(), usuProp);
+                usuPer.altaUsuario(dtusu);
+           
    }
    dtColaborador colaborador = (dtColaborador)dtusu;
    if (colaborador!=null){
    colaborador usuCola= new colaborador(colaborador.getNickname(),colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(),colaborador.getImagen(),colaborador.getFechaNac());
    usuarios.put(usuCola.getNickname(),usuCola);
+       usuPer.altaUsuario(dtusu);
    }
    
-    
+     } catch (Exception ex) {
+               
+            throw new Exception ("Error: "+ex);
+        
+            }
     }
 
-    @Override
     public List<String> listarProponentes(String nick) {
         List<String> retornar=new ArrayList<String>();
         Set set = usuarios.entrySet();
@@ -189,6 +203,11 @@ public class ContUsuario implements iConUsuario {
     
     public usuario getUsuarioRecordado(){
         return this.usuariorecordado;
+    }
+
+    @Override
+    public List<String> listarProponentes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
     
