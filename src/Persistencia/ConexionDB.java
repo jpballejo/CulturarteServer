@@ -53,6 +53,7 @@ public class ConexionDB {
         }
         return conexion;
     }
+    
     public void cerrar(){
         if (conexion != null) {
             try {

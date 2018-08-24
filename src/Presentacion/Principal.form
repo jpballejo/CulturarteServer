@@ -132,6 +132,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Seguir Usuario"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="seguirusuarioActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="dejardeseguir">
               <Properties>
@@ -179,6 +182,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar Colaboracion"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarcolaboracionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="consultacolaboracion">
               <Properties>
