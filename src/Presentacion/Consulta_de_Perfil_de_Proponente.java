@@ -5,6 +5,13 @@
  */
 package Presentacion;
 
+import Logica.dtProponente;
+import Logica.dtPropuesta;
+import Logica.iConPropuesta;
+import Logica.iConUsuario;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nicolasgutierrez
@@ -14,8 +21,18 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
     /**
      * Creates new form Consulta_de_Perfil_de_Proponente
      */
+    
+    private iConUsuario ICU;
+    private iConPropuesta ICP;
+    
     public Consulta_de_Perfil_de_Proponente() {
         initComponents();
+    }
+    
+    public Consulta_de_Perfil_de_Proponente(iConUsuario ICU, iConPropuesta ICP) {
+        initComponents();
+        this.ICU=ICU;
+        this.ICP=ICP;
     }
 
     /**
@@ -48,6 +65,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         jScrollPane5 = new javax.swing.JScrollPane();
         tableinfopropuesta = new javax.swing.JTable();
         labelimgpropuesta = new javax.swing.JLabel();
+        txtbuscar = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,6 +84,11 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -117,6 +140,11 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
                 "Titulo", "Estado"
             }
         ));
+        tablepropuestas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablepropuestas1MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tablepropuestas1);
 
         tableinfopropuesta.setModel(new javax.swing.table.DefaultTableModel(
@@ -132,6 +160,17 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         ));
         jScrollPane5.setViewportView(tableinfopropuesta);
 
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +182,9 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(txtbuscar))))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -184,14 +225,14 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(labelnickname))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -211,7 +252,11 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelmonto)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(55, 55, 55))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -224,6 +269,56 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarActionPerformed
+
+    private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
+        // TODO add your handling code here:
+        List<String> proponentes= ICU.listarProponentes(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        for (int i=0;i<proponentes.size();i++) {
+            String p=proponentes.get(i);
+            Object[] dat={p};
+            modelo.addRow(dat);
+        }                
+        
+    }//GEN-LAST:event_txtbuscarKeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row=jTable1.rowAtPoint(evt.getPoint());
+        int col=jTable1.columnAtPoint(evt.getPoint());
+        dtProponente dtp=ICU.infoProponente(jTable1.getValueAt(row, col).toString());
+        labelnickname.setText(dtp.getNickname());
+        DefaultTableModel modelo=(DefaultTableModel) tableproponente.getModel();
+        modelo.setRowCount(0);
+        Object[] dat={dtp.getNombre(),dtp.getApellido(),dtp.getEmail(),dtp.getFechaNac().getFecha(),dtp.getSitioWeb(),dtp.getBiografia()};
+        modelo.addRow(dat);
+        
+        List<dtPropuesta> ldtp=ICU.listarPropuestas(jTable1.getValueAt(row, col).toString());
+        DefaultTableModel modelo2=(DefaultTableModel) tablepropuestas1.getModel();
+        modelo2.setRowCount(0);
+        for (int i=0;i<ldtp.size();i++) {
+            dtPropuesta p=(dtPropuesta)ldtp.get(i);
+            Object[] dat2={p.getTitulo(),p.getEstado()};
+            modelo2.addRow(dat2);
+            
+        }
+            
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void tablepropuestas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepropuestas1MouseClicked
+        // TODO add your handling code here:
+        int row=jTable1.rowAtPoint(evt.getPoint());
+        int col=jTable1.columnAtPoint(evt.getPoint());
+        Object[] dat3= (Object[]) (jTable1.getValueAt(row, col));
+        dtPropuesta dtp=ICP.infoProp(dat3[0].toString()); //pide el titulo al array
+        
+    }//GEN-LAST:event_tablepropuestas1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,6 +342,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
     private javax.swing.JTable tableinfopropuesta;
     private javax.swing.JTable tableproponente;
     private javax.swing.JTable tablepropuestas1;
+    private javax.swing.JTextField txtbuscar;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

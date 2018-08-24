@@ -56,7 +56,9 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
         super(nickname, nombre, apellido, email, imagen, nacimiento);
     }
  
-    
+    public boolean colaborasconpropuesta(String tituloprop){
+        return this.colaboracionesUsuario.containsKey(tituloprop);
+    }
 
 
 }

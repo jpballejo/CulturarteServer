@@ -87,6 +87,7 @@ public class ContUsuario implements iConUsuario {
     public dtProponente infoProponente(String idProponente) {
         proponente p=(proponente)usuarios.get(idProponente);
         dtProponente res= new dtProponente(p.getNombre(),p.getApellido(),p.getNickname(),p.getImagen(),p.getEmail(),p.getNacimiento(),p.getDireccion(),p.getBiografia(),p.getWeb());
+        this.usuariorecordado=p;
         return res;
     }
 
@@ -107,8 +108,16 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public List<dtColaborador> listarColaboradores(String idPropuesta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<String> listarColaboradores(String idPropuesta) {
+        List res= new ArrayList<String>();
+        Iterator it= this.usuarios.keySet().iterator();
+        while(it.hasNext()){
+            colaborador c=(colaborador) this.usuarios.get((String)it.next());
+            if(c.colaborasconpropuesta(idPropuesta)){
+                res.add(c.getNickname());               
+            }
+        }
+        return res;
     }
 
     @Override
@@ -178,7 +187,9 @@ public class ContUsuario implements iConUsuario {
     }
     
     
-
+    public usuario getUsuarioRecordado(){
+        return this.usuariorecordado;
+    }
    
     
 }

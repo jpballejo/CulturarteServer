@@ -5,7 +5,9 @@
  */
 package Logica;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.util.List;
 public class ContPropuesta implements iConPropuesta {
 
     private static ContPropuesta instance;
+    private ContUsuario cUsuario;
     
     public static ContPropuesta getInstance() {
         if(instance==null){
@@ -60,7 +63,11 @@ public class ContPropuesta implements iConPropuesta {
 
     @Override
     public dtPropuesta infoProp(String idPropuesta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.cUsuario=ContUsuario.getInstance();
+        proponente p=(proponente) this.cUsuario.getUsuarioRecordado();
+        dtPropuesta dtp=p.getPropuestas(idPropuesta);
+        dtp.setColaboradores(this.cUsuario.listarColaboradores(idPropuesta));
+        return dtp;
     }
 
     @Override

@@ -5,6 +5,9 @@
  */
 package Logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Esteban Menendez
@@ -14,6 +17,7 @@ public class dtPropuesta {
     String titulo, descripcion, imagen, lugar, estado, categoria, proponente;
     dtFecha fechaRealizacion, fechapublicada;
     int precioentrada, montorequerido;
+    List<String> colaboradores;
 
 //CONSTRUCTOR//
     public dtPropuesta(String titulo, String descripcion, String imagen, String lugar, String estado, String categoria, String proponente, dtFecha fechaRealizacion, dtFecha fechapublicada, int precioentrada, int montorequerido) {
@@ -28,6 +32,7 @@ public class dtPropuesta {
         this.fechapublicada = fechapublicada;
         this.precioentrada = precioentrada;
         this.montorequerido = montorequerido;
+        this.colaboradores= new ArrayList<String>();
     }
 
 //GETTERS//
@@ -118,5 +123,9 @@ public class dtPropuesta {
 
     public void setMontorequerido(int montorequerido) {
         this.montorequerido = montorequerido;
+    }
+    
+    public void setColaboradores(List<String> l){
+        this.colaboradores=l;
     }
 }

@@ -87,7 +87,8 @@ public class proponente extends usuario {
 
     //METODOS//
     public dtPropuesta getPropuestas(String idPropuesta){
-    dtPropuesta prop=new dtPropuesta(web, direccion, web, web, web, biografia, idPropuesta, nacimiento, nacimiento, 0, 0);
+    propuesta p=this.propuestasUsuario.get(idPropuesta);
+    dtPropuesta prop=new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido());
     return prop;
     }
     

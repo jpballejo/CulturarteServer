@@ -20,7 +20,7 @@ public interface iConUsuario {
     public abstract List<String> listarColaboradores();
     public abstract dtUsuario infoColaborador(String idColaborador);
     public abstract List<dtPropuesta> listarPropuestas(String idColaborador);
-    public abstract List<dtColaborador> listarColaboradores(String idPropuesta);
+    public abstract List<String> listarColaboradores(String idPropuesta);
     public abstract dtColaboraciones seleccionarColaborador(String idColaborador);
     public abstract void seguir(String nicknameSeguidor, String nicknameASeguir) throws Exception;
     public abstract void dejarDeSeguir(String nicknameSeguidor, String nicknameADejarDeSeguir)throws Exception;
