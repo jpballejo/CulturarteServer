@@ -41,7 +41,7 @@ public class ConexionDB {
     }
     public Connection getConexion() {
         if (conexion == null) {
-            try {
+            try {              
                 
                 Driver driver = new com.mysql.jdbc.Driver();
                 DriverManager.registerDriver(driver);
