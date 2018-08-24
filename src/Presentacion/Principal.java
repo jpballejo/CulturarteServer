@@ -99,8 +99,12 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
 
+        jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,6 +141,11 @@ public class Principal extends javax.swing.JFrame {
         menuusuarios.add(consultadeproponente);
 
         seguirusuario.setText("Seguir Usuario");
+        seguirusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seguirusuarioActionPerformed(evt);
+            }
+        });
         menuusuarios.add(seguirusuario);
 
         dejardeseguir.setText("Dejar de Seguir a Usuario");
@@ -230,6 +239,9 @@ public class Principal extends javax.swing.JFrame {
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
+        ddsu.pack();
+        ddsu.setResizable(true);
+        ddsu.setClosable(true);
         ddsu.setVisible(true);
     }//GEN-LAST:event_dejardeseguirActionPerformed
 
@@ -241,6 +253,12 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_altacategoriaActionPerformed
 
+    private void seguirusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seguirusuarioActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_seguirusuarioActionPerformed
+
+        
 
     /**
      * @param args the command line arguments

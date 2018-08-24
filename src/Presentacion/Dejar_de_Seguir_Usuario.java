@@ -14,7 +14,7 @@ import Logica.iConUsuario;
 public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
 
     
-    private iConUsuario ICP;
+    private iConUsuario ICU;
     /**
      * Creates new form Dejar_de_Seguir_Usuario
      */
@@ -22,9 +22,9 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    public Dejar_de_Seguir_Usuario(iConUsuario icp) {
+    public Dejar_de_Seguir_Usuario(iConUsuario ICU) {
         initComponents();
-        this.ICP=icp;
+        this.ICU=ICU;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,7 +83,7 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
 
     private void btndejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndejardeseguirActionPerformed
                 try{
-        ICP.dejarDeSeguir(txtseguidor.getText(), txtadejardeseguir.getText());
+        ICU.dejarDeSeguir(txtseguidor.getText(), txtadejardeseguir.getText());
         
         javax.swing.JOptionPane.showMessageDialog(null,"Se completo el dejar de seguir");
         // TODO add your handling code here:
