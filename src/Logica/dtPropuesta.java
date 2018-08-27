@@ -79,6 +79,10 @@ public class dtPropuesta {
     public int getMontorequerido() {
         return montorequerido;
     }
+    
+    public List<String> detColaboradores(){
+        return colaboradores;
+    }
 
 //SETTERS//
     public void setTitulo(String titulo) {
