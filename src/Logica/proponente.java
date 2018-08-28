@@ -31,6 +31,7 @@ public class proponente extends usuario {
 
     /**
      *
+     * @param prop
      */
     public void agregarPropuesta(propuesta prop){
         propuestasUsuario.put(prop.getTitulo(), prop);

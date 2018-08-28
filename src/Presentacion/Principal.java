@@ -59,6 +59,9 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         menuprincipal = new javax.swing.JMenuBar();
         menuusuarios = new javax.swing.JMenu();
         altadeperfil = new javax.swing.JMenuItem();
@@ -100,11 +103,18 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jMenuItem1.setText("jMenuItem1");
+
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,11 +150,6 @@ public class Principal extends javax.swing.JFrame {
         menuusuarios.add(consultadeproponente);
 
         seguirusuario.setText("Seguir Usuario");
-        seguirusuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seguirusuarioActionPerformed(evt);
-            }
-        });
         menuusuarios.add(seguirusuario);
 
         dejardeseguir.setText("Dejar de Seguir a Usuario");
@@ -176,11 +181,6 @@ public class Principal extends javax.swing.JFrame {
         menucolaboraciones.setText("Colaboraciones");
 
         cancelarcolaboracion.setText("Cancelar Colaboracion");
-        cancelarcolaboracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarcolaboracionActionPerformed(evt);
-            }
-        });
         menucolaboraciones.add(cancelarcolaboracion);
 
         consultacolaboracion.setText("Consulta de Colaboracion");
@@ -225,7 +225,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void altadeperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altadeperfilMouseClicked
         // TODO add your handling code here:
-        Alta_Perfil alta = new Alta_Perfil();
     }//GEN-LAST:event_altadeperfilMouseClicked
 
     private void consultadeproponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultadeproponenteActionPerformed
@@ -239,26 +238,12 @@ public class Principal extends javax.swing.JFrame {
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
-        ddsu.pack();
-        ddsu.setResizable(true);
-        ddsu.setClosable(true);
         ddsu.setVisible(true);
     }//GEN-LAST:event_dejardeseguirActionPerformed
-
-    private void cancelarcolaboracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarcolaboracionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelarcolaboracionActionPerformed
 
     private void altacategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altacategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_altacategoriaActionPerformed
-
-    private void seguirusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seguirusuarioActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_seguirusuarioActionPerformed
-
-        
 
     /**
      * @param args the command line arguments
@@ -316,8 +301,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;

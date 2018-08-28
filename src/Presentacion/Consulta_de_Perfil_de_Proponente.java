@@ -312,6 +312,20 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         int col=jTable1.columnAtPoint(evt.getPoint());
         Object[] dat3= (Object[]) (jTable1.getValueAt(row, col));
         dtPropuesta dtp=ICP.infoProp(dat3[0].toString()); //pide el titulo al array
+        DefaultTableModel model=(DefaultTableModel) tableinfopropuesta.getModel();
+        model.setRowCount(0);
+        
+        Object[] inf={dtp.getTitulo(),dtp.getDescripcion(),dtp.getLugar(),dtp.getFechaRealizacion().getFecha()};
+        model.addRow(inf);
+        labelmonto.setText(Integer.toString(dtp.getMontorequerido()));
+        List<String> lc=dtp.detColaboradores();
+        DefaultTableModel model2=(DefaultTableModel) tablecolaboradores.getModel();
+        model2.setRowCount(0);
+        for (int i=0;i<lc.size();i++){
+            String nick=(String)lc.get(i);
+            Object[] colabs={nick};
+            model2.addRow(colabs);
+        }
         
     }//GEN-LAST:event_tablepropuestas1MouseClicked
 

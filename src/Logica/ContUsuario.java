@@ -46,10 +46,7 @@ public class ContUsuario implements iConUsuario {
             return instance;
     }
 
-    /**
-     *
-     * @throws Exception
-     */
+   
     @Override
     public void cargarUsuarios() {
         
