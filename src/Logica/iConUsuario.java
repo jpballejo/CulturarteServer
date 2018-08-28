@@ -27,6 +27,7 @@ public interface iConUsuario {
     public abstract void dejarDeSeguir(String nicknameSeguidor, String nicknameADejarDeSeguir)throws Exception;
     public abstract void eliminarColaboracion(colProp col) throws Exception;
     public abstract colProp seleccionarColaboracion(String nickusuario, String titulo); //original devuelve dt
+    public abstract List<String> listarusuarios(String nick);
 
     public List<String> listarProponentes(String text);
     

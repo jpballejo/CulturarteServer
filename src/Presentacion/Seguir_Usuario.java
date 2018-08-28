@@ -6,6 +6,9 @@
 package Presentacion;
 
 import Logica.iConUsuario;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,7 +17,7 @@ import Logica.iConUsuario;
 public class Seguir_Usuario extends javax.swing.JInternalFrame {
 
     
-    private iConUsuario ICP;
+    private iConUsuario ICU;
     /**
      * Creates new form Seguir_Usuario
      */
@@ -34,12 +37,68 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtseguidor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtaseguir = new javax.swing.JTextField();
+        txtbuscar = new javax.swing.JTextField();
         btnseguir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableseguidor = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableseguidor1 = new javax.swing.JTable();
+        txtaseguir1 = new javax.swing.JTextField();
+        txtbuscar2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
+            }
+        });
 
         btnseguir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnseguirActionPerformed(evt);
+            }
+        });
+
+        tableseguidor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nickname"
+            }
+        ));
+        tableseguidor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableseguidorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableseguidor);
+
+        tableseguidor1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nickname"
+            }
+        ));
+        tableseguidor1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableseguidor1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableseguidor1);
+
+        txtbuscar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscar2KeyPressed(evt);
             }
         });
 
@@ -48,30 +107,67 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnseguir)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtseguidor)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtaseguir)))
-                .addGap(186, 186, 186))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                                .addGap(108, 108, 108)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(184, 184, 184))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnseguir, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtseguidor)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtaseguir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtbuscar2, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(23, 23, 23))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(59, 59, 59)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(328, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtseguidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtaseguir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnseguir)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtseguidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtaseguir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnseguir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(93, 93, 93)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -79,8 +175,13 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
 
     private void btnseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnseguirActionPerformed
 
+        
+        
         try{
-        ICP.seguir(txtseguidor.getText(), txtaseguir.getText());
+           if(txtseguidor.getText()==txtaseguir1.getText())
+               throw new Exception("Jaja buen intento, no puedese seguirte tu mismo");
+            
+        ICU.seguir(txtseguidor.getText(), txtaseguir1.getText());
         
         javax.swing.JOptionPane.showMessageDialog(null,"Seguimiento realizado con exito");
         // TODO add your handling code here:
@@ -89,15 +190,70 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         }
         
         this.txtseguidor.setText("");
-        this.txtaseguir.setText("");
+        this.txtaseguir1.setText("");
+        this.txtbuscar.setText("");
+        this.txtbuscar2.setText("");
+        
     }//GEN-LAST:event_btnseguirActionPerformed
+
+    private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
+        // TODO add your handling code here:
+        List<String> lu=ICU.listarusuarios(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) tableseguidor.getModel();
+        modelo.setRowCount(0);
+        Iterator it=lu.iterator();
+        while(it.hasNext()){
+            String n=(String)it.next();
+            Object[] obj={n};
+            modelo.addRow(obj);
+        
+        }
+    }//GEN-LAST:event_txtbuscarKeyPressed
+
+    private void txtbuscar2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscar2KeyPressed
+        // TODO add your handling code here:
+        List<String> lu=ICU.listarusuarios(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) tableseguidor1.getModel();
+        modelo.setRowCount(0);
+        Iterator it=lu.iterator();
+        while(it.hasNext()){
+            String n=(String)it.next();
+            Object[] obj={n};
+            modelo.addRow(obj);
+        
+        }
+    }//GEN-LAST:event_txtbuscar2KeyPressed
+
+    private void tableseguidor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidor1MouseClicked
+        // TODO add your handling code here:
+        int row=tableseguidor.rowAtPoint(evt.getPoint());
+        int col=tableseguidor.columnAtPoint(evt.getPoint());
+        String seguidor=(String)tableseguidor.getValueAt(row, col);
+        txtseguidor.setText(seguidor);
+    }//GEN-LAST:event_tableseguidor1MouseClicked
+
+    private void tableseguidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidorMouseClicked
+        // TODO add your handling code here:
+        int row=tableseguidor1.rowAtPoint(evt.getPoint());
+        int col=tableseguidor1.columnAtPoint(evt.getPoint());
+        String aseguir=(String)tableseguidor1.getValueAt(row, col);
+        txtaseguir1.setText(aseguir);
+    }//GEN-LAST:event_tableseguidorMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnseguir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtaseguir;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tableseguidor;
+    private javax.swing.JTable tableseguidor1;
+    private javax.swing.JTextField txtaseguir1;
+    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtbuscar2;
     private javax.swing.JTextField txtseguidor;
     // End of variables declaration//GEN-END:variables
 }
