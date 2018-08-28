@@ -27,7 +27,8 @@ public dtColaborador getColaboradores(){
 }
 
 public dtColaborador getColaborador(){
-return null;
+    dtColaborador dt=new dtColaborador(this.nombre,this.apellido,this.nickname,this.imagen,this.email,this.nacimiento);
+    return dt;
 }
 
 

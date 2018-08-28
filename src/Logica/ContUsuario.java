@@ -107,12 +107,20 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public List<String> listarColaboradores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> colabs=new ArrayList();
+     for (String key : this.usuarios.keySet()) {
+         colaborador c=(colaborador)this.usuarios.get(key);
+         if(c!=null)
+             colabs.add(c.nickname);
+     }
+        return colabs;
+        
     }
 
     @Override
     public dtUsuario infoColaborador(String idColaborador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        colaborador c=(colaborador)this.usuarios.get(idColaborador);
+        return c.getColaborador();
     }
 
     @Override
