@@ -10,15 +10,21 @@ import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-
+import Logica.ContUsuario;
+import Logica.dtProponente;
+import Logica.dtColaborador;
+import Logica.dtFecha;
+import javax.swing.JFileChooser;
 /**
  *
  * @author nicolasgutierrez
  */
 public class Alta_Perfil extends javax.swing.JInternalFrame {
-
-    /**
+ContUsuario contUsu = ContUsuario.getInstance();
+boolean usuTipo = false;
+/**
      * Creates new form Alta_Perfil
      */
     public Alta_Perfil() {
@@ -47,7 +53,7 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
         jT_apellido = new javax.swing.JTextField();
         jT_email = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jFT_fechaNac = new javax.swing.JFormattedTextField();
+        jdc_fechaNac = new com.toedter.calendar.JDateChooser();
         jLabel16 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jL_imagenP = new javax.swing.JLabel();
@@ -99,14 +105,6 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha Nacimiento:");
 
-        jFT_fechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/mm/yyyy"))));
-        jFT_fechaNac.setToolTipText("Fecha de nacimiento");
-        jFT_fechaNac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFT_fechaNacActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -119,17 +117,18 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
                     .addComponent(jLabel14)
                     .addComponent(jLabel15)
                     .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jT_nick, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jT_nombre, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jT_nick, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jT_nombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jT_apellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jT_email, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jFT_fechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jT_email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(jT_apellido, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jdc_fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -152,9 +151,9 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(jT_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFT_fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jdc_fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -188,9 +187,19 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 170, 150));
 
         jb_aceptar.setText("Aceptar");
+        jb_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_aceptarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jb_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
         jb_cancelar.setText("Cancelar");
+        jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cancelarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jb_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
 
         jrb_colaborador.setText("Colaborador");
@@ -268,6 +277,7 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_examinarActionPerformed
+JFileChooser fileChooser = new JFileChooser();
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtn_examinarActionPerformed
 
@@ -282,16 +292,19 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Jrb_proponenteActionPerformed
 
-    private void jFT_fechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFT_fechaNacActionPerformed
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
+    this.dispose();
         // TODO add your handling code here:
-    
-        JFormattedTextField fecha = new JFormattedTextField(new SimpleDateFormat("dd/mm/yyyy"));
-    }//GEN-LAST:event_jFT_fechaNacActionPerformed
+    }//GEN-LAST:event_jb_cancelarActionPerformed
+
+    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_aceptarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Jrb_proponente;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JFormattedTextField jFT_fechaNac;
     private javax.swing.JLabel jL_imagenP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -315,20 +328,44 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
     private javax.swing.JButton jb_aceptar;
     private javax.swing.JButton jb_cancelar;
     private javax.swing.JButton jbtn_examinar;
+    private com.toedter.calendar.JDateChooser jdc_fechaNac;
     private javax.swing.JRadioButton jrb_colaborador;
     private javax.swing.JTextPane jtp_biografia;
     // End of variables declaration//GEN-END:variables
 
    private void controlDatos () throws Exception{
-   if(jT_nick.getText()==null){throw new Exception("Nickname vacio");}
-   if(jT_nombre.getText()==null){throw new Exception("Nombre vacio");}
-   if(jT_apellido.getText()==null){throw new Exception("Apellido vacio");}
-   if(jT_email.getText()==null){throw new Exception("Email vacio");}
-   if(compruebaEmail(jT_email.getText())==false){throw new Exception("Email incorrecto");}
-   if(jFT_fechaNac.getText()==null){throw new Exception("Fecha nacimiento vacia");}
-   
+       
+        if(jT_nick.getText()==null){
+            JOptionPane.showMessageDialog(null,"Nickname vacio");
+            jT_nick.selectAll();
+            jT_nick.requestFocus();}
+        if(jT_nombre.getText()==null){
+            JOptionPane.showMessageDialog(null,"Nombre vacio");
+            jT_nombre.selectAll();
+            jT_nombre.requestFocus();}
+        if(jT_apellido.getText()==null){
+            JOptionPane.showMessageDialog(null,"Apellido vacio");
+            jT_apellido.selectAll();
+            jT_apellido.requestFocus();}
+        if(jT_email.getText()==null){
+            JOptionPane.showMessageDialog(null,"Email vacio");
+            jT_email.selectAll();
+            jT_email.requestFocus();}
+        if(compruebaEmail(jT_email.getText())==false){
+            JOptionPane.showMessageDialog(null,"Email incorrecto");
+            jT_email.selectAll();
+            jT_email.requestFocus();}
+        if(jdc_fechaNac==null){
+            JOptionPane.showMessageDialog(null,"Fecha nacimiento vacia");
+           jdc_fechaNac.requestFocus();}
+
    }
-    private boolean compruebaEmail(String email){
+   private dtFecha getFechajdc(){
+           dtFecha fecha;
+           fecha = new dtFecha(Integer.toString(jdc_fechaNac.getDate().getDay()),Integer.toString(jdc_fechaNac.getDate().getMonth()),Integer.toString(jdc_fechaNac.getDate().getYear()));
+           return fecha;}
+   
+   private boolean compruebaEmail(String email){
          // Patrón para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -336,5 +373,25 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
         
     return mather.find();
     }
+   private void limpiarTxt(){
+        jT_nick.setText(" ");
+        jT_nombre.setText(" ");
+        jT_apellido.setText(" ");
+        jT_email.setText(" ");
+        jFT_fechaNac.setText(" ");
+        jT_direccion.setText(" ");
+        jT_web.setText(" ");
+        jtp_biografia.setText(" ");
+        jrb_colaborador.setSelected(false);
+        Jrb_proponente.setSelected(false);
+        
+    }
+   private void altaPerfil(){
+   if (usuTipo==false){
+       
+   dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText()
+           ,imagenRuta, jT_email.getText(), getFechajdc());
+   }
+   }
 }
     
