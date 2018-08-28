@@ -45,6 +45,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -62,6 +63,9 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+=======
+        jDesktop = new javax.swing.JDesktopPane();
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
         menuprincipal = new javax.swing.JMenuBar();
         menuusuarios = new javax.swing.JMenu();
         altadeperfil = new javax.swing.JMenuItem();
@@ -81,6 +85,7 @@ public class Principal extends javax.swing.JFrame {
         menucategoria = new javax.swing.JMenu();
         altacategoria = new javax.swing.JMenuItem();
 
+<<<<<<< HEAD
         jScrollPane1.setViewportView(jEditorPane1);
 
         jMenu1.setText("File");
@@ -116,11 +121,10 @@ public class Principal extends javax.swing.JFrame {
         jMenu6.setText("Edit");
         jMenuBar3.add(jMenu6);
 
+=======
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        menuusuarios.setText("Usuarios");
-
-        altadeperfil.setText("Alta de Perfil");
         altadeperfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 altadeperfilMouseClicked(evt);
@@ -133,7 +137,6 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(altadeperfil);
 
-        consultadecolaborador.setText("Consulta perfil de Colaborador");
         consultadecolaborador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultadecolaboradorActionPerformed(evt);
@@ -141,7 +144,6 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(consultadecolaborador);
 
-        consultadeproponente.setText("Consulta de perfil de Proponente");
         consultadeproponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultadeproponenteActionPerformed(evt);
@@ -149,10 +151,12 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(consultadeproponente);
 
+<<<<<<< HEAD
         seguirusuario.setText("Seguir Usuario");
+=======
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
         menuusuarios.add(seguirusuario);
 
-        dejardeseguir.setText("Dejar de Seguir a Usuario");
         dejardeseguir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dejardeseguirActionPerformed(evt);
@@ -162,38 +166,30 @@ public class Principal extends javax.swing.JFrame {
 
         menuprincipal.add(menuusuarios);
 
-        menupropuestas.setText("Propuestas");
-
-        altapropuesta.setText("Alta de Propuesta");
         menupropuestas.add(altapropuesta);
 
-        consultapropuesta.setText("Consulta de Propuesta");
         menupropuestas.add(consultapropuesta);
 
-        consultapropuestaporestado.setText("Consulta de Propuesta por estado");
         menupropuestas.add(consultapropuestaporestado);
 
-        modificarpropuesta.setText("Modificar datos Propuesta");
         menupropuestas.add(modificarpropuesta);
 
         menuprincipal.add(menupropuestas);
 
+<<<<<<< HEAD
         menucolaboraciones.setText("Colaboraciones");
 
         cancelarcolaboracion.setText("Cancelar Colaboracion");
+=======
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
         menucolaboraciones.add(cancelarcolaboracion);
 
-        consultacolaboracion.setText("Consulta de Colaboracion");
         menucolaboraciones.add(consultacolaboracion);
 
-        registrarcolaboracion.setText("Registrar Colaboracion");
         menucolaboraciones.add(registrarcolaboracion);
 
         menuprincipal.add(menucolaboraciones);
 
-        menucategoria.setText("Categoria");
-
-        altacategoria.setText("Alta de Categoria");
         altacategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 altacategoriaActionPerformed(evt);
@@ -209,11 +205,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addComponent(jDesktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addComponent(jDesktop)
         );
 
         pack();
@@ -238,7 +234,12 @@ public class Principal extends javax.swing.JFrame {
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
+<<<<<<< HEAD
         ddsu.setVisible(true);
+=======
+        jDesktop.add(ddsu);
+        ddsu.show();
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
     }//GEN-LAST:event_dejardeseguirActionPerformed
 
     private void altacategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altacategoriaActionPerformed
@@ -277,7 +278,7 @@ public class Principal extends javax.swing.JFrame {
             //@Override
             public void run() {
                 
-                new Principal().setVisible(true);
+                new Principal().show();
                 
                 
             }
@@ -295,6 +296,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultapropuesta;
     private javax.swing.JMenuItem consultapropuestaporestado;
     private javax.swing.JMenuItem dejardeseguir;
+<<<<<<< HEAD
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
@@ -312,6 +314,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu3;
     private javax.swing.JPopupMenu jPopupMenu4;
     private javax.swing.JScrollPane jScrollPane1;
+=======
+    private javax.swing.JDesktopPane jDesktop;
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
     private javax.swing.JMenu menucategoria;
     private javax.swing.JMenu menucolaboraciones;
     private javax.swing.JMenuBar menuprincipal;

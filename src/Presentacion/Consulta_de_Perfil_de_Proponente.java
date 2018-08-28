@@ -286,7 +286,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         int row=jTable1.rowAtPoint(evt.getPoint());
         int col=jTable1.columnAtPoint(evt.getPoint());
-        dtProponente dtp=ICU.infoProponente(jTable1.getValueAt(row, col).toString());
+        dtProponente dtp=ICU.infoProponente((String)jTable1.getValueAt(row, col));
         labelnickname.setText(dtp.getNickname());
         DefaultTableModel modelo=(DefaultTableModel) tableproponente.getModel();
         modelo.setRowCount(0);

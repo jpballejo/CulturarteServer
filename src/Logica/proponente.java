@@ -88,9 +88,12 @@ public class proponente extends usuario {
 
     //METODOS//
     public dtPropuesta getPropuestas(String idPropuesta){
-    propuesta p=this.propuestasUsuario.get(idPropuesta);
-    dtPropuesta prop=new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido());
-    return prop;
+    propuesta p=(propuesta)this.propuestasUsuario.get(idPropuesta);
+    if(p!=null){
+        dtPropuesta prop=new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido(),0);
+        return prop;}
+    else
+        return null;
     }
     
     public List<dtPropuesta> getTodasPropuestas(){
@@ -99,7 +102,7 @@ public class proponente extends usuario {
         while(it.hasNext()){
             String key=(String) it.next();
             propuesta p=this.propuestasUsuario.get(key);
-            dtPropuesta dtp= new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido());
+            dtPropuesta dtp= new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido(),0);
             retornar.add(dtp);
         }
         return retornar;
@@ -107,4 +110,22 @@ public class proponente extends usuario {
   
    
        
+    public List<String> listarmispropuestas(){
+        List<String> retorno= new ArrayList();
+        this.propuestasUsuario.keySet().forEach((key) -> {
+            retorno.add(key);
+        });
+        return retorno;
+    }
+    
+     public List<String> listarmispropuestaslike(String titulo){
+        List<String> retorno= new ArrayList();
+        this.propuestasUsuario.keySet().forEach((key) -> {
+            propuesta p=(propuesta)this.propuestasUsuario.get(key);
+            if (p.getTitulo().contains(titulo)) {
+                retorno.add(key);
+            }
+        });
+        return retorno;
+    }
 }

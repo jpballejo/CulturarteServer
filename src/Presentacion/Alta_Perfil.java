@@ -30,6 +30,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import Logica.ContUsuario;
+import Logica.dtProponente;
+import Logica.dtColaborador;
+import Logica.dtFecha;
+import javax.swing.JFileChooser;
 /**
  *
  * @author nicolasgutierrez
@@ -37,10 +42,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Alta_Perfil extends javax.swing.JInternalFrame {
 ContUsuario contUsu = ContUsuario.getInstance();
 boolean usuTipo = false;
+
 String imagenRuta =null;
 JFileChooser navegadorArchivos = new JFileChooser();
     
     /**
+=======
+>>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
      * Creates new form Alta_Perfil
      */
     public Alta_Perfil() {
@@ -139,13 +147,16 @@ JFileChooser navegadorArchivos = new JFileChooser();
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jT_nick, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(jT_nick, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jT_nombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jT_apellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jT_email, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jT_email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(jT_apellido, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jdc_fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jdc_fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -294,8 +305,13 @@ JFileChooser navegadorArchivos = new JFileChooser();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_examinarActionPerformed
+
        selecImagen();
        
+
+
+        // TODO add your handling code here:
+
     }//GEN-LAST:event_jbtn_examinarActionPerformed
 
     private void jrb_colaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_colaboradorActionPerformed
@@ -318,15 +334,27 @@ JFileChooser navegadorArchivos = new JFileChooser();
         // TODO add your handling code here:
     }//GEN-LAST:event_Jrb_proponenteActionPerformed
 
-    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
+
+    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {                                           
        if(altaPerfil()==true)JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
        limpiarTxt();
-    }//GEN-LAST:event_jb_aceptarActionPerformed
+    }                                          
 
-    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {                                            
        limpiarTxt();
         this.dispose();
+    }                                           
+
+
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
+    
+        // TODO add your handling code here:
     }//GEN-LAST:event_jb_cancelarActionPerformed
+
+    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_aceptarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Jrb_proponente;
@@ -360,7 +388,11 @@ JFileChooser navegadorArchivos = new JFileChooser();
     private javax.swing.JTextPane jtp_biografia;
     // End of variables declaration//GEN-END:variables
 
-    private boolean controlDatos () throws Exception{
+
+   
+
+   private boolean controlDatos () throws Exception{
+
        
         if(jT_nick.getText()==null){
             JOptionPane.showMessageDialog(null,"Nickname vacio");
@@ -417,6 +449,7 @@ JFileChooser navegadorArchivos = new JFileChooser();
         jT_nombre.setText(" ");
         jT_apellido.setText(" ");
         jT_email.setText(" ");
+
         jdc_fechaNac.cleanup();
         jT_direccion.setText(" ");
         jT_web.setText(" ");
@@ -425,6 +458,7 @@ JFileChooser navegadorArchivos = new JFileChooser();
         Jrb_proponente.setSelected(false);
         
     }
+
    private boolean altaPerfil(){
    try {
        if(controlDatos()==true){
@@ -445,6 +479,8 @@ JFileChooser navegadorArchivos = new JFileChooser();
            Logger.getLogger(Alta_Perfil.class.getName()).log(Level.SEVERE, null, ex);
        }
         return false; }
+   
+   
    private void selecImagen(){
        FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
        navegadorArchivos.setFileFilter(filtroImagen);
@@ -458,8 +494,10 @@ JFileChooser navegadorArchivos = new JFileChooser();
        ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
        jL_imagenP.setIcon(nuevoIcono);
        //BufferedImage img= nuevoIcono;
-       salvarImagen(foto);
-   }
+       salvarImagen(foto);}
+
+ 
+   
    private void salvarImagen(Image imagen){
    BufferedImage img = (BufferedImage) imagen;
    File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones"+jT_nick.getText()+".png");

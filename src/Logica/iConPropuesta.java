@@ -24,7 +24,8 @@ public interface iConPropuesta {
     public abstract void modificarPropuesta(dtPropuesta dtProp);
     public abstract List<dtPropuestaComp> informacionPropuestas(String titulo);
     public abstract List<dtPropuestasProponente> listarPropuestasExistentes();
-    public abstract dtPropuesta mostrarInfoPropuesta(String idPropuesta);
+    public abstract dtPropuesta mostrarInfoPropuesta(String idPropuesta) throws Exception;
+    public abstract List<String>listartodasPropuestas(String titulo);
 
 }
     

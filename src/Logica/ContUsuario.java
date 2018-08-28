@@ -104,12 +104,20 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public List<String> listarColaboradores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> colabs=new ArrayList();
+     for (String key : this.usuarios.keySet()) {
+         colaborador c=(colaborador)this.usuarios.get(key);
+         if(c!=null)
+             colabs.add(c.nickname);
+     }
+        return colabs;
+        
     }
 
     @Override
     public dtUsuario infoColaborador(String idColaborador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        colaborador c=(colaborador)this.usuarios.get(idColaborador);
+        return c.getColaborador();
     }
 
     @Override
@@ -207,5 +215,55 @@ public class ContUsuario implements iConUsuario {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
+    public List<String> listartodaslaspropuestas(String titulo){
+        List<String> ret=new ArrayList();
     
+     if(titulo.isEmpty()){   
+        for (String key : this.usuarios.keySet()) {
+         proponente p=(proponente) this.usuarios.get(key);
+         ret.addAll(p.listarmispropuestas());      
+        }
+     }
+     else{
+         for (String key : this.usuarios.keySet()) {
+         proponente p=(proponente) this.usuarios.get(key);
+         ret.addAll(p.listarmispropuestaslike(titulo));      
+        }
+     }
+     
+     return ret;
+}
+    
+    public dtPropuesta infoPropuesta(String titulo) throws Exception{
+        dtPropuesta dtp=null;
+        for( String key : this.usuarios.keySet()){
+            proponente p=(proponente)this.usuarios.get(key);
+            if (p!=null)
+                dtp=p.getPropuestas(titulo);
+                if(dtp!=null&&dtp.getTitulo().equals(titulo))
+                    break;
+            }
+        
+        if(dtp!=null) {
+            dtp.setColaboradores(this.listarColaboradores(titulo));
+            dtp.setMontoTotal(this.montopropuesta(titulo));
+            return dtp;
+     } else {
+            throw new Exception("Propuesta no encontrada");
+     }
+    }
+    
+     public int montopropuesta(String idPropuesta) {
+        int res=0;
+        Iterator it= this.usuarios.keySet().iterator();
+        while(it.hasNext()){
+            colaborador c=(colaborador) this.usuarios.get((String)it.next());
+            if(c.colaborasconpropuesta(idPropuesta)){
+                    res=res+c.getmontocolaboracion(idPropuesta);
+            }
+        }
+        return res;
+    }
+    
+
 }
