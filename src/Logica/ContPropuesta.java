@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class ContPropuesta implements iConPropuesta {
 
     @Override
     public List<dtPropuesta> listarPropuesta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -86,8 +87,17 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     @Override
-    public dtPropuesta mostrarInfoPropuesta(String idPropuesta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public dtPropuesta mostrarInfoPropuesta(String idPropuesta) throws Exception {
+        return ContUsuario.getInstance().infoPropuesta(idPropuesta);
     }
+
+    @Override
+    public List<String> listartodasPropuestas(String titulo) {
+        return ContUsuario.getInstance().listartodaslaspropuestas(titulo);
+    }
+    
+    
+    
+    
     
 }

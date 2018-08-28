@@ -80,6 +80,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jT_nick" alignment="1" max="32767" attributes="0"/>
                       <Component id="jT_nombre" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -92,6 +93,15 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jdc_fechaNac" min="-2" pref="147" max="-2" attributes="0"/>
+=======
+                      <Component id="jT_nick" alignment="1" pref="165" max="32767" attributes="0"/>
+                      <Component id="jT_nombre" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jT_apellido" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jT_email" alignment="1" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jdc_fechaNac" min="-2" pref="149" max="-2" attributes="0"/>
+>>>>>>> 25cf1e98c5d78c478d742e059a2f306375966c70
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>

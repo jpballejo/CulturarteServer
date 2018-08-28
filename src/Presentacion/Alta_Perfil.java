@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import Logica.ContUsuario;
+import Logica.dtColaborador;
+import Logica.dtFecha;
 import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -24,7 +27,6 @@ import javax.swing.JFileChooser;
 public class Alta_Perfil extends javax.swing.JInternalFrame {
 ContUsuario contUsu = ContUsuario.getInstance();
 boolean usuTipo = false;
-/**
      * Creates new form Alta_Perfil
      */
     public Alta_Perfil() {
@@ -379,6 +381,7 @@ JFileChooser fileChooser = new JFileChooser();
         jT_apellido.setText(" ");
         jT_email.setText(" ");
         jFT_fechaNac.setText(" ");
+        jdc_fechaNac.cleanup();
         jT_direccion.setText(" ");
         jT_web.setText(" ");
         jtp_biografia.setText(" ");
