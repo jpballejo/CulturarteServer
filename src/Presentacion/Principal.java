@@ -5,35 +5,29 @@
  */
 package Presentacion;
 
-import Logica.culturarteFabrica;
-import Logica.iConColaboracion;
-import Logica.iConPropuesta;
-import Logica.iConUsuario;
-
 /**
  *
- * @author nicolasgutierrez
+ * @author juan
  */
 public class Principal extends javax.swing.JFrame {
 
-    
-    private iConUsuario ICU;
-    private iConColaboracion ICC;
-    private iConPropuesta ICP;
+
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setExtendedState(int state) {
+        super.setExtendedState(state); //To change body of generated methods, choose Tools | Templates.
+    }
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        
-        //   this.setJMenuBar(jMenuBar1); 
-        //   this.jMenuBar1.setVisible(true);
-           
-           
-           culturarteFabrica Fabrica= culturarteFabrica.getInstance();
-           ICU=Fabrica.getIContUsuario();
-           ICC=Fabrica.getIContColaboracion();
-           ICP=Fabrica.getIContPropuesta();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setVisible(true);
     }
 
     /**
@@ -45,196 +39,180 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
-        jPopupMenu3 = new javax.swing.JPopupMenu();
-        jPopupMenu4 = new javax.swing.JPopupMenu();
+        jFrame1 = new javax.swing.JFrame();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jDesktop = new javax.swing.JDesktopPane();
-        menuprincipal = new javax.swing.JMenuBar();
-        menuusuarios = new javax.swing.JMenu();
-        altadeperfil = new javax.swing.JMenuItem();
-        consultadecolaborador = new javax.swing.JMenuItem();
-        consultadeproponente = new javax.swing.JMenuItem();
-        seguirusuario = new javax.swing.JMenuItem();
-        dejardeseguir = new javax.swing.JMenuItem();
-        menupropuestas = new javax.swing.JMenu();
-        altapropuesta = new javax.swing.JMenuItem();
-        consultapropuesta = new javax.swing.JMenuItem();
-        consultapropuestaporestado = new javax.swing.JMenuItem();
-        modificarpropuesta = new javax.swing.JMenuItem();
-        menucolaboraciones = new javax.swing.JMenu();
-        cancelarcolaboracion = new javax.swing.JMenuItem();
-        consultacolaboracion = new javax.swing.JMenuItem();
-        registrarcolaboracion = new javax.swing.JMenuItem();
-        menucategoria = new javax.swing.JMenu();
-        altacategoria = new javax.swing.JMenuItem();
-        jScrollPane1.setViewportView(jEditorPane1);
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jMenu3.setText("jMenu3");
 
         jMenuItem1.setText("jMenuItem1");
 
-        jMenu3.setText("File");
-        jMenuBar2.add(jMenu3);
+        jMenuItem2.setText("jMenuItem2");
 
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
-
-        jMenu5.setText("File");
-        jMenuBar3.add(jMenu5);
-
-        jMenu6.setText("Edit");
-        jMenuBar3.add(jMenu6);
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        altadeperfil.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                altadeperfilMouseClicked(evt);
-            }
-        });
-        altadeperfil.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 646, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Usuario");
+        jMenu1.add(jSeparator1);
+
+        jMenuItem3.setText("Alta de Perfil");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altadeperfilActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        menuusuarios.add(altadeperfil);
+        jMenu1.add(jMenuItem3);
 
-        consultadecolaborador.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem4.setText("Consulta Proponente");
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("Consulta de colaborador");
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("Seguir Usuario");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultadecolaboradorActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        menuusuarios.add(consultadecolaborador);
+        jMenu1.add(jMenuItem6);
 
-        consultadeproponente.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem7.setText("Dejar de seguir");
+        jMenu1.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Propuesta");
+
+        jMenuItem11.setText("Alta de Propuesta");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultadeproponenteActionPerformed(evt);
+                jMenuItem11ActionPerformed(evt);
             }
         });
-        menuusuarios.add(consultadeproponente);
+        jMenu2.add(jMenuItem11);
 
-        seguirusuario.setText("Seguir Usuario");
-
-        menuusuarios.add(seguirusuario);
-
-        dejardeseguir.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem10.setText("Alta de Categoria");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dejardeseguirActionPerformed(evt);
+                jMenuItem10ActionPerformed(evt);
             }
         });
-        menuusuarios.add(dejardeseguir);
+        jMenu2.add(jMenuItem10);
 
-        menuprincipal.add(menuusuarios);
+        jMenuItem9.setText("Consulta de Propuesta");
+        jMenu2.add(jMenuItem9);
 
-        menupropuestas.add(altapropuesta);
+        jMenuItem8.setText("Consulta de Propuesta por estado");
+        jMenu2.add(jMenuItem8);
 
-        menupropuestas.add(consultapropuesta);
+        jMenuItem13.setText("Modificar Propuesta");
+        jMenu2.add(jMenuItem13);
 
-        menupropuestas.add(consultapropuestaporestado);
+        jMenuBar1.add(jMenu2);
 
-        menupropuestas.add(modificarpropuesta);
+        jMenu4.setText("Colaboracion");
 
-        menuprincipal.add(menupropuestas);
+        jMenuItem12.setText("Colaborar ");
+        jMenu4.add(jMenuItem12);
 
+        jMenuItem15.setText("Cancelar Colaboracion");
+        jMenu4.add(jMenuItem15);
 
-        menucolaboraciones.setText("Colaboraciones");
+        jMenuItem14.setText("Consulta de colaboracion");
+        jMenu4.add(jMenuItem14);
 
-        cancelarcolaboracion.setText("Cancelar Colaboracion");
+        jMenuBar1.add(jMenu4);
 
-        menucolaboraciones.add(cancelarcolaboracion);
+        jMenu5.setText("Configuracion");
 
-        menucolaboraciones.add(consultacolaboracion);
+        jMenuItem16.setText("Cargar datos de prueba");
+        jMenu5.add(jMenuItem16);
 
-        menucolaboraciones.add(registrarcolaboracion);
+        jMenuItem17.setText("Configuracion general");
+        jMenu5.add(jMenuItem17);
 
-        menuprincipal.add(menucolaboraciones);
+        jMenuBar1.add(jMenu5);
 
-        altacategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                altacategoriaActionPerformed(evt);
-            }
-        });
-        menucategoria.add(altacategoria);
-
-        menuprincipal.add(menucategoria);
-
-        setJMenuBar(menuprincipal);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktop)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktop)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void altadeperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altadeperfilActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_altadeperfilActionPerformed
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void altadeperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altadeperfilMouseClicked
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_altadeperfilMouseClicked
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
-    private void consultadeproponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultadeproponenteActionPerformed
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_consultadeproponenteActionPerformed
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
-    private void consultadecolaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultadecolaboradorActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+Alta_Perfil alta = new Alta_Perfil();
+jDesktopPane1.add(alta);
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_consultadecolaboradorActionPerformed
-
-    private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
-        // TODO add your handling code here:
-        Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
-
-        ddsu.setVisible(true);
-
-        jDesktop.add(ddsu);
-        ddsu.show();
-    }//GEN-LAST:event_dejardeseguirActionPerformed
-
-    private void altacategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altacategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_altacategoriaActionPerformed
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,52 +243,39 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            //@Override
             public void run() {
-                
-                new Principal().show();
-                
-                
+                new Principal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem altacategoria;
-    private javax.swing.JMenuItem altadeperfil;
-    private javax.swing.JMenuItem altapropuesta;
-    private javax.swing.JMenuItem cancelarcolaboracion;
-    private javax.swing.JMenuItem consultacolaboracion;
-    private javax.swing.JMenuItem consultadecolaborador;
-    private javax.swing.JMenuItem consultadeproponente;
-    private javax.swing.JMenuItem consultapropuesta;
-    private javax.swing.JMenuItem consultapropuestaporestado;
-    private javax.swing.JMenuItem dejardeseguir;
-    private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JPopupMenu jPopupMenu3;
-    private javax.swing.JPopupMenu jPopupMenu4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JDesktopPane jDesktop;
-    private javax.swing.JMenu menucategoria;
-    private javax.swing.JMenu menucolaboraciones;
-    private javax.swing.JMenuBar menuprincipal;
-    private javax.swing.JMenu menupropuestas;
-    private javax.swing.JMenu menuusuarios;
-    private javax.swing.JMenuItem modificarpropuesta;
-    private javax.swing.JMenuItem registrarcolaboracion;
-    private javax.swing.JMenuItem seguirusuario;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
