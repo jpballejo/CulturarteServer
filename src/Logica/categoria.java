@@ -10,8 +10,13 @@ package Logica;
  * @author Esteban Menendez
  */
 public class categoria {
-
+    private categoria padre;
     private String nombre;
+
+    public categoria(categoria padre, String nombre) {
+        this.padre = padre;
+        this.nombre = nombre;
+    }
 
 //CONSTRUCTOR//
     public categoria(String nombre) {
@@ -26,6 +31,20 @@ public class categoria {
 //SETTER//
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the padre
+     */
+    public categoria getPadre() {
+        return padre;
+    }
+
+    /**
+     * @param padre the padre to set
+     */
+    public void setPadre(categoria padre) {
+        this.padre = padre;
     }
 
     

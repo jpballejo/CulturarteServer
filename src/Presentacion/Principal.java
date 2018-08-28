@@ -225,6 +225,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void altadeperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altadeperfilMouseClicked
         // TODO add your handling code here:
+        Alta_Perfil alta = new Alta_Perfil();
     }//GEN-LAST:event_altadeperfilMouseClicked
 
     private void consultadeproponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultadeproponenteActionPerformed
