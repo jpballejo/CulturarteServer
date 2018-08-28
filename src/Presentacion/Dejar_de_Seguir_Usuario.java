@@ -22,10 +22,6 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    public Dejar_de_Seguir_Usuario(iConUsuario ICU) {
-        initComponents();
-        this.ICU=ICU;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
