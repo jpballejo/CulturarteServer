@@ -27,7 +27,7 @@ import javax.swing.JFileChooser;
 public class Alta_Perfil extends javax.swing.JInternalFrame {
 ContUsuario contUsu = ContUsuario.getInstance();
 boolean usuTipo = false;
-     * Creates new form Alta_Perfil
+     /* Creates new form Alta_Perfil
      */
     public Alta_Perfil() {
         initComponents();
