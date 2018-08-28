@@ -346,16 +346,7 @@ JFileChooser navegadorArchivos = new JFileChooser();
     }                                           
 
 
-    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
-    
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_cancelarActionPerformed
-
-    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_aceptarActionPerformed
-
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Jrb_proponente;
     private javax.swing.ButtonGroup buttonGroup1;
