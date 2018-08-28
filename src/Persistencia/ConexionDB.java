@@ -19,7 +19,7 @@ public class ConexionDB {
     private final String host="localhost";
     private final String port="3306";
     private final String db="cultuRarte";
-    private final String user="root";
+    private final String user="admin";
     private final String pass="pao2930";
     
     //Para hacer ConexionDB singleton descomentar
@@ -42,9 +42,7 @@ public class ConexionDB {
     public Connection getConexion() {
         if (conexion == null) {
             try {              
-                
-                Driver driver = new com.mysql.jdbc.Driver();
-                DriverManager.registerDriver(driver);
+                                
                 conexion = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
                 } catch (SQLException ex) {
                 ex.printStackTrace();

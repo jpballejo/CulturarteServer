@@ -8,13 +8,28 @@ package Presentacion;
 import Logica.ContUsuario;
 import Logica.dtColaborador;
 import Logica.dtFecha;
+import Logica.dtProponente;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import static java.util.Locale.filter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import Logica.ContUsuario;
 import Logica.dtProponente;
 import Logica.dtColaborador;
@@ -28,9 +43,10 @@ public class Alta_Perfil extends javax.swing.JInternalFrame {
 ContUsuario contUsu = ContUsuario.getInstance();
 boolean usuTipo = false;
      /* Creates new form Alta_Perfil
-     */
-    public Alta_Perfil() {
-        initComponents();
+        jT_direccion.enable(false);
+        jT_web.enable(false);
+        jtp_biografia.enable(false);
+        jb_aceptar.enable(false);
     }
 
     /**
@@ -279,30 +295,48 @@ boolean usuTipo = false;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_examinarActionPerformed
-JFileChooser fileChooser = new JFileChooser();
+
+       selecImagen();
+       
+
+
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jbtn_examinarActionPerformed
 
     private void jrb_colaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_colaboradorActionPerformed
         this.setMinimumSize(new Dimension(384, 547));
+        usuTipo=false;
+        jb_aceptar.enable(true);
+        jT_direccion.enable(false);
+        jT_web.enable(false);
+        jtp_biografia.enable(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jrb_colaboradorActionPerformed
 
     private void Jrb_proponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jrb_proponenteActionPerformed
         this.setMinimumSize(new Dimension(641, 1000));
-
+        usuTipo=true;
+        jb_aceptar.enable(true);
+        jT_direccion.enable(true);
+        jT_web.enable(true);
+        jtp_biografia.enable(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_Jrb_proponenteActionPerformed
 
-    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
-    this.dispose();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_cancelarActionPerformed
 
-    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_aceptarActionPerformed
+    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+       if(altaPerfil()==true)JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
+       limpiarTxt();
+    }                                          
 
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+       limpiarTxt();
+        this.dispose();
+    }                                           
+
+
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Jrb_proponente;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -335,32 +369,48 @@ JFileChooser fileChooser = new JFileChooser();
     private javax.swing.JTextPane jtp_biografia;
     // End of variables declaration//GEN-END:variables
 
-   private void controlDatos () throws Exception{
+
+   
+
+   private boolean controlDatos () throws Exception{
+
        
         if(jT_nick.getText()==null){
             JOptionPane.showMessageDialog(null,"Nickname vacio");
             jT_nick.selectAll();
-            jT_nick.requestFocus();}
+            jT_nick.requestFocus();
+            return false;
+        }
         if(jT_nombre.getText()==null){
             JOptionPane.showMessageDialog(null,"Nombre vacio");
             jT_nombre.selectAll();
-            jT_nombre.requestFocus();}
+            jT_nombre.requestFocus();
+            return false;
+        }
         if(jT_apellido.getText()==null){
             JOptionPane.showMessageDialog(null,"Apellido vacio");
             jT_apellido.selectAll();
-            jT_apellido.requestFocus();}
+            jT_apellido.requestFocus();
+            return false;
+        }
         if(jT_email.getText()==null){
             JOptionPane.showMessageDialog(null,"Email vacio");
             jT_email.selectAll();
-            jT_email.requestFocus();}
-        if(compruebaEmail(jT_email.getText())==false){
+            jT_email.requestFocus();
+            return false;
+        }
+        if(compruebaEmail(jT_email.getText())!=true){
             JOptionPane.showMessageDialog(null,"Email incorrecto");
             jT_email.selectAll();
-            jT_email.requestFocus();}
+            jT_email.requestFocus();
+            return false;
+        }
         if(jdc_fechaNac==null){
             JOptionPane.showMessageDialog(null,"Fecha nacimiento vacia");
-           jdc_fechaNac.requestFocus();}
-
+           jdc_fechaNac.requestFocus();
+           return false;
+        }
+        return true;
    }
    private dtFecha getFechajdc(){
            dtFecha fecha;
@@ -380,7 +430,7 @@ JFileChooser fileChooser = new JFileChooser();
         jT_nombre.setText(" ");
         jT_apellido.setText(" ");
         jT_email.setText(" ");
-        jFT_fechaNac.setText(" ");
+
         jdc_fechaNac.cleanup();
         jT_direccion.setText(" ");
         jT_web.setText(" ");
@@ -389,12 +439,55 @@ JFileChooser fileChooser = new JFileChooser();
         Jrb_proponente.setSelected(false);
         
     }
-   private void altaPerfil(){
-   if (usuTipo==false){
-       
-   dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText()
-           ,imagenRuta, jT_email.getText(), getFechajdc());
-   }
+
+   private boolean altaPerfil(){
+   try {
+       if(controlDatos()==true){
+       if (usuTipo==false){
+      
+           dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText()
+                   ,imagenRuta, jT_email.getText(), getFechajdc());
+           contUsu.agregarUsu(dtCola);
+           return true;
+       } 
+   
+        if (usuTipo==true && jT_direccion.getText()!=null&&jtp_biografia.getText()!=null&&jT_web.getText()!=null){
+       dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta,jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
+       contUsu.agregarUsu(dtprop);
+       return true;
+        }}
+        } catch (Exception ex) {
+           Logger.getLogger(Alta_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        return false; }
+   
+   
+   private void selecImagen(){
+       FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+       navegadorArchivos.setFileFilter(filtroImagen);
+       navegadorArchivos.showOpenDialog(this);
+       File imagen = navegadorArchivos.getSelectedFile();
+       String path = navegadorArchivos.getSelectedFile().getPath();
+       jL_imagenP.setIcon(new ImageIcon(path));
+       ImageIcon icon = new ImageIcon(path);
+       Image foto = icon.getImage();
+       Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
+       ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
+       jL_imagenP.setIcon(nuevoIcono);
+       //BufferedImage img= nuevoIcono;
+       salvarImagen(foto);}
+
+ 
+   
+   private void salvarImagen(Image imagen){
+   BufferedImage img = (BufferedImage) imagen;
+   File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones"+jT_nick.getText()+".png");
+   imagenRuta="/home/juan/ProgAplicaciones2018/progAplicaciones"+jT_nick.getText()+".png";
+    try { 
+        ImageIO.write(img, "png", outputfile);
+    } catch (IOException ex) {
+        Logger.getLogger(Alta_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+    }
    }
 }
     

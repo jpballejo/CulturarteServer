@@ -45,6 +45,24 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jPopupMenu3 = new javax.swing.JPopupMenu();
+        jPopupMenu4 = new javax.swing.JPopupMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         jDesktop = new javax.swing.JDesktopPane();
         menuprincipal = new javax.swing.JMenuBar();
         menuusuarios = new javax.swing.JMenu();
@@ -64,6 +82,40 @@ public class Principal extends javax.swing.JFrame {
         registrarcolaboracion = new javax.swing.JMenuItem();
         menucategoria = new javax.swing.JMenu();
         altacategoria = new javax.swing.JMenuItem();
+        jScrollPane1.setViewportView(jEditorPane1);
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +145,8 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(consultadeproponente);
 
+        seguirusuario.setText("Seguir Usuario");
+
         menuusuarios.add(seguirusuario);
 
         dejardeseguir.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +167,11 @@ public class Principal extends javax.swing.JFrame {
         menupropuestas.add(modificarpropuesta);
 
         menuprincipal.add(menupropuestas);
+
+
+        menucolaboraciones.setText("Colaboraciones");
+
+        cancelarcolaboracion.setText("Cancelar Colaboracion");
 
         menucolaboraciones.add(cancelarcolaboracion);
 
@@ -166,6 +225,9 @@ public class Principal extends javax.swing.JFrame {
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
+
+        ddsu.setVisible(true);
+
         jDesktop.add(ddsu);
         ddsu.show();
     }//GEN-LAST:event_dejardeseguirActionPerformed
@@ -224,6 +286,23 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultapropuesta;
     private javax.swing.JMenuItem consultapropuestaporestado;
     private javax.swing.JMenuItem dejardeseguir;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JPopupMenu jPopupMenu3;
+    private javax.swing.JPopupMenu jPopupMenu4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JDesktopPane jDesktop;
     private javax.swing.JMenu menucategoria;
     private javax.swing.JMenu menucolaboraciones;
