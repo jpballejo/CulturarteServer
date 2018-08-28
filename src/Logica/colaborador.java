@@ -60,6 +60,14 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
     public boolean colaborasconpropuesta(String tituloprop){
         return this.colaboracionesUsuario.containsKey(tituloprop);
     }
+    
+    public int getmontocolaboracion(String tituloprop){
+        colProp cp=(colProp)this.colaboracionesUsuario.get(tituloprop);
+        if(cp!=null)
+            return cp.getMontocolaborado();
+        else
+            return 0;
+    }
 
 
 }

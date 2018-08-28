@@ -364,10 +364,11 @@ private void controlDatos () throws Exception{
     }
    private void altaPerfil(){
    if (usuTipo==false){
+       String imagenRuta = null;
        
        
    dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText()
-           ,imagenRuta, jT_email.getText(), getFechajdc());
+           ,imagenRuta  , jT_email.getText(), getFechajdc());
    }
    }
 }

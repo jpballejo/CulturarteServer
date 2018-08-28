@@ -5,6 +5,12 @@
  */
 package Presentacion;
 
+import Logica.ContPropuesta;
+import Logica.dtProponente;
+import Logica.dtPropuesta;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nicolasgutierrez
@@ -14,6 +20,8 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
     /**
      * Creates new form Consulta_de_Propuesta
      */
+     private ContPropuesta ICP = ContPropuesta.getInstance();
+    
     public Consulta_de_Propuesta() {
         initComponents();
     }
@@ -40,7 +48,8 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablacolaboradores = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        txtmontotoal = new javax.swing.JTextField();
+        txtbuscar = new javax.swing.JTextField();
+        txtmontotoal1 = new javax.swing.JTextField();
 
         tablepropuestas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,6 +62,11 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
                 "Titulo"
             }
         ));
+        tablepropuestas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablepropuestasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablepropuestas);
 
         tablepropuesta.setModel(new javax.swing.table.DefaultTableModel(
@@ -68,12 +82,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tablepropuesta);
         if (tablepropuesta.getColumnModel().getColumnCount() > 0) {
-            tablepropuesta.getColumnModel().getColumn(1).setHeaderValue("Descripcion");
-            tablepropuesta.getColumnModel().getColumn(2).setHeaderValue("Lugar");
-            tablepropuesta.getColumnModel().getColumn(3).setHeaderValue("Fecha");
             tablepropuesta.getColumnModel().getColumn(4).setResizable(false);
-            tablepropuesta.getColumnModel().getColumn(4).setHeaderValue("Precio entrada");
-            tablepropuesta.getColumnModel().getColumn(5).setHeaderValue("Monto requerido");
         }
 
         tablacolaboradores.setModel(new javax.swing.table.DefaultTableModel(
@@ -89,6 +98,12 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(tablacolaboradores);
 
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +113,9 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(txtbuscar))
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,13 +126,11 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtestado))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5)))
-                                    .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtmontotoal1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -129,7 +144,6 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -144,16 +158,60 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtmontotoal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
+        List<String> lprop= ICP.listartodasPropuestas(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) tablepropuestas.getModel();
+        modelo.setRowCount(0);
+        for (int i=0;i<lprop.size();i++){
+            String p=lprop.get(i);
+            Object[] dato={p};
+            modelo.addRow(dato);
+        }
+        
+    }//GEN-LAST:event_txtbuscarKeyPressed
+
+    private void tablepropuestasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepropuestasMouseClicked
+        // TODO add your handling code here:
+        try{
+        int row=tablepropuestas.rowAtPoint(evt.getPoint());
+        int col=tablepropuestas.columnAtPoint(evt.getPoint());
+        dtPropuesta dtp=ICP.mostrarInfoPropuesta((String)tablepropuestas.getValueAt(row, col));
+        
+        DefaultTableModel model=(DefaultTableModel) tablepropuesta.getModel();
+        model.setRowCount(0);
+        Object[] dato={dtp.getTitulo(),dtp.getDescripcion(),dtp.getLugar(),dtp.getFechaRealizacion().getFecha(),dtp.getPrecioentrada(),dtp.getMontorequerido()};
+        txtestado.setText(dtp.getEstado());
+        txtmontotoal1.setText(Integer.toString(dtp.getMontoTotal()));
+        model.addRow(dato);
+        DefaultTableModel model2=(DefaultTableModel) tablacolaboradores.getModel();
+        model2.setRowCount(0);
+        List<String> colabs=dtp.detColaboradores();
+        for (int i=0;i<colabs.size();i++){
+            String c=colabs.get(i);
+            Object[] dat={c};
+            model2.addRow(dat);      
+        }
+        
+        
+        }catch(Exception ex){
+         javax.swing.JOptionPane.showMessageDialog(null,ex);
+        }
+    }//GEN-LAST:event_tablepropuestasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -168,8 +226,9 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JTable tablacolaboradores;
     private javax.swing.JTable tablepropuesta;
     private javax.swing.JTable tablepropuestas;
+    private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtestado;
     private javax.swing.JLabel txtimagen;
-    private javax.swing.JTextField txtmontotoal;
+    private javax.swing.JTextField txtmontotoal1;
     // End of variables declaration//GEN-END:variables
 }

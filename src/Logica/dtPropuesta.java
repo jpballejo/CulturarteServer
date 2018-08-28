@@ -16,11 +16,11 @@ public class dtPropuesta {
 
     String titulo, descripcion, imagen, lugar, estado, categoria, proponente;
     dtFecha fechaRealizacion, fechapublicada;
-    int precioentrada, montorequerido;
+    int precioentrada, montorequerido, montoactual;
     List<String> colaboradores;
 
 //CONSTRUCTOR//
-    public dtPropuesta(String titulo, String descripcion, String imagen, String lugar, String estado, String categoria, String proponente, dtFecha fechaRealizacion, dtFecha fechapublicada, int precioentrada, int montorequerido) {
+    public dtPropuesta(String titulo, String descripcion, String imagen, String lugar, String estado, String categoria, String proponente, dtFecha fechaRealizacion, dtFecha fechapublicada, int precioentrada, int montorequerido, int montoactual) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -32,6 +32,7 @@ public class dtPropuesta {
         this.fechapublicada = fechapublicada;
         this.precioentrada = precioentrada;
         this.montorequerido = montorequerido;
+        this.montoactual=montoactual;
         this.colaboradores= new ArrayList<String>();
     }
 
@@ -83,6 +84,10 @@ public class dtPropuesta {
     public List<String> detColaboradores(){
         return colaboradores;
     }
+    
+    public int getMontoTotal() {
+        return montoactual;
+    }
 
 //SETTERS//
     public void setTitulo(String titulo) {
@@ -131,5 +136,9 @@ public class dtPropuesta {
     
     public void setColaboradores(List<String> l){
         this.colaboradores=l;
+    }
+    
+    public void setMontoTotal(int m){
+        this.montoactual=m;
     }
 }
