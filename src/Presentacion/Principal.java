@@ -45,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
+
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,9 +63,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
-=======
         jDesktop = new javax.swing.JDesktopPane();
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
         menuprincipal = new javax.swing.JMenuBar();
         menuusuarios = new javax.swing.JMenu();
         altadeperfil = new javax.swing.JMenuItem();
@@ -84,8 +82,6 @@ public class Principal extends javax.swing.JFrame {
         registrarcolaboracion = new javax.swing.JMenuItem();
         menucategoria = new javax.swing.JMenu();
         altacategoria = new javax.swing.JMenuItem();
-
-<<<<<<< HEAD
         jScrollPane1.setViewportView(jEditorPane1);
 
         jMenu1.setText("File");
@@ -121,8 +117,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu6.setText("Edit");
         jMenuBar3.add(jMenu6);
 
-=======
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         altadeperfil.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,10 +145,8 @@ public class Principal extends javax.swing.JFrame {
         });
         menuusuarios.add(consultadeproponente);
 
-<<<<<<< HEAD
         seguirusuario.setText("Seguir Usuario");
-=======
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
+
         menuusuarios.add(seguirusuario);
 
         dejardeseguir.addActionListener(new java.awt.event.ActionListener() {
@@ -176,12 +168,11 @@ public class Principal extends javax.swing.JFrame {
 
         menuprincipal.add(menupropuestas);
 
-<<<<<<< HEAD
+
         menucolaboraciones.setText("Colaboraciones");
 
         cancelarcolaboracion.setText("Cancelar Colaboracion");
-=======
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
+
         menucolaboraciones.add(cancelarcolaboracion);
 
         menucolaboraciones.add(consultacolaboracion);
@@ -234,12 +225,11 @@ public class Principal extends javax.swing.JFrame {
     private void dejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dejardeseguirActionPerformed
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario ddsu= new Dejar_de_Seguir_Usuario(ICU);
-<<<<<<< HEAD
+
         ddsu.setVisible(true);
-=======
+
         jDesktop.add(ddsu);
         ddsu.show();
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
     }//GEN-LAST:event_dejardeseguirActionPerformed
 
     private void altacategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altacategoriaActionPerformed
@@ -296,7 +286,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultapropuesta;
     private javax.swing.JMenuItem consultapropuestaporestado;
     private javax.swing.JMenuItem dejardeseguir;
-<<<<<<< HEAD
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
@@ -314,9 +303,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu3;
     private javax.swing.JPopupMenu jPopupMenu4;
     private javax.swing.JScrollPane jScrollPane1;
-=======
     private javax.swing.JDesktopPane jDesktop;
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
     private javax.swing.JMenu menucategoria;
     private javax.swing.JMenu menucolaboraciones;
     private javax.swing.JMenuBar menuprincipal;
