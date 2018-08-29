@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(true);
         
         //Mandando fruta
-      
+      /*
         jMenu1.add(jMenuItem3);
          jMenu1.add(jMenuItem4);
            jMenu1.add(jMenuItem5);
@@ -60,7 +60,7 @@ public class Principal extends javax.swing.JFrame {
            jMenuBar1.repaint();
            repaint();
            setVisible(true);
-           jMenuBar1.setVisible(true);
+           jMenuBar1.setVisible(true); */
     }
 
     /**
