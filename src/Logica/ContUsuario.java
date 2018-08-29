@@ -264,6 +264,15 @@ public class ContUsuario implements iConUsuario {
         }
         return res;
     }
+     
+     @Override
+     public List<String> listarusuarios(String nick){
+         List<String> lst= new ArrayList();
+         this.usuarios.keySet().stream().filter((key) -> (key.contains(nick))).forEachOrdered((key) -> {
+             lst.add(key);
+     });
+         return lst;
+     }
     
 
 }
