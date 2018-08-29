@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/nbproject/private/private.xml</file>
-            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Alta_Perfil.java</file>
-            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Consulta_de_Perfil_de_Proponente.java</file>
             <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Principal.java</file>
+            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Consulta_de_Perfil_de_Proponente.java</file>
+            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Carga_datos_prueba.java</file>
+            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Configuracion_Culturarte.java</file>
+            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Presentacion/Alta_Perfil.java</file>
+            <file>file:/home/juan/ProgAplicaciones2018/progAplicaciones/src/Persistencia/ConexionDB.java</file>
         </group>
     </open-files>
 </project-private>
