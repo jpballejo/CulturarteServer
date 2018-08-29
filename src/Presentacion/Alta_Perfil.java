@@ -45,12 +45,7 @@ boolean usuTipo = false;
 
 String imagenRuta =null;
 JFileChooser navegadorArchivos = new JFileChooser();
-    
-    /**
-=======
->>>>>>> 36134cbcc47856d4dd681f814faca46d1135fe4c
-     * Creates new form Alta_Perfil
-     */
+ 
     public Alta_Perfil() {
         initComponents();
         jT_direccion.enable(false);
