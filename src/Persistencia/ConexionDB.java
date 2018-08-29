@@ -16,11 +16,32 @@ import java.util.logging.Logger;
  * @author apias
  */
 public class ConexionDB {
-    private final String host="localhost";
-    private final String port="3306";
-    private final String db="cultuRarte";
-    private final String user="admin";
-    private final String pass="pao2930";
+    private String host="localhost";
+    private String port="3306";
+    private String db="cultuRarte";
+    private String user="admin";
+    private String pass="pao2930";
+    
+    public void setHost(String h){
+        this.host=h;
+    }
+    
+    public void setPort(String p){
+        this.port=p;
+    }
+    
+    public void setDB(String db){
+        this.db=db;
+    }
+    
+    public void setUser(String u){
+        this.user=u;
+    }
+        
+    public void setPass(String pas){
+        this.pass=pas;
+    }
+        
     
     //Para hacer ConexionDB singleton descomentar
     //private static Connection conexion=null;
@@ -28,6 +49,7 @@ public class ConexionDB {
     //Para hacer ConexionDB singleton descomentar
     //private ConexionDB(){};
     public ConexionDB(){};
+    
     //Para hacer ConexionDB singleton descomentar
     //public static Connection getConexion() {
     public Connection getConn(){

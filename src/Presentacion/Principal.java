@@ -28,6 +28,39 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setVisible(true);
+        
+        //Mandando fruta
+      
+        jMenu1.add(jMenuItem3);
+         jMenu1.add(jMenuItem4);
+           jMenu1.add(jMenuItem5);
+             jMenu1.add(jMenuItem6);
+               jMenu1.add(jMenuItem7);
+        
+        jMenu2.add(jMenuItem11);
+         jMenu2.add(jMenuItem10);
+          jMenu2.add(jMenuItem9);
+           jMenu2.add(jMenuItem8);
+            jMenu2.add(jMenuItem13);
+            
+        jMenu4.add(jMenuItem12);
+         jMenu4.add(jMenuItem15);
+          jMenu4.add(jMenuItem14);
+          
+        jMenu5.add(jMenuItem16);  
+         jMenu5.add(jMenuItem17);
+                           
+         jMenuBar1.add(jMenu1);
+         jMenuBar1.add(jMenu2);
+         jMenuBar1.add(jMenu4);
+         jMenuBar1.add(jMenu5);
+         
+           this.setJMenuBar(jMenuBar1);   
+           
+           jMenuBar1.repaint();
+           repaint();
+           setVisible(true);
+           jMenuBar1.setVisible(true);
     }
 
     /**
