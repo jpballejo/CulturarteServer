@@ -267,9 +267,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-Alta_Perfil alta = new Alta_Perfil();
-jDesktopPane1.add(alta);
-alta.show();
+//Alta_Perfil alta = new Alta_Perfil();
+//jDesktopPane1.add(alta);
+//alta.show();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed

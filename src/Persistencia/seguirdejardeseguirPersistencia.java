@@ -5,11 +5,18 @@
  */
 package Persistencia;
 
+import Logica.dtFecha;
+import Logica.dtPropuestasBD;
+import Logica.dtSeguidores;
 import Logica.proponente;
 import Logica.usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,6 +25,7 @@ import java.sql.SQLException;
 public class seguirdejardeseguirPersistencia {
     
     private Connection conexion = new ConexionDB().getConexion();
+   static ConexionDB conne;
     
     public boolean seguir(usuario us,usuario uas){
                     try {
@@ -49,6 +57,26 @@ public class seguirdejardeseguirPersistencia {
             ex.printStackTrace();
             return false;
         } 
+    }
+    
+    public static List<dtSeguidores> cargarSeguidores(){
+        try {
+            
+            List<dtSeguidores> list= new ArrayList<>();
+            String sql=null;       
+            Statement st=conne.getConn().createStatement();
+            sql= "SELECT * FROM Seguidores";
+            ResultSet rs=st.executeQuery(sql);
+            while(rs.next()){
+                dtSeguidores dt=new dtSeguidores(rs.getString("nickusuario"),rs.getString("nickaseguir"));
+                list.add(dt);      
+            }
+            return list;    
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }         
     }
 }    
     

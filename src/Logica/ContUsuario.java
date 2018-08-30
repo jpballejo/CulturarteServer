@@ -50,7 +50,10 @@ public class ContUsuario implements iConUsuario {
     @Override
     public void cargarUsuarios() {
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cargaUsuarios();
+        cargaSeguidores();
+         
+        
     }
 
     @Override
@@ -275,4 +278,114 @@ public class ContUsuario implements iConUsuario {
      }
     
 
+     public void cargaUsuarios(){
+         Map<String, proponente> mapproponentes=new HashMap<String, proponente>();
+         mapproponentes= usuariosPersistencia.CargarProponentes();
+         for(String keyp : mapproponentes.keySet()){
+             proponente p=mapproponentes.get(keyp);
+             this.usuarios.put(keyp, p);        
+         }
+         
+         Map<String, colaborador> mapcolaboradores=new HashMap<String, colaborador>();
+         mapcolaboradores= usuariosPersistencia.CargarColaboradores();
+         for(String keyc : mapcolaboradores.keySet()){
+             colaborador c=mapcolaboradores.get(keyc);
+             this.usuarios.put(keyc, c);        
+         }
+     }
+     
+     public void cargaSeguidores(){
+         List<dtSeguidores> list= new ArrayList<>();
+         list= seguirdejardeseguirPersistencia.cargarSeguidores();
+         Iterator it= list.iterator();
+         while(it.hasNext()){
+             dtSeguidores dt=(dtSeguidores)it.next();
+             usuario u=this.usuarios.get(dt.nickusuario);
+             u.seguir(this.usuarios.get(dt.nickaseguir));
+         }
+         
+     }
+     
+     public void esteUsuariopropusoestaProp(String nickproponente, propuesta p){
+         proponente prop=(proponente)this.usuarios.get(nickproponente);
+         prop.agregarPropuesta(p);
+     }
+     
+     
+     public boolean compararfechas(dtFecha uno, dtFecha dos){
+         int unoanio=Integer.parseInt(uno.getAnio());
+         int unomes=Integer.parseInt(uno.getMes());
+         int unodia=Integer.parseInt(uno.getDia());
+         int dosanio=Integer.parseInt(dos.getAnio());
+         int dosmes=Integer.parseInt(dos.getMes());
+         int dosdia=Integer.parseInt(dos.getDia());
+         
+         if(unoanio>dosanio){
+             return true;
+         }
+         if(unoanio==dosanio && unomes>dosmes){
+             return true;
+         }
+         if(unoanio==dosanio && unomes==dosmes && unodia>dosdia){
+             return true;
+         }
+         if(unoanio==dosanio && unomes==dosmes && unodia==dosdia){ //CASO DUDOSO
+             return true;
+         }
+         else{
+             return false;
+         }
+         
+     }
+     
+     public boolean compararhoras(dtHora uno, dtHora dos){
+         if(uno.getHoras()>dos.getHoras()){
+             return true;
+         }
+         if(uno.getHoras()==dos.getHoras() && uno.getMinutos()>dos.getMinutos()){
+             return true;
+         }
+         if(uno.getHoras()==dos.getHoras() && uno.getMinutos()==dos.getMinutos()){
+             return true;
+         }
+         else
+             return false;
+         
+     }
+     
+     public void agregarEstadoAPropuesta(estado e, String titulo, dtFecha dtf, dtHora dth){
+         
+     }
+     
+     public propuesta damePropuesta(String titulo) {
+        
+        for( String key : this.usuarios.keySet()){
+            proponente p=(proponente)this.usuarios.get(key);
+            if (p!=null && p.tenesPropuesta(titulo)){
+                return p.damelapropuesta(titulo);
+                
+                }
+             
+            }
+       return null;  
+    }
+     
+    public void ordenarLosEstadosdeCadaPropuesta(){
+        for(String key: this.usuarios.keySet()){
+            if(this.usuarios.get(key) instanceof proponente){
+                proponente p=(proponente)this.usuarios.get(key);
+                p.ordenalosestadosdepropuestas();
+            }
+                
+        }
+    }
+    
+    public void registrarcolaboracion(String nickc, String titulo, colProp cp){
+        cp.setPropuesta(this.damePropuesta(titulo));
+        if(this.usuarios.get(nickc) instanceof colaborador){
+            colaborador c=(colaborador)this.usuarios.get(nickc);
+            c.agregarcolaboracion(cp);
+        }
+    }
+     
 }

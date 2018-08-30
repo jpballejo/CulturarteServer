@@ -37,6 +37,8 @@ public class dtFecha {
     String fecha=null;
     fecha = this.dia+"/"+this.mes+"/"+this.anio;
     
+    
+    
     return fecha;
     }
 

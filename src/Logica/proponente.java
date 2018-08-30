@@ -128,4 +128,19 @@ public class proponente extends usuario {
         });
         return retorno;
     }
+     
+     public boolean tenesPropuesta(String titulo){
+         return this.propuestasUsuario.containsKey(titulo);
+     }
+     
+     public propuesta damelapropuesta(String titulo){
+         return this.propuestasUsuario.get(titulo);
+     }
+     
+     public void ordenalosestadosdepropuestas(){
+         for(String key: this.propuestasUsuario.keySet()){
+             propuesta p=this.propuestasUsuario.get(key);
+             p.ordenarestados();
+         }
+     }
 }

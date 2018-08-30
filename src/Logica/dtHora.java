@@ -38,5 +38,23 @@ public class dtHora {
     }
 
     
+    public String convertirHoraAString(dtHora dt){
+         String retorno=dt.horas+":"+dt.minutos;
+         return retorno;
+    }
+    
+    public dtHora convertirHorasADtHora(String h){
+        dtHora retorno=new dtHora(1,1);
+        String[] parsed= h.split(":");
+        retorno.horas=Integer.parseInt(parsed[0]);
+        retorno.minutos=Integer.parseInt(parsed[1]);
+        return retorno;
+    }
+    
+    public String getHora(){
+        String ret=this.horas+":"+this.minutos;
+        return ret;
+    }
+    
     
 }

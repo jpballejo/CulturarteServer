@@ -12,22 +12,45 @@ package Logica;
 public class propEstado {
 
     private dtFecha fecha;
+    private dtHora hora;
+    private estado estado;
     
 //METODOS//
+
+    public propEstado(dtFecha fecha, dtHora hora, estado estado) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.estado = estado;
+    }
+    
     
 
-//CONSTRUCTOR//
-    public propEstado(dtFecha fecha) {
-        this.fecha = fecha;
-    }
-  
-//GETTER//
     public dtFecha getFecha() {
         return fecha;
     }
+
+    public dtHora getHora() {
+        return hora;
+    }
+
+    public estado getEstado() {
+        return estado;
+    }
+
     
-//SETTER//
+    
     public void setFecha(dtFecha fecha) {
         this.fecha = fecha;
     }
+
+    public void setHora(dtHora hora) {
+        this.hora = hora;
+    }
+
+    public void setEstado(estado estado) {
+        this.estado = estado;
+    }
+    
+
+
 }

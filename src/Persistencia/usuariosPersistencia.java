@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  * @author juan
  */
 public class usuariosPersistencia {
-    ConexionDB conexion;
+    static ConexionDB conexion;
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception{
         try {
@@ -52,7 +52,7 @@ public class usuariosPersistencia {
     
     }
     
-    public Map<String, proponente> CargarProponentes(){
+    public static Map<String, proponente> CargarProponentes(){
                 try {
             String sqlproponentes=null, sqlusuarios=null;
             dtFecha dtf=new dtFecha("1","1","2000");
@@ -103,7 +103,7 @@ public class usuariosPersistencia {
     }
     
     
-   public Map<String, colaborador> CargarColaboradores(){
+   public static Map<String, colaborador> CargarColaboradores(){
                 try {
             String sqlproponentes=null, sqlusuarios=null;
             dtFecha dtf=new dtFecha("1","1","2000");

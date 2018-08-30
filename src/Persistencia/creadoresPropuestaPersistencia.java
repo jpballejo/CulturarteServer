@@ -5,9 +5,15 @@
  */
 package Persistencia;
 
+import Logica.dtColaboracionCompleto;
+import Logica.dtCreadoresPropuestas;
+import Logica.dtFecha;
+import Logica.dtHora;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -67,4 +73,24 @@ public class creadoresPropuestaPersistencia {
         
     }
     
+    public List<dtCreadoresPropuestas> cargarCreadores(){
+        
+        try{
+            List<dtCreadoresPropuestas> list=new ArrayList<>();
+            String sql=null;
+            Statement st=conexion.getConn().createStatement();
+            sql= "SELECT * FROM CreadoresPropuesta";
+            ResultSet rs=st.executeQuery(sql);
+            while(rs.next()){           
+                dtCreadoresPropuestas dt= new dtCreadoresPropuestas(rs.getString("nickusuario"),rs.getString("tituloprop"));
+                list.add(dt);
+            
+        }
+            return list;
+        
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } 
+    }
 }

@@ -5,12 +5,17 @@
  */
 package Persistencia;
 
+import Logica.dtEstadosPropuestas;
+import Logica.dtFecha;
+import Logica.dtHora;
 import Logica.estado;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +24,7 @@ import java.util.Map;
  */
 public class estadoPersistencia {
           
-    ConexionDB conexion;
+    static ConexionDB conexion;
     
     public boolean agregarestado(String nombre){
                     try {
@@ -51,7 +56,7 @@ public class estadoPersistencia {
         } 
     }
         
-        public Map<String, estado> CargarEstados(){
+        public static Map<String, estado> CargarEstados(){
                 try {
             String sql=null;
             Map<String, estado> lista=new HashMap<String, estado>();
@@ -67,6 +72,31 @@ public class estadoPersistencia {
             st.close();
             return lista;
         } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }  
+        }
+        
+        
+        public static List<dtEstadosPropuestas> CargarEstadosPropuestas(){
+            try{
+            List<dtEstadosPropuestas> list= new ArrayList<>();
+            String sql=null;
+            Statement st=conexion.getConn().createStatement();
+            sql="SELECT * FROM estadoPropuesta";
+            ResultSet rs=st.executeQuery(sql);
+            while(rs.next()){
+                 String[] f=rs.getString("fecha").split("/");
+                dtFecha dtf= new dtFecha(f[0],f[1],f[2]);
+                String[] h=rs.getString("hora").split(":");
+                dtHora dth= new dtHora(Integer.parseInt(h[0]),Integer.parseInt(h[1]));  
+                
+                dtEstadosPropuestas dt=new dtEstadosPropuestas(rs.getString("propuesta"),rs.getString("estado"),dtf,dth);
+            }
+            
+            return list;
+            
+            } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }  

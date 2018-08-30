@@ -5,8 +5,12 @@
  */
 package Logica;
 
+import Persistencia.categoriaPersistencia;
+import Persistencia.estadoPersistencia;
+import Persistencia.propuestasPersistencia;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +35,9 @@ public class ContPropuesta implements iConPropuesta {
     
     @Override
     public void cargarPropuestas() {
-      
+      cargaCategorias();
+      cargaEstados();
+      cargaPropuestas();
     }
 
     @Override
@@ -98,8 +104,35 @@ public class ContPropuesta implements iConPropuesta {
         return ContUsuario.getInstance().listartodaslaspropuestas(titulo);
     }
     
+    public void cargaCategorias(){
+        
+        this.categorias=categoriaPersistencia.CargarCategorias();
     
+    }
     
+    public void cargaEstados(){
+        this.estados=estadoPersistencia.CargarEstados();
+    }
     
+    public void cargaPropuestas(){
+       Map<String, dtPropuestasBD> props=propuestasPersistencia.cargarPropuestas();
+       for(String key: props.keySet()){
+           dtPropuestasBD dt=props.get(key);
+           propuesta p=new propuesta(dt.getTitulo(),dt.getDescripcion(),dt.getImagen(),dt.getLugar(),dt.getFecha(),dt.getFecha_publicacion(),dt.getPrecio_entrada(),dt.getMonto_necesario());
+           cUsuario.esteUsuariopropusoestaProp(dt.getNickproponente(), p);
+           
+       }
+       
+       List<dtEstadosPropuestas> l= estadoPersistencia.CargarEstadosPropuestas();
+       Iterator it=l.iterator();
+       while(it.hasNext()){
+           dtEstadosPropuestas dtep=(dtEstadosPropuestas)it.next();
+           propuesta p2=cUsuario.damePropuesta(dtep.getTituloprop());
+           estado e=this.estados.get(dtep.getEstado());
+           p2.agregarNuevoEstado(e, dtep.getFecha(), dtep.getHora());
+           
+       }
+       cUsuario.ordenarLosEstadosdeCadaPropuesta();
+    }
     
 }

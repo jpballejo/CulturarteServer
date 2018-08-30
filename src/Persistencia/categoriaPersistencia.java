@@ -23,7 +23,7 @@ import java.util.Map;
  * @author nicolasgutierrez
  */
 public class categoriaPersistencia {
-    ConexionDB conexion;
+   static ConexionDB conexion;
 
     public void altaCategoria(String nombre, String padre) throws Exception{
         try {
@@ -53,7 +53,7 @@ public class categoriaPersistencia {
     
     }
         
-        public Map<String, categoria> CargarCategorias(){
+        public static Map<String, categoria> CargarCategorias(){
             Map<String, categoria> list= new HashMap<String, categoria>();
                  try {
             String sql=null;

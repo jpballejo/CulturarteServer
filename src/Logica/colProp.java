@@ -14,7 +14,7 @@ public class colProp {
     private dtFecha fecha;
     private dtHora hora;
     private int montocolaborado;
-    private enumRetorno retorno;
+    private String retorno;
 
 
     //METODOS//
@@ -34,11 +34,12 @@ public class colProp {
 }
 //CONSTRUCTOR//
 
-    public colProp(dtFecha fecha, dtHora hora, int montocolaborado, enumRetorno retorno) {
+    public colProp(dtFecha fecha, dtHora hora, int montocolaborado, String retorno, propuesta prop) {
         this.fecha = fecha;
         this.hora = hora;
         this.montocolaborado = montocolaborado;
         this.retorno = retorno;
+        this.propColaborada=prop;
     }
     
     //GETTERS//
@@ -54,7 +55,7 @@ public class colProp {
         return montocolaborado;
     }
 
-    public enumRetorno getRetorno() {
+    public String getRetorno() {
         return retorno;
     }
     
@@ -71,9 +72,12 @@ public class colProp {
         this.montocolaborado = montocolaborado;
     }
 
-    public void setRetorno(enumRetorno retorno) {
+    public void setRetorno(String retorno) {
         this.retorno = retorno;
     }
 
+    public void setPropuesta(propuesta p) {
+        this.propColaborada=p;
+    }
  
 }

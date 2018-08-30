@@ -7,6 +7,8 @@ package Logica;
 
 
 
+import Persistencia.colaboracionesPersistencia;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,7 +31,7 @@ public class ContColaboracion implements iConColaboracion{
     
     @Override
     public void cargarColaboracion() {
-        
+        cargarColaboraciones();
     }
 
     @Override
@@ -95,4 +97,15 @@ public class ContColaboracion implements iConColaboracion{
         this.cUsuario.eliminarColaboracion(this.colaboracion);
     }
     
+    public void cargarColaboraciones(){
+        List<dtColaboracionCompleto> list=colaboracionesPersistencia.cargarColaboraciones();
+        Iterator it=list.iterator();
+        while(it.hasNext()){
+            dtColaboracionCompleto dt=(dtColaboracionCompleto) it.next();
+            colProp cp=new colProp(dt.getFecha(),dt.getHora(),dt.getMonto(),dt.getRetorno(),null);
+            cUsuario.registrarcolaboracion(dt.getNickname(), dt.getTitulo(), cp);
+        }
+    }
+    
 }
+
