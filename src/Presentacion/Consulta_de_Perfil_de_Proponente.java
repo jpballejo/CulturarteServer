@@ -286,14 +286,14 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         int row=jTable1.rowAtPoint(evt.getPoint());
         int col=jTable1.columnAtPoint(evt.getPoint());
-        dtProponente dtp=ICU.infoProponente((String)jTable1.getValueAt(row, col));
+        dtProponente dtp=ICU.infoProponente((String)jTable1.getValueAt(row, col)); //una forma
         labelnickname.setText(dtp.getNickname());
         DefaultTableModel modelo=(DefaultTableModel) tableproponente.getModel();
         modelo.setRowCount(0);
         Object[] dat={dtp.getNombre(),dtp.getApellido(),dtp.getEmail(),dtp.getFechaNac().getFecha(),dtp.getSitioWeb(),dtp.getBiografia()};
         modelo.addRow(dat);
         
-        List<dtPropuesta> ldtp=ICU.listarPropuestas(jTable1.getValueAt(row, col).toString());
+        List<dtPropuesta> ldtp=ICU.listarPropuestas(jTable1.getValueAt(row, col).toString()); //otra forma
         DefaultTableModel modelo2=(DefaultTableModel) tablepropuestas1.getModel();
         modelo2.setRowCount(0);
         for (int i=0;i<ldtp.size();i++) {

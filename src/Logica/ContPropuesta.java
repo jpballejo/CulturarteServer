@@ -18,6 +18,8 @@ public class ContPropuesta implements iConPropuesta {
 
     private static ContPropuesta instance;
     private ContUsuario cUsuario;
+    private Map<String, categoria> categorias=new HashMap<String,categoria>();
+    private Map<String, estado> estados=new HashMap<String,estado>();
     
     public static ContPropuesta getInstance() {
         if(instance==null){

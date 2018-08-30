@@ -5,6 +5,10 @@
  */
 package Presentacion;
 
+import Persistencia.ConexionDB;
+import java.sql.Connection;
+
+
 /**
  *
  * @author juan
@@ -29,71 +33,41 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtrutaperfil = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        txtrutapropuesta = new javax.swing.JTextField();
+        btnaceptarperfil = new javax.swing.JButton();
+        btnaceptarprop = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtrutacargadedatos = new javax.swing.JTextField();
+        btnaceptarcarga = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txthost = new javax.swing.JTextField();
+        txtpuerto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtbd = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        txtuser = new javax.swing.JTextField();
+        txtpass = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnaceptar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Ruta imagenes de Perfil");
+        btnaceptarperfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaceptarperfilActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
-
-        jLabel3.setText("Ruta imagenes de Propuesta");
-
-        jTextField3.setText("jTextField2");
-
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton2");
-
-        jLabel4.setText("Ruta imagenes carga datos");
-
-        jTextField4.setText("jTextField2");
-
-        jButton4.setText("jButton2");
-
-        jLabel5.setText("Puerto");
-
-        jTextField5.setText("jTextField5");
-
-        jTextField6.setText("jTextField5");
-
-        jLabel6.setText("Puerto");
-
-        jLabel7.setText("Puerto");
-
-        jTextField7.setText("jTextField5");
-
-        jLabel8.setText("Puerto");
-
-        jTextField8.setText("jTextField5");
-
-        jTextField9.setText("jTextField5");
-
-        jLabel9.setText("Puerto");
-
-        jButton5.setText("jButton2");
-
-        jButton6.setText("jButton2");
+        btnaceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,9 +80,9 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4))
+                            .addComponent(btnaceptarprop)
+                            .addComponent(btnaceptarperfil)
+                            .addComponent(btnaceptarcarga))
                         .addGap(14, 14, 14))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,42 +91,42 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtrutapropuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtrutacargadedatos, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtrutaperfil, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(39, 39, 39)
-                                .addComponent(jTextField6))
+                                .addComponent(txtpuerto))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(39, 39, 39)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txthost, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(327, 327, 327))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(39, 39, 39)
-                                .addComponent(jTextField9))
+                                .addComponent(txtpass))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(39, 39, 39)
-                                .addComponent(jTextField8))
+                                .addComponent(txtuser))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(39, 39, 39)
-                                .addComponent(jTextField7)))
+                                .addComponent(txtbd)))
                         .addGap(49, 49, 49)
-                        .addComponent(jButton5)
+                        .addComponent(btnaceptar)
                         .addGap(43, 43, 43)
-                        .addComponent(jButton6)
+                        .addComponent(btncancelar)
                         .addGap(73, 73, 73))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -161,40 +135,40 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(txtrutaperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaceptarperfil))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
+                    .addComponent(txtrutapropuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaceptarprop)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4)
+                    .addComponent(txtrutacargadedatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaceptarcarga)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txthost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtpuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtbd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaceptar)
+                    .addComponent(btncancelar))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
@@ -203,6 +177,37 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
+        // TODO add your handling code here:
+        if(txthost.getText().isEmpty()!=true && txtpuerto.getText().isEmpty()!=true && txtbd.getText().isEmpty()!=true && txtuser.getText().isEmpty()!=true && txtpass.getText().isEmpty()!=true){
+            ConexionDB.cerrar();
+            Connection conexionConfigurada = ConexionDB.getConexionConfigurada(txthost.getText(),txtpuerto.getText(),txtbd.getText(),txtuser.getText(),txtpass.getText()); 
+             javax.swing.JOptionPane.showMessageDialog(null,"Configuracion realizada con exito");
+             limpiarcampos();
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null,"Error rellene todos los campos");
+            limpiarcampos();
+        }
+    }//GEN-LAST:event_btnaceptarActionPerformed
+
+    private void btnaceptarperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarperfilActionPerformed
+        // TODO add your handling code here:
+        if(txtrutaperfil.getText().isEmpty()!=true){
+            
+        }
+    }//GEN-LAST:event_btnaceptarperfilActionPerformed
+ 
+    public void limpiarcampos(){
+        this.txtbd.setText("");
+        this.txthost.setText("");
+        this.txtpass.setText("");
+        this.txtrutacargadedatos.setText("");
+        this.txtpuerto.setText("");
+        this.txtrutaperfil.setText("");
+        this.txtrutapropuesta.setText("");
+        this.txtuser.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -239,11 +244,11 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnaceptar;
+    private javax.swing.JButton btnaceptarcarga;
+    private javax.swing.JButton btnaceptarperfil;
+    private javax.swing.JButton btnaceptarprop;
+    private javax.swing.JButton btncancelar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -253,13 +258,13 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtbd;
+    private javax.swing.JTextField txthost;
+    private javax.swing.JTextField txtpass;
+    private javax.swing.JTextField txtpuerto;
+    private javax.swing.JTextField txtrutacargadedatos;
+    private javax.swing.JTextField txtrutaperfil;
+    private javax.swing.JTextField txtrutapropuesta;
+    private javax.swing.JTextField txtuser;
     // End of variables declaration//GEN-END:variables
 }
