@@ -16,22 +16,15 @@ import java.util.logging.Logger;
  * @author apias
  */
 public class ConexionDB {
-    private final String host="localhost";
-    private final String port="3306";
-    private final String db="cultuRarte";
-    private final String user="admin";
-    private final String pass="pao2930";
-    
-    //Para hacer ConexionDB singleton descomentar
-    //private static Connection conexion=null;
+    private  final String host="localhost";
+    private  final String port="3306";
+    private  final String db="cultuRarte";
+    private  final String user="administrador";
+    private  final String pass="1234";
     private Connection conexion=null;
-    //Para hacer ConexionDB singleton descomentar
-    //private ConexionDB(){};
-    public ConexionDB(){};
-    //Para hacer ConexionDB singleton descomentar
-    //public static Connection getConexion() {
+    private Connection con = null;
+    
     public Connection getConn(){
-        Connection con=null;
         try {
             con = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
         } catch (SQLException ex) {
@@ -51,7 +44,17 @@ public class ConexionDB {
         }
         return conexion;
     }
+    public void closeConn(){
+        if(con!=null){
+                try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
     
+        }
+    }
     public void cerrar(){
         if (conexion != null) {
             try {
