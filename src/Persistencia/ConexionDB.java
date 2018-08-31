@@ -5,7 +5,6 @@
  */
 package Persistencia;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,8 +20,8 @@ public class ConexionDB {
     private  final String db="cultuRarte";
     private  final String user="administrador";
     private  final String pass="1234";
-    private Connection conexion=null;
-    private Connection con = null;
+    private static Connection conexion=null;
+    private static Connection con = null;
     
     public Connection getConn(){
         try {
@@ -67,15 +66,13 @@ public class ConexionDB {
                 ex.printStackTrace();
                 Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
             }
-    
-<<<<<<< HEAD
+
         }
     }
-    public void cerrar(){
-=======
+
     public static void cerrar(){
->>>>>>> origin/master
-        if (conexion != null) {
+
+        if(conexion != null) {
             try {
                 conexion.close();
             } catch (SQLException ex) {
