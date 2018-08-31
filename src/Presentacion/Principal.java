@@ -265,13 +265,16 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Seguir_Usuario su= new Seguir_Usuario();
         //jDesktopPane1.add(su);
+         this.getContentPane().add(su);
         su.show();
+        
     }//GEN-LAST:event_jm_seguirUsuarioActionPerformed
 
     private void jm_altaPropuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaPropuestaActionPerformed
         // TODO add your handling code here:
         Alta_de_Propuesta adp= new Alta_de_Propuesta();
         //jDesktopPane1.add(adp);
+         this.getContentPane().add(adp);
         adp.show();
     }//GEN-LAST:event_jm_altaPropuestaActionPerformed
 
@@ -279,6 +282,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Alta_de_categoria adc=new Alta_de_categoria();
        // jDesktopPane1.add(adc);
+        this.getContentPane().add(adc);
         adc.show();
     }//GEN-LAST:event_jm_altaCategoriaActionPerformed
 
@@ -294,6 +298,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario dd= new Dejar_de_Seguir_Usuario();
       //  jDesktopPane1.add(dd);
+       this.getContentPane().add(dd);
         dd.show();
     }//GEN-LAST:event_jm_dejarSeguirActionPerformed
 
@@ -309,6 +314,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Consulta_de_Perfil_de_Proponente cp= new Consulta_de_Perfil_de_Proponente();
         //jDesktopPane1.add(cp);
+         this.getContentPane().add(cp);
         cp.show();
     }//GEN-LAST:event_jm_consultaProponenteActionPerformed
 
@@ -316,6 +322,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Consulta_de_Propuesta cdp= new Consulta_de_Propuesta();
       //  jDesktopPane1.add(cdp);
+       this.getContentPane().add(cdp);
         cdp.show();
     }//GEN-LAST:event_jm_consultaPropuestaActionPerformed
 
@@ -323,6 +330,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Consulta_de_Propuesta_por_Estado cdppe= new Consulta_de_Propuesta_por_Estado();
        // jDesktopPane1.add(cdppe);
+        this.getContentPane().add(cdppe);
         cdppe.show();
     }//GEN-LAST:event_jm_consultaPropuestaEstadoActionPerformed
 
@@ -330,6 +338,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Modificar_datos_de_Propuesta mddp= new Modificar_datos_de_Propuesta();
        // jDesktopPane1.add(mddp);
+        this.getContentPane().add(mddp);
         mddp.show();
                
     }//GEN-LAST:event_jm_modificarPropuestaActionPerformed
@@ -338,6 +347,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Registrar_Colaboracion_a_Propuesta rcap= new Registrar_Colaboracion_a_Propuesta();
        // jDesktopPane1.add(rcap);
+        this.getContentPane().add(rcap);
         rcap.show();
     }//GEN-LAST:event_jm_colaborarActionPerformed
 
@@ -345,6 +355,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Cancelar_colaboracion_a_Propuesta ccap= new Cancelar_colaboracion_a_Propuesta();
        // jDesktopPane1.add(ccap);
+        this.getContentPane().add(ccap);
         ccap.show();
     }//GEN-LAST:event_jm_cancelarColaboracionActionPerformed
 
@@ -352,6 +363,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Consulta_de_Colaboracion_a_Propuesta cdcap= new Consulta_de_Colaboracion_a_Propuesta();
        // jDesktopPane1.add(cdcap);
+        this.getContentPane().add(cdcap);
         cdcap.show();
     }//GEN-LAST:event_jm_consultaColaboracionActionPerformed
 
