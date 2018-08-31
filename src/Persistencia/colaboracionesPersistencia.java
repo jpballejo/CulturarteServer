@@ -29,7 +29,7 @@ public class colaboracionesPersistencia {
                     try {
              String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "INSERT INTO Colaboraciones (nickusuario, tituloprop, fecha, hora, monto, retorno) VALUES ("+colaborador+","+titulo+","+fecha+","+hora+","+monto+","+retorno+")";
+            sql= "INSERT INTO 'Colaboraciones' ('nickusuario', 'tituloprop', 'fecha', 'hora', 'monto', 'retorno') VALUES ("+colaborador+","+titulo+","+fecha+","+hora+","+monto+","+retorno+")";
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -44,7 +44,7 @@ public class colaboracionesPersistencia {
                     try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "DELETE FROM Colaboraciones WHERE nickusuario ="+colaborador+" AND tituloprop ="+titulo;
+            sql= "DELETE FROM 'Colaboraciones' WHERE nickusuario ="+colaborador+" AND tituloprop ="+titulo;
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -60,7 +60,7 @@ public class colaboracionesPersistencia {
         List<dtColaboracionCompleto> list= new ArrayList<>();
         String sql=null;
         Statement st=conexion.getConn().createStatement();
-        sql= "SELECT * FROM Colaboraciones";
+        sql= "SELECT * FROM 'Colaboraciones'";
         ResultSet rs=st.executeQuery(sql);
         while(rs.next()){
             String[] f=rs.getString("fecha").split("/");

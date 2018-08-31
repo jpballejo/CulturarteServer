@@ -28,7 +28,7 @@ public class creadoresPropuestaPersistencia {
                     try {
              String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "INSERT INTO CreadoresPropuesta (nickusuario, tituloprop) VALUES ("+proponente+","+titulo+")";
+            sql= "INSERT INTO 'CreadoresPropuesta' ('nickusuario', 'tituloprop') VALUES ("+proponente+","+titulo+")";
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -44,7 +44,7 @@ public class creadoresPropuestaPersistencia {
                     try {
              String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "DELETE FROM CreadoresPropuesta WHERE nickusuario="+proponente+" AND tituloprop="+titulo;
+            sql= "DELETE FROM 'CreadoresPropuesta' WHERE nickusuario="+proponente+" AND tituloprop="+titulo;
             st.executeUpdate(sql);
             conexion.getConn().close();
        
@@ -60,7 +60,7 @@ public class creadoresPropuestaPersistencia {
         try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "SELECT nickusuario FROM CreadoresPropuesta WHERE tituloprop="+titulo;
+            sql= "SELECT 'nickusuario' FROM 'CreadoresPropuesta' WHERE tituloprop="+titulo;
             ResultSet ret=st.executeQuery(sql);
             conexion.getConn().close();
             return ret.getString("nickusuario");
@@ -79,7 +79,7 @@ public class creadoresPropuestaPersistencia {
             List<dtCreadoresPropuestas> list=new ArrayList<>();
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "SELECT * FROM CreadoresPropuesta";
+            sql= "SELECT * FROM 'CreadoresPropuesta'";
             ResultSet rs=st.executeQuery(sql);
             while(rs.next()){           
                 dtCreadoresPropuestas dt= new dtCreadoresPropuestas(rs.getString("nickusuario"),rs.getString("tituloprop"));

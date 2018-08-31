@@ -29,7 +29,7 @@ public class categoriaPersistencia {
         try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "INSERT INTO Categoria (nombre, padre) VALUES ("+nombre+","+padre+")";
+            sql= "INSERT INTO 'Categoria' ('nombre','padre') VALUES ("+nombre+","+padre+")";
             st.executeUpdate(sql);
             conexion.getConn().close();
             
@@ -43,7 +43,7 @@ public class categoriaPersistencia {
         try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "DELETE FROM Categoria WHERE nombre ="+nombre;
+            sql= "DELETE FROM 'Categoria' WHERE nombre ="+nombre;
             st.executeUpdate(sql);
             conexion.getConn().close();
             
@@ -59,7 +59,7 @@ public class categoriaPersistencia {
             String sql=null;
 
             Statement st = conexion.getConn().createStatement();  
-            sql=("SELECT * FROM Categoria"); 
+            sql=("SELECT * FROM 'Categoria'"); 
             ResultSet rs=st.executeQuery(sql);
             while (rs.next()){
                 String codigo=rs.getString("nombre");
@@ -72,7 +72,7 @@ public class categoriaPersistencia {
             String sql2=null;
 
             Statement st2 = conexion.getConn().createStatement();  
-            sql=("SELECT * FROM Categoria"); 
+            sql=("SELECT * FROM 'Categoria'"); 
             ResultSet rs2=st2.executeQuery(sql2);
             while (rs2.next()){
                 String clave=rs2.getString("nombre");

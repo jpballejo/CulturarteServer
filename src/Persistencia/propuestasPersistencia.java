@@ -29,7 +29,7 @@ public class propuestasPersistencia {
             String sql=null;
         
             Statement st=conexion.getConn().createStatement();
-            sql= "SELECT * FROM Propuesta";
+            sql= "SELECT * FROM 'Propuesta'";
             ResultSet rs=st.executeQuery(sql);
             while(rs.next()){
                 String key=rs.getString("titulo");

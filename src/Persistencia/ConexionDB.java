@@ -21,10 +21,10 @@ public class ConexionDB {
     private  final String db="cultuRarte";
     private  final String user="administrador";
     private  final String pass="1234";
-    private Connection conexion=null;
+    private static Connection conexion=null;
     private Connection con = null;
     
-    public Connection getConn(){
+    public  Connection getConn(){
         try {
             con = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
         } catch (SQLException ex) {
@@ -68,13 +68,13 @@ public class ConexionDB {
                 Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
             }
     
-<<<<<<< HEAD
+
         }
     }
-    public void cerrar(){
-=======
+    
+
     public static void cerrar(){
->>>>>>> origin/master
+
         if (conexion != null) {
             try {
                 conexion.close();

@@ -30,7 +30,7 @@ public class estadoPersistencia {
                     try {
              String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "INSERT INTO estado (estado) VALUES ("+nombre+")";
+            sql= "INSERT INTO 'estado' ('estado') VALUES ("+nombre+")";
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -45,7 +45,7 @@ public class estadoPersistencia {
                     try {
              String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "DELETE FROM estado WHERE estado="+nombre;
+            sql= "DELETE FROM 'estado' WHERE estado="+nombre;
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -61,7 +61,7 @@ public class estadoPersistencia {
             String sql=null;
             Map<String, estado> lista=new HashMap<String, estado>();
             Statement st = conexion.getConn().createStatement();  
-            sql=("SELECT * FROM estado"); 
+            sql=("SELECT * FROM 'estado'"); 
             ResultSet rs=st.executeQuery(sql);
             while (rs.next()){
                 String codigo=rs.getString("estado");
@@ -83,7 +83,7 @@ public class estadoPersistencia {
             List<dtEstadosPropuestas> list= new ArrayList<>();
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql="SELECT * FROM estadoPropuesta";
+            sql="SELECT * FROM 'estadoPropuesta'";
             ResultSet rs=st.executeQuery(sql);
             while(rs.next()){
                  String[] f=rs.getString("fecha").split("/");

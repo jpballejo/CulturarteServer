@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  * @author juan
  */
 public class usuariosPersistencia {
-    ConexionDB conexion = new ConexionDB();
+    static ConexionDB conexion = new ConexionDB();
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception{
         try {
@@ -63,22 +63,24 @@ public class usuariosPersistencia {
                 try {
             String sqlproponentes=null, sqlusuarios=null;
             dtFecha dtf=new dtFecha("1","1","2000");
+            Connection conn;
+                    conn = conexion.getConexion();
             Map<String, proponente> lista=new HashMap<String, proponente>();
             Map<String, proponente> listaproponentes=new HashMap<String, proponente>();
             Map<String, usuario> listausuarios=new HashMap<String, usuario>();
-            Statement st1 = conexion.getConn().createStatement();  
-            sqlproponentes=("SELECT * FROM Proponente"); 
+            Statement st1 = conn.createStatement();  
+            sqlproponentes=("SELECT * FROM 'Proponente'"); 
             ResultSet rs=st1.executeQuery(sqlproponentes);
             while (rs.next()){
                 String codigo=rs.getString("id_usuario");
                 proponente p=new proponente(codigo,"","","","",dtf,rs.getString("direccion"),rs.getString("biografia"),rs.getString("par_web"));
                 listaproponentes.put(codigo, p);
             }
-            rs.close();
-            st.close();
+            
+           
             
             Statement st2 = conexion.getConn().createStatement();  
-            sqlusuarios=("SELECT * FROM usuario"); 
+            sqlusuarios=("SELECT * FROM 'usuario'"); 
             ResultSet rs2=st2.executeQuery(sqlusuarios);
             while (rs2.next()){
                 String codigo=rs2.getString("idUsuario");
@@ -87,8 +89,8 @@ public class usuariosPersistencia {
                 usuario u=new usuario(codigo,rs2.getString("nombre"),rs2.getString("apellido"),rs2.getString("email"),rs2.getString("imagen"),dtf2);
                 listausuarios.put(codigo, u);
             }
-            rs.close();
-            st.close();
+            
+            
             
             for(String key : listaproponentes.keySet()){
                 proponente aux=(proponente)listaproponentes.get(key);
@@ -118,7 +120,7 @@ public class usuariosPersistencia {
             Map<String, colaborador> listacolaboradores=new HashMap<String, colaborador>();
             Map<String, usuario> listausuarios=new HashMap<String, usuario>();
             Statement st = conexion.getConn().createStatement();  
-            sqlproponentes=("SELECT * FROM colaborador"); 
+            sqlproponentes=("SELECT * FROM 'colaborador'"); 
             ResultSet rs=st.executeQuery(sqlproponentes);
             while (rs.next()){
                 String codigo=rs.getString("idUsuario");
@@ -129,7 +131,7 @@ public class usuariosPersistencia {
             st.close();
             
             Statement st2 = conexion.getConn().createStatement();  
-            sqlusuarios=("SELECT * FROM usuario"); 
+            sqlusuarios=("SELECT * FROM 'usuario'"); 
             ResultSet rs2=st2.executeQuery(sqlusuarios);
             while (rs2.next()){
                 String codigo=rs2.getString("idUsuario");
