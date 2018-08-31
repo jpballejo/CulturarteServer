@@ -117,6 +117,11 @@ public class ContColaboracion implements iConColaboracion{
 
     }
 
+    @Override
+    public List<dtCola> listarcolaboracionesdelcolaborador(String nickcolaborador) {
+        return cUsuario.colaboracionesde(nickcolaborador);
+    }
+
   
 }
 

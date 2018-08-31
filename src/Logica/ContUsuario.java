@@ -35,8 +35,8 @@ public class ContUsuario implements iConUsuario {
     colaboracionesPersistencia colabPer= new colaboracionesPersistencia();
     
     
- public boolean existeUsuario(String nickName){
-     if(usuarios.containsKey(nickName)== true){return true;}return false;
+    public boolean existeUsuario(String nickName){
+         if(usuarios.containsKey(nickName)== true){return true;}return false;
 
  }
         
@@ -118,9 +118,11 @@ public class ContUsuario implements iConUsuario {
     public List<String> listarColaboradores() {
         List<String> colabs=new ArrayList();
      for (String key : this.usuarios.keySet()) {
-         colaborador c=(colaborador)this.usuarios.get(key);
-         if(c!=null)
-             colabs.add(c.nickname);
+         if(this.usuarios.get(key) instanceof colaborador){
+            colaborador c=(colaborador)this.usuarios.get(key);
+            if(c!=null)
+                 colabs.add(c.nickname);
+         }
      }
         return colabs;
         
@@ -267,12 +269,13 @@ public class ContUsuario implements iConUsuario {
     
      public int montopropuesta(String idPropuesta) {
         int res=0;
-        Iterator it= this.usuarios.keySet().iterator();
-        while(it.hasNext()){
-            colaborador c=(colaborador) this.usuarios.get((String)it.next());
-            if(c.colaborasconpropuesta(idPropuesta)){
+        for (String key: this.usuarios.keySet()){
+           if(this.usuarios.get(key) instanceof colaborador){
+                colaborador c=(colaborador) this.usuarios.get(key);
+                if(c.colaborasconpropuesta(idPropuesta)){
                     res=res+c.getmontocolaboracion(idPropuesta);
-            }
+                }
+           }
         }
         return res;
     }
@@ -574,5 +577,42 @@ public class ContUsuario implements iConUsuario {
         }
     }
 
+    @Override
+    public List<String> listarColaboradoresporNick(String nick) {
+           List res= new ArrayList<String>();
+           for (String key: this.usuarios.keySet()){
+            if(this.usuarios.get(key) instanceof colaborador){   
+            colaborador c=(colaborador) this.usuarios.get(key);
+                if(c.getNickname().contains(nick)){
+                    res.add(c.getNickname());               
+                 }
+            }
+        }
+        return res;
+    }
+
+    public List<dtCola> colaboracionesde(String nickcolaborador){
+        List<dtCola> list= new ArrayList<>();
+        colaborador c=(colaborador) this.usuarios.get(nickcolaborador);
+        for(String key: c.colaboracionesUsuario.keySet()){
+            colProp cp= c.colaboracionesUsuario.get(key);
+            dtCola dtco= new dtCola(cp.getPropColaborada().getTitulo(),cp.getPropColaborada().getEstadoActual(),quienpropuso(cp.getPropColaborada().getTitulo()),montopropuesta(cp.getPropColaborada().getTitulo()));
+            list.add(dtco);
+        
+        }
+        return list;
+    }
+    
+    public String quienpropuso(String titulo){
+        for(String key: this.usuarios.keySet()){
+            if(this.usuarios.get(key) instanceof proponente){
+                proponente p=(proponente) this.usuarios.get(key);
+                if(p.propuestasUsuario.containsKey(key))
+                    return p.getNickname();
+            }
+        }
+        return "";
+    }
+    
     
 }

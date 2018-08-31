@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Persistencia;
 
 import Logica.dtPropuestaEstado;
 import Logica.estado;
@@ -28,7 +28,7 @@ public class estadoPropuestaPersistencia {
                     try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "INSERT INTO estadoPropuesta (propuesta, estado, fecha, hora) VALUES ("+titulo+","+estado+","+fecha+","+hora+")";
+            sql= "INSERT INTO 'estadoPropuesta' ('propuesta', 'estado', 'fecha', 'hora') VALUES ("+titulo+","+estado+","+fecha+","+hora+")";
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -43,7 +43,7 @@ public class estadoPropuestaPersistencia {
                     try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
-            sql= "DELETE FROM estadoPropuesta WHERE propuesta="+propuesta+" AND estado="+estado;
+            sql= "DELETE FROM 'estadoPropuesta' WHERE propuesta="+propuesta+" AND estado="+estado;
             st.executeUpdate(sql);           
             conexion.getConn().close();
        
@@ -60,7 +60,7 @@ public class estadoPropuestaPersistencia {
             String sql=null;
             List<dtPropuestaEstado> lista=new ArrayList<dtPropuestaEstado>();
             Statement st = conexion.getConn().createStatement();  
-            sql=("SELECT * FROM estadoPropuesta"); 
+            sql=("SELECT * FROM 'estadoPropuesta'"); 
             ResultSet rs=st.executeQuery(sql);
             while (rs.next()){
                 dtPropuestaEstado e=new dtPropuestaEstado(rs.getString("propuesta"),rs.getString("estado"),rs.getString("fecha"),rs.getString("hora"));

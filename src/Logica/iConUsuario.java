@@ -29,6 +29,7 @@ public interface iConUsuario {
     public abstract colProp seleccionarColaboracion(String nickusuario, String titulo); //original devuelve dt
     public abstract List<String> listarusuarios(String nick);
     public abstract void borrartodocUsuario();
+    public abstract List<String> listarColaboradoresporNick(String nick);
 
     public List<String> listarProponentes(String text);
 
