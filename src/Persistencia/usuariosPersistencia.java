@@ -17,30 +17,37 @@ import java.util.logging.Logger;
  * @author juan
  */
 public class usuariosPersistencia {
-    ConexionDB conexion;
+    ConexionDB conexion = new ConexionDB();
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception{
         try {
             String sqlUsu=null,sqlProp=null,sqlCol=null;
-            Statement st=conexion.getConn().createStatement();
-            dtProponente dtProp = (dtProponente)dtUsu;
-            if (dtProp!=null){
-                sqlUsu = "INSERT INTO usuario (idUsuario,nombre,apellido,email,fechaNacimiento, imagen)VALUES("+dtProp.getNickname()+","+dtProp.getNombre()+","+dtProp.getApellido()+","+dtProp.getEmail()+","+dtProp.getFechaNac().getFecha()+","+dtProp.getImagen()+")";
-                sqlProp ="INSERT INTO Proponente (id_usuario,direccion,pag_web,biografia) VALUES ("+dtProp.getNickname()+","+dtProp.getDireccion()+","+dtProp.getSitioWeb()+","+dtProp.getBiografia()+")";
+            Connection con= conexion.getConn();
+            Statement st= (Statement)con.createStatement();
+        
+            if (dtUsu instanceof dtProponente){
+                dtProponente dtProp = (dtProponente)dtUsu;
+                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('"+dtProp.getNickname()+"','"+dtProp.getNombre()+"','"+dtProp.getApellido()+"','"+dtProp.getEmail()+"','"+dtProp.getFechaNac().getFecha()+"','"+dtProp.getImagen()+"')";
+                sqlProp ="INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('"+dtProp.getNickname()+"','"+dtProp.getDireccion()+"','"+dtProp.getSitioWeb()+"','"+dtProp.getBiografia()+"')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlProp);
-                conexion.getConn().close();
+                con.close();
             }
             
-            dtColaborador dtCol = (dtColaborador)dtUsu;
-            if(dtCol!=null){
-                sqlUsu = "INSERT INTO usuario (idUsuario,nombre,apellido,email,fechaNacimiento, imagen)VALUES("+dtCol.getNickname()+","+dtCol.getNombre()+","+dtCol.getApellido()+","+dtCol.getEmail()+","+dtCol.getFechaNac().getFecha()+","+dtCol.getImagen()+")";
-                sqlCol="INSERT INTO colaborador VALUES ("+dtCol.getNickname()+")";
+            
+            if(dtUsu instanceof dtColaborador){
+                dtColaborador dtCol = (dtColaborador)dtUsu;
+                
+                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('"+dtCol.getNickname()+"','"+dtCol.getNombre()+"','"+dtCol.getApellido()+"','"+dtCol.getEmail()+"','"+dtCol.getFechaNac().getFecha()+"','"+dtCol.getImagen()+"')";
+                sqlCol="INSERT INTO colaborador (`idUsuario`) VALUES ('"+dtCol.getNickname()+"')";
+                st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlCol);
                 conexion.getConn().close();
             }
         } catch (SQLException ex) {
-            throw new Exception("Error al insertar los datos en la BD");
+            System.err.println(ex.getMessage());
+           // throw new Exception("Error al insertar los datos en la BD");
+            
         }
     
     }
