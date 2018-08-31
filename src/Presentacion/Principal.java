@@ -44,28 +44,33 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jFrame1 = new javax.swing.JFrame();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jm_altaPerfil = new javax.swing.JMenuItem();
+        jm_consultaProponente = new javax.swing.JMenuItem();
+        jm_consultaColaborador = new javax.swing.JMenuItem();
+        jm_seguirUsuario = new javax.swing.JMenuItem();
+        jm_dejarSeguir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        jm_altaPropuesta = new javax.swing.JMenuItem();
+        jm_altaCategoria = new javax.swing.JMenuItem();
+        jm_consultaPropuesta = new javax.swing.JMenuItem();
+        jm_consultaPropuestaEstado = new javax.swing.JMenuItem();
+        jm_modificarPropuesta = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jm_colaborar = new javax.swing.JMenuItem();
+        jm_cancelarColaboracion = new javax.swing.JMenuItem();
+        jm_consultaColaboracion = new javax.swing.JMenuItem();
+        jm_cargarDatos = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
+        jm_configuracionGeneral = new javax.swing.JMenuItem();
+
+        jMenu3.setText("jMenu3");
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -80,121 +85,132 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-
+        jMenu1.setText("Usuario");
         jMenu1.add(jSeparator1);
 
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jm_altaPerfil.setText("Alta de Perfil");
+        jm_altaPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jm_altaPerfilActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(jm_altaPerfil);
 
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jm_consultaProponente.setText("Consulta Proponente");
+        jm_consultaProponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jm_consultaProponenteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMenu1.add(jm_consultaProponente);
 
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jm_consultaColaborador.setText("Consulta de colaborador");
+        jm_consultaColaborador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jm_consultaColaboradorActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenu1.add(jm_consultaColaborador);
 
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jm_seguirUsuario.setText("Seguir Usuario");
+        jm_seguirUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jm_seguirUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        jMenu1.add(jm_seguirUsuario);
 
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jm_dejarSeguir.setText("Dejar de seguir");
+        jm_dejarSeguir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jm_dejarSeguirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem7);
+        jMenu1.add(jm_dejarSeguir);
 
         jMenuBar1.add(jMenu1);
 
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem11);
+        jMenu2.setText("Propuesta");
 
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        jm_altaPropuesta.setText("Alta de Propuesta");
+        jm_altaPropuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jm_altaPropuestaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem10);
+        jMenu2.add(jm_altaPropuesta);
 
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        jm_altaCategoria.setText("Alta de Categoria");
+        jm_altaCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                jm_altaCategoriaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem9);
+        jMenu2.add(jm_altaCategoria);
 
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jm_consultaPropuesta.setText("Consulta de Propuesta");
+        jm_consultaPropuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jm_consultaPropuestaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        jMenu2.add(jm_consultaPropuesta);
 
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        jm_consultaPropuestaEstado.setText("Consulta de Propuesta por estado");
+        jm_consultaPropuestaEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                jm_consultaPropuestaEstadoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem13);
+        jMenu2.add(jm_consultaPropuestaEstado);
+
+        jm_modificarPropuesta.setText("Modificar Propuesta");
+        jm_modificarPropuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_modificarPropuestaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jm_modificarPropuesta);
 
         jMenuBar1.add(jMenu2);
 
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem12);
+        jMenu4.setText("Colaboracion");
 
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+        jm_colaborar.setText("Colaborar ");
+        jm_colaborar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
+                jm_colaborarActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem15);
+        jMenu4.add(jm_colaborar);
 
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jm_cancelarColaboracion.setText("Cancelar Colaboracion");
+        jm_cancelarColaboracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                jm_cancelarColaboracionActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem14);
+        jMenu4.add(jm_cancelarColaboracion);
+
+        jm_consultaColaboracion.setText("Consulta de colaboracion");
+        jm_consultaColaboracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_consultaColaboracionActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jm_consultaColaboracion);
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.add(jMenuItem16);
+        jm_cargarDatos.setText("Configuracion");
 
-        jMenu5.add(jMenuItem17);
+        jMenuItem16.setText("Cargar datos de prueba");
+        jm_cargarDatos.add(jMenuItem16);
 
-        jMenuBar1.add(jMenu5);
+        jm_configuracionGeneral.setText("Configuracion general");
+        jm_cargarDatos.add(jm_configuracionGeneral);
+
+        jMenuBar1.add(jm_cargarDatos);
 
         setJMenuBar(jMenuBar1);
 
@@ -202,108 +218,107 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGap(0, 646, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jm_seguirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_seguirUsuarioActionPerformed
         // TODO add your handling code here:
         Seguir_Usuario su= new Seguir_Usuario();
-        jDesktopPane1.add(su);
+        //jDesktopPane1.add(su);
         su.show();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_jm_seguirUsuarioActionPerformed
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+    private void jm_altaPropuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaPropuestaActionPerformed
         // TODO add your handling code here:
         Alta_de_Propuesta adp= new Alta_de_Propuesta();
-        jDesktopPane1.add(adp);
+        //jDesktopPane1.add(adp);
         adp.show();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+    }//GEN-LAST:event_jm_altaPropuestaActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void jm_altaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaCategoriaActionPerformed
         // TODO add your handling code here:
         Alta_de_categoria adc=new Alta_de_categoria();
-        jDesktopPane1.add(adc);
+       // jDesktopPane1.add(adc);
         adc.show();
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_jm_altaCategoriaActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-Alta_Perfil alta = new Alta_Perfil();
-jDesktopPane1.add(alta);
-alta.show();
+    private void jm_altaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaPerfilActionPerformed
+        Alta_perfil altaP = new Alta_perfil();
+        altaP.show();
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jm_altaPerfilActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void jm_dejarSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_dejarSeguirActionPerformed
         // TODO add your handling code here:
         Dejar_de_Seguir_Usuario dd= new Dejar_de_Seguir_Usuario();
-        jDesktopPane1.add(dd);
+      //  jDesktopPane1.add(dd);
         dd.show();
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_jm_dejarSeguirActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jm_consultaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_consultaColaboradorActionPerformed
         // TODO add your handling code here:
         Consulta_de_Perfil_de_Colaborador cc=new Consulta_de_Perfil_de_Colaborador();
-        jDesktopPane1.add(cc);
+       // jDesktopPane1.add(cc);
         cc.show();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jm_consultaColaboradorActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jm_consultaProponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_consultaProponenteActionPerformed
         // TODO add your handling code here:
         Consulta_de_Perfil_de_Proponente cp= new Consulta_de_Perfil_de_Proponente();
-        jDesktopPane1.add(cp);
+        //jDesktopPane1.add(cp);
         cp.show();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jm_consultaProponenteActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void jm_consultaPropuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_consultaPropuestaActionPerformed
         // TODO add your handling code here:
         Consulta_de_Propuesta cdp= new Consulta_de_Propuesta();
-        jDesktopPane1.add(cdp);
+      //  jDesktopPane1.add(cdp);
         cdp.show();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_jm_consultaPropuestaActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void jm_consultaPropuestaEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_consultaPropuestaEstadoActionPerformed
         // TODO add your handling code here:
         Consulta_de_Propuesta_por_Estado cdppe= new Consulta_de_Propuesta_por_Estado();
-        jDesktopPane1.add(cdppe);
+       // jDesktopPane1.add(cdppe);
         cdppe.show();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_jm_consultaPropuestaEstadoActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void jm_modificarPropuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_modificarPropuestaActionPerformed
         // TODO add your handling code here:
         Modificar_datos_de_Propuesta mddp= new Modificar_datos_de_Propuesta();
-        jDesktopPane1.add(mddp);
+       // jDesktopPane1.add(mddp);
         mddp.show();
                
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_jm_modificarPropuestaActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+    private void jm_colaborarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_colaborarActionPerformed
         // TODO add your handling code here:
         Registrar_Colaboracion_a_Propuesta rcap= new Registrar_Colaboracion_a_Propuesta();
-        jDesktopPane1.add(rcap);
+       // jDesktopPane1.add(rcap);
         rcap.show();
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    }//GEN-LAST:event_jm_colaborarActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+    private void jm_cancelarColaboracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_cancelarColaboracionActionPerformed
         // TODO add your handling code here:
         Cancelar_colaboracion_a_Propuesta ccap= new Cancelar_colaboracion_a_Propuesta();
-        jDesktopPane1.add(ccap);
+       // jDesktopPane1.add(ccap);
         ccap.show();
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
+    }//GEN-LAST:event_jm_cancelarColaboracionActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void jm_consultaColaboracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_consultaColaboracionActionPerformed
         // TODO add your handling code here:
         Consulta_de_Colaboracion_a_Propuesta cdcap= new Consulta_de_Colaboracion_a_Propuesta();
-        jDesktopPane1.add(cdcap);
+       // jDesktopPane1.add(cdcap);
         cdcap.show();
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_jm_consultaColaboracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,32 +356,31 @@ alta.show();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem jm_altaCategoria;
+    private javax.swing.JMenuItem jm_altaPerfil;
+    private javax.swing.JMenuItem jm_altaPropuesta;
+    private javax.swing.JMenuItem jm_cancelarColaboracion;
+    private javax.swing.JMenu jm_cargarDatos;
+    private javax.swing.JMenuItem jm_colaborar;
+    private javax.swing.JMenuItem jm_configuracionGeneral;
+    private javax.swing.JMenuItem jm_consultaColaboracion;
+    private javax.swing.JMenuItem jm_consultaColaborador;
+    private javax.swing.JMenuItem jm_consultaProponente;
+    private javax.swing.JMenuItem jm_consultaPropuesta;
+    private javax.swing.JMenuItem jm_consultaPropuestaEstado;
+    private javax.swing.JMenuItem jm_dejarSeguir;
+    private javax.swing.JMenuItem jm_modificarPropuesta;
+    private javax.swing.JMenuItem jm_seguirUsuario;
     // End of variables declaration//GEN-END:variables
 }
