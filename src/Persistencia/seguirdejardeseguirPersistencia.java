@@ -29,8 +29,8 @@ public class seguirdejardeseguirPersistencia {
     
     public boolean seguir(usuario us,usuario uas){
                     try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO Seguidores "
-                    + "(nickusuario, nickasegior) values(?,?)");
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO 'Seguidores' "
+                    + "('nickusuario', 'nickasegior') values(?,?)");
             statement.setString(1, us.getNickname());
             statement.setString(2, uas.getNickname());         
             statement.executeUpdate();
@@ -45,7 +45,7 @@ public class seguirdejardeseguirPersistencia {
     
     public boolean dejardeseguir(usuario us,usuario uas){
                     try {
-            PreparedStatement statement = conexion.prepareStatement("DELETE FROM Seguidores WHERE "
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM 'Seguidores' WHERE "
                     + "nickusuario = ? AND nickaseguir = ?");
             statement.setString(1, us.getNickname());
             statement.setString(2, uas.getNickname());         
@@ -65,7 +65,7 @@ public class seguirdejardeseguirPersistencia {
             List<dtSeguidores> list= new ArrayList<>();
             String sql=null;       
             Statement st=conne.getConn().createStatement();
-            sql= "SELECT * FROM Seguidores";
+            sql= "SELECT * FROM 'Seguidores'";
             ResultSet rs=st.executeQuery(sql);
             while(rs.next()){
                 dtSeguidores dt=new dtSeguidores(rs.getString("nickusuario"),rs.getString("nickaseguir"));

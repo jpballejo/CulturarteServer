@@ -27,7 +27,7 @@ public class tiporetornoPersistencia {
         List<String> list= new ArrayList<>();
         String sql=null;
         Statement st=conexion.getConn().createStatement();
-        sql= "SELECT * FROM tipoRetorno";
+        sql= "SELECT * FROM 'tipoRetorno'";
         ResultSet rs=st.executeQuery(sql);
         while(rs.next()){              
             list.add(rs.getString("nombre"));

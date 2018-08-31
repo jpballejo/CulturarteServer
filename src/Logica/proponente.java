@@ -16,9 +16,9 @@ import java.util.Map;
  */
 public class proponente extends usuario {
 
-    private final Map<String,propuesta> propuestasUsuario = new HashMap<String,propuesta>();//diccionario con clave string
+    protected final Map<String,propuesta> propuestasUsuario = new HashMap<String,propuesta>();//diccionario con clave string
     private String direccion;
-
+ //   private Map<String, usuario> seguidos;
 
     private String biografia, web;
 
@@ -29,20 +29,22 @@ public class proponente extends usuario {
         this.web=web;
         }
 
+    
     /**
      *
      * @param prop
      */
     public void agregarPropuesta(propuesta prop){
-        propuestasUsuario.put(prop.getTitulo(), prop);
+        propuestasUsuario.put(prop.getTitulo(), prop); 
         
     }
     
     public dtProponente getDtProponente(){
    
-        dtProponente dtprop = null;
+        dtProponente dtprop = new dtProponente(this.nombre,this.apellido,this.nickname,this.imagen,this.email,this.nacimiento,this.direccion,this.biografia,this.web);
      
-        return dtprop;}
+        return dtprop;
+    }
 
     /**
      * @return the direccion
@@ -141,6 +143,13 @@ public class proponente extends usuario {
          for(String key: this.propuestasUsuario.keySet()){
              propuesta p=this.propuestasUsuario.get(key);
              p.ordenarestados();
+         }
+     }
+     
+     public void borratuspropuestas(){
+         for(String key: this.propuestasUsuario.keySet()){
+             propuesta p=this.propuestasUsuario.remove(key);
+             p.desvincular();
          }
      }
 }

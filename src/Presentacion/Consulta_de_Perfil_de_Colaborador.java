@@ -5,6 +5,17 @@
  */
 package Presentacion;
 
+import Logica.ContColaboracion;
+import Logica.ContUsuario;
+import Logica.dtCola;
+import Logica.dtColaborador;
+import Logica.dtUsuario;
+import java.awt.Image;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nicolasgutierrez
@@ -14,6 +25,10 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
     /**
      * Creates new form Consulta_de_Perfil_de_Colaborador
      */
+    
+    private ContUsuario ICU = ContUsuario.getInstance();
+    private ContColaboracion ICC= ContColaboracion.getInstance();
+    
     public Consulta_de_Perfil_de_Colaborador() {
         initComponents();
     }
@@ -39,6 +54,8 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         labelimagen = new javax.swing.JLabel();
+        txtbuscar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,6 +74,11 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -87,6 +109,23 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         ));
         jScrollPane4.setViewportView(tablepropuestas1);
 
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
+            }
+        });
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,24 +133,29 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-                            .addComponent(labelimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jLabel1)
                         .addGap(49, 49, 49)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(labelnickname)))
+                        .addComponent(labelnickname))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                    .addComponent(txtbuscar))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                                    .addComponent(labelimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel3))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,7 +167,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
                     .addComponent(jLabel2)
                     .addComponent(labelnickname))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -133,16 +177,74 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarActionPerformed
+
+    private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
+        // TODO add your handling code here:
+        List<String> colaboradores= ICU.listarColaboradoresporNick(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        for (int i=0;i<colaboradores.size();i++) {
+            String c=colaboradores.get(i);
+            Object[] dat={c};
+            modelo.addRow(dat);
+        }
+
+    }//GEN-LAST:event_txtbuscarKeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+        int row=jTable1.rowAtPoint(evt.getPoint());
+        int col=jTable1.columnAtPoint(evt.getPoint());
+        dtColaborador dtc=(dtColaborador)ICU.infoColaborador((String)jTable1.getValueAt(row, col));
+        DefaultTableModel modelo=(DefaultTableModel) tablecolaborador.getModel();
+        modelo.setRowCount(0);
+        Object[] dat={dtc.getNombre(),dtc.getApellido(),dtc.getEmail(),dtc.getFechaNac().getFecha()};
+        labelnickname.setText(dtc.getNickname());
+        modelo.addRow(dat);
+        labelimagen.setIcon(new ImageIcon(dtc.getImagen()));
+       ImageIcon icon = new ImageIcon(dtc.getImagen());
+       Image foto = icon.getImage();
+       Image nuevaFoto = foto.getScaledInstance(labelimagen.getWidth(), labelimagen.getHeight(), Image.SCALE_DEFAULT);
+       ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
+       labelimagen.setIcon(nuevoIcono);
+        
+        DefaultTableModel modelo2=(DefaultTableModel) tablepropuestas1.getModel();
+        modelo2.setRowCount(0);
+        List<dtCola> list=ICC.listarcolaboracionesdelcolaborador((String)jTable1.getValueAt(row, col));
+        Iterator it=list.iterator();
+        while(it.hasNext()){
+            dtCola dtco=(dtCola) it.next();
+            Object[] dat2={dtco.getTitulo(),dtco.getEstado(),dtco.getProponente(),dtco.getMonto_recaudado()};
+            modelo2.addRow(dat2);
+        }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -155,5 +257,6 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
     private javax.swing.JLabel labelnickname;
     private javax.swing.JTable tablecolaborador;
     private javax.swing.JTable tablepropuestas1;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

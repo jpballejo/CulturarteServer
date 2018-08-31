@@ -16,13 +16,13 @@ import java.util.ListIterator;
  */
 public class propuesta {
 
-    private String titulo, descripcion, imagen, lugar;
+    private String titulo, descripcion, imagen, lugar, retorno;
     private dtFecha fecharealizacion;
-    private List<propEstado> estados;
+    protected List<propEstado> estados;
     private categoria categoria;
 
 
-    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido) {
+    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -32,6 +32,7 @@ public class propuesta {
         this.precioEntrada = precioEntrada;
         this.montoRequerido = montoRequerido;
         this.estados=new ArrayList<>();
+        this.retorno=retorno;
     }
     private dtFecha fechapublicada;
     private int precioEntrada;
@@ -166,6 +167,14 @@ public class propuesta {
     public void setPrecioEntrada(int precioEntrada) {
         this.precioEntrada = precioEntrada;
     }
+    
+    public void setRetorno(String r){
+        this.retorno=r;
+    }
+    
+    public String getRetorno(){
+        return this.retorno;
+    }
 
     /**
      * @return the montoRequerido
@@ -251,5 +260,13 @@ public class propuesta {
              return false;
          
      }
+    
+    public void desvincular(){
+        this.estados.clear();
+        this.categoria=null;
+        this.fechapublicada=null;
+        this.fecharealizacion=null;
+        
+    }
   
   }

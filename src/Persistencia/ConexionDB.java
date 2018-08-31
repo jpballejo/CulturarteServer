@@ -22,8 +22,11 @@ public class ConexionDB {
     private  final String pass="1234";
     private static Connection conexion=null;
     private static Connection con = null;
+
+
+
     
-    public Connection getConn(){
+    public  Connection getConn(){
         try {
             con = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
         } catch (SQLException ex) {
@@ -67,12 +70,14 @@ public class ConexionDB {
                 Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+
         }
     }
 
     public static void cerrar(){
 
-        if(conexion != null) {
+        if (conexion != null) {
+
             try {
                 conexion.close();
             } catch (SQLException ex) {

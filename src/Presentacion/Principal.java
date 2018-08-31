@@ -283,7 +283,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jm_altaCategoriaActionPerformed
 
     private void jm_altaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaPerfilActionPerformed
-        Alta_perfil altaP = new Alta_perfil();
+        Alta_perfil altaP= new Alta_perfil();
+        
         altaP.show();
 
         // TODO add your handling code here:
@@ -300,6 +301,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         Consulta_de_Perfil_de_Colaborador cc=new Consulta_de_Perfil_de_Colaborador();
        // jDesktopPane1.add(cc);
+       this.getContentPane().add(cc);
         cc.show();
     }//GEN-LAST:event_jm_consultaColaboradorActionPerformed
 

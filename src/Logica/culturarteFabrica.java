@@ -24,6 +24,11 @@ public class culturarteFabrica {
             
         }
         
+        public void cargarDatosdePrueba(){
+            borrartodo();
+            levantarBDdesdeMemoria();
+        }
+        
         public void cargarDesdeBD(){
             iConColaboracion ic= this.getIContColaboracion();
             iConUsuario iu= this.getIContUsuario();
@@ -48,5 +53,29 @@ public class culturarteFabrica {
             iConPropuesta icp= ContPropuesta.getInstance();
             return icp;
         }
+        
+        public void borrartodo(){
+            iConColaboracion ic= this.getIContColaboracion();
+            iConUsuario iu= this.getIContUsuario();
+            iConPropuesta ip= this.getIContPropuesta();
+            
+            
+            ic.borrartodocColaboraciones();
+            ip.borrartodocPropuesta();
+            iu.borrartodocUsuario();
+            
+            
+        }
+
+    private void levantarBDdesdeMemoria() {
+            iConColaboracion ic= this.getIContColaboracion();
+            iConUsuario iu= this.getIContUsuario();
+            iConPropuesta ip= this.getIContPropuesta();
+                    
+        
+       iu.levantarBDdesdeMemoria();
+       ip.levantarBDdesdeMemoria();
+       ic.levantarBDdesdeMemoria();
+    }
     
 }

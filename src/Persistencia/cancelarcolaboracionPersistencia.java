@@ -22,7 +22,7 @@ public class cancelarcolaboracionPersistencia {
     
     public boolean cancelarColaboracion(String nick,colProp cp ){
             try {
-            PreparedStatement statement = conexion.prepareStatement("DELETE FROM Colaboraciones WHERE "
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM 'Colaboraciones' WHERE "
                     + "nickusuario = ? AND tituloprop = ?");
             statement.setString(1, nick);
             statement.setString(2, cp.getPropColaborada().getTitulo());

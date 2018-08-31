@@ -25,5 +25,9 @@ public interface iConColaboracion {
     public abstract List<dtColaboraciones> listarColaboraciones();
     public abstract dtColProp seleccionarColaboracion(String nickusuario, String titulo);
     public abstract void eliminar() throws Exception;
+    public abstract void borrartodocColaboraciones();
+    public abstract List<dtCola> listarcolaboracionesdelcolaborador(String nickcolaborador);
+
+    public void levantarBDdesdeMemoria();
 
 }
