@@ -23,7 +23,7 @@ import Persistencia.usuariosPersistencia;
  */
 public class ContUsuario implements iConUsuario {
 
- usuariosPersistencia usuPer;
+ usuariosPersistencia usuPer = new usuariosPersistencia();
     private Map<String, usuario> usuarios= new HashMap<String,usuario>();
     
     
@@ -56,19 +56,20 @@ public class ContUsuario implements iConUsuario {
     @Override
     public void agregarUsu(dtUsuario dtusu) throws Exception {
     try {
-        dtProponente proponente = (dtProponente)dtusu;
-   if(proponente!=null){
-            
-                proponente usuProp= new proponente((proponente.getNickname()), proponente.getNombre(), proponente.getApellido(), proponente.getEmail(), proponente.getImagen()
-                        , proponente.getFechaNac(), proponente.getDireccion(),proponente.getBiografia(),proponente.getSitioWeb());
-                usuarios.put(usuProp.getNickname(), usuProp);
-                usuPer.altaUsuario(dtusu);
-           
+        
+   if(dtusu instanceof dtProponente){
+       dtProponente dtProp = (dtProponente)dtusu;
+       proponente usuProp= new proponente((dtProp.getNickname()), dtProp.getNombre(), dtProp.getApellido(), dtProp.getEmail(), dtProp.getImagen()
+               , dtProp.getFechaNac(), dtProp.getDireccion(),dtProp.getBiografia(),dtProp.getSitioWeb());
+       usuarios.put(usuProp.getNickname(), usuProp);
+       usuPer.altaUsuario(dtusu);
+   } else {
    }
-   dtColaborador colaborador = (dtColaborador)dtusu;
-   if (colaborador!=null){
-   colaborador usuCola= new colaborador(colaborador.getNickname(),colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(),colaborador.getImagen(),colaborador.getFechaNac());
-   usuarios.put(usuCola.getNickname(),usuCola);
+           
+        if (dtusu instanceof dtColaborador){
+             dtColaborador colaborador = (dtColaborador)dtusu;
+            colaborador usuCola= new colaborador(colaborador.getNickname(),colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(),colaborador.getImagen(),colaborador.getFechaNac());
+            usuarios.put(usuCola.getNickname(),usuCola);
        usuPer.altaUsuario(dtusu);
    }
    
