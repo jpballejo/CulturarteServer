@@ -24,13 +24,14 @@ public class culturarteFabrica {
             
         }
         
-        public void cargarDatosPrueba(){
+        public void cargarDesdeBD(){
             iConColaboracion ic= this.getIContColaboracion();
             iConUsuario iu= this.getIContUsuario();
             iConPropuesta ip= this.getIContPropuesta();
-            ic.cargarColaboracion();
+          
             iu.cargarUsuarios();
             ip.cargarPropuestas();
+            ic.cargarColaboracion();
         }
     
         public iConColaboracion getIContColaboracion(){

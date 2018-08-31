@@ -68,6 +68,10 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
         else
             return 0;
     }
+    
+    public void agregarcolaboracion(colProp cp){
+        this.colaboracionesUsuario.put(cp.getPropColaborada().getTitulo(), cp);
+    }
 
 
 }

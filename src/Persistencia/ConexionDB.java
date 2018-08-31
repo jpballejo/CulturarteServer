@@ -32,6 +32,21 @@ public class ConexionDB {
         }
         return con;
     }
+    
+    public static Connection getConexionConfigurada(String h, String p, String db, String u, String pas) {
+        if (conexion == null) {
+            try {              
+                                
+                conexion = DriverManager.getConnection("jdbc:mysql://"+h+":"+p+"/"+db, u, pas);
+                } catch (SQLException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return conexion;
+    }
+    
+    
     public Connection getConexion() {
         if (conexion == null) {
             try {              
@@ -53,9 +68,13 @@ public class ConexionDB {
                 Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
             }
     
+<<<<<<< HEAD
         }
     }
     public void cerrar(){
+=======
+    public static void cerrar(){
+>>>>>>> origin/master
         if (conexion != null) {
             try {
                 conexion.close();

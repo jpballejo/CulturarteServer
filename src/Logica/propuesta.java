@@ -5,7 +5,10 @@
  */
 package Logica;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -15,7 +18,7 @@ public class propuesta {
 
     private String titulo, descripcion, imagen, lugar;
     private dtFecha fecharealizacion;
-    private List<estado> estados;
+    private List<propEstado> estados;
     private categoria categoria;
 
 
@@ -28,6 +31,7 @@ public class propuesta {
         this.fechapublicada = fechapublicada;
         this.precioEntrada = precioEntrada;
         this.montoRequerido = montoRequerido;
+        this.estados=new ArrayList<>();
     }
     private dtFecha fechapublicada;
     private int precioEntrada;
@@ -36,14 +40,38 @@ public class propuesta {
     /**
      * @return the titulo
      */
+    
+    
     public String getTitulo() {
         return titulo;
     }
     
     public String getEstadoActual(){
-        return estados.get(0).getNombre();
+        propEstado aux=null;
+        Iterator it= estados.iterator();
+        while(it.hasNext()){
+            aux=(propEstado) it.next();
+        }
+        
+        if(aux==null)
+            return null;
+        else
+            return aux.getEstado().getNombre();
+        
+        
     }
 
+    
+    public List<propEstado> getEstados(){
+        return this.estados;
+    }
+    
+    public void agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth){
+        propEstado pe=new propEstado(dtf,dth,e);
+        this.estados.add(pe);
+    
+    }
+    
     /**
      * @param titulo the titulo to set
      */
@@ -160,7 +188,68 @@ public class propuesta {
     }
 
   
+    public void ordenarestados(){
+        propEstado chiquito=null;
+        List<propEstado> aux=new ArrayList<>();
+        Iterator it=this.estados.iterator();
+        while(it.hasNext()){
+            Iterator it2=this.estados.iterator();
+            propEstado p1=(propEstado) it.next();
+            while(it2.hasNext()){
+                propEstado p2=(propEstado) it2.next();
+                if(compararfechas(p1.getFecha(),p2.getFecha())==false)
+                    chiquito=p1;
+                else
+                    chiquito=p2;
+            }
+            aux.add(chiquito);
+            this.estados.remove(chiquito);
+            
+        }
+        
+        this.estados=aux;
+        
+    }
 
-    
+    public boolean compararfechas(dtFecha uno, dtFecha dos){
+         int unoanio=Integer.parseInt(uno.getAnio());
+         int unomes=Integer.parseInt(uno.getMes());
+         int unodia=Integer.parseInt(uno.getDia());
+         int dosanio=Integer.parseInt(dos.getAnio());
+         int dosmes=Integer.parseInt(dos.getMes());
+         int dosdia=Integer.parseInt(dos.getDia());
+         
+         if(unoanio>dosanio){
+             return true;
+         }
+         if(unoanio==dosanio && unomes>dosmes){
+             return true;
+         }
+         if(unoanio==dosanio && unomes==dosmes && unodia>dosdia){
+             return true;
+         }
+         if(unoanio==dosanio && unomes==dosmes && unodia==dosdia){ //CASO DUDOSO
+             return false;
+         }
+         else{
+             return false;
+         }
+         
+     }
+         
+    public boolean compararhoras(dtHora uno, dtHora dos){
+         if(uno.getHoras()>dos.getHoras()){
+             return true;
+         }
+         if(uno.getHoras()==dos.getHoras() && uno.getMinutos()>dos.getMinutos()){
+             return true;
+         }
+         if(uno.getHoras()==dos.getHoras() && uno.getMinutos()==dos.getMinutos()){
+             return true;
+         }
+         else
+             return false;
+         
+     }
   
   }
