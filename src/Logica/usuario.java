@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class usuario {
             imagen;
    protected dtFecha nacimiento;
 
-    private Map<String, usuario> seguidos;
+    protected Map<String, usuario> seguidos;
    
     //METODOS
     public dtPropuestasProponente getPropuestas() {
@@ -41,6 +42,7 @@ public class usuario {
         this.email = email;
         this.imagen = imagen;
         this.nacimiento = nacimiento;
+        this.seguidos=new HashMap<String, usuario>();
     }
 
     //GETTERS//
@@ -121,8 +123,21 @@ public class usuario {
         
     }
     
+    public void eliminartodoslosseguidos(){
+       this.seguidos.clear();
+       this.nacimiento=null;
+    }
     
-
+    public boolean seguisaalguien(){
+        return this.seguidos.isEmpty();
+    }
+    
+    public void NoSigasAlosQueNoEstenAca(Map<String, usuario> anoborrar){
+        for(String key: this.seguidos.keySet()){
+            if(anoborrar.containsKey(key)==false)
+                this.seguidos.remove(key);
+        }
+    }
     
 
 }

@@ -8,11 +8,14 @@ package Logica;
 import Persistencia.categoriaPersistencia;
 import Persistencia.estadoPersistencia;
 import Persistencia.propuestasPersistencia;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -118,7 +121,7 @@ public class ContPropuesta implements iConPropuesta {
        Map<String, dtPropuestasBD> props=propuestasPersistencia.cargarPropuestas();
        for(String key: props.keySet()){
            dtPropuestasBD dt=props.get(key);
-           propuesta p=new propuesta(dt.getTitulo(),dt.getDescripcion(),dt.getImagen(),dt.getLugar(),dt.getFecha(),dt.getFecha_publicacion(),dt.getPrecio_entrada(),dt.getMonto_necesario());
+           propuesta p=new propuesta(dt.getTitulo(),dt.getDescripcion(),dt.getImagen(),dt.getLugar(),dt.getFecha(),dt.getFecha_publicacion(),dt.getPrecio_entrada(),dt.getMonto_necesario(),dt.getRetorno());
            cUsuario.esteUsuariopropusoestaProp(dt.getNickproponente(), p);
            
        }
@@ -133,6 +136,54 @@ public class ContPropuesta implements iConPropuesta {
            
        }
        cUsuario.ordenarLosEstadosdeCadaPropuesta();
+    }
+
+    @Override
+    public void borrartodocPropuesta() {
+        Map<String, propuesta> lista=propuestasPersistencia.cargarPropuestasNOBorrar();
+        cUsuario.borrarPropuestas(lista);
+    }
+
+    @Override
+    public void levantarBDdesdeMemoria() {
+        try {
+            cargarpropuestasaBD();
+        } catch (SQLException ex) {
+            Logger.getLogger(ContPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cargarcreadorespropuestasaBD();
+        cargarestadospropuestasaBD();
+        cargarestadosaBD();
+        try {
+            cargarcategoriasaBD();
+        } catch (Exception ex) {
+            Logger.getLogger(ContPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void cargarpropuestasaBD() throws SQLException {
+        cUsuario.cargarpropuestasaBD();
+    }
+
+    private void cargarcreadorespropuestasaBD() {
+       cUsuario.cargarcreadorespropuestasaBD();
+    }
+
+    private void cargarestadospropuestasaBD() {
+        cUsuario.cargarestadospropuestasaBD();
+    }
+
+    private void cargarestadosaBD() {
+        for(String key: this.estados.keySet()){
+            estadoPersistencia.agregarestado(key);
+        }
+    }
+
+    private void cargarcategoriasaBD() throws Exception {
+        for(String key: this.categorias.keySet()){
+            categoria c= this.categorias.get(key);
+            categoriaPersistencia.altaCategoria(c.getNombre(), c.getPadre().getNombre());
+        }
     }
     
 }

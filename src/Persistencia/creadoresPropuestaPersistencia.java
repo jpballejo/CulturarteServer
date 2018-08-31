@@ -9,6 +9,7 @@ import Logica.dtColaboracionCompleto;
 import Logica.dtCreadoresPropuestas;
 import Logica.dtFecha;
 import Logica.dtHora;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,15 +23,16 @@ import java.util.List;
 public class creadoresPropuestaPersistencia {
     
         
-    ConexionDB conexion;
+   static ConexionDB conexion;
     
-    public boolean agregarCreador(String proponente, String titulo){
-                    try {
-             String sql=null;
-            Statement st=conexion.getConn().createStatement();
+    public static boolean agregarCreador(String proponente, String titulo){
+        try {
+            String sql=null;
+            Connection conn=conexion.getConn();
+            Statement st=conn.createStatement();
             sql= "INSERT INTO 'CreadoresPropuesta' ('nickusuario', 'tituloprop') VALUES ("+proponente+","+titulo+")";
             st.executeUpdate(sql);           
-            conexion.getConn().close();
+            conn.close();
        
             return true;
         } catch (SQLException ex) {
@@ -41,12 +43,13 @@ public class creadoresPropuestaPersistencia {
     
     
     public boolean eliminarCreador(String proponente, String titulo){
-                    try {
+        try {
              String sql=null;
-            Statement st=conexion.getConn().createStatement();
+            Connection conn=conexion.getConn();
+            Statement st=conn.createStatement();
             sql= "DELETE FROM 'CreadoresPropuesta' WHERE nickusuario="+proponente+" AND tituloprop="+titulo;
             st.executeUpdate(sql);
-            conexion.getConn().close();
+            conn.close();
        
             return true;
         } catch (SQLException ex) {
@@ -59,10 +62,11 @@ public class creadoresPropuestaPersistencia {
     public String quienMeCreo(String titulo){
         try {
             String sql=null;
-            Statement st=conexion.getConn().createStatement();
+            Connection conn=conexion.getConn();
+            Statement st=conn.createStatement();
             sql= "SELECT 'nickusuario' FROM 'CreadoresPropuesta' WHERE tituloprop="+titulo;
             ResultSet ret=st.executeQuery(sql);
-            conexion.getConn().close();
+            conn.close();
             return ret.getString("nickusuario");
        
             
@@ -78,7 +82,8 @@ public class creadoresPropuestaPersistencia {
         try{
             List<dtCreadoresPropuestas> list=new ArrayList<>();
             String sql=null;
-            Statement st=conexion.getConn().createStatement();
+            Connection conn=conexion.getConn();
+            Statement st=conn.createStatement();
             sql= "SELECT * FROM 'CreadoresPropuesta'";
             ResultSet rs=st.executeQuery(sql);
             while(rs.next()){           
@@ -86,6 +91,7 @@ public class creadoresPropuestaPersistencia {
                 list.add(dt);
             
         }
+            conn.close();
             return list;
         
         } catch (SQLException ex) {

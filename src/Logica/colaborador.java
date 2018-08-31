@@ -15,8 +15,9 @@ import java.util.Map;
  */
 public class colaborador extends usuario{
 
-private Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
+protected Map<String,colProp> colaboracionesUsuario = new HashMap<String,colProp>();//diccionario con clave string
     
+
 public boolean sosColaborador(){
     return true;
     }
@@ -72,6 +73,32 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
     public void agregarcolaboracion(colProp cp){
         this.colaboracionesUsuario.put(cp.getPropColaborada().getTitulo(), cp);
     }
+    
+    public void eliminarcolaboraciones(){
+        for(String key: this.colaboracionesUsuario.keySet()){
+            colProp cp=this.colaboracionesUsuario.remove(key);
+            cp.setPropuesta(null);
+            cp.setFecha(null);
+            cp.setHora(null);
+           
+        }
+    }
+    
+    public boolean notenescolaboraciones(){
+        return this.colaboracionesUsuario.isEmpty();
+    }
 
+    public void eliminalasrestantes(Map<String, propuesta> lista){
+    
+        for(String key: this.colaboracionesUsuario.keySet()){
+            if(lista.containsKey(key)==false){
+                colProp cp=this.colaboracionesUsuario.remove(key);
+                cp.setPropuesta(null);
+                cp.setFecha(null);
+                cp.setHora(null);
+            
+            }
+        }
+    }
 
 }

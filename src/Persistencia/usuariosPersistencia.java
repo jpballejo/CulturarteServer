@@ -160,7 +160,11 @@ public class usuariosPersistencia {
             ex.printStackTrace();
             return null;
         }  
-    }    
+    } 
+
+    public static Map<String, usuario> usuariosANoBorrar(){
+        return null;
+    }
     
     
 }

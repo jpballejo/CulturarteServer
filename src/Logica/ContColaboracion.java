@@ -106,6 +106,17 @@ public class ContColaboracion implements iConColaboracion{
             cUsuario.registrarcolaboracion(dt.getNickname(), dt.getTitulo(), cp);
         }
     }
-    
+
+    @Override
+    public void borrartodocColaboraciones() {
+        cUsuario.borrarColaboraciones();
+    }
+
+    @Override
+    public void levantarBDdesdeMemoria() {
+
+    }
+
+  
 }
 

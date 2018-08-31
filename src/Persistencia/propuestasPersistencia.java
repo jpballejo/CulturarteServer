@@ -9,6 +9,8 @@ import Logica.dtColaboracionCompleto;
 import Logica.dtFecha;
 import Logica.dtHora;
 import Logica.dtPropuestasBD;
+import Logica.propuesta;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,12 +25,29 @@ public class propuestasPersistencia {
     
     static ConexionDB conexion;
     
+    
+    public static void altaPropuesta(dtPropuestasBD dtp) throws SQLException{
+        try{
+            String sql=null;
+            Connection conn=conexion.getConn();
+            Statement st= conn.createStatement();
+            sql = "INSERT INTO `Propuesta`(`titulo`, `descripcion`, `imagen`, `lugar`, `fecha`, `precio_entrada`, `monto_necesario`, `fecha_publicacion`, `proponente`, `categoria`, `retorno`) VALUES ("+dtp.getTitulo()+","+dtp.getDescripcion()+","+dtp.getImagen()+","+dtp.getLugar()+","+dtp.getFecha().getFecha()+","+Integer.toString(dtp.getPrecio_entrada())+","+Integer.toString(dtp.getMonto_necesario())+","+dtp.getFecha_publicacion().getFecha()+","+dtp.getNickproponente()+","+dtp.getCategoria()+","+dtp.getRetorno()+")";
+            st.executeUpdate(sql);
+            
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            
+        } 
+        
+    }
+    
     public static Map<String, dtPropuestasBD> cargarPropuestas(){
         try{ 
             Map<String, dtPropuestasBD> propuestas= new HashMap<String, dtPropuestasBD>();
             String sql=null;
-        
-            Statement st=conexion.getConn().createStatement();
+            Connection conn=conexion.getConn();
+            Statement st=conn.createStatement();
             sql= "SELECT * FROM 'Propuesta'";
             ResultSet rs=st.executeQuery(sql);
             while(rs.next()){
@@ -41,7 +60,7 @@ public class propuestasPersistencia {
                 propuestas.put(key, dt);
             
             }
-            
+            conn.close();
             return propuestas;
             
         } catch (SQLException ex) {
@@ -50,5 +69,11 @@ public class propuestasPersistencia {
         }      
         
     }
+    
+    public static Map<String, propuesta> cargarPropuestasNOBorrar(){
+        return null;
+    }
+    
+    
     
 }

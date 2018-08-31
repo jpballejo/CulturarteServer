@@ -25,7 +25,7 @@ import java.util.Map;
 public class categoriaPersistencia {
    static ConexionDB conexion;
 
-    public void altaCategoria(String nombre, String padre) throws Exception{
+    public static void altaCategoria(String nombre, String padre) throws Exception{
         try {
             String sql=null;
             Statement st=conexion.getConn().createStatement();
