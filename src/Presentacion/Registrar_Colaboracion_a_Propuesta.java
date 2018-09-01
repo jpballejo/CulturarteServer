@@ -17,12 +17,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
     ContUsuario contUsu = new ContUsuario();
-    List<String> proponentes= contUsu.listarProponentes();
+   
+    
+          
     /**
      * Creates new form Registrar_Colaboracion_a_Propuesta
      */
     public Registrar_Colaboracion_a_Propuesta() {
         initComponents();
+        //String titulo[]={"nickName"};
+       // llenarGrilla(jTable_proponente, titulo, proponentes);
     }
 
     /**
@@ -156,10 +160,36 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
 
         btncancelar.setText("Cancelar");
         getContentPane().add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 449, 182, -1));
+
+        jT_busqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_busquedaActionPerformed(evt);
+            }
+        });
+        jT_busqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jT_busquedaKeyPressed(evt);
+            }
+        });
         getContentPane().add(jT_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jT_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_busquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT_busquedaActionPerformed
+
+    private void jT_busquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_busquedaKeyPressed
+            List<String> proponentes= contUsu.listarProponentes();
+            DefaultTableModel modelo=(DefaultTableModel) jTable_proponente.getModel();
+            modelo.setRowCount(0);
+            for (int i=0;i<proponentes.size();i++) {
+            String p=proponentes.get(i);
+            Object[] dat={p};
+            modelo.addRow(dat);
+        }
+    }//GEN-LAST:event_jT_busquedaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -192,8 +222,8 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     
     private void llenarGrilla(JTable tabla, String titulo[], List<String> atributos){
         // 
-         Object[] fila = new Object[titulo.length];
-         DefaultTableModel modelo=new DefaultTableModel(null,titulo);
+        Object[] fila = new Object[titulo.length];
+        DefaultTableModel modelo=new DefaultTableModel(null,titulo);
         for (int i=0;i<atributos.size();i++) {
             String p=atributos.get(i);
             Object[] dat={p};
