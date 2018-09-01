@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class dtPropuesta {
 
-    String titulo, descripcion, imagen, lugar, estado, categoria, proponente;
+    String titulo, descripcion, imagen, lugar, estado, categoria, proponente, retorno;
     dtFecha fechaRealizacion, fechapublicada;
     int precioentrada, montorequerido, montoactual;
     List<String> colaboradores;

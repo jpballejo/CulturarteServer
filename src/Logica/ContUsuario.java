@@ -59,7 +59,7 @@ public class ContUsuario implements iConUsuario {
     @Override
     public void cargarUsuarios() {
         
-        cargarUsuarios();
+        cargarUsuario();
         cargaSeguidores();
          
         
@@ -615,5 +615,15 @@ public class ContUsuario implements iConUsuario {
         return "";
     }
     
+    public void linkearpropuesta(propuesta p, String prop){
+        for(String key: this.usuarios.keySet()){
+            if(key==prop){
+                if(this.usuarios.get(key) instanceof proponente){
+                    proponente pr=(proponente)this.usuarios.get(key);
+                    pr.propuestasUsuario.put(p.getTitulo(), p);
+                }
+            }
+        }
+    }
     
 }

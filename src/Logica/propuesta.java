@@ -6,6 +6,8 @@
 package Logica;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -22,7 +24,7 @@ public class propuesta {
     private categoria categoria;
 
 
-    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno) {
+    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno, estado est) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -33,6 +35,14 @@ public class propuesta {
         this.montoRequerido = montoRequerido;
         this.estados=new ArrayList<>();
         this.retorno=retorno;
+       
+        if(est!=null){
+         Calendar cal=Calendar.getInstance();
+            Date da=cal.getTime();
+            dtHora dth=new dtHora(da.getHours(),da.getMinutes());
+        propEstado e=new propEstado(fechapublicada,dth,est);
+        this.estados.add(e);
+        }
     }
     private dtFecha fechapublicada;
     private int precioEntrada;
