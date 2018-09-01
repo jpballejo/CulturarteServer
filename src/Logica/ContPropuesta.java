@@ -59,8 +59,16 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     @Override
-    public void datosPropuesta(dtPropuesta dtProp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void datosPropuesta(dtPropuesta dtp) {
+       propuesta p=new propuesta(dtp.getTitulo(),dtp.getDescripcion(),dtp.getImagen(),dtp.getLugar(),dtp.getFechaRealizacion(),dtp.getFechapublicada(),dtp.getPrecioentrada(),dtp.getMontorequerido(),dtp.retorno,this.estados.get(dtp.estado));
+       cUsuario.linkearpropuesta(p,dtp.proponente);
+       
+       dtPropuestasBD dtpbd=new dtPropuestasBD(dtp.getTitulo(),dtp.proponente,dtp.getDescripcion(),dtp.getImagen(),dtp.getLugar(),dtp.getCategoria(),dtp.retorno,dtp.getFechaRealizacion(),dtp.getFechapublicada(),dtp.getPrecioentrada(),dtp.getMontorequerido());
+        try {
+            propuestasPersistencia.altaPropuesta(dtpbd);
+        } catch (SQLException ex) {
+            Logger.getLogger(ContPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -121,7 +129,7 @@ public class ContPropuesta implements iConPropuesta {
        Map<String, dtPropuestasBD> props=propuestasPersistencia.cargarPropuestas();
        for(String key: props.keySet()){
            dtPropuestasBD dt=props.get(key);
-           propuesta p=new propuesta(dt.getTitulo(),dt.getDescripcion(),dt.getImagen(),dt.getLugar(),dt.getFecha(),dt.getFecha_publicacion(),dt.getPrecio_entrada(),dt.getMonto_necesario(),dt.getRetorno());
+           propuesta p=new propuesta(dt.getTitulo(),dt.getDescripcion(),dt.getImagen(),dt.getLugar(),dt.getFecha(),dt.getFecha_publicacion(),dt.getPrecio_entrada(),dt.getMonto_necesario(),dt.getRetorno(),null);
            cUsuario.esteUsuariopropusoestaProp(dt.getNickproponente(), p);
            
        }
@@ -184,6 +192,16 @@ public class ContPropuesta implements iConPropuesta {
             categoria c= this.categorias.get(key);
             categoriaPersistencia.altaCategoria(c.getNombre(), c.getPadre().getNombre());
         }
+    }
+
+    public List<String> listarCategorias(String text) {
+        List<String> retorno= new ArrayList<>();
+        for(String key: this.categorias.keySet()){
+            if(key.contains(text))
+                retorno.add(key);
+        }
+        return retorno;
+            
     }
     
 }
