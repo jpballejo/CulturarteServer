@@ -5,6 +5,8 @@
  */
 package Presentacion;
 
+import Logica.culturarteFabrica;
+
 /**
  *
  * @author juan
@@ -28,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setVisible(true);
+        culturarteFabrica.getInstance().cargarDesdeBD();
         
         //Mandando fruta
       /*

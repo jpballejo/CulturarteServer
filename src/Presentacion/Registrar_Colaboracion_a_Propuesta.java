@@ -5,12 +5,19 @@
  */
 package Presentacion;
 
+import Logica.ContUsuario;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
-
+    ContUsuario contUsu = new ContUsuario();
+    List<String> proponentes= contUsu.listarProponentes();
     /**
      * Creates new form Registrar_Colaboracion_a_Propuesta
      */
@@ -28,10 +35,10 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablepropuestas = new javax.swing.JTable();
+        jTable_proponente = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablepropuesta = new javax.swing.JTable();
+        jTable_propuestas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         txtmontotoal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -49,8 +56,11 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         txtmontotoal1 = new javax.swing.JTextField();
         btnaceptar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
+        jT_busqueda = new javax.swing.JTextField();
 
-        tablepropuestas.setModel(new javax.swing.table.DefaultTableModel(
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable_proponente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -61,12 +71,17 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                 "Titulo", "Proponente"
             }
         ));
-        jScrollPane1.setViewportView(tablepropuestas);
-        if (tablepropuestas.getColumnModel().getColumnCount() > 0) {
-            tablepropuestas.getColumnModel().getColumn(0).setHeaderValue("Titulo");
+        jScrollPane1.setViewportView(jTable_proponente);
+        if (jTable_proponente.getColumnModel().getColumnCount() > 0) {
+            jTable_proponente.getColumnModel().getColumn(0).setHeaderValue("Titulo");
         }
 
-        tablepropuesta.setModel(new javax.swing.table.DefaultTableModel(
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 57, 220, -1));
+
+        jLabel1.setText("Propuestas");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jTable_propuestas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -77,7 +92,17 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                 "Titulo", "Descripcion", "Lugar", "Fecha", "Precio entrada", "Monto requerido"
             }
         ));
-        jScrollPane2.setViewportView(tablepropuesta);
+        jScrollPane2.setViewportView(jTable_propuestas);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 57, 367, 97));
+
+        jLabel5.setText("Monto total recaudado");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 166, 150, -1));
+        getContentPane().add(txtmontotoal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 187, 150, -1));
+
+        jLabel3.setText("Estado");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 166, -1, -1));
+        getContentPane().add(txtestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 187, 182, -1));
 
         tablecolaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,6 +117,11 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         ));
         jScrollPane3.setViewportView(tablecolaboradores);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 247, 150, 240));
+
+        jLabel2.setText("Colaboradores");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 226, -1, -1));
+
         tablecolaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -105,92 +135,28 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         ));
         jScrollPane4.setViewportView(tablecolaborador);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(txtmontotoal, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                    .addGap(35, 35, 35)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtestado)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jLabel4)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(txtnickcolaborador))
-                                                .addComponent(jLabel6)
-                                                .addComponent(jSpinner1)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jLabel7)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(txtmontotoal1))
-                                                .addComponent(btnaceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btncancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                                            .addGap(0, 0, Short.MAX_VALUE)))))
-                            .addComponent(jLabel2)))
-                    .addComponent(jLabel1))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(txtnickcolaborador))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtmontotoal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnaceptar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btncancelar)))
-                        .addGap(55, 55, 55))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45))))
-        );
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 247, 182, 71));
+
+        jLabel4.setText("Colaborador");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 226, -1, -1));
+
+        txtnickcolaborador.setText("Seleccione uno");
+        getContentPane().add(txtnickcolaborador, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 226, -1, -1));
+
+        jLabel6.setText("Tipo de retorno");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 324, -1, -1));
+        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 345, 182, -1));
+
+        jLabel7.setText("Monto");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 383, -1, -1));
+        getContentPane().add(txtmontotoal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 377, 131, -1));
+
+        btnaceptar.setText("Aceptar");
+        getContentPane().add(btnaceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 410, 182, -1));
+
+        btncancelar.setText("Cancelar");
+        getContentPane().add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 449, 182, -1));
+        getContentPane().add(jT_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,13 +177,29 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jT_busqueda;
+    private javax.swing.JTable jTable_proponente;
+    private javax.swing.JTable jTable_propuestas;
     private javax.swing.JTable tablecolaborador;
     private javax.swing.JTable tablecolaboradores;
-    private javax.swing.JTable tablepropuesta;
-    private javax.swing.JTable tablepropuestas;
     private javax.swing.JTextField txtestado;
     private javax.swing.JTextField txtmontotoal;
     private javax.swing.JTextField txtmontotoal1;
     private javax.swing.JLabel txtnickcolaborador;
     // End of variables declaration//GEN-END:variables
-}
+
+// funciones
+    
+    private void llenarGrilla(JTable tabla, String titulo[], List<String> atributos){
+        // 
+         Object[] fila = new Object[titulo.length];
+         DefaultTableModel modelo=new DefaultTableModel(null,titulo);
+        for (int i=0;i<atributos.size();i++) {
+            String p=atributos.get(i);
+            Object[] dat={p};
+            modelo.addRow(dat);
+        }
+        tabla.setModel(modelo);
+        } 
+    }
+

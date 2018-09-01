@@ -10,6 +10,7 @@ import Logica.ContUsuario;
 import Logica.dtCola;
 import Logica.dtColaborador;
 import Logica.dtUsuario;
+import java.awt.Color;
 import java.awt.Image;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +32,13 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
     
     public Consulta_de_Perfil_de_Colaborador() {
         initComponents();
+        jLabel1.setText("Colaboradores");
+        jLabel2.setText("Informacion para:");
+        labelnickname.setText("Seleccione un colaborador...");
+        jLabel3.setText("Imagen:");
+        jLabel4.setText("Colaboraciones:");
+        jButton1.setText("Cancelar");
+        this.setSize(655, 596);
     }
 
     /**
@@ -56,6 +64,8 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         labelimagen = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +93,12 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         });
         jScrollPane1.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 81, 125, 400));
+
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 23, -1, -1));
+
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 23, -1, -1));
+
         tablecolaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -95,6 +111,10 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
             }
         ));
         jScrollPane2.setViewportView(tablecolaborador);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 45, 401, 71));
+
+        getContentPane().add(labelnickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 23, -1, -1));
 
         tablepropuestas1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,6 +129,13 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         ));
         jScrollPane4.setViewportView(tablepropuestas1);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 288, 401, 193));
+
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 268, -1, -1));
+
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 128, -1, -1));
+        getContentPane().add(labelimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 150, 100, 100));
+
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbuscarActionPerformed(evt);
@@ -119,73 +146,14 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
                 txtbuscarKeyPressed(evt);
             }
         });
+        getContentPane().add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 45, 125, -1));
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel1)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelnickname))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(txtbuscar))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-                                    .addComponent(labelimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel3))
-                                    .addComponent(jLabel4)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(labelnickname))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(17, 17, 17))
-        );
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(497, 487, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,7 +184,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
         DefaultTableModel modelo=(DefaultTableModel) tablecolaborador.getModel();
         modelo.setRowCount(0);
         Object[] dat={dtc.getNombre(),dtc.getApellido(),dtc.getEmail(),dtc.getFechaNac().getFecha()};
-        labelnickname.setText(dtc.getNickname());
+        labelnickname.setText(dtc.getNickname()); //dtc.getNickname()
         modelo.addRow(dat);
         labelimagen.setIcon(new ImageIcon(dtc.getImagen()));
        ImageIcon icon = new ImageIcon(dtc.getImagen());
@@ -239,6 +207,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        labelimagen.setText("");
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

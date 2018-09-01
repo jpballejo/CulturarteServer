@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -46,6 +47,8 @@ public class Alta_perfil extends javax.swing.JFrame {
         jtp_biografia.enable(false);
         jb_aceptar.enable(false);
         this.setLocationRelativeTo(null);
+        jdc_fechaNac.setMinSelectableDate(new Date(1940, 1, 1));
+        jdc_fechaNac.setMaxSelectableDate(new Date(2000, 1, 1));
     }
 
     /**
@@ -219,6 +222,9 @@ public class Alta_perfil extends javax.swing.JFrame {
      if(altaPerfil()==true)
      {JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
        limpiarTxt();}
+     else{
+     JOptionPane.showMessageDialog(null, "No hay chance perro");
+     }
     }//GEN-LAST:event_jb_aceptarActionPerformed
 
     private void jb_examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_examinarActionPerformed
@@ -335,7 +341,6 @@ public class Alta_perfil extends javax.swing.JFrame {
            dtFecha fecha;
            fecha = new dtFecha(Integer.toString(jdc_fechaNac.getDate().getDay()),Integer.toString(jdc_fechaNac.getDate().getMonth()),Integer.toString(jdc_fechaNac.getDate().getYear()));
            return fecha;}
-   
    private boolean compruebaEmail(String email){
          // Patrón para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -355,10 +360,10 @@ public class Alta_perfil extends javax.swing.JFrame {
         jtp_biografia.setText(" ");
         jrb_colaborador.setSelected(false);
         jrb_proponente.setSelected(false);
-        jT_direccion.enable(false);
-        jT_web.enable(false);
-        jtp_biografia.enable(false);
-        jb_aceptar.enable(false);
+        jT_direccion.disable();
+        jT_web.disable();
+        jtp_biografia.disable();
+        jb_aceptar.disable();
         
     }
 

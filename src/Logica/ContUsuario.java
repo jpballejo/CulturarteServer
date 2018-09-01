@@ -28,11 +28,12 @@ import java.sql.SQLException;
  */
 public class ContUsuario implements iConUsuario {
 
-    usuariosPersistencia usuPer = new usuariosPersistencia();
-    seguirdejardeseguirPersistencia segdej= new seguirdejardeseguirPersistencia();
-   
-    private Map<String, usuario> usuarios= new HashMap<String,usuario>();
-    colaboracionesPersistencia colabPer= new colaboracionesPersistencia();
+
+ usuariosPersistencia usuPer = new usuariosPersistencia();
+ private Map<String, usuario> usuarios= new HashMap<String,usuario>();
+ seguirdejardeseguirPersistencia segdej= new seguirdejardeseguirPersistencia();
+ colaboracionesPersistencia colabPer= new colaboracionesPersistencia();
+
     
     
     public boolean existeUsuario(String nickName){
@@ -58,7 +59,7 @@ public class ContUsuario implements iConUsuario {
     @Override
     public void cargarUsuarios() {
         
-        cargaUsuarios();
+        cargarUsuario();
         cargaSeguidores();
          
         
@@ -290,16 +291,16 @@ public class ContUsuario implements iConUsuario {
      }
     
 
-     public void cargaUsuarios(){
+     public void cargarUsuario(){
          Map<String, proponente> mapproponentes=new HashMap<String, proponente>();
-         mapproponentes= usuariosPersistencia.CargarProponentes();
+         mapproponentes = usuPer.CargarProponentes();
          for(String keyp : mapproponentes.keySet()){
              proponente p=mapproponentes.get(keyp);
              this.usuarios.put(keyp, p);        
          }
          
          Map<String, colaborador> mapcolaboradores=new HashMap<String, colaborador>();
-         mapcolaboradores= usuariosPersistencia.CargarColaboradores();
+         mapcolaboradores= usuPer.CargarColaboradores();
          for(String keyc : mapcolaboradores.keySet()){
              colaborador c=mapcolaboradores.get(keyc);
              this.usuarios.put(keyc, c);        
