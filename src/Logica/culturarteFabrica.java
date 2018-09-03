@@ -13,6 +13,10 @@ public class culturarteFabrica {
     
     private static culturarteFabrica instance;
     
+            ContColaboracion ic= ContColaboracion.getInstance();
+            ContUsuario iu= ContUsuario.getInstance();
+           ContPropuesta ip= ContPropuesta.getInstance();
+           
     public static culturarteFabrica getInstance() {
         if(instance==null){
             instance= new culturarteFabrica();
@@ -29,10 +33,7 @@ public class culturarteFabrica {
             levantarBDdesdeMemoria();
         }
         
-        public void cargarDesdeBD(){
-            iConColaboracion ic= this.getIContColaboracion();
-            iConUsuario iu= this.getIContUsuario();
-            iConPropuesta ip= this.getIContPropuesta();
+        public void cargarDesdeBD(){;
           
             iu.cargarUsuarios();
             ip.cargarPropuestas();
@@ -54,11 +55,7 @@ public class culturarteFabrica {
             return icp;
         }
         
-        public void borrartodo(){
-            iConColaboracion ic= this.getIContColaboracion();
-            iConUsuario iu= this.getIContUsuario();
-            iConPropuesta ip= this.getIContPropuesta();
-            
+        public void borrartodo(){            
             
             ic.borrartodocColaboraciones();
             ip.borrartodocPropuesta();
@@ -68,9 +65,6 @@ public class culturarteFabrica {
         }
 
     private void levantarBDdesdeMemoria() {
-            iConColaboracion ic= this.getIContColaboracion();
-            iConUsuario iu= this.getIContUsuario();
-            iConPropuesta ip= this.getIContPropuesta();
                     
         
        iu.levantarBDdesdeMemoria();

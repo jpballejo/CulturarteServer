@@ -38,7 +38,13 @@ public class proponente extends usuario {
         propuestasUsuario.put(prop.getTitulo(), prop); 
         
     }
+    public List<dtPropuestasProponente> getPropuestas(){
+        List<dtPropuestasProponente> listaprop=null;
+        Iterator it = propuestasUsuario.entrySet().iterator();
+        
+        return null;
     
+    }
     public dtProponente getDtProponente(){
    
         dtProponente dtprop = new dtProponente(this.nombre,this.apellido,this.nickname,this.imagen,this.email,this.nacimiento,this.direccion,this.biografia,this.web);

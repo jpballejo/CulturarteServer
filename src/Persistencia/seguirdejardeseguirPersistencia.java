@@ -5,10 +5,8 @@
  */
 package Persistencia;
 
-import Logica.dtFecha;
-import Logica.dtPropuestasBD;
 import Logica.dtSeguidores;
-import Logica.proponente;
+import Logica.dtUsuario;
 import Logica.usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,61 +21,54 @@ import java.util.List;
  * @author nicolasgutierrez
  */
 public class seguirdejardeseguirPersistencia {
-    
-    private Connection conexion = new ConexionDB().getConexion();
-   static ConexionDB conne;
-    
-    public boolean seguir(usuario us,usuario uas){
-                    try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO 'Seguidores' "
-                    + "('nickusuario', 'nickasegior') values(?,?)");
-            statement.setString(1, us.getNickname());
-            statement.setString(2, uas.getNickname());         
-            statement.executeUpdate();
-            statement.close();
-       
-            return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        } 
-    }
-    
-    public boolean dejardeseguir(usuario us,usuario uas){
-                    try {
-            PreparedStatement statement = conexion.prepareStatement("DELETE FROM 'Seguidores' WHERE "
-                    + "nickusuario = ? AND nickaseguir = ?");
-            statement.setString(1, us.getNickname());
-            statement.setString(2, uas.getNickname());         
-            statement.executeUpdate();
-            statement.close();
-       
-            return true;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        } 
-    }
-    
-    public static List<dtSeguidores> cargarSeguidores(){
+
+    static ConexionDB conexion;
+
+    public boolean seguir(dtUsuario us, dtUsuario uas) {
         try {
-            
-            List<dtSeguidores> list= new ArrayList<>();
-            String sql=null;       
-            Statement st=conne.getConn().createStatement();
-            sql= "SELECT * FROM 'Seguidores'";
-            ResultSet rs=st.executeQuery(sql);
-            while(rs.next()){
-                dtSeguidores dt=new dtSeguidores(rs.getString("nickusuario"),rs.getString("nickaseguir"));
-                list.add(dt);      
-            }
-            return list;    
-            
+            Connection conn = conexion.getConexion();
+            String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`)VALUES('" + us.getNickname() + "','" + uas.getNickname() + "')";
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            conexion.cerrar(conn);
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
-        }         
+            return false;
+        }
     }
-}    
-    
-    
+
+    public boolean dejardeseguir(dtUsuario us, dtUsuario uas) {
+        try {
+            String sql="DELETE FROM 'Seguidores' WHERE nickusuario ='"+us.getNickname()+"'  AND nickaseguir ='"+uas.getNickname()+"'";
+            Connection conn = conexion.getConexion();
+            Statement st=conn.createStatement();
+            st.executeUpdate(sql);
+            conexion.cerrar(conn);
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public static List<dtSeguidores> cargarSeguidores() {
+        try {
+
+            List<dtSeguidores> list = new ArrayList<>();
+            String sql = "SELECT * FROM Seguidores";
+            Connection conn = conexion.getConexion();
+            Statement st=conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                dtSeguidores dt = new dtSeguidores(rs.getString(1), rs.getString(2));
+                list.add(dt);
+            }
+            conexion.cerrar(conn);
+            return list;
+
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+}

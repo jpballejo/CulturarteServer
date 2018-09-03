@@ -20,9 +20,11 @@ public class propuesta {
 
     private String titulo, descripcion, imagen, lugar, retorno;
     private dtFecha fecharealizacion;
-    protected List<propEstado> estados;
+    protected ArrayList<propEstado> estados;
     private categoria categoria;
-
+    private dtFecha fechapublicada;
+    private int precioEntrada;
+    private int montoRequerido;
 
     public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno, estado est) {
         this.titulo = titulo;
@@ -33,7 +35,7 @@ public class propuesta {
         this.fechapublicada = fechapublicada;
         this.precioEntrada = precioEntrada;
         this.montoRequerido = montoRequerido;
-        this.estados=new ArrayList<>();
+        this.estados=new ArrayList<propEstado>();
         this.retorno=retorno;
        
         if(est!=null){
@@ -44,9 +46,7 @@ public class propuesta {
         this.estados.add(e);
         }
     }
-    private dtFecha fechapublicada;
-    private int precioEntrada;
-    private int montoRequerido;
+   
 
     /**
      * @return the titulo
@@ -73,7 +73,7 @@ public class propuesta {
     }
 
     
-    public List<propEstado> getEstados(){
+    public ArrayList<propEstado> getEstados(){
         return this.estados;
     }
     
@@ -209,7 +209,7 @@ public class propuesta {
   
     public void ordenarestados(){
         propEstado chiquito=null;
-        List<propEstado> aux=new ArrayList<>();
+        ArrayList<propEstado> aux=new ArrayList<propEstado>();
         Iterator it=this.estados.iterator();
         while(it.hasNext()){
             Iterator it2=this.estados.iterator();

@@ -6,34 +6,30 @@
 package Persistencia;
 
 import Logica.colProp;
-import Logica.proponente;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author nicolasgutierrez
  */
 public class cancelarcolaboracionPersistencia {
-    
-    
-    private Connection conexion = new ConexionDB().getConexion();
-    
-    public boolean cancelarColaboracion(String nick,colProp cp ){
-            try {
-            PreparedStatement statement = conexion.prepareStatement("DELETE FROM 'Colaboraciones' WHERE "
-                    + "nickusuario = ? AND tituloprop = ?");
-            statement.setString(1, nick);
-            statement.setString(2, cp.getPropColaborada().getTitulo());
-            statement.executeUpdate();
-            statement.close();
-   
+
+    private ConexionDB conexion = new ConexionDB();
+
+    public boolean cancelarColaboracion(String nick, colProp cp) {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "DELETE FROM `cultuRarte`.`Colaboraciones` WHERE nickusuario = '" + nick + "'AND tituloprop ='" + cp.getPropColaborada().getTitulo() + "'";
+            Statement stDEL = conn.createStatement();
+            stDEL.executeUpdate(sql);
+            conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        }        
-    }    
-    
+        }
+    }
+
 }

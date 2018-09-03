@@ -27,7 +27,7 @@ public class ContPropuesta implements iConPropuesta {
     private ContUsuario cUsuario;
     private Map<String, categoria> categorias=new HashMap<String,categoria>();
     private Map<String, estado> estados=new HashMap<String,estado>();
-    
+    private categoriaPersistencia catPer;
     public static ContPropuesta getInstance() {
         if(instance==null){
             instance= new ContPropuesta();
@@ -116,8 +116,23 @@ public class ContPropuesta implements iConPropuesta {
     }
     
     public void cargaCategorias(){
+        ArrayList<dtCategoria> dtcategorias = new ArrayList<dtCategoria>();
+      dtcategorias= catPer.cargarCat();
+       for (int i = 0;i<=dtcategorias.size();i++){
+           dtCategoria dtcat= (dtCategoria)dtcategorias.get(i);
+           categoria cat= new categoria(dtcat.getNombre());
+           categorias.put(cat.getNombre(), cat);
+       }
+       dtcategorias.lastIndexOf(null);
+       for(int p=0;p<=dtcategorias.size();p++){
+       dtCategoria dtcatp= (dtCategoria)dtcategorias.get(p);
+       if(!dtcatp.getPadre().isEmpty()){
+       categoria catp= (categoria)categorias.get(dtcatp.getPadre());
+       categoria cath=(categoria)categorias.get(dtcatp.getNombre());
+       cath.setPadre(catp);
+       }
+       }
         
-        this.categorias=categoriaPersistencia.CargarCategorias();
     
     }
     

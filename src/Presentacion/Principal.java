@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import Logica.ContColaboracion;
+import Logica.ContPropuesta;
+import Logica.ContUsuario;
 import Logica.culturarteFabrica;
 
 /**
@@ -12,8 +15,11 @@ import Logica.culturarteFabrica;
  * @author juan
  */
 public class Principal extends javax.swing.JFrame {
-
-
+culturarteFabrica fabrica=culturarteFabrica.getInstance();
+//test jp
+    ContUsuario contUsuario=ContUsuario.getInstance();
+    ContPropuesta contPropuesta = ContPropuesta.getInstance();
+    ContColaboracion contColaboracion= ContColaboracion.getInstance();
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
@@ -30,7 +36,10 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setVisible(true);
-        culturarteFabrica.getInstance().cargarDesdeBD();
+        contUsuario.cargarUsuarios();
+        contPropuesta.cargarPropuestas();
+        contColaboracion.cargarColaboracion();
+        //fabrica.cargarDesdeBD();
         
         //Mandando fruta
       /*

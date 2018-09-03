@@ -5,9 +5,7 @@
  */
 package Persistencia;
 
-import Logica.dtColaboracionCompleto;
-import Logica.dtFecha;
-import Logica.dtHora;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,14 +23,15 @@ public class tiporetornoPersistencia {
     public List<String> cargarRetornos(){
      try{
         List<String> list= new ArrayList<>();
-        String sql=null;
-        Statement st=conexion.getConn().createStatement();
-        sql= "SELECT * FROM 'tipoRetorno'";
+        String sql="SELECT * FROM tipoRetorno";
+         Connection conn = conexion.getConexion();
+         Statement st= conn.createStatement();
         ResultSet rs=st.executeQuery(sql);
         while(rs.next()){              
             list.add(rs.getString("nombre"));
             
         }
+        conexion.cerrar(conn);
             return list;
         
         } catch (SQLException ex) {
