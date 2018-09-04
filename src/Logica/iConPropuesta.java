@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,8 +28,12 @@ public interface iConPropuesta {
     public abstract dtPropuesta mostrarInfoPropuesta(String idPropuesta) throws Exception;
     public abstract List<String>listartodasPropuestas(String titulo);
     public abstract void borrartodocPropuesta();
-
-    public void levantarBDdesdeMemoria();
-
+    public abstract propEstado crearEstado(dtEstadosPropuestas dtestProp);
+    public abstract propuesta armarPropuesta(dtPropuestasBD dtProp);
+    public abstract estado getEstado(String estaNombre);
+    public abstract categoria getCategoria(String cateNombre);
+    public abstract void levantarBDdesdeMemoria();
+    public abstract void cargarEstadosProp(propuesta prop,ArrayList<dtEstadosPropuestas> estProp);
+    
 }
     

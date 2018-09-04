@@ -5,15 +5,14 @@
  */
 package Persistencia;
 
-import Logica.dtColaboracionCompleto;
 import Logica.dtFecha;
-import Logica.dtHora;
 import Logica.dtPropuestasBD;
 import Logica.propuesta;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,58 +21,62 @@ import java.util.Map;
  * @author nicolasgutierrez
  */
 public class propuestasPersistencia {
-    
-    static ConexionDB conexion;
-    
-    
-    public static void altaPropuesta(dtPropuestasBD dtp) throws SQLException{
-        try{
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st= conn.createStatement();
-            sql = "INSERT INTO `Propuesta`(`titulo`, `descripcion`, `imagen`, `lugar`, `fecha`, `precio_entrada`, `monto_necesario`, `fecha_publicacion`, `proponente`, `categoria`, `retorno`) VALUES ("+dtp.getTitulo()+","+dtp.getDescripcion()+","+dtp.getImagen()+","+dtp.getLugar()+","+dtp.getFecha().getFecha()+","+Integer.toString(dtp.getPrecio_entrada())+","+Integer.toString(dtp.getMonto_necesario())+","+dtp.getFecha_publicacion().getFecha()+","+dtp.getNickproponente()+","+dtp.getCategoria()+","+dtp.getRetorno()+")";
+
+    static ConexionDB conexion = new ConexionDB();
+
+    public static void altaPropuesta(dtPropuestasBD dtp) throws SQLException {
+        try {
+            String sql = null;
+            sql = "INSERT INTO `Propuesta`(`titulo`, `descripcion`, `imagen`, `lugar`, `fecha`, `precio_entrada`, `monto_necesario`, `fecha_publicacion`, `proponente`, `categoria`, `retorno`)"
+                    + " VALUES ('" + dtp.getTitulo() + "','" + dtp.getDescripcion() + "','" + dtp.getImagen() + "','" + dtp.getLugar() + "','" + dtp.getFecha().getFecha() + "','" + Integer.toString(dtp.getPrecio_entrada()) + "','" + Integer.toString(dtp.getMonto_necesario()) + "','" + dtp.getFecha_publicacion().getFecha() + "','" + dtp.getNickproponente() + "," + dtp.getCategoria() + "','" + dtp.getRetorno() + "')";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            
-            conn.close();
+            //   conexion.cerrar(conn);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            
-        } 
-        
+
+        }
+
     }
-    
-    public static Map<String, dtPropuestasBD> cargarPropuestas(){
-        try{ 
-            Map<String, dtPropuestasBD> propuestas= new HashMap<String, dtPropuestasBD>();
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "SELECT * FROM 'Propuesta'";
-            ResultSet rs=st.executeQuery(sql);
-            while(rs.next()){
-                String key=rs.getString("titulo");
-                String[] f=rs.getString("fecha").split("/");
-                dtFecha dtf= new dtFecha(f[0],f[1],f[2]);
-                String[] h=rs.getString("fecha_publicacion").split("/");
-                dtFecha dtfc= new dtFecha(f[0],f[1],f[2]);           
-                dtPropuestasBD dt= new dtPropuestasBD(rs.getString("titulo"),rs.getString("proponente"),rs.getString("descripcion"),rs.getString("imagen"),rs.getString("lugar"),rs.getString("categoria"),rs.getString("retorno"),dtf,dtfc,Integer.parseInt(rs.getString("precio_entrada")),Integer.parseInt(rs.getString("monto_necesario")));
-                propuestas.put(key, dt);
-            
+
+    public dtFecha construirFecha(String fecha) {
+        String[] splited = fecha.split("/");
+        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
+        return fec;
+    }
+
+    public void cargarPropuestas(ArrayList<dtPropuestasBD> propuestas) {
+        try {
+            String sql = "SELECT * FROM cultuRarte.Propuesta";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String imagen = null;
+                if (rs.getString(3) != null) {
+                    imagen = rs.getString(3);
+                }
+                dtFecha dtf = construirFecha(rs.getString(5));
+                dtFecha dtfp = construirFecha(rs.getString(8));
+                int precio=0; int monto=0;
+                precio=Integer.parseInt(rs.getString(6));
+                monto=Integer.parseInt(rs.getString(7));
+                dtPropuestasBD dt = new dtPropuestasBD(rs.getString(1), rs.getString(9), rs.getString(2), imagen, rs.getString(4), rs.getString(10), rs.getString(11), dtf, dtfp,precio,monto);
+                propuestas.add(dt);
+
             }
-            conn.close();
-            return propuestas;
-            
+          
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
-        }      
-        
+
+        }
+
     }
-    
-    public static Map<String, propuesta> cargarPropuestasNOBorrar(){
+
+    public static Map<String, propuesta> cargarPropuestasNOBorrar() {
         return null;
     }
-    
-    
-    
+
 }

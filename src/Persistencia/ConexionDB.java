@@ -21,19 +21,19 @@ public class ConexionDB {
     private  final String user="administrador";
     private  final String pass="1234";
     private static Connection conexion=null;
-    private static Connection con = null;
+    private Connection con = null;
 
 
 
     
-    public  Connection getConn(){
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return con;
-    }
+//    public Connection getConn(){
+//        try {
+//            con = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return con;
+//    }
     
     public static Connection getConexionConfigurada(String h, String p, String db, String u, String pas) {
         if (conexion == null) {
@@ -61,7 +61,7 @@ public class ConexionDB {
         }
         return conexion;
     }
-    public void closeConn(){
+    public void closeConn(Connection con){
         if(con!=null){
                 try {
                 con.close();
@@ -74,7 +74,7 @@ public class ConexionDB {
         }
     }
 
-    public static void cerrar(){
+    public static void cerrar(Connection conexion){
 
         if (conexion != null) {
 

@@ -7,11 +7,11 @@ package Logica;
 
 import Persistencia.categoriaPersistencia;
 import Persistencia.estadoPersistencia;
+import Persistencia.estadoPropuestaPersistencia;
 import Persistencia.propuestasPersistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -24,23 +24,42 @@ import java.util.logging.Logger;
 public class ContPropuesta implements iConPropuesta {
 
     private static ContPropuesta instance;
-    private ContUsuario cUsuario;
-    private Map<String, categoria> categorias=new HashMap<String,categoria>();
-    private Map<String, estado> estados=new HashMap<String,estado>();
-    
-    public static ContPropuesta getInstance() {
-        if(instance==null){
-            instance= new ContPropuesta();
-        }
-            return instance;
+    private ContUsuario cUsuario = ContUsuario.getInstance();
+    private Map<String, categoria> categorias = new HashMap<String, categoria>();
+    private Map<String, estado> estados = new HashMap<String, estado>();
+    categoriaPersistencia catPer = new categoriaPersistencia();
+    estadoPersistencia estPer = new estadoPersistencia();
+    propuestasPersistencia propPer = new propuestasPersistencia();
+    estadoPropuestaPersistencia estPropPer = new estadoPropuestaPersistencia();
+    private Map<String, Integer> idEstado = new HashMap<String, Integer>();
+
+    private void cargaridEstado() {
+        this.idEstado.put("Cancelada", 6);
+        this.idEstado.put("No financiada", 5);
+        this.idEstado.put("Financiada", 4);
+        this.idEstado.put("En financiacion", 3);
+        this.idEstado.put("Publicada", 2);
+        this.idEstado.put("Ingresada", 1);
     }
-    
-    
+
+    private Integer getNumEstado(String estado) {
+        return this.idEstado.get(estado);
+
+    }
+
+    public static ContPropuesta getInstance() {
+        if (instance == null) {
+            instance = new ContPropuesta();
+        }
+        return instance;
+    }
+
     @Override
     public void cargarPropuestas() {
-      cargaCategorias();
-      cargaEstados();
-      cargaPropuestas();
+        cargaridEstado();
+        cargaCategorias();
+        cargaEstados();
+        cargaPropuestas();
     }
 
     @Override
@@ -59,11 +78,12 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     @Override
+    //revisdar jp
     public void datosPropuesta(dtPropuesta dtp) {
-       propuesta p=new propuesta(dtp.getTitulo(),dtp.getDescripcion(),dtp.getImagen(),dtp.getLugar(),dtp.getFechaRealizacion(),dtp.getFechapublicada(),dtp.getPrecioentrada(),dtp.getMontorequerido(),dtp.retorno,this.estados.get(dtp.estado));
-       cUsuario.linkearpropuesta(p,dtp.proponente);
-       
-       dtPropuestasBD dtpbd=new dtPropuestasBD(dtp.getTitulo(),dtp.proponente,dtp.getDescripcion(),dtp.getImagen(),dtp.getLugar(),dtp.getCategoria(),dtp.retorno,dtp.getFechaRealizacion(),dtp.getFechapublicada(),dtp.getPrecioentrada(),dtp.getMontorequerido());
+        //propuesta p = new propuesta(dtp.getTitulo(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido(), dtp.retorno, this.estados.get(dtp.estado));
+        // cUsuario.linkearpropuesta(p, dtp.getProponente());
+
+        dtPropuestasBD dtpbd = new dtPropuestasBD(dtp.getTitulo(), dtp.proponente, dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getCategoria(), dtp.retorno, dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido());
         try {
             propuestasPersistencia.altaPropuesta(dtpbd);
         } catch (SQLException ex) {
@@ -83,9 +103,9 @@ public class ContPropuesta implements iConPropuesta {
 
     @Override
     public dtPropuesta infoProp(String idPropuesta) {
-        this.cUsuario=ContUsuario.getInstance();
-        proponente p=(proponente) this.cUsuario.getUsuarioRecordado();
-        dtPropuesta dtp=p.getPropuestas(idPropuesta);
+        this.cUsuario = ContUsuario.getInstance();
+        proponente p = (proponente) this.cUsuario.getUsuarioRecordado();
+        dtPropuesta dtp = p.getPropuestas(idPropuesta);
         dtp.setColaboradores(this.cUsuario.listarColaboradores(idPropuesta));
         return dtp;
     }
@@ -114,41 +134,123 @@ public class ContPropuesta implements iConPropuesta {
     public List<String> listartodasPropuestas(String titulo) {
         return ContUsuario.getInstance().listartodaslaspropuestas(titulo);
     }
-    
-    public void cargaCategorias(){
-        
-        this.categorias=categoriaPersistencia.CargarCategorias();
-    
+
+    public void cargaCategorias() {
+        try {
+            ArrayList<dtCategoria> dtcate = new ArrayList<>();
+            catPer.cargarCat(dtcate);
+            System.out.println(dtcate.size());
+            for (int i = (0); i < dtcate.size(); i++) {
+                System.out.print(i);
+                dtCategoria dtcat = (dtCategoria) dtcate.get(i);
+                categoria cat = new categoria(dtcat.getNombre());
+                categorias.put(cat.getNombre(), cat);
+            }
+            //dtcate.lastIndexOf(null);
+            System.out.println(dtcate.size());
+            for (int p = 0; p < dtcate.size(); p++) {
+                dtCategoria dtcatp = (dtCategoria) dtcate.get(p);
+                if (dtcatp.getPadre() != null) {
+                    categoria catp = (categoria) categorias.get(dtcatp.getPadre());
+                    categoria cath = (categoria) categorias.get(dtcatp.getNombre());
+                    cath.setPadre(catp);
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }//revisado
+
+    public void cargaEstados() {
+        ArrayList<String> nomEstados = new ArrayList<>();
+        estPer.CargarEstados(nomEstados);
+        for (int i = 0; i < nomEstados.size(); i++) {
+            estado nuevoEstado = new estado(nomEstados.get(i));
+            estados.put(nuevoEstado.getNombre(), nuevoEstado);
+        }
     }
-    
-    public void cargaEstados(){
-        this.estados=estadoPersistencia.CargarEstados();
+
+    public void cargaPropuestas() {
+        ArrayList<dtPropuestasBD> dtpropuestasDb = new ArrayList<dtPropuestasBD>();
+        propPer.cargarPropuestas(dtpropuestasDb);
+        ArrayList<dtEstadosPropuestas> estProp = new ArrayList<>();
+        estPer.CargarEstadosPropuestas(estProp);
+        for (int i = 0; i < dtpropuestasDb.size(); i++) {
+            dtPropuestasBD dtProp = (dtPropuestasBD) dtpropuestasDb.get(i);
+            propuesta prop = armarPropuesta(dtProp);
+            cargarEstadosProp(prop, estProp);
+            String nick = dtProp.getNickproponente();
+            cUsuario.esteUsuariopropusoestaProp(nick, prop);
+        }
     }
-    
-    public void cargaPropuestas(){
-       Map<String, dtPropuestasBD> props=propuestasPersistencia.cargarPropuestas();
-       for(String key: props.keySet()){
-           dtPropuestasBD dt=props.get(key);
-           propuesta p=new propuesta(dt.getTitulo(),dt.getDescripcion(),dt.getImagen(),dt.getLugar(),dt.getFecha(),dt.getFecha_publicacion(),dt.getPrecio_entrada(),dt.getMonto_necesario(),dt.getRetorno(),null);
-           cUsuario.esteUsuariopropusoestaProp(dt.getNickproponente(), p);
-           
-       }
-       
-       List<dtEstadosPropuestas> l= estadoPersistencia.CargarEstadosPropuestas();
-       Iterator it=l.iterator();
-       while(it.hasNext()){
-           dtEstadosPropuestas dtep=(dtEstadosPropuestas)it.next();
-           propuesta p2=cUsuario.damePropuesta(dtep.getTituloprop());
-           estado e=this.estados.get(dtep.getEstado());
-           p2.agregarNuevoEstado(e, dtep.getFecha(), dtep.getHora());
-           
-       }
-       cUsuario.ordenarLosEstadosdeCadaPropuesta();
+
+    /**
+     *
+     * @param prop
+     * @param estProp
+     */
+    @Override
+    public void cargarEstadosProp(propuesta prop, ArrayList<dtEstadosPropuestas> estProp) {
+        try {
+            int orden=0;
+            String nombre=null;
+            for (int p = 0; p < estProp.size(); p++) {
+                dtEstadosPropuestas dtEtPop = (dtEstadosPropuestas) estProp.get(p);
+                nombre=dtEtPop.getEstado();
+                if (prop.getTitulo().equals(dtEtPop.getTituloprop()) == true) {
+                    propEstado propest = crearEstado(dtEtPop);
+                    
+                    orden = getNumEstado(nombre);
+                    prop.setEstado(propest, orden);
+
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @Override
+    public propEstado crearEstado(dtEstadosPropuestas dtestProp) {
+        propEstado estaprop = null;
+        try {
+            estado est = getEstado(dtestProp.getEstado());
+            estaprop = new propEstado(dtestProp.getFecha(), dtestProp.getHora(), est);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return estaprop;
+    }
+
+    public propuesta armarPropuesta(dtPropuestasBD dtProp) {
+        //propuesta prop = new propuesta(dtProp.getTitulo(), dtProp.getDescripcion() dtProp.getImagen(), dtProp.getLugar(), dtProp.getFecha(),dtProp.getFecha_publicacion(), dtProp.getPrecio_entrada(), dtProp.getMonto_necesario(), dtProp.getRetorno(),getCategoria(dtProp.getCategoria())); 
+        categoria cat = getCategoria(dtProp.getCategoria());
+        propuesta prop = new propuesta(dtProp.getTitulo(), dtProp.getDescripcion(), dtProp.getImagen(), dtProp.getLugar(), dtProp.getFecha(), dtProp.getFecha_publicacion(), dtProp.getPrecio_entrada(), dtProp.getMonto_necesario(), dtProp.getRetorno(), cat);
+        return prop;
+    }
+
+    public estado getEstado(String estaNombre) {
+        estado est = (estado) estados.get(estaNombre);
+        return est;
+    }
+
+    public categoria getCategoria(String cateNombre) {
+        categoria cat = (categoria) categorias.get(cateNombre);
+        return cat;
+    }
+
+    
+    
+    
+    // //////// trunkate y carga bd
+    @Override
     public void borrartodocPropuesta() {
-        Map<String, propuesta> lista=propuestasPersistencia.cargarPropuestasNOBorrar();
+        Map<String, propuesta> lista = propuestasPersistencia.cargarPropuestasNOBorrar();
         cUsuario.borrarPropuestas(lista);
     }
 
@@ -174,7 +276,7 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     private void cargarcreadorespropuestasaBD() {
-       cUsuario.cargarcreadorespropuestasaBD();
+        cUsuario.cargarcreadorespropuestasaBD();
     }
 
     private void cargarestadospropuestasaBD() {
@@ -182,26 +284,27 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     private void cargarestadosaBD() {
-        for(String key: this.estados.keySet()){
+        for (String key : this.estados.keySet()) {
             estadoPersistencia.agregarestado(key);
         }
     }
 
     private void cargarcategoriasaBD() throws Exception {
-        for(String key: this.categorias.keySet()){
-            categoria c= this.categorias.get(key);
+        for (String key : this.categorias.keySet()) {
+            categoria c = this.categorias.get(key);
             categoriaPersistencia.altaCategoria(c.getNombre(), c.getPadre().getNombre());
         }
     }
 
     public List<String> listarCategorias(String text) {
-        List<String> retorno= new ArrayList<>();
-        for(String key: this.categorias.keySet()){
-            if(key.contains(text))
+        List<String> retorno = new ArrayList<>();
+        for (String key : this.categorias.keySet()) {
+            if (key.contains(text)) {
                 retorno.add(key);
+            }
         }
         return retorno;
-            
+
     }
-    
+
 }

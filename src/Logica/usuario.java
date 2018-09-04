@@ -27,9 +27,9 @@ public class usuario {
     protected Map<String, usuario> seguidos;
    
     //METODOS
-    public dtPropuestasProponente getPropuestas() {
-        dtPropuestasProponente dtpp = new dtPropuestasProponente(email, nickname);
-        return dtpp;
+    public List<dtPropuestasProponente> getPropuestas() {
+        return null;
+       
     }
 
     //CONSTRUCTORES//

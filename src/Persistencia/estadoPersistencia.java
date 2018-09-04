@@ -10,7 +10,6 @@ import Logica.dtFecha;
 import Logica.dtHora;
 import Logica.estado;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,101 +23,102 @@ import java.util.Map;
  * @author nicolasgutierrez
  */
 public class estadoPersistencia {
-          
-    static ConexionDB conexion;
-    
-    public static boolean agregarestado(String nombre){
+
+    static ConexionDB conexion = new ConexionDB();
+
+    public static boolean agregarestado(String nombre) {
         try {
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "INSERT INTO 'estado' ('estado') VALUES ("+nombre+")";
-            st.executeUpdate(sql);           
-            conn.close();
-       
+            String sql = "INSERT INTO 'estado' ('estado') VALUES ('" + nombre + "')";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            //conexion.cerrar(conn);
+
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
     }
-    
-        public boolean eliminarestado(String nombre){
+
+    public boolean eliminarestado(String nombre) {
         try {
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "DELETE FROM 'estado' WHERE estado="+nombre;
-            st.executeUpdate(sql);           
-            conn.close();
-       
+            String sql = "DELETE FROM 'estado' WHERE estado='" + nombre + "'";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            //  conexion.cerrar(conn);
+
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }
     }
-        
-        public static Map<String, estado> CargarEstados(){
+
+    public void CargarEstados(ArrayList<String> estados) {
         try {
-            String sql=null;
-            Map<String, estado> lista=new HashMap<String, estado>();
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();  
-            sql=("SELECT * FROM 'estado'"); 
-            ResultSet rs=st.executeQuery(sql);
-            while (rs.next()){
-                String codigo=rs.getString("estado");
-                estado e=new estado(codigo);
-                lista.put(codigo, e);
+            String sql = "SELECT * FROM cultuRarte.estado";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(rs.getString(1));
             }
-            conn.close();
-            return lista;
+            //   conexion.cerrar(conn);
+        } catch (SQLException ex) {
+            System.err.print(ex.getMessage());
+        }
+    }
+
+    public static void agregarEstadosPropuestas(dtEstadosPropuestas dtep) {
+        try {
+            String sql = null;
+            sql = "INSERT INTO `estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ('" + dtep.getTituloprop() + "','" + dtep.getEstado() + "','" + dtep.getFecha().getFecha() + "','" + dtep.getHora().getHora() + "')";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            //     conexion.cerrar(conn);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
-        }  
+
         }
-        
-       public static void agregarEstadosPropuestas(dtEstadosPropuestas dtep){            
+    }
+
+    public dtFecha construirFecha(String fecha) {
+        String[] splited = fecha.split("/");
+        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
+        return fec;
+    }
+
+    public dtHora construirHora(String hora) {
+
+        String[] h = hora.split(":");
+        dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
+        return dth;
+    }
+
+    public void CargarEstadosPropuestas(ArrayList<dtEstadosPropuestas> estados) {
         try {
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "INSERT INTO `estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ("+dtep.getTituloprop()+","+dtep.getEstado()+","+dtep.getFecha().getFecha()+","+dtep.getHora().getHora()+")";
-            st.executeUpdate(sql);           
-            conn.close();
-       
-           
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-           
-        } 
-       } 
-        
-        
-        public static List<dtEstadosPropuestas> CargarEstadosPropuestas(){
-            try{
-            List<dtEstadosPropuestas> list= new ArrayList<>();
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql="SELECT * FROM 'estadoPropuesta'";
-            ResultSet rs=st.executeQuery(sql);
-            while(rs.next()){
-                 String[] f=rs.getString("fecha").split("/");
-                dtFecha dtf= new dtFecha(f[0],f[1],f[2]);
-                String[] h=rs.getString("hora").split(":");
-                dtHora dth= new dtHora(Integer.parseInt(h[0]),Integer.parseInt(h[1]));  
-                
-                dtEstadosPropuestas dt=new dtEstadosPropuestas(rs.getString("propuesta"),rs.getString("estado"),dtf,dth);
+            List<dtEstadosPropuestas> list = new ArrayList<>();
+            String sql = null;
+            sql = "SELECT * FROM cultuRarte.estadoPropuesta";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                dtFecha dtf = construirFecha(rs.getString(3));
+                System.out.println(rs.getString(1) + " " + rs.getString(4));
+                dtHora dth = construirHora(rs.getString(4));
+                dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth);
+                estados.add(dt);
             }
-            conn.close();
-            return list;
-            
-            } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }  
+            //      conexion.cerrar(conn);
+
+        } catch (SQLException ex) {
+            System.err.print(ex.getMessage());
+
         }
+    }
 }

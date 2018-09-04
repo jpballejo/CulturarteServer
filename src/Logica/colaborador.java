@@ -71,7 +71,8 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
     }
     
     public void agregarcolaboracion(colProp cp){
-        this.colaboracionesUsuario.put(cp.getPropColaborada().getTitulo(), cp);
+        String titulo= cp.getPropColaborada().getTitulo();
+        this.colaboracionesUsuario.put(titulo, cp);
     }
     
     public void eliminarcolaboraciones(){

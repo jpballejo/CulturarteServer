@@ -5,10 +5,7 @@
  */
 package Persistencia;
 
-import Logica.dtColaboracionCompleto;
 import Logica.dtCreadoresPropuestas;
-import Logica.dtFecha;
-import Logica.dtHora;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,81 +19,73 @@ import java.util.List;
  */
 public class creadoresPropuestaPersistencia {
     
-        
-   static ConexionDB conexion;
+    static ConexionDB conexion = new ConexionDB();
     
-    public static boolean agregarCreador(String proponente, String titulo){
+    public static boolean agregarCreador(String proponente, String titulo) {
         try {
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "INSERT INTO 'CreadoresPropuesta' ('nickusuario', 'tituloprop') VALUES ("+proponente+","+titulo+")";
-            st.executeUpdate(sql);           
-            conn.close();
-       
+            String sql = "INSERT INTO 'CreadoresPropuesta' ('nickusuario', 'tituloprop') VALUES ('" + proponente + "','" + titulo + "')";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);            
+     //       conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }        
     }
     
-    
-    public boolean eliminarCreador(String proponente, String titulo){
+    public boolean eliminarCreador(String proponente, String titulo) {
         try {
-             String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "DELETE FROM 'CreadoresPropuesta' WHERE nickusuario="+proponente+" AND tituloprop="+titulo;
+            String sql = "DELETE FROM 'CreadoresPropuesta' WHERE nickusuario='" + proponente + "' AND tituloprop='" + titulo + "'";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conn.close();
-       
+      //      conexion.cerrar(conn);
+            
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        } 
+        }        
     }
     
-    
-    public String quienMeCreo(String titulo){
+    public String quienMeCreo(String titulo) {
         try {
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "SELECT 'nickusuario' FROM 'CreadoresPropuesta' WHERE tituloprop="+titulo;
-            ResultSet ret=st.executeQuery(sql);
-            conn.close();
-            return ret.getString("nickusuario");
-       
+            String sql = "SELECT 'nickusuario' FROM 'CreadoresPropuesta' WHERE tituloprop='" + titulo + "'";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet ret = st.executeQuery(sql);
+            String retorno = ret.getString("nickusuario");
+         //   conexion.cerrar(conn);
+            return retorno;
             
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        } 
+        }        
         
     }
     
-    public List<dtCreadoresPropuestas> cargarCreadores(){
+    public List<dtCreadoresPropuestas> cargarCreadores() {
         
-        try{
-            List<dtCreadoresPropuestas> list=new ArrayList<>();
-            String sql=null;
-            Connection conn=conexion.getConn();
-            Statement st=conn.createStatement();
-            sql= "SELECT * FROM 'CreadoresPropuesta'";
-            ResultSet rs=st.executeQuery(sql);
-            while(rs.next()){           
-                dtCreadoresPropuestas dt= new dtCreadoresPropuestas(rs.getString("nickusuario"),rs.getString("tituloprop"));
+        try {
+            List<dtCreadoresPropuestas> list = new ArrayList<>();
+            String sql = "SELECT * FROM CreadoresPropuesta";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {                
+                dtCreadoresPropuestas dt = new dtCreadoresPropuestas(rs.getString("nickusuario"), rs.getString("tituloprop"));
                 list.add(dt);
-            
-        }
-            conn.close();
+                
+            }
+        //    conexion.cerrar(conn);
             return list;
-        
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        } 
+        }        
     }
 }

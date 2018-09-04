@@ -180,7 +180,7 @@ public class Configuracion_Culturarte extends javax.swing.JFrame {
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
         // TODO add your handling code here:
         if(txthost.getText().isEmpty()!=true && txtpuerto.getText().isEmpty()!=true && txtbd.getText().isEmpty()!=true && txtuser.getText().isEmpty()!=true && txtpass.getText().isEmpty()!=true){
-            ConexionDB.cerrar();
+ //           ConexionDB.cerrar();
             Connection conexionConfigurada = ConexionDB.getConexionConfigurada(txthost.getText(),txtpuerto.getText(),txtbd.getText(),txtuser.getText(),txtpass.getText()); 
              javax.swing.JOptionPane.showMessageDialog(null,"Configuracion realizada con exito");
              limpiarcampos();
