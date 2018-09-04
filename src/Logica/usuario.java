@@ -103,7 +103,8 @@ public class usuario {
     }
     
     public void seguir(usuario us) {
-        this.seguidos.put(us.getNickname(), us);
+        String usu= us.getNickname();
+        this.seguidos.put(usu, us);
     }
 
    

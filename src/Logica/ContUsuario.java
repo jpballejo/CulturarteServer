@@ -76,8 +76,23 @@ public class ContUsuario implements iConUsuario {
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         //cargarUsuario();
-        // cargaSeguidores();
+        cargarSeguidores();
 
+    }
+
+    public void cargarSeguidores() {
+        ArrayList<dtSeguidores> siguen = new ArrayList<>();
+        try {
+            usuPer.seguidores(siguen);
+            for (int i = 0; i < siguen.size(); i++) {
+                dtSeguidores seg = null;
+                seg = (dtSeguidores) siguen.get(i);
+                seguir(seg.getNickusuario(), seg.getNickaseguir());
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void agregaUsuCD(dtUsuario dtusu) throws Exception {
@@ -182,7 +197,7 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public List<String> listarColaboradores(String idPropuesta) {
-        List res = new ArrayList<String>();
+        List<String> res = new ArrayList<>();
         Iterator it = this.usuarios.keySet().iterator();
         while (it.hasNext()) {
             colaborador c = (colaborador) this.usuarios.get((String) it.next());
@@ -342,17 +357,7 @@ public class ContUsuario implements iConUsuario {
         return lst;
     }
 
-    public void cargaSeguidores() {
-        List<dtSeguidores> list = new ArrayList<>();
-        list = seguirdejardeseguirPersistencia.cargarSeguidores();
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            dtSeguidores dt = (dtSeguidores) it.next();
-            usuario u = this.usuarios.get(dt.nickusuario);
-            u.seguir(this.usuarios.get(dt.nickaseguir));
-        }
-
-    }
+   
 
     public void esteUsuariopropusoestaProp(String nickproponente, propuesta p) {
         try {
@@ -411,33 +416,24 @@ public class ContUsuario implements iConUsuario {
     public propuesta damePropuesta(String titulo) {
 
         for (String key : this.usuarios.keySet()) {
-           // proponente p = (proponente) this.usuarios.get(key);
-           usuario usu = (usuario)usuarios.get(key);
-            if(usu instanceof proponente){
-                proponente p = (proponente)usu;
-            if (p.tenesPropuesta(titulo)==true) {
-                return p.damelapropuesta(titulo);
+            // proponente p = (proponente) this.usuarios.get(key);
+            usuario usu = (usuario) usuarios.get(key);
+            if (usu instanceof proponente) {
+                proponente p = (proponente) usu;
+                if (p.tenesPropuesta(titulo) == true) {
+                    return p.damelapropuesta(titulo);
 
-            }
+                }
             }
         }
         return null;
     }
 
-//    public void ordenarLosEstadosdeCadaPropuesta() {
-//        for (String key : this.usuarios.keySet()) {
-//            if (this.usuarios.get(key) instanceof proponente) {
-//                proponente p = (proponente) this.usuarios.get(key);
-////                p.ordenalosestadosdepropuestas();
-//            }
-//
-//        }
-//    }
     public void registrarcolaboracion(String nickc, String titulo, colProp cp) {
-       propuesta prop =damePropuesta(titulo);
+        propuesta prop = damePropuesta(titulo);
         cp.setPropuesta(prop);
         usuario usu = usuarios.get(nickc);
-        if ( usu instanceof colaborador) {
+        if (usu instanceof colaborador) {
             colaborador c = (colaborador) usu;
             c.agregarcolaboracion(cp);
         }
