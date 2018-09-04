@@ -34,7 +34,7 @@ public class ContUsuario implements iConUsuario {
     private Map<String, usuario> usuarios = new HashMap<String, usuario>();
     seguirdejardeseguirPersistencia segdej = new seguirdejardeseguirPersistencia();
     colaboracionesPersistencia colabPer = new colaboracionesPersistencia();
-       
+
     public boolean existeUsuario(String nickName) {
         if (usuarios.containsKey(nickName) == true) {
             return true;
@@ -62,12 +62,12 @@ public class ContUsuario implements iConUsuario {
             dtUsuarios = usuPer.cargaUsuarios();
             int tam = dtUsuarios.size();
             //Iterator<dtUsuario> iterador = dtUsuarios.iterator();
-            for (int i=0;i<dtUsuarios.size();i++){
-            dtUsuario usu = (dtUsuario)dtUsuarios.get(i);
-            agregaUsuCD(usu);
+            for (int i = 0; i < dtUsuarios.size(); i++) {
+                dtUsuario usu = (dtUsuario) dtUsuarios.get(i);
+                agregaUsuCD(usu);
                 usu = null;
             }
-           /* while (iterador.hasNext()) {
+            /* while (iterador.hasNext()) {
                 dtUsuario usu = (dtUsuario) iterador.next();
                 agregaUsuCD(usu);
                 usu = null;
@@ -342,8 +342,6 @@ public class ContUsuario implements iConUsuario {
         return lst;
     }
 
-    
-
     public void cargaSeguidores() {
         List<dtSeguidores> list = new ArrayList<>();
         list = seguirdejardeseguirPersistencia.cargarSeguidores();
@@ -357,8 +355,13 @@ public class ContUsuario implements iConUsuario {
     }
 
     public void esteUsuariopropusoestaProp(String nickproponente, propuesta p) {
-        proponente prop = (proponente) usuarios.get(nickproponente);
-        prop.agregarPropuesta(p);
+        try {
+            proponente prop = (proponente) usuarios.get(nickproponente);
+            prop.agregarPropuesta(p);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public boolean compararfechas(dtFecha uno, dtFecha dos) {
@@ -408,12 +411,15 @@ public class ContUsuario implements iConUsuario {
     public propuesta damePropuesta(String titulo) {
 
         for (String key : this.usuarios.keySet()) {
-            proponente p = (proponente) this.usuarios.get(key);
-            if (p != null && p.tenesPropuesta(titulo)) {
+           // proponente p = (proponente) this.usuarios.get(key);
+           usuario usu = (usuario)usuarios.get(key);
+            if(usu instanceof proponente){
+                proponente p = (proponente)usu;
+            if (p.tenesPropuesta(titulo)==true) {
                 return p.damelapropuesta(titulo);
 
             }
-
+            }
         }
         return null;
     }
@@ -427,11 +433,12 @@ public class ContUsuario implements iConUsuario {
 //
 //        }
 //    }
-
     public void registrarcolaboracion(String nickc, String titulo, colProp cp) {
-        cp.setPropuesta(this.damePropuesta(titulo));
-        if (this.usuarios.get(nickc) instanceof colaborador) {
-            colaborador c = (colaborador) this.usuarios.get(nickc);
+       propuesta prop =damePropuesta(titulo);
+        cp.setPropuesta(prop);
+        usuario usu = usuarios.get(nickc);
+        if ( usu instanceof colaborador) {
+            colaborador c = (colaborador) usu;
             c.agregarcolaboracion(cp);
         }
     }
@@ -541,7 +548,7 @@ public class ContUsuario implements iConUsuario {
                 usuario uaux;
                 uaux = u.seguidos.get(key);
                 dtUsuario us = new dtUsuario(u.getNickname(), null, null, null, null, null);
-                dtUsuario aux =new dtUsuario(uaux.getNickname(), null, null, null, null, null);
+                dtUsuario aux = new dtUsuario(uaux.getNickname(), null, null, null, null, null);
                 segdej.seguir(us, aux);
             }
 
@@ -592,7 +599,7 @@ public class ContUsuario implements iConUsuario {
     }
 
     void cargarestadospropuestasaBD() {
-    /*    for (String key : this.usuarios.keySet()) {
+        /*    for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof proponente) {
                 proponente p;
                 p = (proponente) this.usuarios.get(key);

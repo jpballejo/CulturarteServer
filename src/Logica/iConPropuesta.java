@@ -34,5 +34,6 @@ public interface iConPropuesta {
     public abstract categoria getCategoria(String cateNombre);
     public abstract void levantarBDdesdeMemoria();
     public abstract void cargarEstadosProp(propuesta prop,ArrayList<dtEstadosPropuestas> estProp);
+    
 }
     

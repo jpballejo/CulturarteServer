@@ -109,7 +109,8 @@ public class estadoPersistencia {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 dtFecha dtf = construirFecha(rs.getString(3));
-                dtHora dth= construirHora(rs.getString(4));
+                System.out.println(rs.getString(1) + " " + rs.getString(4));
+                dtHora dth = construirHora(rs.getString(4));
                 dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth);
                 estados.add(dt);
             }

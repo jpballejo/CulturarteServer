@@ -10,45 +10,47 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 /**
  *
  * @author Esteban Menendez
  */
 public class proponente extends usuario {
 
-    protected final Map<String,propuesta> propuestasUsuario = new HashMap<String,propuesta>();//diccionario con clave string
+    protected final Map<String, propuesta> propuestasUsuario = new HashMap<String, propuesta>();//diccionario con clave string
     private String direccion;
- //   private Map<String, usuario> seguidos;
+    //   private Map<String, usuario> seguidos;
 
     private String biografia, web;
 
     public proponente(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String direccion, String biografia, String web) {
         super(nickname, nombre, apellido, email, imagen, nacimiento);
-        this.direccion=direccion;
-        this.biografia=biografia;
-        this.web=web;
-        }
+        this.direccion = direccion;
+        this.biografia = biografia;
+        this.web = web;
+    }
 
-    
     /**
      *
      * @param prop
      */
-    public void agregarPropuesta(propuesta prop){
-        propuestasUsuario.put(prop.getTitulo(), prop); 
-        
+    public void agregarPropuesta(propuesta prop) {
+        propuestasUsuario.put(prop.getTitulo(), prop);
+
     }
-    public List<dtPropuestasProponente> getPropuestas(){
-        List<dtPropuestasProponente> listaprop=null;
+
+    public List<dtPropuestasProponente> getPropuestas() {
+        List<dtPropuestasProponente> listaprop = null;
         Iterator it = propuestasUsuario.entrySet().iterator();
-        
+
         return null;
-    
+
     }
-    public dtProponente getDtProponente(){
-   
-        dtProponente dtprop = new dtProponente(this.nombre,this.apellido,this.nickname,this.imagen,this.email,this.nacimiento,this.direccion,this.biografia,this.web);
-     
+
+    public dtProponente getDtProponente() {
+
+        dtProponente dtprop = new dtProponente(this.nombre, this.apellido, this.nickname, this.imagen, this.email, this.nacimiento, this.direccion, this.biografia, this.web);
+
         return dtprop;
     }
 
@@ -95,67 +97,79 @@ public class proponente extends usuario {
     }
 
     //METODOS//
-    public dtPropuesta getPropuestas(String idPropuesta){
-    propuesta p=(propuesta)this.propuestasUsuario.get(idPropuesta);
-    if(p!=null){
-        dtPropuesta prop=new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido(),0);
-        return prop;}
-    else
-        return null;
+    public dtPropuesta getPropuestas(String idPropuesta) {
+        propuesta p = (propuesta) this.propuestasUsuario.get(idPropuesta);
+        if (p != null) {
+            dtPropuesta prop = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0);
+            return prop;
+        } else {
+            return null;
+        }
     }
-    
-    public List<dtPropuesta> getTodasPropuestas(){
-        List<dtPropuesta> retornar=new ArrayList<dtPropuesta>();
-        Iterator it= this.propuestasUsuario.keySet().iterator();
-        while(it.hasNext()){
-            String key=(String) it.next();
-            propuesta p=this.propuestasUsuario.get(key);
-            dtPropuesta dtp= new dtPropuesta(p.getTitulo(),p.getDescripcion(),p.getImagen(),p.getLugar(),p.getEstadoActual(),p.getCategoria(),this.getNickname(),p.getFecharealizacion(),p.getFechapublicada(),p.getPrecioEntrada(),p.getMontoRequerido(),0);
+
+    public List<dtPropuesta> getTodasPropuestas() {
+        List<dtPropuesta> retornar = new ArrayList<dtPropuesta>();
+        Iterator it = this.propuestasUsuario.keySet().iterator();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            propuesta p = this.propuestasUsuario.get(key);
+            dtPropuesta dtp = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0);
             retornar.add(dtp);
         }
         return retornar;
     }
-  
-   
-       
-    public List<String> listarmispropuestas(){
-        List<String> retorno= new ArrayList();
+
+    public List<String> listarmispropuestas() {
+        List<String> retorno = new ArrayList();
         this.propuestasUsuario.keySet().forEach((key) -> {
             retorno.add(key);
         });
         return retorno;
     }
-    
-     public List<String> listarmispropuestaslike(String titulo){
-        List<String> retorno= new ArrayList();
+
+    public List<String> listarmispropuestaslike(String titulo) {
+        List<String> retorno = new ArrayList();
         this.propuestasUsuario.keySet().forEach((key) -> {
-            propuesta p=(propuesta)this.propuestasUsuario.get(key);
+            propuesta p = (propuesta) this.propuestasUsuario.get(key);
             if (p.getTitulo().contains(titulo)) {
                 retorno.add(key);
             }
         });
         return retorno;
     }
-     
-     public boolean tenesPropuesta(String titulo){
-         return this.propuestasUsuario.containsKey(titulo);
-     }
-     
-     public propuesta damelapropuesta(String titulo){
-         return this.propuestasUsuario.get(titulo);
-     }
-     
+
+    public boolean tenesPropuesta(String titulo) {
+        boolean tengo = false;
+        try {
+            tengo = this.propuestasUsuario.containsKey(titulo);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return tengo;
+    }
+
+    public propuesta damelapropuesta(String titulo) {
+        propuesta prop = null;
+        try {
+            prop = (propuesta) this.propuestasUsuario.get(titulo);
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return prop;
+    }
+
 //     public void ordenalosestadosdepropuestas(){
 //         for(String key: this.propuestasUsuario.keySet()){
 //             propuesta p=this.propuestasUsuario.get(key);
 //             p.ordenarestados();
 //         }
 //     }
-     
-     public void borratuspropuestas(){
-         for(String key: this.propuestasUsuario.keySet()){
-             propuesta p=this.propuestasUsuario.remove(key);
-             p.desvincular();
-         }
-     }
+    public void borratuspropuestas() {
+        for (String key : this.propuestasUsuario.keySet()) {
+            propuesta p = this.propuestasUsuario.remove(key);
+            p.desvincular();
+        }
+    }
 }

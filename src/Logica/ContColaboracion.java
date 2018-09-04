@@ -5,9 +5,8 @@
  */
 package Logica;
 
-
-
 import Persistencia.colaboracionesPersistencia;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,20 +14,20 @@ import java.util.List;
  *
  * @author nicolasgutierrez
  */
-public class ContColaboracion implements iConColaboracion{
+public class ContColaboracion implements iConColaboracion {
 
     private static ContColaboracion instance;
     private colProp colaboracion;
-    private ContUsuario cUsuario=ContUsuario.getInstance();
-    
-    
+    private ContUsuario cUsuario = ContUsuario.getInstance();
+    private colaboracionesPersistencia colPer = new colaboracionesPersistencia();
+
     public static ContColaboracion getInstance() {
-        if(instance==null){
-            instance= new ContColaboracion();
+        if (instance == null) {
+            instance = new ContColaboracion();
         }
-            return instance;
+        return instance;
     }
-    
+
     @Override
     public void cargarColaboracion() {
         cargarColaboraciones();
@@ -86,25 +85,31 @@ public class ContColaboracion implements iConColaboracion{
 
     @Override
     public dtColProp seleccionarColaboracion(String nickusuario, String titulo) {
-       colProp cp=(colProp)this.cUsuario.seleccionarColaboracion(nickusuario, titulo);
-       this.colaboracion=cp;
-       dtColProp dtcp= new dtColProp(nickusuario,cp.getRetorno(),cp.getFecha(),cp.getHora(),cp.getMontocolaborado());
-       return dtcp;
+        colProp cp = (colProp) this.cUsuario.seleccionarColaboracion(nickusuario, titulo);
+        this.colaboracion = cp;
+        dtColProp dtcp = new dtColProp(nickusuario, cp.getRetorno(), cp.getFecha(), cp.getHora(), cp.getMontocolaborado());
+        return dtcp;
     }
 
     @Override
-    public void eliminar() throws Exception{
+    public void eliminar() throws Exception {
         this.cUsuario.eliminarColaboracion(this.colaboracion);
     }
-    
-    public void cargarColaboraciones(){
-        List<dtColaboracionCompleto> list=colaboracionesPersistencia.cargarColaboraciones();
-        Iterator it=list.iterator();
-        while(it.hasNext()){
-            dtColaboracionCompleto dt=(dtColaboracionCompleto) it.next();
-            colProp cp=new colProp(dt.getFecha(),dt.getHora(),dt.getMonto(),dt.getRetorno(),null);
-            cUsuario.registrarcolaboracion(dt.getNickname(), dt.getTitulo(), cp);
+
+    public void cargarColaboraciones() {
+        ArrayList<dtColaboracionCompleto> dtColaComp = new ArrayList<>();
+        try {
+            colPer.cargarColaboraciones(dtColaComp);
+            for (int i = 0; i < dtColaComp.size(); i++) {
+                dtColaboracionCompleto dt = (dtColaboracionCompleto) dtColaComp.get(i);
+                colProp cp = new colProp(dt.getFecha(), dt.getHora(), dt.getMonto(), dt.getRetorno(), null);
+                cUsuario.registrarcolaboracion(dt.getNickname(), dt.getTitulo(), cp);
+
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
+
     }
 
     @Override
@@ -122,6 +127,4 @@ public class ContColaboracion implements iConColaboracion{
         return cUsuario.colaboracionesde(nickcolaborador);
     }
 
-  
 }
-

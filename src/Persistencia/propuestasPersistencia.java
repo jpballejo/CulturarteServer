@@ -59,7 +59,10 @@ public class propuestasPersistencia {
                 }
                 dtFecha dtf = construirFecha(rs.getString(5));
                 dtFecha dtfp = construirFecha(rs.getString(8));
-                dtPropuestasBD dt = new dtPropuestasBD(rs.getString(1), rs.getString(9), rs.getString(2), imagen, rs.getString(4), rs.getString(10), rs.getString(11), dtf, dtfp, Integer.parseInt(rs.getString(6)), Integer.parseInt(rs.getString(7)));
+                int precio=0; int monto=0;
+                precio=Integer.parseInt(rs.getString(6));
+                monto=Integer.parseInt(rs.getString(7));
+                dtPropuestasBD dt = new dtPropuestasBD(rs.getString(1), rs.getString(9), rs.getString(2), imagen, rs.getString(4), rs.getString(10), rs.getString(11), dtf, dtfp,precio,monto);
                 propuestas.add(dt);
 
             }

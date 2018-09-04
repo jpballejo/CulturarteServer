@@ -30,7 +30,7 @@ public class colaboracionesPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-           // conexion.cerrar(conn);
+            // conexion.cerrar(conn);
 
             return true;
         } catch (SQLException ex) {
@@ -42,11 +42,11 @@ public class colaboracionesPersistencia {
     public boolean eliminarColaboracion(String colaborador, String titulo) {
         try {
             String sql = null;
-            sql = "DELETE FROM 'Colaboraciones' WHERE nickusuario ='" + colaborador + "' AND tituloprop ='" + titulo+"'";
-           Connection conn= conexion.getConexion();
-           Statement st=conn.createStatement();
+            sql = "DELETE FROM 'Colaboraciones' WHERE nickusuario ='" + colaborador + "' AND tituloprop ='" + titulo + "'";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
             st.executeUpdate(sql);
-           // conexion.cerrar(conn);
+            // conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -54,28 +54,40 @@ public class colaboracionesPersistencia {
         }
     }
 
-    public static List<dtColaboracionCompleto> cargarColaboraciones() {
+    public dtFecha construirFecha(String fecha) {
+        String[] splited = fecha.split("/");
+        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
+        return fec;
+    }
+
+    public dtHora construirHora(String hora) {
+
+        String[] h = hora.split(":");
+        dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
+        return dth;
+    }
+
+    public void cargarColaboraciones(ArrayList<dtColaboracionCompleto> dtcolaboraciones) {
         try {
-            List<dtColaboracionCompleto> list = new ArrayList<>();
-            String sql = "SELECT * FROM Colaboraciones";
+
+            String sql = "SELECT * FROM cultuRarte.Colaboraciones";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String[] f = rs.getString("fecha").split("/");
-                dtFecha dtf = new dtFecha(f[0], f[1], f[2]);
-                String[] h = rs.getString("hora").split(":");
-                dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
-                dtColaboracionCompleto dtc = new dtColaboracionCompleto(rs.getString("nickusuario"), rs.getString("tituloprop"), dtf, dth, Integer.parseInt(rs.getString("monto")), rs.getString("retorno"));
-                list.add(dtc);
+                String fechaS= rs.getString(3);
+                dtFecha dtf = construirFecha(fechaS);
+                String horaS = rs.getString(4);
+                dtHora dth= construirHora(horaS);
+                int monto = Integer.parseInt(rs.getString(5));
+                dtColaboracionCompleto dtc = new dtColaboracionCompleto(rs.getString(1), rs.getString(2), dtf, dth, monto, rs.getString(6));
+                dtcolaboraciones.add(dtc);
 
             }
-           // conexion.cerrar(conn);
-            return list;
+         
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
+            System.err.println(ex.getMessage());
         }
 
     }

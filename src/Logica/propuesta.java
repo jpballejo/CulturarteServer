@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -38,12 +39,13 @@ public class propuesta {
         this.montoRequerido = montoRequerido;
         this.retorno = retorno;
         this.categoria = cat;
+
         if (est != null) {
             Calendar cal = Calendar.getInstance();
             Date da = cal.getTime();
             dtHora dth = new dtHora(da.getHours(), da.getMinutes());
             propEstado e = new propEstado(fechapublicada, dth, est);
-            this.estados.put(getNumEstado(est.getNombre()), e);
+            this.estados.put(1, e);
         }
     }
 
@@ -67,52 +69,38 @@ public class propuesta {
     }
 
     /**
+     * @param estado
      * @return the titulo
      */
-    public Integer getNumEstado(String estado) {
-        HashMap<String, Integer> idEstado = new HashMap<String, Integer>();
-        idEstado.put("Cancelada", 6);
-        idEstado.put("No financiada", 5);
-        idEstado.put("Financiada", 4);
-        idEstado.put("En financiacion", 3);
-        idEstado.put("Publicada", 2);
-        idEstado.put("Ingresada", 1);
-        return idEstado.get(estado);
-
-    }
-
     public String getTitulo() {
         return titulo;
     }
 
-    public void setEstado(propEstado estprop) {
-        int orden = getNumEstado(estprop.getEstado().getNombre());
-        estados.put(orden, estprop);
+    public void setEstado(propEstado estprop, int orden) {
+        try {
+            estados.put(orden, estprop);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
     public String getEstadoActual() {
-        propEstado aux = null;
-        Iterator it = estados.keySet().iterator();
-        while (it.hasNext()) {
-            aux = (propEstado) estados.get(it.next());
-        }
-
-        if (aux == null) {
-            return null;
-        } else {
-            return aux.getEstado().getNombre();
-        }
-
+        int ides = estados.size();
+        String est = null;
+        propEstado propEst = estados.get(ides);
+        est = propEst.getEstado().getNombre();
+        return est;
     }
 
     public TreeMap<Integer, propEstado> getEstados() {
         return this.estados;
     }
 
-    public void agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth) {
+    public void agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth, int orden) {
         propEstado pe = new propEstado(dtf, dth, e);
-        this.estados.put(getNumEstado(e.getNombre()), pe);
+        this.estados.put(orden, pe);
 
     }
 
