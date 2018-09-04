@@ -30,6 +30,7 @@ public class seguirdejardeseguirPersistencia {
             String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`)VALUES('" + us.getNickname() + "','" + uas.getNickname() + "')";
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
+            System.out.println();
          //   conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
