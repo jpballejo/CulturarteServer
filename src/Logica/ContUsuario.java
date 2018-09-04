@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Logica;
+
 import Persistencia.cancelarcolaboracionPersistencia;
 import Persistencia.colaboracionesPersistencia;
 import Persistencia.creadoresPropuestaPersistencia;
@@ -17,10 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.lang.Exception;
 import Persistencia.usuariosPersistencia;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import static java.lang.System.in;
 import java.sql.SQLException;
 
 /**
@@ -36,8 +33,8 @@ import java.sql.SQLException;
  * @author nicolasgutierrez
  */
 public class ContUsuario implements iConUsuario {
-   
-    ArrayList<String>listaImagenes=new ArrayList<>();
+
+    private ArrayList<String> listaImagenes = new ArrayList<>();
     usuariosPersistencia usuPer = new usuariosPersistencia();
     private Map<String, usuario> usuarios = new HashMap<String, usuario>();
     seguirdejardeseguirPersistencia segdej = new seguirdejardeseguirPersistencia();
@@ -62,43 +59,51 @@ public class ContUsuario implements iConUsuario {
         }
         return instance;
     }
-public boolean moverImagenesUsu(){
 
-
-return false;
-}
-/*private void salvarImagen(Image imagen){
-   BufferedImage img = (BufferedImage) imagen;
-   File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png");
-   imagenRuta="/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png";
-    try { 
-        ImageIO.write(img, "png", outputfile);
-    } catch (IOException ex) {
-        Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
-    }
-   }*/
-public boolean copiarArchivo(String origen, String destino) throws IOException{
-    File imagen =  new File(origen);
-    File va = new File(destino);
-    if(imagen.exists()){
-        try {
-            InputStream inp = new FileInputStream(imagen);
-            OutputStream out = new FileOutputStream(va);
-            byte [] bufer = new byte [1024];
-            int largo;
-            while ((largo= inp.read(bufer))>0){
-            out.write(bufer, 0, largo);
+    public boolean moverImagenesUsu() {
+        //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
+        int tam = listaImagenes.size();
+        for (int i = 0; i < listaImagenes.size(); i++) {
+            try {
+                String inicio = null;
+                String destino = null;
+                String imagen = listaImagenes.get(i);
+                inicio = "/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesPer/" + imagen;
+                destino = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil/" + imagen;
+                System.out.println(destino);
+                copiarArchivo(inicio, destino);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+                return false;
             }
-            inp.close();
-            out.close();
-            return true;
-        } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
-            return false;
         }
+        return true;
     }
-return false;
-}
+//y este elcoso que mueve la cosa
+
+    public boolean copiarArchivo(String origen, String destino) throws IOException {
+        File imagen = new File(origen);
+        File va = new File(destino);
+        if (imagen.exists()) {
+            try {
+                InputStream inp = new FileInputStream(imagen);
+                OutputStream out = new FileOutputStream(va);
+                byte[] bufer = new byte[1024];
+                int largo;
+                while ((largo = inp.read(bufer)) > 0) {
+                    out.write(bufer, 0, largo);
+                }
+                inp.close();
+                out.close();
+                return true;
+            } catch (FileNotFoundException e) {
+                System.err.println(e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void cargarUsuarios() {
         try {
@@ -112,25 +117,24 @@ return false;
                 agregaUsuCD(usu);
                 usu = null;
             }
-            /* while (iterador.hasNext()) {
-                dtUsuario usu = (dtUsuario) iterador.next();
-                agregaUsuCD(usu);
-                usu = null;
-            }*/
+
         } catch (Exception ex) {
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //cargarUsuario();
+        moverImagenesUsu();
         cargarSeguidores();
 
     }
-    public void sacarRutaImagen(dtUsuario usu){
-    if (usu.getImagen()!=null){
-    String imagen=usu.getImagen();
-    listaImagenes.add(imagen);
+
+    public void sacarRutaImagen(dtUsuario usu) {
+        if (usu.getImagen() != null) {
+            String imagen = usu.getImagen();
+            listaImagenes.add(imagen);
+        }
+
     }
-    
-    }
+//revisar
+
     public void cargarSeguidores() {
         ArrayList<dtSeguidores> siguen = new ArrayList<>();
         try {
@@ -138,12 +142,25 @@ return false;
             for (int i = 0; i < siguen.size(); i++) {
                 dtSeguidores seg = null;
                 seg = (dtSeguidores) siguen.get(i);
-                seguir(seg.getNickusuario(), seg.getNickaseguir());
+                seguirCD(seg);
 
             }
         } catch (Exception ex) {
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void seguirCD(dtSeguidores dtseg) {
+        usuario ussig = null;
+        usuario usaseg = null;
+        try {
+            ussig = (usuario) usuarios.get(dtseg.getNickusuario());
+            usaseg = (usuario) usuarios.get(dtseg.getNickaseguir());
+            ussig.seguir(usaseg);
+        } catch (Exception e) {
+        }
+        
+
     }
 
     public void agregaUsuCD(dtUsuario dtusu) throws Exception {
@@ -407,8 +424,6 @@ return false;
         });
         return lst;
     }
-
-   
 
     public void esteUsuariopropusoestaProp(String nickproponente, propuesta p) {
         try {

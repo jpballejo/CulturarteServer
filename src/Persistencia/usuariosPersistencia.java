@@ -143,7 +143,7 @@ public class usuariosPersistencia {
             Statement usuSeg = conn.createStatement();
             ResultSet usu=usuSeg.executeQuery(sql);
             while (usu.next()){
-                dtSeguidores dtseg = new dtSeguidores(usu.getString(1), usu.getString(2));;
+                dtSeguidores dtseg = new dtSeguidores(usu.getString(1), usu.getString(2));
                    seguidores.add(dtseg);
             }
             
