@@ -125,7 +125,7 @@ return false;
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         //cargarUsuario();
-        cargarSeguidores();
+       // cargarSeguidores();
 
     }
     public void sacarRutaImagen(dtUsuario usu){
@@ -200,6 +200,12 @@ return false;
         }
     }
 
+    /**
+     *
+     * @param nick
+     * @return
+     */
+    @Override
     public List<String> listarProponentes(String nick) {
         List<String> retornar = new ArrayList<String>();
         Set set = usuarios.entrySet();
