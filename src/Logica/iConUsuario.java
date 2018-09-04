@@ -32,5 +32,6 @@ public interface iConUsuario {
     public abstract List<String> listarProponentes(String text);
     public abstract void levantarBDdesdeMemoria();
     public abstract List<String> listarColaboradoresLike(String nick);
+    public abstract boolean registrarColaboracion(String titulo, String colaborador, int monto, String retorno);
     
 }

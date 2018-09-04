@@ -22,7 +22,9 @@ import java.util.logging.Logger;
 import java.lang.Exception;
 import Persistencia.usuariosPersistencia;
 import java.sql.SQLException;
-import static sun.misc.Version.println;
+import java.util.Calendar;
+import java.util.Date;
+
 
 
 /**
@@ -693,6 +695,33 @@ public class ContUsuario implements iConUsuario {
         }
         return colabs;
 
+    }
+
+    @Override
+    public boolean registrarColaboracion(String titulo, String colab, int monto, String retorno) {
+        propuesta p=this.damePropuesta(titulo);
+        if(this.usuarios.get(colab) instanceof colaborador){
+            colaborador c= (colaborador) this.usuarios.get(colab);
+            if(c!=null){
+                if(p!=null && c.colaborasconpropuesta(titulo)==false){
+                    Calendar cal=Calendar.getInstance();        
+                    Date da=cal.getTime();        
+                    dtFecha dtf=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
+                    dtHora dth=new dtHora(da.getHours(),da.getMinutes());
+                    colProp cp=new colProp(dtf,dth,monto,retorno,p);
+                    c.colaboracionesUsuario.put(p.getTitulo(), cp);
+                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno);
+                    return true;
+                }
+                else
+                    return false;
+                
+            }
+            else
+                return false;
+        }
+        else
+            return false;
     }
     
 

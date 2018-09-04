@@ -34,7 +34,7 @@ public class colaboracionesPersistencia {
 
             return true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.err.println(ex.getMessage());
             return false;
         }
     }

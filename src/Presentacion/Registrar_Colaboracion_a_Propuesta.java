@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,8 +32,23 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
      */
     public Registrar_Colaboracion_a_Propuesta() {
         initComponents();
+        this.setSize(666, 553);
         //String titulo[]={"nickName"};
        // llenarGrilla(jTable_proponente, titulo, proponentes);
+       jLabel1.setText("Propuestas");
+       jLabel5.setText("Monto total recaudado");
+       jLabel3.setText("Estado");
+       jLabel2.setText("Colaboradores");
+       jLabel8.setText("Propuesta");
+       txttituloprop.setText("Seleccione una");
+       jLabel4.setText("Colaborador");
+       txtnickcolaborador.setText("Seleccione uno");
+       jLabel6.setText("Tipo de retorno");
+       jLabel7.setText("Monto");
+       btnaceptar.setText("Aceptar");
+       btncancelar.setText("Cancelar");
+       cbporcentaje.setText("Porcentaje");
+       cbentradas.setText("Entradas");
     }
 
     /**
@@ -243,7 +259,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                                 .addComponent(txttituloprop))
                             .addComponent(jLabel3)
                             .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,10 +437,27 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             }
             
             if(txtmontoacolaborar.getText().isEmpty()==false && txtmontoacolaborar.getText().contains(",")==false && txtmontoacolaborar.getText().contains(".")==false && txtmontoacolaborar.getText().contains(" ")==false && isNumeric(txtmontoacolaborar.getText())){
-                if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")){}
+                if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")==false){
+                    if(txtnickcolaborador.getText().isEmpty()==false && txtnickcolaborador.getText().contains("Seleccione uno")==false){
+                       boolean b= contUsu.registrarColaboracion(txttituloprop.getText(), txtnickcolaborador.getText(), Integer.parseInt(txtmontoacolaborar.getText()), re);
+                        if(b){
+                             JOptionPane.showMessageDialog(null, "Colaboracion registrada");
+                        }
+                        else{
+                             JOptionPane.showMessageDialog(null, "Imposible registrar la colaboracion");
+                        }
+                    }
+                    else{
+                         JOptionPane.showMessageDialog(null, "Por favor seleccione un colaborador");
+                    }
+                }
+                else{
+                     JOptionPane.showMessageDialog(null, "Por favor seleccione una propuesta");
+                }
+                
             }
             else{
-            
+                 JOptionPane.showMessageDialog(null, "Por favor coloque un monto valido");
             }
     }//GEN-LAST:event_btnaceptarActionPerformed
 
