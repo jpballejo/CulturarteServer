@@ -6,6 +6,9 @@
 package Presentacion;
 
 import Logica.iConUsuario;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +23,16 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
      */
     public Dejar_de_Seguir_Usuario() {
         initComponents();
+        
+                
+        this.setSize(580, 565);
+        
+        jLabel3.setText("Buscar usuario seguidor");
+        jLabel4.setText("Buscar usuario a dejar de seguir");
+        jLabel1.setText("Usuario seguidor");
+        jLabel2.setText(" Usuario a no seguir");
+        btncancelar.setText("Cancelar");
+        btnseguir.setText("Dejar de seguir");
     }
 
     /**
@@ -31,73 +44,201 @@ public class Dejar_de_Seguir_Usuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btndejardeseguir = new javax.swing.JButton();
-        txtadejardeseguir = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtseguidor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txtseguidor = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtbuscar = new javax.swing.JTextField();
+        btnseguir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableseguidor = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableseguidor1 = new javax.swing.JTable();
+        txtaseguir1 = new javax.swing.JTextField();
+        txtbuscar2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btncancelar = new javax.swing.JButton();
 
-        btndejardeseguir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndejardeseguirActionPerformed(evt);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 93, -1, -1));
+        getContentPane().add(txtseguidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 121, 107, -1));
+
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 177, 140, -1));
+
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
             }
         });
+        getContentPane().add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 48, 119, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btndejardeseguir)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtseguidor)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtadejardeseguir)))
-                .addGap(186, 186, 186))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtseguidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtadejardeseguir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btndejardeseguir)
-                .addContainerGap(277, Short.MAX_VALUE))
-        );
+        btnseguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnseguirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnseguir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 110, 40));
+
+        tableseguidor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nickname"
+            }
+        ));
+        tableseguidor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableseguidorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableseguidor);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 93, 119, -1));
+
+        tableseguidor1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nickname"
+            }
+        ));
+        tableseguidor1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableseguidor1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableseguidor1);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 93, 119, -1));
+        getContentPane().add(txtaseguir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 205, 107, -1));
+
+        txtbuscar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscar2KeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtbuscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 48, 119, -1));
+
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 26, 168, -1));
+
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 26, 260, -1));
+
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btndejardeseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndejardeseguirActionPerformed
-                try{
-        ICU.dejarDeSeguir(txtseguidor.getText(), txtadejardeseguir.getText());
-        
-        javax.swing.JOptionPane.showMessageDialog(null,"Se completo el dejar de seguir");
+    private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
         // TODO add your handling code here:
-        }catch(Exception ex){
-         javax.swing.JOptionPane.showMessageDialog(null,ex);
+        List<String> lu=ICU.listarusuarios(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) tableseguidor.getModel();
+        modelo.setRowCount(0);
+        Iterator it=lu.iterator();
+        while(it.hasNext()){
+            String n=(String)it.next();
+            Object[] obj={n};
+            modelo.addRow(obj);
+
         }
-        
-         this.txtseguidor.setText("");
-         this.txtadejardeseguir.setText("");
-// TODO add your handling code here:
-    }//GEN-LAST:event_btndejardeseguirActionPerformed
+    }//GEN-LAST:event_txtbuscarKeyPressed
+
+    private void btnseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnseguirActionPerformed
+
+        try{
+            if(txtseguidor.getText()==txtaseguir1.getText())
+            throw new Exception("Jaja buen intento, no puedes dejar de seguirte tu mismo");
+
+            if(txtseguidor.getText().isEmpty()==false){
+                if(txtaseguir1.getText().isEmpty()==false){
+                    ICU.dejarDeSeguir(txtseguidor.getText(), txtaseguir1.getText());
+                }
+                else{
+                    javax.swing.JOptionPane.showMessageDialog(null,"Seleccione un usuario a dejar de seguir");
+                    txtaseguir1.requestFocus();
+                }
+            }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(null,"Seleccione un usuario seguidor");
+                txtseguidor.requestFocus();
+            }
+
+            javax.swing.JOptionPane.showMessageDialog(null,"Unfollow realizado con exito");
+            // TODO add your handling code here:
+        }catch(Exception ex){
+            javax.swing.JOptionPane.showMessageDialog(null,ex);
+        }
+
+        this.txtseguidor.setText("");
+        this.txtaseguir1.setText("");
+        this.txtbuscar.setText("");
+        this.txtbuscar2.setText("");
+
+    }//GEN-LAST:event_btnseguirActionPerformed
+
+    private void tableseguidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidorMouseClicked
+        // TODO add your handling code here:
+        int row=tableseguidor1.rowAtPoint(evt.getPoint());
+        int col=tableseguidor1.columnAtPoint(evt.getPoint());
+        String aseguir=(String)tableseguidor1.getValueAt(row, col);
+        txtaseguir1.setText(aseguir);
+    }//GEN-LAST:event_tableseguidorMouseClicked
+
+    private void tableseguidor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidor1MouseClicked
+        // TODO add your handling code here:
+        int row=tableseguidor.rowAtPoint(evt.getPoint());
+        int col=tableseguidor.columnAtPoint(evt.getPoint());
+        String seguidor=(String)tableseguidor.getValueAt(row, col);
+        txtseguidor.setText(seguidor);
+    }//GEN-LAST:event_tableseguidor1MouseClicked
+
+    private void txtbuscar2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscar2KeyPressed
+        // TODO add your handling code here:
+        List<String> lu=ICU.listarusuarios(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) tableseguidor1.getModel();
+        modelo.setRowCount(0);
+        Iterator it=lu.iterator();
+        while(it.hasNext()){
+            String n=(String)it.next();
+            Object[] obj={n};
+            modelo.addRow(obj);
+
+        }
+    }//GEN-LAST:event_txtbuscar2KeyPressed
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btncancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btndejardeseguir;
+    private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btnseguir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtadejardeseguir;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tableseguidor;
+    private javax.swing.JTable tableseguidor1;
+    private javax.swing.JTextField txtaseguir1;
+    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtbuscar2;
     private javax.swing.JTextField txtseguidor;
     // End of variables declaration//GEN-END:variables
 }

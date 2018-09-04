@@ -436,6 +436,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                 re=cbporcentaje.getText();
             }
             
+        if(re.isEmpty()==false){          
             if(txtmontoacolaborar.getText().isEmpty()==false && txtmontoacolaborar.getText().contains(",")==false && txtmontoacolaborar.getText().contains(".")==false && txtmontoacolaborar.getText().contains(" ")==false && isNumeric(txtmontoacolaborar.getText())){
                 if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")==false){
                     if(txtnickcolaborador.getText().isEmpty()==false && txtnickcolaborador.getText().contains("Seleccione uno")==false){
@@ -458,7 +459,16 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             }
             else{
                  JOptionPane.showMessageDialog(null, "Por favor coloque un monto valido");
+                 txtmontoacolaborar.selectAll();
+                 txtmontoacolaborar.requestFocus();
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un retorno");                
+            cbporcentaje.requestFocus();
+            cbentradas.requestFocus();
+        }
+            
+            
     }//GEN-LAST:event_btnaceptarActionPerformed
 
 
