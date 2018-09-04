@@ -441,10 +441,20 @@ return false;
 
     @Override
     public List<String> listarusuarios(String nick) {
-        List<String> lst = new ArrayList();
-        this.usuarios.keySet().stream().filter((key) -> (key.contains(nick))).forEachOrdered((key) -> {
-            lst.add(key);
-        });
+        List<String> lst = new ArrayList<String>();
+        if(nick.isEmpty()==false){
+            for(String key: this.usuarios.keySet()){
+                 if(key.contains(nick)){
+                    lst.add(key);
+                }
+        
+            }
+        }
+        else{
+            for(String key: this.usuarios.keySet()){
+                lst.add(key);
+            }
+        }
         return lst;
     }
 

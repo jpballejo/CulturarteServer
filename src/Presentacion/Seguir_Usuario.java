@@ -5,19 +5,24 @@
  */
 package Presentacion;
 
+import Logica.ContUsuario;
 import Logica.iConUsuario;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author nicolasgutierrez
  */
-public class Seguir_Usuario extends javax.swing.JInternalFrame {
+public class Seguir_Usuario extends javax.swing.JInternalFrame{
 
     
-    private iConUsuario ICU;
+    private iConUsuario ICU= ContUsuario.getInstance();
+ 
     /**
      * Creates new form Seguir_Usuario
      */
@@ -32,6 +37,9 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         jLabel2.setText("Usuario a seguir");
         btncancelar.setText("Cancelar");
         btnseguir.setText("Seguir");
+        
+        
+        
     }
 
     /**
@@ -152,6 +160,7 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         if(txtseguidor.getText().isEmpty()==false){
             if(txtaseguir1.getText().isEmpty()==false){
                 ICU.seguir(txtseguidor.getText(), txtaseguir1.getText());
+                javax.swing.JOptionPane.showMessageDialog(null,"Seguimiento realizado con exito");
             }
             else{
                 javax.swing.JOptionPane.showMessageDialog(null,"Seleccione un usuario a seguir");
@@ -163,7 +172,7 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
             txtseguidor.requestFocus();
         }
         
-        javax.swing.JOptionPane.showMessageDialog(null,"Seguimiento realizado con exito");
+        
         // TODO add your handling code here:
         }catch(Exception ex){
          javax.swing.JOptionPane.showMessageDialog(null,ex);
@@ -179,7 +188,7 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
     private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
         // TODO add your handling code here:
         List<String> lu=ICU.listarusuarios(txtbuscar.getText());
-        DefaultTableModel modelo=(DefaultTableModel) tableseguidor.getModel();
+        DefaultTableModel modelo=(DefaultTableModel) tableseguidor1.getModel();
         modelo.setRowCount(0);
         Iterator it=lu.iterator();
         while(it.hasNext()){
@@ -206,8 +215,8 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
 
     private void tableseguidor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidor1MouseClicked
         // TODO add your handling code here:
-        int row=tableseguidor.rowAtPoint(evt.getPoint());
-        int col=tableseguidor.columnAtPoint(evt.getPoint());
+        int row=tableseguidor.getSelectedRow();
+        int col=tableseguidor.getSelectedColumn();
         String seguidor=(String)tableseguidor.getValueAt(row, col);
         txtseguidor.setText(seguidor);
     }//GEN-LAST:event_tableseguidor1MouseClicked
@@ -225,6 +234,7 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btncancelarActionPerformed
 
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncancelar;
