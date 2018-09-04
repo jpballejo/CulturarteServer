@@ -27,7 +27,7 @@ public class seguirdejardeseguirPersistencia {
     public boolean seguir(dtUsuario us, dtUsuario uas) {
         try {
             Connection conn = conexion.getConexion();
-            String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`)VALUES('" + us.getNickname() + "','" + uas.getNickname() + "')";
+            String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`) VALUES ('" + us.getNickname() + "','" + uas.getNickname() + "')";
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
             System.out.println();

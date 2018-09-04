@@ -38,10 +38,20 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame{
         jLabel2.setText("Usuario a seguir");
         btncancelar.setText("Cancelar");
         btnseguir.setText("Seguir");
-        MouseListener l = null;
         
-        tableseguidor.addMouseListener(l);
-        tableseguidor1.addMouseListener(l);
+        tableseguidor.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            int row = tableseguidor.rowAtPoint(evt.getPoint());
+            int col = tableseguidor.columnAtPoint(evt.getPoint());
+            if (row >= 0 && col >= 0) {
+                    
+            String aseguir=(String)tableseguidor.getValueAt(row, col);
+            txtaseguir1.setText(aseguir);
+            }
+        }
+        });
+
         
     }
 
@@ -205,7 +215,7 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame{
     private void txtbuscar2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscar2KeyPressed
         // TODO add your handling code here:
         List<String> lu=ICU.listarusuarios(txtbuscar.getText());
-        DefaultTableModel modelo=(DefaultTableModel) tableseguidor1.getModel();
+        DefaultTableModel modelo=(DefaultTableModel) tableseguidor.getModel();
         modelo.setRowCount(0);
         Iterator it=lu.iterator();
         while(it.hasNext()){
@@ -218,18 +228,20 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame{
 
     private void tableseguidor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidor1MouseClicked
         // TODO add your handling code here:
-        int row=tableseguidor.getSelectedRow();
-        int col=tableseguidor.getSelectedColumn();
-        String seguidor=(String)tableseguidor.getValueAt(row, col);
+        int row=tableseguidor1.getSelectedRow();
+        int col=tableseguidor1.getSelectedColumn();
+        String seguidor=(String)tableseguidor1.getValueAt(row, col);
+    
         txtseguidor.setText(seguidor);
+        
     }//GEN-LAST:event_tableseguidor1MouseClicked
 
     private void tableseguidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableseguidorMouseClicked
         // TODO add your handling code here:
-        int row=tableseguidor1.rowAtPoint(evt.getPoint());
-        int col=tableseguidor1.columnAtPoint(evt.getPoint());
-        String aseguir=(String)tableseguidor1.getValueAt(row, col);
-        txtaseguir1.setText(aseguir);
+        int row=tableseguidor.rowAtPoint(evt.getPoint());
+        int col=tableseguidor.columnAtPoint(evt.getPoint());
+        String aseguir=(String)tableseguidor.getValueAt(row, col);
+            txtaseguir1.setText(aseguir);
     }//GEN-LAST:event_tableseguidorMouseClicked
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
