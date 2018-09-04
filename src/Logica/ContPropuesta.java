@@ -12,7 +12,6 @@ import Persistencia.propuestasPersistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -65,8 +64,8 @@ public class ContPropuesta implements iConPropuesta {
     @Override
     //revisdar jp
     public void datosPropuesta(dtPropuesta dtp) {
-        propuesta p = new propuesta(dtp.getTitulo(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido(), dtp.retorno, this.estados.get(dtp.estado));
-        cUsuario.linkearpropuesta(p, dtp.getProponente());
+        //propuesta p = new propuesta(dtp.getTitulo(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido(), dtp.retorno, this.estados.get(dtp.estado));
+       // cUsuario.linkearpropuesta(p, dtp.getProponente());
 
         dtPropuestasBD dtpbd = new dtPropuestasBD(dtp.getTitulo(), dtp.proponente, dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getCategoria(), dtp.retorno, dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido());
         try {
@@ -158,27 +157,36 @@ public class ContPropuesta implements iConPropuesta {
 
     public void cargaPropuestas() {
         ArrayList<dtPropuestasBD> dtpropuestasDb = new ArrayList<dtPropuestasBD>();
-
-    }
-
-    public void cargarEstadosProp(ArrayList<propuesta> propuestas) {
         ArrayList<dtEstadosPropuestas> estProp = new ArrayList<>();
         estPer.CargarEstadosPropuestas(estProp);
-        for (int i= 0; i<propuestas.size();i++){
-        propuesta prop = (propuesta)propuestas.get(i);
-        for (int p = 0; p<estProp.size();p++){
-            dtEstadosPropuestas dtEtPop = (dtEstadosPropuestas)estProp.get(p);
-        if(prop.getTitulo().equals(dtEtPop.getTituloprop())==true)
-        {
+        for (int i = 0; i < dtpropuestasDb.size(); i++) {
+            dtPropuestasBD dtProp = (dtPropuestasBD) dtpropuestasDb.get(i);
+            propuesta prop = armarPropuesta(dtProp);
+            cargarEstadosProp(prop,estProp);
+            cUsuario.esteUsuariopropusoestaProp(dtProp.getNickproponente(), prop);
+        }
+    }
+
+    /**
+     *
+     * @param prop
+     * @param estProp
+     */
+    @Override
+    public void cargarEstadosProp(propuesta prop,ArrayList<dtEstadosPropuestas> estProp) {
+        
+        for (int p = 0; p < estProp.size(); p++) {
+            dtEstadosPropuestas dtEtPop = (dtEstadosPropuestas) estProp.get(p);
+            if (prop.getTitulo().equals(dtEtPop.getTituloprop()) == true) {
                 propEstado propest = crearEstado(dtEtPop);
                 prop.setEstado(propest);
-        }
+
             }
         }
-        
 
     }
 
+    @Override
     public propEstado crearEstado(dtEstadosPropuestas dtestProp) {
         estado est = getEstado(dtestProp.getEstado());
         propEstado estaprop = new propEstado(dtestProp.getFecha(), dtestProp.getHora(), est);
@@ -261,4 +269,5 @@ public class ContPropuesta implements iConPropuesta {
 
     }
 
+   
 }

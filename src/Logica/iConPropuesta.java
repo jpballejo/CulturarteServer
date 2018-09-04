@@ -32,7 +32,7 @@ public interface iConPropuesta {
     public abstract propuesta armarPropuesta(dtPropuestasBD dtProp);
     public abstract estado getEstado(String estaNombre);
     public abstract categoria getCategoria(String cateNombre);
-    public void levantarBDdesdeMemoria();
-    public void cargarEstadosProp(ArrayList<propuesta> propuestas);
+    public abstract void levantarBDdesdeMemoria();
+    public abstract void cargarEstadosProp(propuesta prop,ArrayList<dtEstadosPropuestas> estProp);
 }
     
