@@ -45,6 +45,26 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         
         String imagenRuta=null;
         JFileChooser navegadorArchivos=new JFileChooser();
+        jLabel14.setText("Proponentes");
+        jLabel15.setText("Categorias");
+        jLabel1.setText("Proponente");
+        jLabel2.setText("Tipo de Espectaculo");
+        jLabel4.setText("Titulo");
+        jLabel7.setText("Fecha realizacion");
+        jLabel8.setText("Dia");
+        jLabel9.setText("Mes");
+        jLabel10.setText("Anio");
+        jLabel5.setText("Descripcion");
+        jLabel6.setText("Lugar");
+        jLabel13.setText("Retornos posibles");
+        cbporcentaje.setText("Porcentaje");
+        cbentradas.setText("Entradas");
+        jLabel16.setText("Monto requerido");
+        jLabel11.setText("Costo entrada");
+        jLabel12.setText("Imagen");
+        btnexplorar.setText("Explorar");
+        btndardealta.setText("Dat de Alta");
+        
     }
 
     /**
@@ -454,7 +474,18 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             dtFecha dtfpublicada=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
             dtFecha dtfrealizar=new dtFecha(txtdia.getText(),txtmes.getText(),txtanio.getText());
             
-            dtPropuesta dtp=new dtPropuesta(txttitulo1.getText(),txtdescripcion.getText(),imagenRuta,txtlugar.getText(),"Ingresada",txttipoespectaculo.getText(),txtproponente1.getText(),dtfrealizar,dtfpublicada,Integer.parseInt(txtcostoentrada.getText()),Integer.parseInt(txtmontorec.getText()),0);
+             String re="";
+        
+            if(cbentradas.isSelected()&&!cbporcentaje.isSelected()){
+                re=cbentradas.getText();
+            }else if(cbentradas.isSelected()&&cbporcentaje.isSelected()){
+                re=cbentradas.getText()+"/"+cbporcentaje.getText();
+            }else if(!cbentradas.isSelected()&&cbporcentaje.isSelected()){
+                re=cbporcentaje.getText();
+            }
+            
+            
+            dtPropuesta dtp=new dtPropuesta(txttitulo1.getText(),txtdescripcion.getText(),imagenRuta,txtlugar.getText(),"Ingresada",txttipoespectaculo.getText(),txtproponente1.getText(),dtfrealizar,dtfpublicada,Integer.parseInt(txtcostoentrada.getText()),Integer.parseInt(txtmontorec.getText()),0,re);
             ICP.datosPropuesta(dtp);
             
             JOptionPane.showMessageDialog(null, "Propuesta agregada con exito");

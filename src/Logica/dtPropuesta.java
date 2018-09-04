@@ -20,7 +20,7 @@ public class dtPropuesta {
     List<String> colaboradores;
 
 //CONSTRUCTOR//
-    public dtPropuesta(String titulo, String descripcion, String imagen, String lugar, String estado, String categoria, String proponente, dtFecha fechaRealizacion, dtFecha fechapublicada, int precioentrada, int montorequerido, int montoactual) {
+    public dtPropuesta(String titulo, String descripcion, String imagen, String lugar, String estado, String categoria, String proponente, dtFecha fechaRealizacion, dtFecha fechapublicada, int precioentrada, int montorequerido, int montoactual, String retorno) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -33,6 +33,7 @@ public class dtPropuesta {
         this.precioentrada = precioentrada;
         this.montorequerido = montorequerido;
         this.montoactual=montoactual;
+       this.retorno=retorno;
         this.colaboradores= new ArrayList<String>();
     }
 
