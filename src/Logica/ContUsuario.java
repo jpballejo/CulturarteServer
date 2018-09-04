@@ -208,7 +208,7 @@ return false;
     @Override
     public List<String> listarProponentes(String nick) {
         List<String> retornar = new ArrayList<String>();
-        Set set = usuarios.entrySet();
+ /*       Set set = usuarios.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
@@ -218,6 +218,23 @@ return false;
             }
 
         }
+        return retornar; */
+        if(nick.isEmpty()){
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente){
+                    retornar.add(key);
+                }
+            }
+        }
+        else{
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente && key.contains(nick)){
+                    retornar.add(key);
+                }
+            }
+        }
+
+        
         return retornar;
     }
 
