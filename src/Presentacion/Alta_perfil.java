@@ -47,8 +47,8 @@ public class Alta_perfil extends javax.swing.JFrame {
         jtp_biografia.enable(false);
         jb_aceptar.enable(false);
         this.setLocationRelativeTo(null);
-        jdc_fechaNac.setMinSelectableDate(new Date(1940, 1, 1));
-        jdc_fechaNac.setMaxSelectableDate(new Date(2000, 1, 1));
+       // jdc_fechaNac.setMinSelectableDate(new Date(1940, 1, 1));
+        //jdc_fechaNac.setMaxSelectableDate(new Date(2000, 1, 1));
     }
 
     /**

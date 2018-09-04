@@ -9,6 +9,13 @@ import Persistencia.categoriaPersistencia;
 import Persistencia.estadoPersistencia;
 import Persistencia.estadoPropuestaPersistencia;
 import Persistencia.propuestasPersistencia;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +30,7 @@ import java.util.logging.Logger;
  */
 public class ContPropuesta implements iConPropuesta {
 
+    private ArrayList<String> listaImagenes = new ArrayList<>();
     private static ContPropuesta instance;
     private ContUsuario cUsuario = ContUsuario.getInstance();
     private Map<String, categoria> categorias = new HashMap<String, categoria>();
@@ -40,6 +48,57 @@ public class ContPropuesta implements iConPropuesta {
         this.idEstado.put("En financiacion", 3);
         this.idEstado.put("Publicada", 2);
         this.idEstado.put("Ingresada", 1);
+    }
+
+    public boolean moverImagenesProp() {
+        //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
+        int tam = listaImagenes.size();
+        for (int i = 0; i < listaImagenes.size(); i++) {
+            try {
+                String inicio = null;
+                String destino = null;
+                String imagen = listaImagenes.get(i);
+                inicio = "/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/" + imagen;
+                destino = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesProp/" + imagen;
+                System.out.println(destino);
+                copiarArchivo(inicio, destino);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean copiarArchivo(String origen, String destino) throws IOException {
+        File imagen = new File(origen);
+        File va = new File(destino);
+        if (imagen.exists()) {
+            try {
+                InputStream inp = new FileInputStream(imagen);
+                OutputStream out = new FileOutputStream(va);
+                byte[] bufer = new byte[1024];
+                int largo;
+                while ((largo = inp.read(bufer)) > 0) {
+                    out.write(bufer, 0, largo);
+                }
+                inp.close();
+                out.close();
+                return true;
+            } catch (FileNotFoundException e) {
+                System.err.println(e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public void sacarRutaImagen(dtPropuestasBD prop) {
+        if (prop.getImagen() != null) {
+            String imagen = prop.getImagen();
+            listaImagenes.add(imagen);
+        }
+
     }
 
     private Integer getNumEstado(String estado) {
@@ -60,6 +119,7 @@ public class ContPropuesta implements iConPropuesta {
         cargaCategorias();
         cargaEstados();
         cargaPropuestas();
+        moverImagenesProp();
     }
 
     @Override
@@ -178,6 +238,7 @@ public class ContPropuesta implements iConPropuesta {
         estPer.CargarEstadosPropuestas(estProp);
         for (int i = 0; i < dtpropuestasDb.size(); i++) {
             dtPropuestasBD dtProp = (dtPropuestasBD) dtpropuestasDb.get(i);
+            sacarRutaImagen(dtProp);
             propuesta prop = armarPropuesta(dtProp);
             cargarEstadosProp(prop, estProp);
             String nick = dtProp.getNickproponente();
@@ -193,14 +254,14 @@ public class ContPropuesta implements iConPropuesta {
     @Override
     public void cargarEstadosProp(propuesta prop, ArrayList<dtEstadosPropuestas> estProp) {
         try {
-            int orden=0;
-            String nombre=null;
+            int orden = 0;
+            String nombre = null;
             for (int p = 0; p < estProp.size(); p++) {
                 dtEstadosPropuestas dtEtPop = (dtEstadosPropuestas) estProp.get(p);
-                nombre=dtEtPop.getEstado();
+                nombre = dtEtPop.getEstado();
                 if (prop.getTitulo().equals(dtEtPop.getTituloprop()) == true) {
                     propEstado propest = crearEstado(dtEtPop);
-                    
+
                     orden = getNumEstado(nombre);
                     prop.setEstado(propest, orden);
 
@@ -244,9 +305,6 @@ public class ContPropuesta implements iConPropuesta {
         return cat;
     }
 
-    
-    
-    
     // //////// trunkate y carga bd
     @Override
     public void borrartodocPropuesta() {
