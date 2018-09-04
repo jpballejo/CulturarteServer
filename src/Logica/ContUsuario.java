@@ -27,6 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+
+
 
 /**
  *
@@ -121,8 +125,10 @@ public class ContUsuario implements iConUsuario {
         } catch (Exception ex) {
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         moverImagenesUsu();
         cargarSeguidores();
+
 
     }
 
@@ -213,9 +219,15 @@ public class ContUsuario implements iConUsuario {
         }
     }
 
+    /**
+     *
+     * @param nick
+     * @return
+     */
+    @Override
     public List<String> listarProponentes(String nick) {
         List<String> retornar = new ArrayList<String>();
-        Set set = usuarios.entrySet();
+ /*       Set set = usuarios.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
@@ -225,6 +237,23 @@ public class ContUsuario implements iConUsuario {
             }
 
         }
+        return retornar; */
+        if(nick.isEmpty()){
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente){
+                    retornar.add(key);
+                }
+            }
+        }
+        else{
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente && key.contains(nick)){
+                    retornar.add(key);
+                }
+            }
+        }
+
+        
         return retornar;
     }
 
@@ -259,8 +288,20 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public List<dtPropuesta> listarPropuestas(String idProponente) {
+        List<dtPropuesta> retornar = new ArrayList<dtPropuesta>();
+        List<dtPropuesta> aux = new ArrayList<dtPropuesta>();
+        
         proponente p = (proponente) this.usuarios.get(idProponente);
-        return p.getTodasPropuestas();
+        aux = p.getTodasPropuestas();
+        Iterator it= aux.iterator();
+        while(it.hasNext()){
+            dtPropuesta dtp=(dtPropuesta) it.next();
+            dtp.montoactual=this.montopropuesta(dtp.titulo);
+            retornar.add(dtp);
+        }
+        aux.clear();
+        
+        return retornar;
     }
 
     @Override
@@ -388,6 +429,7 @@ public class ContUsuario implements iConUsuario {
             proponente p = (proponente) this.usuarios.get(key);
             if (p != null) {
                 dtp = p.getPropuestas(titulo);
+                dtp.montoactual=this.montopropuesta(dtp.titulo);
             }
             if (dtp != null && dtp.getTitulo().equals(titulo)) {
                 break;
@@ -418,10 +460,20 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public List<String> listarusuarios(String nick) {
-        List<String> lst = new ArrayList();
-        this.usuarios.keySet().stream().filter((key) -> (key.contains(nick))).forEachOrdered((key) -> {
-            lst.add(key);
-        });
+        List<String> lst = new ArrayList<String>();
+        if(nick.isEmpty()==false){
+            for(String key: this.usuarios.keySet()){
+                 if(key.contains(nick)){
+                    lst.add(key);
+                }
+        
+            }
+        }
+        else{
+            for(String key: this.usuarios.keySet()){
+                lst.add(key);
+            }
+        }
         return lst;
     }
 
@@ -726,5 +778,49 @@ public class ContUsuario implements iConUsuario {
             }
         }
     }
+
+    @Override
+    public List<String> listarColaboradoresLike(String nick) {
+
+        List<String> colabs = new ArrayList();
+        for (String key : this.usuarios.keySet()) {
+            if (this.usuarios.get(key) instanceof colaborador) {
+                colaborador c = (colaborador) this.usuarios.get(key);
+                if (c != null && c.getNickname().contains(nick)) {
+                    colabs.add(c.nickname);
+                }
+            }
+        }
+        return colabs;
+
+    }
+
+    @Override
+    public boolean registrarColaboracion(String titulo, String colab, int monto, String retorno) {
+        propuesta p=this.damePropuesta(titulo);
+        if(this.usuarios.get(colab) instanceof colaborador){
+            colaborador c= (colaborador) this.usuarios.get(colab);
+            if(c!=null){
+                if(p!=null && c.colaborasconpropuesta(titulo)==false){
+                    Calendar cal=Calendar.getInstance();        
+                    Date da=cal.getTime();        
+                    dtFecha dtf=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
+                    dtHora dth=new dtHora(da.getHours(),da.getMinutes());
+                    colProp cp=new colProp(dtf,dth,monto,retorno,p);
+                    c.colaboracionesUsuario.put(p.getTitulo(), cp);
+                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno);
+                    return true;
+                }
+                else
+                    return false;
+                
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+    
 
 }

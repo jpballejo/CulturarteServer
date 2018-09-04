@@ -23,6 +23,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,8 +45,31 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
     public Alta_de_Propuesta() {
         initComponents();
         
+        this.setSize(850, 600);
+        
         String imagenRuta=null;
         JFileChooser navegadorArchivos=new JFileChooser();
+        jLabel14.setText("Proponentes");
+        jLabel15.setText("Categorias");
+        jLabel1.setText("Proponente");
+        jLabel2.setText("Tipo de Espectaculo");
+        jLabel4.setText("Titulo");
+        jLabel7.setText("Fecha realizacion");
+        jLabel8.setText("Dia");
+        jLabel9.setText("Mes");
+        jLabel10.setText("Anio");
+        jLabel5.setText("Descripcion");
+        jLabel6.setText("Lugar");
+        jLabel13.setText("Retornos posibles");
+        cbporcentaje.setText("Porcentaje");
+        cbentradas.setText("Entradas");
+        jLabel16.setText("Monto requerido");
+        jLabel11.setText("Costo entrada");
+        jLabel12.setText("Imagen");
+        btnexplorar.setText("Explorar");
+        btndardealta.setText("Dar de Alta");
+        btncancelar.setText("Cancelar");
+        
     }
 
     /**
@@ -95,6 +120,9 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         labelimage = new javax.swing.JLabel();
         txtmontorec = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        btncancelar = new javax.swing.JButton();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txttipoespectaculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,11 +146,11 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addComponent(txtproponente1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txttipoespectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,53 +166,83 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 53, -1, -1));
+
         txtdia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtdiaActionPerformed(evt);
             }
         });
+        getContentPane().add(txtdia, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 148, 40, -1));
+
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 126, -1, -1));
+
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 182, -1, -1));
+
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 296, -1, -1));
 
         txtlugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtlugarActionPerformed(evt);
             }
         });
+        getContentPane().add(txtlugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 333, 160, -1));
+
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 126, -1, -1));
 
         txttitulo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttitulo1ActionPerformed(evt);
             }
         });
+        getContentPane().add(txttitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 148, 160, -1));
 
         txtmes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmesActionPerformed(evt);
             }
         });
+        getContentPane().add(txtmes, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 177, 40, -1));
 
         txtanio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtanioActionPerformed(evt);
             }
         });
+        getContentPane().add(txtanio, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 206, 40, -1));
+
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 153, -1, -1));
+
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 182, -1, -1));
+
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 211, -1, -1));
 
         txtcostoentrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcostoentradaActionPerformed(evt);
             }
         });
+        getContentPane().add(txtcostoentrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 260, 160, -1));
+
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 238, -1, -1));
+
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 303, -1, -1));
 
         btnexplorar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnexplorarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnexplorar, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 298, -1, -1));
+
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 371, -1, -1));
 
         btndardealta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndardealtaActionPerformed(evt);
             }
         });
+        getContentPane().add(btndardealta, new org.netbeans.lib.awtextra.AbsoluteConstraints(659, 434, 110, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,6 +270,8 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 84, 131, 382));
+
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbuscarActionPerformed(evt);
@@ -222,6 +282,9 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
                 txtbuscarKeyPressed(evt);
             }
         });
+        getContentPane().add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 40, 132, -1));
+
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 18, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,6 +312,8 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(jTable2);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 84, 132, 382));
+
         txtbuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbuscar1ActionPerformed(evt);
@@ -259,152 +324,34 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
                 txtbuscar1KeyPressed(evt);
             }
         });
+        getContentPane().add(txtbuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 40, 132, -1));
+
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 18, -1, -1));
+
+        getContentPane().add(cbporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 405, -1, -1));
+
+        getContentPane().add(cbentradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 440, -1, -1));
 
         jScrollPane1.setViewportView(txtdescripcion);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 206, -1, -1));
+        getContentPane().add(labelimage, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, 130, 100));
 
         txtmontorec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmontorecActionPerformed(evt);
             }
         });
+        getContentPane().add(txtmontorec, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 510, 160, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel15)
-                    .addComponent(txtbuscar1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(121, 121, 121))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(txtmontorec, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btndardealta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txttitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(cbporcentaje)
-                                    .addComponent(cbentradas)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(34, 34, 34)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtdia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtmes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtanio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel11)
-                                    .addComponent(txtcostoentrada, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelimage, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnexplorar)))))))
-                        .addGap(124, 124, 124))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(343, 343, 343)
-                .addComponent(labelimage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btndardealta)
-                .addGap(38, 38, 38))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txttitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtanio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtcostoentrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(btnexplorar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtlugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13)
-                .addGap(18, 18, 18)
-                .addComponent(cbporcentaje)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbentradas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtmontorec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 480, -1, -1));
+
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(658, 470, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -454,7 +401,18 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             dtFecha dtfpublicada=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
             dtFecha dtfrealizar=new dtFecha(txtdia.getText(),txtmes.getText(),txtanio.getText());
             
-            dtPropuesta dtp=new dtPropuesta(txttitulo1.getText(),txtdescripcion.getText(),imagenRuta,txtlugar.getText(),"Ingresada",txttipoespectaculo.getText(),txtproponente1.getText(),dtfrealizar,dtfpublicada,Integer.parseInt(txtcostoentrada.getText()),Integer.parseInt(txtmontorec.getText()),0);
+             String re="";
+        
+            if(cbentradas.isSelected()&&!cbporcentaje.isSelected()){
+                re=cbentradas.getText();
+            }else if(cbentradas.isSelected()&&cbporcentaje.isSelected()){
+                re=cbentradas.getText()+"/"+cbporcentaje.getText();
+            }else if(!cbentradas.isSelected()&&cbporcentaje.isSelected()){
+                re=cbporcentaje.getText();
+            }
+            
+            
+            dtPropuesta dtp=new dtPropuesta(txttitulo1.getText(),txtdescripcion.getText(),imagenRuta,txtlugar.getText(),"Ingresada",txttipoespectaculo.getText(),txtproponente1.getText(),dtfrealizar,dtfpublicada,Integer.parseInt(txtcostoentrada.getText()),Integer.parseInt(txtmontorec.getText()),0,re);
             ICP.datosPropuesta(dtp);
             
             JOptionPane.showMessageDialog(null, "Propuesta agregada con exito");
@@ -522,6 +480,18 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmontorecActionPerformed
 
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo=(DefaultTableModel) jTable2.getModel();
+        modelo.setRowCount(0);
+        
+        DefaultTableModel modelo2=(DefaultTableModel) jTable1.getModel();
+        modelo2.setRowCount(0);
+        
+        this.limpiartodo(jPanel1);
+        this.dispose();
+    }//GEN-LAST:event_btncancelarActionPerformed
+
     
     public boolean controlardatos(){
         int anio=Integer.parseInt(txtanio.getText());
@@ -579,8 +549,17 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
     }
    }
+          
+       public void limpiartodo(JPanel panel){
+        for(int i = 0; panel.getComponents().length > i; i++){
+            if(panel.getComponents()[i] instanceof JTextField){
+                ((JTextField)panel.getComponents()[i]).setText("");
+            }   
+        }
+       }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btncancelar;
     private javax.swing.JButton btndardealta;
     private javax.swing.JButton btnexplorar;
     private javax.swing.JCheckBox cbentradas;

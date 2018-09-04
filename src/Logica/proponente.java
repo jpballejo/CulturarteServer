@@ -100,7 +100,7 @@ public class proponente extends usuario {
     public dtPropuesta getPropuestas(String idPropuesta) {
         propuesta p = (propuesta) this.propuestasUsuario.get(idPropuesta);
         if (p != null) {
-            dtPropuesta prop = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0);
+            dtPropuesta prop = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(),0, p.getRetorno());
             return prop;
         } else {
             return null;
@@ -113,7 +113,7 @@ public class proponente extends usuario {
         while (it.hasNext()) {
             String key = (String) it.next();
             propuesta p = this.propuestasUsuario.get(key);
-            dtPropuesta dtp = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0);
+            dtPropuesta dtp = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0, p.getRetorno());
             retornar.add(dtp);
         }
         return retornar;
