@@ -9,6 +9,7 @@ import Logica.ContUsuario;
 import Logica.iConUsuario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JTable;
@@ -37,8 +38,10 @@ public class Seguir_Usuario extends javax.swing.JInternalFrame{
         jLabel2.setText("Usuario a seguir");
         btncancelar.setText("Cancelar");
         btnseguir.setText("Seguir");
+        MouseListener l = null;
         
-        
+        tableseguidor.addMouseListener(l);
+        tableseguidor1.addMouseListener(l);
         
     }
 
