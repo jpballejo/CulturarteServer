@@ -7,6 +7,7 @@ package Persistencia;
 import Logica.dtColaborador;
 import Logica.dtFecha;
 import Logica.dtProponente;
+import Logica.dtSeguidores;
 import Logica.dtUsuario;
 import Logica.usuario;
 import java.sql.*;
@@ -135,7 +136,23 @@ public class usuariosPersistencia {
         }
 
     }
-
+    public void seguidores(ArrayList<dtSeguidores> seguidores){
+        try {
+            Connection conn = conexion.getConexion();
+            String sql= "SELECT * FROM cultuRarte.Seguidores";
+            Statement usuSeg = conn.createStatement();
+            ResultSet usu=usuSeg.executeQuery(sql);
+            while (usu.next()){
+                dtSeguidores dtseg = new dtSeguidores(usu.getString(1), usu.getString(2));;
+                   seguidores.add(dtseg);
+            }
+            
+        } catch (Exception e) {
+            
+            System.err.println(e.getMessage());
+        }
+    
+    }
     public static Map<String, usuario> usuariosANoBorrar() {
         return null;
     }

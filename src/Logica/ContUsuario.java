@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package Logica;
-
 import Persistencia.cancelarcolaboracionPersistencia;
 import Persistencia.colaboracionesPersistencia;
 import Persistencia.creadoresPropuestaPersistencia;
-import Persistencia.estadoPersistencia;
 import Persistencia.propuestasPersistencia;
 import Persistencia.seguirdejardeseguirPersistencia;
 import java.util.ArrayList;
@@ -21,6 +19,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.lang.Exception;
 import Persistencia.usuariosPersistencia;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import static java.lang.System.in;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,7 +40,8 @@ import java.util.Date;
  * @author nicolasgutierrez
  */
 public class ContUsuario implements iConUsuario {
-
+   
+    ArrayList<String>listaImagenes=new ArrayList<>();
     usuariosPersistencia usuPer = new usuariosPersistencia();
     private Map<String, usuario> usuarios = new HashMap<String, usuario>();
     seguirdejardeseguirPersistencia segdej = new seguirdejardeseguirPersistencia();
@@ -57,7 +66,43 @@ public class ContUsuario implements iConUsuario {
         }
         return instance;
     }
+public boolean moverImagenesUsu(){
 
+
+return false;
+}
+/*private void salvarImagen(Image imagen){
+   BufferedImage img = (BufferedImage) imagen;
+   File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png");
+   imagenRuta="/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png";
+    try { 
+        ImageIO.write(img, "png", outputfile);
+    } catch (IOException ex) {
+        Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+    }
+   }*/
+public boolean copiarArchivo(String origen, String destino) throws IOException{
+    File imagen =  new File(origen);
+    File va = new File(destino);
+    if(imagen.exists()){
+        try {
+            InputStream inp = new FileInputStream(imagen);
+            OutputStream out = new FileOutputStream(va);
+            byte [] bufer = new byte [1024];
+            int largo;
+            while ((largo= inp.read(bufer))>0){
+            out.write(bufer, 0, largo);
+            }
+            inp.close();
+            out.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+return false;
+}
     @Override
     public void cargarUsuarios() {
         try {
@@ -67,6 +112,7 @@ public class ContUsuario implements iConUsuario {
             //Iterator<dtUsuario> iterador = dtUsuarios.iterator();
             for (int i = 0; i < dtUsuarios.size(); i++) {
                 dtUsuario usu = (dtUsuario) dtUsuarios.get(i);
+                sacarRutaImagen(usu);
                 agregaUsuCD(usu);
                 usu = null;
             }
@@ -79,8 +125,29 @@ public class ContUsuario implements iConUsuario {
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         //cargarUsuario();
-        // cargaSeguidores();
+        cargarSeguidores();
 
+    }
+    public void sacarRutaImagen(dtUsuario usu){
+    if (usu.getImagen()!=null){
+    String imagen=usu.getImagen();
+    listaImagenes.add(imagen);
+    }
+    
+    }
+    public void cargarSeguidores() {
+        ArrayList<dtSeguidores> siguen = new ArrayList<>();
+        try {
+            usuPer.seguidores(siguen);
+            for (int i = 0; i < siguen.size(); i++) {
+                dtSeguidores seg = null;
+                seg = (dtSeguidores) siguen.get(i);
+                seguir(seg.getNickusuario(), seg.getNickaseguir());
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void agregaUsuCD(dtUsuario dtusu) throws Exception {
@@ -197,7 +264,7 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public List<String> listarColaboradores(String idPropuesta) {
-        List res = new ArrayList<String>();
+        List<String> res = new ArrayList<>();
         Iterator it = this.usuarios.keySet().iterator();
         while (it.hasNext()) {
             colaborador c = (colaborador) this.usuarios.get((String) it.next());
@@ -358,17 +425,7 @@ public class ContUsuario implements iConUsuario {
         return lst;
     }
 
-    public void cargaSeguidores() {
-        List<dtSeguidores> list = new ArrayList<>();
-        list = seguirdejardeseguirPersistencia.cargarSeguidores();
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            dtSeguidores dt = (dtSeguidores) it.next();
-            usuario u = this.usuarios.get(dt.nickusuario);
-            u.seguir(this.usuarios.get(dt.nickaseguir));
-        }
-
-    }
+   
 
     public void esteUsuariopropusoestaProp(String nickproponente, propuesta p) {
         try {
@@ -427,33 +484,24 @@ public class ContUsuario implements iConUsuario {
     public propuesta damePropuesta(String titulo) {
 
         for (String key : this.usuarios.keySet()) {
-           // proponente p = (proponente) this.usuarios.get(key);
-           usuario usu = (usuario)usuarios.get(key);
-            if(usu instanceof proponente){
-                proponente p = (proponente)usu;
-            if (p.tenesPropuesta(titulo)==true) {
-                return p.damelapropuesta(titulo);
+            // proponente p = (proponente) this.usuarios.get(key);
+            usuario usu = (usuario) usuarios.get(key);
+            if (usu instanceof proponente) {
+                proponente p = (proponente) usu;
+                if (p.tenesPropuesta(titulo) == true) {
+                    return p.damelapropuesta(titulo);
 
-            }
+                }
             }
         }
         return null;
     }
 
-//    public void ordenarLosEstadosdeCadaPropuesta() {
-//        for (String key : this.usuarios.keySet()) {
-//            if (this.usuarios.get(key) instanceof proponente) {
-//                proponente p = (proponente) this.usuarios.get(key);
-////                p.ordenalosestadosdepropuestas();
-//            }
-//
-//        }
-//    }
     public void registrarcolaboracion(String nickc, String titulo, colProp cp) {
-       propuesta prop =damePropuesta(titulo);
+        propuesta prop = damePropuesta(titulo);
         cp.setPropuesta(prop);
         usuario usu = usuarios.get(nickc);
-        if ( usu instanceof colaborador) {
+        if (usu instanceof colaborador) {
             colaborador c = (colaborador) usu;
             c.agregarcolaboracion(cp);
         }
