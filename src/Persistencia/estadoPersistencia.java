@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class estadoPersistencia {
 
-    static ConexionDB conexion;
+    static ConexionDB conexion = new ConexionDB();
 
     public static boolean agregarestado(String nombre) {
         try {
@@ -32,7 +32,7 @@ public class estadoPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+            //conexion.cerrar(conn);
 
             return true;
         } catch (SQLException ex) {
@@ -47,7 +47,7 @@ public class estadoPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+            //  conexion.cerrar(conn);
 
             return true;
         } catch (SQLException ex) {
@@ -56,23 +56,18 @@ public class estadoPersistencia {
         }
     }
 
-    public static Map<String, estado> CargarEstados() {
+    public void CargarEstados(ArrayList<String> estados) {
         try {
             String sql = "SELECT * FROM cultuRarte.estado";
-            Map<String, estado> lista = new HashMap<String, estado>();
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String codigo = rs.getString("estado");
-                estado e = new estado(codigo);
-                lista.put(codigo, e);
+                estados.add(rs.getString(1));
             }
-            conexion.cerrar(conn);
-            return lista;
+            //   conexion.cerrar(conn);
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
+            System.err.print(ex.getMessage());
         }
     }
 
@@ -83,7 +78,7 @@ public class estadoPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+            //     conexion.cerrar(conn);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -91,28 +86,38 @@ public class estadoPersistencia {
         }
     }
 
-    public static List<dtEstadosPropuestas> CargarEstadosPropuestas() {
+    public dtFecha construirFecha(String fecha) {
+        String[] splited = fecha.split("/");
+        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
+        return fec;
+    }
+
+    public dtHora construirHora(String hora) {
+
+        String[] h = hora.split(":");
+        dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
+        return dth;
+    }
+
+    public void CargarEstadosPropuestas(ArrayList<dtEstadosPropuestas> estados) {
         try {
             List<dtEstadosPropuestas> list = new ArrayList<>();
             String sql = null;
-            sql = "SELECT * FROM estadoPropuesta";
+            sql = "SELECT * FROM cultuRarte.estadoPropuesta";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String[] f = rs.getString("fecha").split("/");
-                dtFecha dtf = new dtFecha(f[0], f[1], f[2]);
-                String[] h = rs.getString("hora").split(":");
-                dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
-
+                dtFecha dtf = construirFecha(rs.getString(3));
+                dtHora dth= construirHora(rs.getString(4));
                 dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth);
+                estados.add(dt);
             }
-            conexion.cerrar(conn);
-            return list;
+            //      conexion.cerrar(conn);
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
+            System.err.print(ex.getMessage());
+
         }
     }
 }

@@ -24,7 +24,7 @@ public class cancelarcolaboracionPersistencia {
             String sql = "DELETE FROM `cultuRarte`.`Colaboraciones` WHERE nickusuario = '" + nick + "'AND tituloprop ='" + cp.getPropColaborada().getTitulo() + "'";
             Statement stDEL = conn.createStatement();
             stDEL.executeUpdate(sql);
-            conexion.cerrar(conn);
+            //conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();

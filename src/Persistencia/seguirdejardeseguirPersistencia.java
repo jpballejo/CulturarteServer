@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class seguirdejardeseguirPersistencia {
 
-    static ConexionDB conexion;
+    static ConexionDB conexion = new ConexionDB();
 
     public boolean seguir(dtUsuario us, dtUsuario uas) {
         try {
@@ -30,7 +30,7 @@ public class seguirdejardeseguirPersistencia {
             String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`)VALUES('" + us.getNickname() + "','" + uas.getNickname() + "')";
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+         //   conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -44,7 +44,7 @@ public class seguirdejardeseguirPersistencia {
             Connection conn = conexion.getConexion();
             Statement st=conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+        //    conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -64,7 +64,7 @@ public class seguirdejardeseguirPersistencia {
                 dtSeguidores dt = new dtSeguidores(rs.getString(1), rs.getString(2));
                 list.add(dt);
             }
-            conexion.cerrar(conn);
+         //   conexion.cerrar(conn);
             return list;
 
         } catch (SQLException ex) {

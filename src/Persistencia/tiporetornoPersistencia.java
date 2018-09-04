@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class tiporetornoPersistencia {
     
-    ConexionDB conexion;
+   static ConexionDB conexion = new ConexionDB();
     
     public List<String> cargarRetornos(){
      try{
@@ -31,7 +31,7 @@ public class tiporetornoPersistencia {
             list.add(rs.getString("nombre"));
             
         }
-        conexion.cerrar(conn);
+     //   conexion.cerrar(conn);
             return list;
         
         } catch (SQLException ex) {

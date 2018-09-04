@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class creadoresPropuestaPersistencia {
     
-    static ConexionDB conexion;
+    static ConexionDB conexion = new ConexionDB();
     
     public static boolean agregarCreador(String proponente, String titulo) {
         try {
@@ -27,7 +27,7 @@ public class creadoresPropuestaPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);            
-            conexion.cerrar(conn);
+     //       conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -41,7 +41,7 @@ public class creadoresPropuestaPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+      //      conexion.cerrar(conn);
             
             return true;
         } catch (SQLException ex) {
@@ -57,7 +57,7 @@ public class creadoresPropuestaPersistencia {
             Statement st = conn.createStatement();
             ResultSet ret = st.executeQuery(sql);
             String retorno = ret.getString("nickusuario");
-            conexion.cerrar(conn);
+         //   conexion.cerrar(conn);
             return retorno;
             
         } catch (SQLException ex) {
@@ -80,7 +80,7 @@ public class creadoresPropuestaPersistencia {
                 list.add(dt);
                 
             }
-            conexion.cerrar(conn);
+        //    conexion.cerrar(conn);
             return list;
             
         } catch (SQLException ex) {

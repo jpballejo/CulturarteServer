@@ -6,7 +6,6 @@
 package Persistencia;
 
 import Logica.dtPropuestaEstado;
-import Persistencia.ConexionDB;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class estadoPropuestaPersistencia {
 
-    ConexionDB conexion;
+    static ConexionDB conexion = new ConexionDB();
 
     public boolean agregarPropEstado(String titulo, String estado, String fecha, String hora) {
         try {
@@ -29,7 +28,7 @@ public class estadoPropuestaPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+       //     conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             return false;
@@ -43,7 +42,7 @@ public class estadoPropuestaPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+       //     conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             return false;
@@ -62,7 +61,7 @@ public class estadoPropuestaPersistencia {
                 dtPropuestaEstado e = new dtPropuestaEstado(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 lista.add(e);
             }
-            conexion.cerrar(conn);
+       //     conexion.cerrar(conn);
             return lista;
         } catch (SQLException ex) {
             return null;

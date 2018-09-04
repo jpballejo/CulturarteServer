@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class colaboracionesPersistencia {
 
-    static ConexionDB conexion;
+    static ConexionDB conexion = new ConexionDB();
 
     public boolean registrarColaboracion(String colaborador, String titulo, String fecha, String hora, String monto, String retorno) {
         try {
@@ -30,7 +30,7 @@ public class colaboracionesPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+           // conexion.cerrar(conn);
 
             return true;
         } catch (SQLException ex) {
@@ -46,7 +46,7 @@ public class colaboracionesPersistencia {
            Connection conn= conexion.getConexion();
            Statement st=conn.createStatement();
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+           // conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -70,7 +70,7 @@ public class colaboracionesPersistencia {
                 list.add(dtc);
 
             }
-            conexion.cerrar(conn);
+           // conexion.cerrar(conn);
             return list;
 
         } catch (SQLException ex) {

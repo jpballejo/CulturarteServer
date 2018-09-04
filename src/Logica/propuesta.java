@@ -8,9 +8,9 @@ package Logica;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.TreeMap;
 
 /**
  *
@@ -20,13 +20,14 @@ public class propuesta {
 
     private String titulo, descripcion, imagen, lugar, retorno;
     private dtFecha fecharealizacion;
-    protected ArrayList<propEstado> estados;
+    private TreeMap<Integer, propEstado> estados;
     private categoria categoria;
     private dtFecha fechapublicada;
     private int precioEntrada;
     private int montoRequerido;
 
-    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno, estado est) {
+    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno, estado est, categoria cat) {
+        this.estados = new TreeMap<Integer, propEstado>();
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.imagen = imagen;
@@ -35,54 +36,86 @@ public class propuesta {
         this.fechapublicada = fechapublicada;
         this.precioEntrada = precioEntrada;
         this.montoRequerido = montoRequerido;
-        this.estados=new ArrayList<propEstado>();
-        this.retorno=retorno;
-       
-        if(est!=null){
-         Calendar cal=Calendar.getInstance();
-            Date da=cal.getTime();
-            dtHora dth=new dtHora(da.getHours(),da.getMinutes());
-        propEstado e=new propEstado(fechapublicada,dth,est);
-        this.estados.add(e);
+        this.retorno = retorno;
+        this.categoria = cat;
+        if (est != null) {
+            Calendar cal = Calendar.getInstance();
+            Date da = cal.getTime();
+            dtHora dth = new dtHora(da.getHours(), da.getMinutes());
+            propEstado e = new propEstado(fechapublicada, dth, est);
+            this.estados.put(getNumEstado(est.getNombre()), e);
         }
     }
-   
+
+    public propuesta(String titulo, String descripcion, String imagen, String lugar, dtFecha fecharealizacion, dtFecha fechapublicada, int precioEntrada, int montoRequerido, String retorno, categoria cat) {
+        this.estados = new TreeMap<Integer, propEstado>();
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.lugar = lugar;
+        this.fecharealizacion = fecharealizacion;
+        this.fechapublicada = fechapublicada;
+        this.precioEntrada = precioEntrada;
+        this.montoRequerido = montoRequerido;
+        this.retorno = retorno;
+        this.categoria = cat;
+
+    }
+
+    propuesta(String titulo, String descripcion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * @return the titulo
      */
-    
-    
+    public Integer getNumEstado(String estado) {
+        HashMap<String, Integer> idEstado = new HashMap<String, Integer>();
+        idEstado.put("Cancelada", 6);
+        idEstado.put("No financiada", 5);
+        idEstado.put("Financiada", 4);
+        idEstado.put("En financiacion", 3);
+        idEstado.put("Publicada", 2);
+        idEstado.put("Ingresada", 1);
+        return idEstado.get(estado);
+
+    }
+
     public String getTitulo() {
         return titulo;
     }
-    
-    public String getEstadoActual(){
-        propEstado aux=null;
-        Iterator it= estados.iterator();
-        while(it.hasNext()){
-            aux=(propEstado) it.next();
-        }
-        
-        if(aux==null)
-            return null;
-        else
-            return aux.getEstado().getNombre();
-        
-        
+
+    public void setEstado(propEstado estprop) {
+        int orden = getNumEstado(estprop.getEstado().getNombre());
+        estados.put(orden, estprop);
+
     }
 
-    
-    public ArrayList<propEstado> getEstados(){
+    public String getEstadoActual() {
+        propEstado aux = null;
+        Iterator it = estados.keySet().iterator();
+        while (it.hasNext()) {
+            aux = (propEstado) estados.get(it.next());
+        }
+
+        if (aux == null) {
+            return null;
+        } else {
+            return aux.getEstado().getNombre();
+        }
+
+    }
+
+    public TreeMap<Integer, propEstado> getEstados() {
         return this.estados;
     }
-    
-    public void agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth){
-        propEstado pe=new propEstado(dtf,dth,e);
-        this.estados.add(pe);
-    
+
+    public void agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth) {
+        propEstado pe = new propEstado(dtf, dth, e);
+        this.estados.put(getNumEstado(e.getNombre()), pe);
+
     }
-    
+
     /**
      * @param titulo the titulo to set
      */
@@ -96,7 +129,7 @@ public class propuesta {
     public String getDescripcion() {
         return descripcion;
     }
-    
+
     public String getCategoria() {
         return categoria.getNombre();
     }
@@ -177,12 +210,12 @@ public class propuesta {
     public void setPrecioEntrada(int precioEntrada) {
         this.precioEntrada = precioEntrada;
     }
-    
-    public void setRetorno(String r){
-        this.retorno=r;
+
+    public void setRetorno(String r) {
+        this.retorno = r;
     }
-    
-    public String getRetorno(){
+
+    public String getRetorno() {
         return this.retorno;
     }
 
@@ -200,83 +233,60 @@ public class propuesta {
         this.montoRequerido = montoRequerido;
     }
 
-    
     //METODOS//
-    public boolean sosPropuesta(String idPropuesta){
-    return true;
-    }
-
-  
-    public void ordenarestados(){
-        propEstado chiquito=null;
-        ArrayList<propEstado> aux=new ArrayList<propEstado>();
-        Iterator it=this.estados.iterator();
-        while(it.hasNext()){
-            Iterator it2=this.estados.iterator();
-            propEstado p1=(propEstado) it.next();
-            while(it2.hasNext()){
-                propEstado p2=(propEstado) it2.next();
-                if(compararfechas(p1.getFecha(),p2.getFecha())==false)
-                    chiquito=p1;
-                else
-                    chiquito=p2;
-            }
-            aux.add(chiquito);
-            this.estados.remove(chiquito);
-            
+    public boolean sosPropuesta(String idPropuesta) {
+        if (this.titulo.equals(idPropuesta) == true) {
+            return true;
         }
-        
-        this.estados=aux;
-        
+        return false;
     }
 
-    public boolean compararfechas(dtFecha uno, dtFecha dos){
-         int unoanio=Integer.parseInt(uno.getAnio());
-         int unomes=Integer.parseInt(uno.getMes());
-         int unodia=Integer.parseInt(uno.getDia());
-         int dosanio=Integer.parseInt(dos.getAnio());
-         int dosmes=Integer.parseInt(dos.getMes());
-         int dosdia=Integer.parseInt(dos.getDia());
-         
-         if(unoanio>dosanio){
-             return true;
-         }
-         if(unoanio==dosanio && unomes>dosmes){
-             return true;
-         }
-         if(unoanio==dosanio && unomes==dosmes && unodia>dosdia){
-             return true;
-         }
-         if(unoanio==dosanio && unomes==dosmes && unodia==dosdia){ //CASO DUDOSO
-             return false;
-         }
-         else{
-             return false;
-         }
-         
-     }
-         
-    public boolean compararhoras(dtHora uno, dtHora dos){
-         if(uno.getHoras()>dos.getHoras()){
-             return true;
-         }
-         if(uno.getHoras()==dos.getHoras() && uno.getMinutos()>dos.getMinutos()){
-             return true;
-         }
-         if(uno.getHoras()==dos.getHoras() && uno.getMinutos()==dos.getMinutos()){
-             return true;
-         }
-         else
-             return false;
-         
-     }
-    
-    public void desvincular(){
-        this.estados.clear();
-        this.categoria=null;
-        this.fechapublicada=null;
-        this.fecharealizacion=null;
-        
+    public boolean compararfechas(dtFecha uno, dtFecha dos) {
+        int unoanio = Integer.parseInt(uno.getAnio());
+        int unomes = Integer.parseInt(uno.getMes());
+        int unodia = Integer.parseInt(uno.getDia());
+        int dosanio = Integer.parseInt(dos.getAnio());
+        int dosmes = Integer.parseInt(dos.getMes());
+        int dosdia = Integer.parseInt(dos.getDia());
+
+        if (unoanio > dosanio) {
+            return true;
+        }
+        if (unoanio == dosanio && unomes > dosmes) {
+            return true;
+        }
+        if (unoanio == dosanio && unomes == dosmes && unodia > dosdia) {
+            return true;
+        }
+        if (unoanio == dosanio && unomes == dosmes && unodia == dosdia) { //CASO DUDOSO
+            return false;
+        } else {
+            return false;
+        }
+
     }
-  
-  }
+
+    public boolean compararhoras(dtHora uno, dtHora dos) {
+        if (uno.getHoras() > dos.getHoras()) {
+            return true;
+        }
+        if (uno.getHoras() == dos.getHoras() && uno.getMinutos() > dos.getMinutos()) {
+            return true;
+        }
+        if (uno.getHoras() == dos.getHoras() && uno.getMinutos() == dos.getMinutos()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public void desvincular() {
+        this.estados.clear();
+        this.categoria = null;
+        this.fechapublicada = null;
+        this.fecharealizacion = null;
+
+    }
+
+}

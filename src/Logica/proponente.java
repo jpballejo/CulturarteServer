@@ -145,12 +145,12 @@ public class proponente extends usuario {
          return this.propuestasUsuario.get(titulo);
      }
      
-     public void ordenalosestadosdepropuestas(){
-         for(String key: this.propuestasUsuario.keySet()){
-             propuesta p=this.propuestasUsuario.get(key);
-             p.ordenarestados();
-         }
-     }
+//     public void ordenalosestadosdepropuestas(){
+//         for(String key: this.propuestasUsuario.keySet()){
+//             propuesta p=this.propuestasUsuario.get(key);
+//             p.ordenarestados();
+//         }
+//     }
      
      public void borratuspropuestas(){
          for(String key: this.propuestasUsuario.keySet()){

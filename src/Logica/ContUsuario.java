@@ -34,7 +34,7 @@ public class ContUsuario implements iConUsuario {
     private Map<String, usuario> usuarios = new HashMap<String, usuario>();
     seguirdejardeseguirPersistencia segdej = new seguirdejardeseguirPersistencia();
     colaboracionesPersistencia colabPer = new colaboracionesPersistencia();
-
+       
     public boolean existeUsuario(String nickName) {
         if (usuarios.containsKey(nickName) == true) {
             return true;
@@ -61,12 +61,17 @@ public class ContUsuario implements iConUsuario {
             ArrayList<dtUsuario> dtUsuarios = new ArrayList<dtUsuario>();
             dtUsuarios = usuPer.cargaUsuarios();
             int tam = dtUsuarios.size();
-            Iterator<dtUsuario> iterador = dtUsuarios.iterator();
-            while (iterador.hasNext()) {
+            //Iterator<dtUsuario> iterador = dtUsuarios.iterator();
+            for (int i=0;i<dtUsuarios.size();i++){
+            dtUsuario usu = (dtUsuario)dtUsuarios.get(i);
+            agregaUsuCD(usu);
+                usu = null;
+            }
+           /* while (iterador.hasNext()) {
                 dtUsuario usu = (dtUsuario) iterador.next();
                 agregaUsuCD(usu);
                 usu = null;
-            }
+            }*/
         } catch (Exception ex) {
             Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -254,6 +259,12 @@ public class ContUsuario implements iConUsuario {
         }
     }
 
+    /**
+     *
+     * @param nickusuario
+     * @param titulo
+     * @return
+     */
     @Override
     public colProp seleccionarColaboracion(String nickusuario, String titulo) {
         colaborador c = (colaborador) this.usuarios.get(nickusuario);
@@ -346,7 +357,7 @@ public class ContUsuario implements iConUsuario {
     }
 
     public void esteUsuariopropusoestaProp(String nickproponente, propuesta p) {
-        proponente prop = (proponente) this.usuarios.get(nickproponente);
+        proponente prop = (proponente) usuarios.get(nickproponente);
         prop.agregarPropuesta(p);
     }
 
@@ -407,15 +418,15 @@ public class ContUsuario implements iConUsuario {
         return null;
     }
 
-    public void ordenarLosEstadosdeCadaPropuesta() {
-        for (String key : this.usuarios.keySet()) {
-            if (this.usuarios.get(key) instanceof proponente) {
-                proponente p = (proponente) this.usuarios.get(key);
-                p.ordenalosestadosdepropuestas();
-            }
-
-        }
-    }
+//    public void ordenarLosEstadosdeCadaPropuesta() {
+//        for (String key : this.usuarios.keySet()) {
+//            if (this.usuarios.get(key) instanceof proponente) {
+//                proponente p = (proponente) this.usuarios.get(key);
+////                p.ordenalosestadosdepropuestas();
+//            }
+//
+//        }
+//    }
 
     public void registrarcolaboracion(String nickc, String titulo, colProp cp) {
         cp.setPropuesta(this.damePropuesta(titulo));
@@ -581,13 +592,13 @@ public class ContUsuario implements iConUsuario {
     }
 
     void cargarestadospropuestasaBD() {
-        for (String key : this.usuarios.keySet()) {
+    /*    for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof proponente) {
                 proponente p;
                 p = (proponente) this.usuarios.get(key);
                 for (String k : p.propuestasUsuario.keySet()) {
                     propuesta prop = p.propuestasUsuario.get(k);
-                    Iterator it = prop.estados.iterator();
+ //                   Iterator it = prop.estados.iterator();
                     while (it.hasNext()) {
                         propEstado pestado = (propEstado) it.next();
                         dtEstadosPropuestas dtep = new dtEstadosPropuestas(prop.getTitulo(), pestado.getEstado().getNombre(), pestado.getFecha(), pestado.getHora());
@@ -595,7 +606,7 @@ public class ContUsuario implements iConUsuario {
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Override

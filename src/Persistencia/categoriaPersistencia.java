@@ -13,10 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class categoriaPersistencia {
 
-    static ConexionDB conexion;
+      static ConexionDB conexion = new ConexionDB();
 
     public static void altaCategoria(String nombre, String padre) throws Exception {
         try {
@@ -33,7 +30,7 @@ public class categoriaPersistencia {
             Statement st = conn.createStatement();
             sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + nombre + "','" + padre + "')";
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+           // conexion.cerrar(conn);
 
         } catch (SQLException ex) {
             throw new Exception("Error al insertar los datos en la BD");
@@ -48,7 +45,7 @@ public class categoriaPersistencia {
             Statement st = conn.createStatement();
             sql = "DELETE FROM `cultuRarte`.`Categoria` WHERE 'nombre' ='" + nombre + "'";
             st.executeUpdate(sql);
-            conexion.cerrar(conn);
+            //conexion.cerrar(conn);
 
         } catch (SQLException ex) {
             throw new Exception("Error al insertar los datos en la BD");
@@ -56,34 +53,33 @@ public class categoriaPersistencia {
 
     }
 
-    public ArrayList<dtCategoria>cargarCat() {
+    public void cargarCat(ArrayList<dtCategoria> categorias) {
         
         
-       ArrayList<dtCategoria> categorias=new ArrayList<dtCategoria>();
         try {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             String sql = "SELECT * FROM cultuRarte.Categoria";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String nombre = rs.getString(1);
+                String nombre =null;
                 String padre = null;
-                if (!rs.getString(2).isEmpty()) {
-                    padre = rs.getString(2);
+                nombre= rs.getString(1);
+                padre=rs.getString(2);
+                if (padre!=null) {
                     dtCategoria dtCat = new dtCategoria(nombre, padre);
                     categorias.add(dtCat);
                 }
-                if (rs.getString(2).isEmpty()) {
-                    dtCategoria dtCat = new dtCategoria(nombre, padre);
+                if (padre==null) {
+                    dtCategoria dtCat = new dtCategoria(nombre, null);
                     categorias.add(dtCat);
                 }
 
             }
             
         } catch (SQLException ex) {
-         return null;  
+            System.err.println(ex.getMessage());
         }
-     return categorias;
     }
 
     public static Map<String, categoria> CargarCategorias() {
@@ -118,7 +114,7 @@ public class categoriaPersistencia {
                 }
 
             }
-            conexion.cerrar(conn);
+           // conexion.cerrar(conn);
 
             return list;
         } catch (SQLException ex) {
