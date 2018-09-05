@@ -16,6 +16,7 @@ public class culturarteFabrica {
             ContColaboracion ic= ContColaboracion.getInstance();
             ContUsuario iu= ContUsuario.getInstance();
            ContPropuesta ip= ContPropuesta.getInstance();
+          
            
     public static culturarteFabrica getInstance() {
         if(instance==null){
@@ -33,7 +34,7 @@ public class culturarteFabrica {
             levantarBDdesdeMemoria();
         }
         
-        public void cargarDesdeBD(){;
+        public void cargarDesdeBD(){
           
             iu.cargarUsuarios();
             ip.cargarPropuestas();

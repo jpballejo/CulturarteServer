@@ -17,13 +17,6 @@ import Logica.dtProponente;
 import Logica.dtPropuestasBD;
 import Logica.dtSeguidores;
 import Logica.dtUsuario;
-import static Persistencia.categoriaPersistencia.conexion;
-import static Persistencia.colaboracionesPersistencia.conexion;
-import static Persistencia.estadoPersistencia.conexion;
-import static Persistencia.estadoPropuestaPersistencia.conexion;
-import static Persistencia.propuestasPersistencia.conexion;
-import static Persistencia.seguirdejardeseguirPersistencia.conexion;
-import static Persistencia.usuariosPersistencia.conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -142,18 +135,16 @@ public class BDCulturarte {
         }
     }
 
-    
-
     public boolean cargaUsuariosOrigin(String usu) {
         try {
-            String sql=null;
+            String sql = null;
             Connection con = conexion.getConexion();
             Statement st = (Statement) con.createStatement();
-            
-            sql= "INSERT INTO `usuPer`(`idusuPer`)VALUES('"+usu+"')";
+
+            sql = "INSERT INTO `usuPer`(`idusuPer`)VALUES('" + usu + "')";
             st.executeUpdate(sql);
             return true;
-        
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -162,31 +153,31 @@ public class BDCulturarte {
 
     public boolean cargaPropuestasOrigin(String prop) {
         try {
-            String sql=null;
+            String sql = null;
             Connection con = conexion.getConexion();
             Statement st = (Statement) con.createStatement();
-            
-            sql= "INSERT INTO `propPer`(`idpropPer`)VALUES('"+prop+"')";
+
+            sql = "INSERT INTO `propPer`(`idpropPer`)VALUES('" + prop + "')";
             st.executeUpdate(sql);
             return true;
-        
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
-        }        
-        
+        }
+
     }
 
     public boolean cargaEstadoPropuestasOrigin(dtEstadosPropuestas estaprop) {
         try {
-            String sql=null;    
+            String sql = null;
             Connection con = conexion.getConexion();
             Statement st = (Statement) con.createStatement();
-            
-            sql= "INSERT INTO `propEstPer`(`propId`,`estado`,`fecha`)VALUES('"+estaprop.getTituloprop()+"','"+estaprop.getEstado()+"','"+estaprop.getFecha()+"')";
+
+            sql = "INSERT INTO `propEstPer`(`propId`,`estado`,`fecha`)VALUES('" + estaprop.getTituloprop() + "','" + estaprop.getEstado() + "','" + estaprop.getFecha() + "')";
             st.executeUpdate(sql);
             return true;
-        
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -194,35 +185,35 @@ public class BDCulturarte {
     }
 
     public boolean cargaSeguidoresOrigin(dtSeguidores sig) {
-         try {
-            String sql=null;    
+        try {
+            String sql = null;
             Connection con = conexion.getConexion();
             Statement st = (Statement) con.createStatement();
-            
-            sql= "INSERT INTO `SeguidoresPer`(`usuSeguidor`,`usuSeguido`)VALUES('"+sig.getNickusuario()+"','"+sig.getNickaseguir()+"')";
+
+            sql = "INSERT INTO `SeguidoresPer`(`usuSeguidor`,`usuSeguido`)VALUES('" + sig.getNickusuario() + "','" + sig.getNickaseguir() + "')";
             st.executeUpdate(sql);
             return true;
-        
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
-        }       
+        }
     }
 
     public boolean cargaColaboracionesOrigin(dtColaboraciones cola) {
-         try {
-            String sql=null;    
+        try {
+            String sql = null;
             Connection con = conexion.getConexion();
             Statement st = (Statement) con.createStatement();
-            
-            sql= "INSERT INTO `colPersistencia`(`colaborador`,`propuesta`,`fecha`)VALUES('"+cola.getNickname()+"','"+cola.getIdPropuesta()+"','"+cola.getFecha().getFecha()+"')";
+
+            sql = "INSERT INTO `colPersistencia`(`colaborador`,`propuesta`,`fecha`)VALUES('" + cola.getNickname() + "','" + cola.getIdPropuesta() + "','" + cola.getFecha().getFecha() + "')";
             st.executeUpdate(sql);
             return true;
-        
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
-        } 
+        }
     }
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception {
@@ -364,6 +355,242 @@ public class BDCulturarte {
             return true;
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarCategoria() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`Categoria`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarColaboraciones() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`Colaboraciones`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public boolean truncarFavoritos() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`Favoritos`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarProponente() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`Proponente`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarPropuesta() {
+        try {
+           
+            truncarColaboraciones();
+            truncarEstadoPropuesta();
+            truncarEstado();
+            //previo
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`Propuesta`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            //posteriormente
+            truncarCategoria();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+public boolean truncarPer(){
+    try {
+        truncarProPer();
+        truncarPropEstPer();
+        truncarSeguidoresPer();
+        truncarUsuPer();
+        
+        return true;
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+        return false;
+        
+    }
+}
+    public boolean truncarSeguidores() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`Seguidores`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarSeguidoresPer() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`SeguidoresPer`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarColPersistencia() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`colPersistencia`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarColaborador() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`colaborador`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarEstado() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`estado`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarEstadoPropuesta() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`estadoPropuesta`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarPropEstPer() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`propEstPer`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarProPer() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`propPer`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarUsuPer() {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`usuPer`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean truncarUsuario() {
+
+        try {
+            truncarSeguidores();
+            truncarProponente();
+            truncarColaborador();
+            //previamente
+            Connection conn = conexion.getConexion();
+            String sql = "TRUNCATE `cultuRarte`.`usuario`";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
             return false;
         }
     }

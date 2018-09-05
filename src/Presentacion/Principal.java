@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import Logica.ContCargaBD;
 import Logica.ContColaboracion;
 import Logica.ContPropuesta;
 import Logica.ContUsuario;
@@ -20,6 +21,8 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
     ContUsuario contUsuario=ContUsuario.getInstance();
     ContPropuesta contPropuesta = ContPropuesta.getInstance();
     ContColaboracion contColaboracion= ContColaboracion.getInstance();
+    ContCargaBD contCarga = ContCargaBD.getInstance();
+    
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
@@ -250,6 +253,11 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         jm_cargarDatos.setText("Configuracion");
 
         jMenuItem16.setText("Cargar datos de prueba");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jm_cargarDatos.add(jMenuItem16);
 
         jm_configuracionGeneral.setText("Configuracion general");
@@ -378,6 +386,10 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         this.getContentPane().add(cdcap);
         cdcap.show();
     }//GEN-LAST:event_jm_consultaColaboracionActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+contCarga.limpiarCargar();
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * @param args the command line arguments

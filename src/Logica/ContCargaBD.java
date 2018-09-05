@@ -71,8 +71,29 @@ public class ContCargaBD implements iContCargaBD {
         bdCul.levantarSeguidoresOrigin(seguidoresPer);
     }
 
+    public boolean limpiarCargar() {
+
+        try {
+            if (truncarTablas()) {
+                System.out.println("ok tablas");
+            }
+            if (truncarPropuestas()) {
+                System.out.println("ok propuestas");
+            }
+            if (truncarUsuarios()) {
+                System.out.println("ok usuarios");
+            }
+            
+            if(cargarDatos()){System.out.println("OK CARGA....");}
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
     public boolean cargarDatos() {
-        
+
         try {
             cargarUsuarios();
             cargarEstados();
@@ -85,7 +106,7 @@ public class ContCargaBD implements iContCargaBD {
         } catch (Exception e) {
             return false;
         }
-        
+
     }
 
     public void setearCategoria(dtCategoria dtcat) {
@@ -182,7 +203,6 @@ public class ContCargaBD implements iContCargaBD {
     /**
      *
      */
-   
     private void cargarUsuarios() {
         for (int i = 0; i < usuariosPer.size(); i++) {
             try {
@@ -248,25 +268,35 @@ public class ContCargaBD implements iContCargaBD {
 
     private void cargarSeguidores() {
         try {
-            for(int i =0;i<seguidoresUPer.size();i++){
-            dtSeguidores sig = seguidoresUPer.get(i);
-            bdCul.agregarSeguidoresCD(sig);
+            for (int i = 0; i < seguidoresUPer.size(); i++) {
+                dtSeguidores sig = seguidoresUPer.get(i);
+                bdCul.agregarSeguidoresCD(sig);
             }
-            
+
         } catch (Exception e) {
-                    System.err.println(e.getMessage());
+            System.err.println(e.getMessage());
 
         }
-        
+
     }
 
     private void cargaOrigin() {
-        if(cargaUsuariosOrigin()){System.out.println("okUsusOrigin");}
-                if(cargaPropuestasOrigin()){System.out.println("okPropOrigin");}
-        if(cargaColaboracionesOrigin()){System.out.println("okColaOrigin");}
-        if(cargaEstadoPropuestasOrigin()){System.out.println("okPropEstOrigin");}
-        if(cargaSeguidoresOrigin()){System.out.println("okSegiOrigin");}
-        
+        if (cargaUsuariosOrigin()) {
+            System.out.println("okUsusOrigin");
+        }
+        if (cargaPropuestasOrigin()) {
+            System.out.println("okPropOrigin");
+        }
+        if (cargaColaboracionesOrigin()) {
+            System.out.println("okColaOrigin");
+        }
+        if (cargaEstadoPropuestasOrigin()) {
+            System.out.println("okPropEstOrigin");
+        }
+        if (cargaSeguidoresOrigin()) {
+            System.out.println("okSegiOrigin");
+        }
+
     }
 
     private boolean cargaUsuariosOrigin() {
@@ -318,51 +348,44 @@ public class ContCargaBD implements iContCargaBD {
     private boolean cargaSeguidoresOrigin() {
         //seguidoresPer
         try {
-        for (int i =0;i<seguidoresPer.size();i++){
-        dtSeguidores sig=seguidoresPer.get(i);
-        bdCul.cargaSeguidoresOrigin(sig);
-        }    
-        return true;
+            for (int i = 0; i < seguidoresPer.size(); i++) {
+                dtSeguidores sig = seguidoresPer.get(i);
+                bdCul.cargaSeguidoresOrigin(sig);
+            }
+            return true;
         } catch (Exception e) {
-                return false;
+            return false;
 
         }
-        
+
     }
 
     private boolean cargaColaboracionesOrigin() {
         //colper
         try {
-            for(int i=0;i<colPer.size();i++){
-            dtColaboraciones cola =(dtColaboraciones) colPer.get(i);
-            bdCul.cargaColaboracionesOrigin(cola);
+            for (int i = 0; i < colPer.size(); i++) {
+                dtColaboraciones cola = (dtColaboraciones) colPer.get(i);
+                bdCul.cargaColaboracionesOrigin(cola);
             }
             return true;
         } catch (Exception e) {
         }
-        
+
         return false;
     }
 
     private boolean truncarTablas() {
 
-        return false;
+        return bdCul.truncarPer();
     }
 
     private boolean truncarUsuarios() {
-        return false;
+        return bdCul.truncarUsuario();
+
     }
 
     private boolean truncarPropuestas() {
-        return false;
-    }
-
-    private boolean truncarColaboraciones() {
-        return false;
-    }
-
-    private boolean truncarCategoria() {
-        return false;
+        return bdCul.truncarPropuesta();
     }
 
 }
