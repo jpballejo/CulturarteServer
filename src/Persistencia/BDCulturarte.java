@@ -209,7 +209,7 @@ public class BDCulturarte {
         }       
     }
 
-    public boolean cargaColaboracionesOrigin() {
+    public boolean cargaColaboracionesOrigin(dtColaboraciones cola) {
         return false;
     }
 

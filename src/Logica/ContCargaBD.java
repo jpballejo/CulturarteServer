@@ -244,6 +244,12 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private void cargaOrigin() {
+        if(cargaUsuariosOrigin()){System.out.println("okUsusOrigin");}
+                if(cargaPropuestasOrigin()){System.out.println("okPropOrigin");}
+        if(cargaColaboracionesOrigin()){System.out.println("okColaOrigin");}
+        if(cargaEstadoPropuestasOrigin()){System.out.println("okPropEstOrigin");}
+        if(cargaSeguidoresOrigin()){System.out.println("okSegiOrigin");}
+        
     }
 
     private boolean cargaUsuariosOrigin() {
@@ -293,12 +299,31 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private boolean cargaSeguidoresOrigin() {
+        //seguidoresPer
+        try {
+        for (int i =0;i<seguidoresPer.size();i++){
+        dtSeguidores sig=seguidoresPer.get(i);
+        bdCul.cargaSeguidoresOrigin(sig);
+        }    
+        return true;
+        } catch (Exception e) {
+                return false;
+
+        }
         
-        
-        return false;
     }
 
     private boolean cargaColaboracionesOrigin() {
+        //colper
+        try {
+            for(int i=0;i<colPer.size();i++){
+            dtColaboraciones cola =(dtColaboraciones) colPer.get(i);
+            bdCul.cargaColaboracionesOrigin(cola);
+            }
+            return true;
+        } catch (Exception e) {
+        }
+        
         return false;
     }
 
