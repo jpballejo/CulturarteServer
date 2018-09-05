@@ -12,7 +12,13 @@ package Logica;
 public class dtColaboraciones {
 
     private String nickname, idPropuesta;
+    private dtFecha fecha;
 
+    public dtColaboraciones(String nickname, String idPropuesta, dtFecha fecha) {
+        this.nickname = nickname;
+        this.idPropuesta = idPropuesta;
+        this.fecha = fecha;
+    }
 //CONSTRUCTOR//
     public dtColaboraciones(String nickname, String idPropuesta) {
         this.nickname = nickname;
@@ -35,6 +41,13 @@ public class dtColaboraciones {
 
     public void setIdPropuesta(String idPropuesta) {
         this.idPropuesta = idPropuesta;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public dtFecha getFecha() {
+        return fecha;
     }
 
     

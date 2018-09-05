@@ -40,7 +40,9 @@ public class propuestasPersistencia {
         }
 
     }
-   
+    
+    
+
     public dtFecha construirFecha(String fecha) {
         String[] splited = fecha.split("/");
         dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);

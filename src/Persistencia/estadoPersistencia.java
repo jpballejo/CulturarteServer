@@ -5,18 +5,17 @@
  */
 package Persistencia;
 
+import Logica.ContCargaBD;
+import Logica.dtEstado;
 import Logica.dtEstadosPropuestas;
 import Logica.dtFecha;
 import Logica.dtHora;
-import Logica.estado;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -25,10 +24,10 @@ import java.util.Map;
 public class estadoPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
-
+    ContCargaBD contCarga = ContCargaBD.getInstance();
     public static boolean agregarestado(String nombre) {
         try {
-            String sql = "INSERT INTO 'estado' ('estado') VALUES ('" + nombre + "')";
+            String sql = "INSERT INTO `cultuRarte`.'estado' ('estado') VALUES ('" + nombre + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -40,10 +39,12 @@ public class estadoPersistencia {
             return false;
         }
     }
+  
+    
 
     public boolean eliminarestado(String nombre) {
         try {
-            String sql = "DELETE FROM 'estado' WHERE estado='" + nombre + "'";
+            String sql = "DELETE FROM `cultuRarte`.'estado' WHERE estado='" + nombre + "'";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -56,14 +57,15 @@ public class estadoPersistencia {
         }
     }
 
-    public void CargarEstados(ArrayList<String> estados) {
+    public void CargarEstados(ArrayList<dtEstado> nomEstados) {
         try {
             String sql = "SELECT * FROM cultuRarte.estado";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                estados.add(rs.getString(1));
+                dtEstado esta=new dtEstado(rs.getInt(2), rs.getString(1));
+                nomEstados.add(esta);
             }
             //   conexion.cerrar(conn);
         } catch (SQLException ex) {
@@ -74,14 +76,14 @@ public class estadoPersistencia {
     public static void agregarEstadosPropuestas(dtEstadosPropuestas dtep) {
         try {
             String sql = null;
-            sql = "INSERT INTO `estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ('" + dtep.getTituloprop() + "','" + dtep.getEstado() + "','" + dtep.getFecha().getFecha() + "','" + dtep.getHora().getHora() + "')";
+            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`,`estado`,`fecha`,`hora`)VALUES('" + dtep.getTituloprop() + "','" + dtep.getEstado() + "','" + dtep.getFecha().getFecha() + "','" + dtep.getHora().getHora() + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
             //     conexion.cerrar(conn);
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.err.println(ex.getMessage());
 
         }
     }
@@ -112,6 +114,7 @@ public class estadoPersistencia {
                 System.out.println(rs.getString(1) + " " + rs.getString(4));
                 dtHora dth = construirHora(rs.getString(4));
                 dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth);
+                contCarga.setearEstadoPropuesta(dt);
                 estados.add(dt);
             }
             //      conexion.cerrar(conn);

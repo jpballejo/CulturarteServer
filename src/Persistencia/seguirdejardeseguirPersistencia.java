@@ -29,7 +29,9 @@ public class seguirdejardeseguirPersistencia {
             Connection conn = conexion.getConexion();
             String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`) VALUES ('" + dts.getNickusuario() + "','" + dts.getNickaseguir() + "')";
             Statement st = conn.createStatement();
+             System.out.println(sql);
             st.executeUpdate(sql);
+           
          //   conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {

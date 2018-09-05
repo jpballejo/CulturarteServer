@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author apias
  */
 public class ConexionDB {
-    private  final String host="192.168.64.2";
+    private  final String host="localhost";
     private  final String port="3306";
     private  final String db="cultuRarte";
     private  final String user="administrador";
@@ -55,8 +55,7 @@ public class ConexionDB {
                                 
                 conexion = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
                 } catch (SQLException ex) {
-                ex.printStackTrace();
-                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println(ex.getMessage());
             }
         }
         return conexion;

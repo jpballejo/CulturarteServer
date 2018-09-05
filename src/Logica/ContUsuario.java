@@ -52,7 +52,7 @@ public class ContUsuario implements iConUsuario {
         return false;
 
     }
-
+    private ContCargaBD contCarga = ContCargaBD.getInstance();
     private static ContUsuario instance;
     private usuario usuariorecordado;
     private seguirdejardeseguirPersistencia seguirdejardeseguir = new seguirdejardeseguirPersistencia();
@@ -112,15 +112,19 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public void cargarUsuarios() {
+        
         try {
+            contCarga.levantaBDusuPer();
             ArrayList<dtUsuario> dtUsuarios = new ArrayList<dtUsuario>();
             dtUsuarios = usuPer.cargaUsuarios();
+            
             int tam = dtUsuarios.size();
             //Iterator<dtUsuario> iterador = dtUsuarios.iterator();
             for (int i = 0; i < dtUsuarios.size(); i++) {
                 dtUsuario usu = (dtUsuario) dtUsuarios.get(i);
                 sacarRutaImagen(usu);
                 agregaUsuCD(usu);
+                contCarga.agregardtusu(usu);
                 usu = null;
             }
 
