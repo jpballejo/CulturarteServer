@@ -24,7 +24,10 @@ import java.util.List;
 public class estadoPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
-    ContCargaBD contCarga = ContCargaBD.getInstance();
+//    ContCargaBD contCarga = ContCargaBD.getInstance();
+
+    private ArrayList<dtEstadosPropuestas> estados = new ArrayList<>();
+
     public static boolean agregarestado(String nombre) {
         try {
             String sql = "INSERT INTO `cultuRarte`.'estado' ('estado') VALUES ('" + nombre + "')";
@@ -39,8 +42,6 @@ public class estadoPersistencia {
             return false;
         }
     }
-  
-    
 
     public boolean eliminarestado(String nombre) {
         try {
@@ -64,7 +65,7 @@ public class estadoPersistencia {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                dtEstado esta=new dtEstado(rs.getInt(2), rs.getString(1));
+                dtEstado esta = new dtEstado(rs.getInt(2), rs.getString(1));
                 nomEstados.add(esta);
             }
             //   conexion.cerrar(conn);
@@ -101,6 +102,11 @@ public class estadoPersistencia {
         return dth;
     }
 
+    private void setearEstadoPropuesta(dtEstadosPropuestas dt) {
+        estados.add(dt);
+
+    }
+
     public void CargarEstadosPropuestas(ArrayList<dtEstadosPropuestas> estados) {
         try {
             List<dtEstadosPropuestas> list = new ArrayList<>();
@@ -114,7 +120,7 @@ public class estadoPersistencia {
                 System.out.println(rs.getString(1) + " " + rs.getString(4));
                 dtHora dth = construirHora(rs.getString(4));
                 dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth);
-                contCarga.setearEstadoPropuesta(dt);
+                setearEstadoPropuesta(dt);
                 estados.add(dt);
             }
             //      conexion.cerrar(conn);
@@ -123,5 +129,12 @@ public class estadoPersistencia {
             System.err.print(ex.getMessage());
 
         }
+    }
+
+    /**
+     * @return the estados
+     */
+    public ArrayList<dtEstadosPropuestas> getEstados() {
+        return estados;
     }
 }
