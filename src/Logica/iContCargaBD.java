@@ -25,6 +25,8 @@ public interface iContCargaBD {
 
     public abstract void setearEstadoPropuesta(dtEstadosPropuestas estProp);
 
+    public abstract void seteardtSeguidores(dtSeguidores dtseg);
+
     public abstract void levantarBDproPer();
 
     public abstract void levantaBDusuPer();
@@ -32,6 +34,8 @@ public interface iContCargaBD {
     public abstract void levantarBDcolPer();
 
     public abstract void levantarBDestadosPropPer();
+
+    public abstract void levantarBDseguidoresPer();
 
     public abstract boolean cargarDatos();
 }

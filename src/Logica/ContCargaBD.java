@@ -10,8 +10,6 @@ import Persistencia.estadoPersistencia;
 import Persistencia.propuestasPersistencia;
 import Persistencia.usuariosPersistencia;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -33,11 +31,13 @@ public class ContCargaBD implements iContCargaBD {
     private ArrayList<dtPropuestasBD> propuestasPer = new ArrayList<>();
     private ArrayList<dtColaboracionCompleto> colaboracionesPer = new ArrayList<>();
     private ArrayList<dtEstadosPropuestas> estadosPropuestaPer = new ArrayList<>();
+    private ArrayList<dtSeguidores> seguidoresUPer = new ArrayList<>();
 //arreglos primitivos para carga -- bruto
     private ArrayList<String> usuPer = new ArrayList<>();
     private ArrayList<String> propPer = new ArrayList<>();
     private ArrayList<dtColaboraciones> colPer = new ArrayList<>();
     private ArrayList<dtEstadosPropuestas> estaPropPer = new ArrayList<>();
+    private ArrayList<dtSeguidores> seguidoresPer = new ArrayList<>();
 
     public static ContCargaBD getInstance() {
         if (instance == null) {
@@ -67,6 +67,10 @@ public class ContCargaBD implements iContCargaBD {
         bdCul.levantarEstadosOrigin(estaPropPer);
     }
 
+    public void levantarBDseguidoresPer() {
+        bdCul.levantarSeguidoresOrigin(seguidoresPer);
+    }
+
     public boolean cargarDatos() {
         return true;
     }
@@ -78,7 +82,6 @@ public class ContCargaBD implements iContCargaBD {
     public void setearEstado(ArrayList<dtEstado> estadosV) {
         this.estadosPer = estadosV;
     }
-
 
     public void setearEstadoPropuesta(dtEstadosPropuestas estProp) {
         try {
@@ -99,6 +102,23 @@ public class ContCargaBD implements iContCargaBD {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public void seteardtSeguidores(dtSeguidores dtseg) {
+// filtro seguidoresPer 
+
+        try {
+            for (int i = 0; i < seguidoresPer.size(); i++) {
+                dtSeguidores control = (dtSeguidores) seguidoresPer.get(i);
+                if (dtseg.equals(control)) {
+                    seguidoresUPer.add(dtseg);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        }
+
     }
 
     public void agregardtusu(dtUsuario us) {
@@ -187,6 +207,101 @@ public class ContCargaBD implements iContCargaBD {
         }
     }
 
+    private void cargarColaboraciones() {
+        try {
+            for (int i = 0; i < colaboracionesPer.size(); i++) {
+                dtColaboracionCompleto dtcola = (dtColaboracionCompleto) colaboracionesPer.get(i);
+                bdCul.altaColaboracionCD(dtcola);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void cargarEstadosPropuestas() {
+        try {
+            for (int i = 0; i < estadosPropuestaPer.size(); i++) {
+                dtEstadosPropuestas estaprop = (dtEstadosPropuestas) estadosPropuestaPer.get(i);
+                bdCul.agregarPropEstadoCD(estaprop);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void cargarSeguidores() {
+        try {
+            for(int i =0;i<seguidoresUPer.size();i++){
+            dtSeguidores sig = seguidoresUPer.get(i);
+            bdCul.agregarSeguidoresCD(sig);
+            }
+            
+        } catch (Exception e) {
+                    System.err.println(e.getMessage());
+
+        }
+        
+    }
+
+    private void cargaOrigin() {
+    }
+
+    private boolean cargaUsuariosOrigin() {
+        //usuPer
+        try {
+            for (int i = 0; i < usuPer.size(); i++) {
+                String usu = usuPer.get(i);
+                bdCul.cargaUsuariosOrigin(usu);
+            }
+            return true;
+        } catch (Exception e) {
+
+            System.err.println(e.getMessage());
+            return false;
+
+        }
+
+    }
+
+    private boolean cargaPropuestasOrigin() {
+        try {
+            for (int i = 0; i < propPer.size(); i++) {
+                String prop = propPer.get(i);
+                bdCul.cargaPropuestasOrigin(prop);
+            }
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+
+        }
+
+    }
+
+    private boolean cargaEstadoPropuestasOrigin() {
+        try {
+            for (int i = 0; i < estaPropPer.size(); i++) {
+                dtEstadosPropuestas esta = (dtEstadosPropuestas) estaPropPer.get(i);
+                bdCul.cargaEstadoPropuestasOrigin(esta);
+            }
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    private boolean cargaSeguidoresOrigin() {
+        
+        
+        return false;
+    }
+
+    private boolean cargaColaboracionesOrigin() {
+        return false;
+    }
+
     private boolean truncarTablas() {
 
         return false;
@@ -206,12 +321,6 @@ public class ContCargaBD implements iContCargaBD {
 
     private boolean truncarCategoria() {
         return false;
-    }
-
-    private void cargarColaboraciones() {
-    }
-
-    private void cargarEstadosPropuestas() {
     }
 
 }

@@ -144,16 +144,18 @@ public class ContUsuario implements iConUsuario {
         }
 
     }
-//revisar
+//revisar--debugin   gg la dota
 
     public void cargarSeguidores() {
         ArrayList<dtSeguidores> siguen = new ArrayList<>();
+        contCarga.levantarBDseguidoresPer();
         try {
             usuPer.seguidores(siguen);
             for (int i = 0; i < siguen.size(); i++) {
                 dtSeguidores seg = null;
                 seg = (dtSeguidores) siguen.get(i);
                 seguirCD(seg);
+                contCarga.seteardtSeguidores(seg);
 
             }
         } catch (Exception ex) {
