@@ -210,7 +210,19 @@ public class BDCulturarte {
     }
 
     public boolean cargaColaboracionesOrigin(dtColaboraciones cola) {
-        return false;
+         try {
+            String sql=null;    
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();
+            
+            sql= "INSERT INTO `colPersistencia`(`colaborador`,`propuesta`,`fecha`)VALUES('"+cola.getNickname()+"','"+cola.getIdPropuesta()+"','"+cola.getFecha().getFecha()+"')";
+            st.executeUpdate(sql);
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        } 
     }
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception {
