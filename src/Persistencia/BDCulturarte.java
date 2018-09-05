@@ -6,17 +6,23 @@
 package Persistencia;
 
 import Logica.dtCategoria;
+import Logica.dtColaboracionCompleto;
 import Logica.dtColaboraciones;
 import Logica.dtColaborador;
 import Logica.dtEstado;
 import Logica.dtEstadosPropuestas;
 import Logica.dtFecha;
+import Logica.dtHora;
 import Logica.dtProponente;
 import Logica.dtPropuestasBD;
+import Logica.dtSeguidores;
 import Logica.dtUsuario;
 import static Persistencia.categoriaPersistencia.conexion;
+import static Persistencia.colaboracionesPersistencia.conexion;
 import static Persistencia.estadoPersistencia.conexion;
+import static Persistencia.estadoPropuestaPersistencia.conexion;
 import static Persistencia.propuestasPersistencia.conexion;
+import static Persistencia.seguirdejardeseguirPersistencia.conexion;
 import static Persistencia.usuariosPersistencia.conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,6 +42,13 @@ public class BDCulturarte {
         String[] splited = fecha.split("/");
         dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
         return fec;
+    }
+
+    public dtHora construirHora(String hora) {
+
+        String[] h = hora.split(":");
+        dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
+        return dth;
     }
 
     public void levantaUsusOrigin(ArrayList<String> usus) {
@@ -107,19 +120,48 @@ public class BDCulturarte {
                 estadosProp.add(nuevo);
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage()
-            );
+            System.err.println(e.getMessage());
 
         }
 
     }
 
-    public boolean cargarUsusOrigin(dtUsuario usuOrigen) {
-        return true;
+    public void levantarSeguidoresOrigin(ArrayList<dtSeguidores> segiresPer) {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "SELECT * FROM cultuRarte.SeguidoresPer";
+            Statement st = conn.createStatement();
+            ResultSet rsSeg = st.executeQuery(sql);
+            while (rsSeg.next()) {
+                dtSeguidores dtseg = new dtSeguidores(rsSeg.getString(1), rsSeg.getString(2));
+                segiresPer.add(dtseg);
+
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
-    public boolean cargarPropuestasOrigin(dtPropuestasBD prop) {
-        return true;
+    
+
+    public boolean cargaUsuariosOrigin(String usu) {
+        return false;
+    }
+
+    public boolean cargaPropuestasOrigin(String prop) {
+        return false;
+    }
+
+    public boolean cargaEstadoPropuestasOrigin(dtEstadosPropuestas estaprop) {
+        return false;
+    }
+
+    public boolean cargaSeguidoresOrigin(dtSeguidores sig) {
+        return false;
+    }
+
+    public boolean cargaColaboracionesOrigin() {
+        return false;
     }
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception {
@@ -185,6 +227,7 @@ public class BDCulturarte {
 
         return false;
     }
+
     public boolean altaCategoriaCD(dtCategoria cat) {
         try {
             String sql = null;
@@ -204,5 +247,63 @@ public class BDCulturarte {
             return false;
         }
 
+    }
+
+    public boolean altaColaboracionCD(dtColaboracionCompleto dtcola) {
+        try {
+
+            String colaborador = null, titulo = null, fecha = null, hora = null, monto = null, retorno = null;
+            colaborador = dtcola.getNickname();
+            titulo = dtcola.getTitulo();
+            fecha = dtcola.getFecha().getFecha();
+            hora = dtcola.getHora().getHora();
+            monto = Integer.toString(dtcola.getMonto());
+            retorno = dtcola.getRetorno();
+            String sql = null;
+            sql = "INSERT INTO `cultuRarte`.`Colaboraciones` (`nickusuario`, `tituloprop`, `fecha`, `hora`, `monto`, `retorno`) VALUES ('" + colaborador + "','" + titulo + "','" + fecha + "','" + hora + "','" + monto + "','" + retorno + "')";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            // conexion.cerrar(conn);
+
+            return true;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean agregarPropEstadoCD(dtEstadosPropuestas dtestaprop) {
+        try {
+            String titulo = null, estado = null, fecha = null, hora = null, sql = null;
+            titulo = dtestaprop.getTituloprop();
+            estado = dtestaprop.getEstado();
+            fecha = dtestaprop.getFecha().getFecha();
+            hora = dtestaprop.getHora().getHora();
+            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "')";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            //     conexion.cerrar(conn);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public boolean agregarSeguidoresCD(dtSeguidores dts) {
+        try {
+            Connection conn = conexion.getConexion();
+            String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`) VALUES ('" + dts.getNickusuario() + "','" + dts.getNickaseguir() + "')";
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.executeUpdate(sql);
+
+            //   conexion.cerrar(conn);
+            return true;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        }
     }
 }
