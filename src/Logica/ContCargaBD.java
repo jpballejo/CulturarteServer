@@ -72,7 +72,20 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     public boolean cargarDatos() {
-        return true;
+        
+        try {
+            cargarUsuarios();
+            cargarEstados();
+            cargarCategorias();
+            cargarPropuestas();
+            cargarColaboraciones();
+            cargarEstadosPropuestas();
+            cargarSeguidores();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
     }
 
     public void setearCategoria(dtCategoria dtcat) {
@@ -166,6 +179,10 @@ public class ContCargaBD implements iContCargaBD {
         }
     }
 
+    /**
+     *
+     */
+   
     private void cargarUsuarios() {
         for (int i = 0; i < usuariosPer.size(); i++) {
             try {
