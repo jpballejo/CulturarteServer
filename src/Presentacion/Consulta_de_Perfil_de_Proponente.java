@@ -243,6 +243,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        vaciarTablas();
         int row=jTable1.rowAtPoint(evt.getPoint());
         int col=jTable1.columnAtPoint(evt.getPoint());
         dtProponente dtp=ICU.infoProponente((String)jTable1.getValueAt(row, col)); //una forma
@@ -320,4 +321,13 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
     private javax.swing.JTextField txtbuscar;
   
     // End of variables declaration//GEN-END:variables
+
+public void vaciarTablas(){
+    DefaultTableModel model=(DefaultTableModel) tableinfopropuesta.getModel();
+    model.setRowCount(0); 
+    DefaultTableModel model2=(DefaultTableModel) tablepropuestas1.getModel();
+    model2.setRowCount(0); 
+    DefaultTableModel model3=(DefaultTableModel) tablecolaboradores.getModel();
+    model3.setRowCount(0);     
+}
 }

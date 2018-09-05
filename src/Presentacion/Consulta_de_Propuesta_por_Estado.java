@@ -198,6 +198,7 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
 
     private void tableestadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableestadosMouseClicked
         // TODO add your handling code here:
+        vaciarTablas();
         int row=tableestados.rowAtPoint(evt.getPoint());
         int col=tableestados.columnAtPoint(evt.getPoint());
         
@@ -263,4 +264,15 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
     private javax.swing.JLabel txtimagen;
     private javax.swing.JTextField txtmontotoal;
     // End of variables declaration//GEN-END:variables
+
+public void vaciarTablas(){
+    DefaultTableModel modelo=(DefaultTableModel) tablepropuesta.getModel();
+    modelo.setRowCount(0);
+       DefaultTableModel modelo2=(DefaultTableModel) tablacolaboradores.getModel();
+    modelo2.setRowCount(0);
+    
+    txtestado.setText("");
+    txtmontotoal.setText("");
+}
+    
 }

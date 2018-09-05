@@ -176,6 +176,7 @@ public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFram
 
     private void tablacolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablacolaboradoresMouseClicked
         // TODO add your handling code here:
+        vaciarTablas();
         int row=tablacolaboradores.rowAtPoint(evt.getPoint());
         int col=tablacolaboradores.columnAtPoint(evt.getPoint());
         
@@ -244,4 +245,10 @@ public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFram
     private javax.swing.JTable tablacolaboradores;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
+
+    public void vaciarTablas(){
+        DefaultTableModel modelo=(DefaultTableModel) tablacolaboracion.getModel();
+        modelo.setRowCount(0);
+}
+
 }

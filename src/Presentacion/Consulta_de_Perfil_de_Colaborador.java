@@ -177,7 +177,7 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
+        vaciarTablas();
         int row=jTable1.rowAtPoint(evt.getPoint());
         int col=jTable1.columnAtPoint(evt.getPoint());
         dtColaborador dtc=(dtColaborador)ICU.infoColaborador((String)jTable1.getValueAt(row, col));
@@ -228,4 +228,9 @@ public class Consulta_de_Perfil_de_Colaborador extends javax.swing.JInternalFram
     private javax.swing.JTable tablepropuestas1;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
+public void vaciarTablas(){
+    DefaultTableModel modelo=(DefaultTableModel) tablepropuestas1.getModel();
+    modelo.setRowCount(0);    
+}
+
 }
