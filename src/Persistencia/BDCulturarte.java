@@ -160,7 +160,7 @@ public class BDCulturarte {
         return false;
     }
 
-    public boolean cargaColaboracionesOrigin() {
+    public boolean cargaColaboracionesOrigin(dtColaboraciones cola) {
         return false;
     }
 
