@@ -50,6 +50,14 @@ public class ContPropuesta implements iConPropuesta {
         this.idEstado.put("Ingresada", 1);
     }
 
+    @Override
+    public int getIdEstado(String estadoNom) {
+        int id = 0;
+        id = idEstado.get(estadoNom);
+        return id;
+
+    }
+
     public boolean moverImagenesProp() {
         //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
         int tam = listaImagenes.size();
@@ -167,6 +175,7 @@ public class ContPropuesta implements iConPropuesta {
         proponente p = (proponente) this.cUsuario.getUsuarioRecordado();
         dtPropuesta dtp = p.getPropuestas(idPropuesta);
         dtp.setColaboradores(this.cUsuario.listarColaboradores(idPropuesta));
+        dtp.setMontoTotal(this.cUsuario.montopropuesta(idPropuesta));
         return dtp;
     }
 
@@ -363,6 +372,25 @@ public class ContPropuesta implements iConPropuesta {
         }
         return retorno;
 
+    }
+
+    @Override
+    public void agregarEstadoAPropuesta(String e, String titulo, dtFecha dtf, dtHora dth) {
+        cUsuario.agregarEstadoAPropuesta(getEstado(e), titulo, dtf, dth, getIdEstado(titulo));
+    }
+
+    @Override
+    public List<String> listarEstados() {
+       List<String> retorno= new ArrayList<>();
+       for(String key: this.idEstado.keySet()){
+           retorno.add(key);
+       }
+       return retorno;
+    }
+
+    @Override
+    public void actualizardatospropuesta(dtPropuesta dtp, String e, dtFecha dtf, dtHora dth) throws Exception {   
+        cUsuario.actualizardatospropuesta(dtp, this.getEstado(e), this.getIdEstado(e), dtf, dth);
     }
 
 }

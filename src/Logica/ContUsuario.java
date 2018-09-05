@@ -8,6 +8,7 @@ package Logica;
 import Persistencia.cancelarcolaboracionPersistencia;
 import Persistencia.colaboracionesPersistencia;
 import Persistencia.creadoresPropuestaPersistencia;
+import Persistencia.estadoPropuestaPersistencia;
 import Persistencia.propuestasPersistencia;
 import Persistencia.seguirdejardeseguirPersistencia;
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
-
-
 /**
  *
  * @author nicolasgutierrez
@@ -43,6 +42,8 @@ public class ContUsuario implements iConUsuario {
     private Map<String, usuario> usuarios = new HashMap<String, usuario>();
     seguirdejardeseguirPersistencia segdej = new seguirdejardeseguirPersistencia();
     colaboracionesPersistencia colabPer = new colaboracionesPersistencia();
+    estadoPropuestaPersistencia estadopropper= new estadoPropuestaPersistencia();
+    propuestasPersistencia propPersis= new propuestasPersistencia();
 
     public boolean existeUsuario(String nickName) {
         if (usuarios.containsKey(nickName) == true) {
@@ -56,6 +57,7 @@ public class ContUsuario implements iConUsuario {
     private usuario usuariorecordado;
     private seguirdejardeseguirPersistencia seguirdejardeseguir = new seguirdejardeseguirPersistencia();
     private cancelarcolaboracionPersistencia cancelarcolab = new cancelarcolaboracionPersistencia();
+    
 
     public static ContUsuario getInstance() {
         if (instance == null) {
@@ -129,7 +131,6 @@ public class ContUsuario implements iConUsuario {
         moverImagenesUsu();
         cargarSeguidores();
 
-
     }
 
     public void sacarRutaImagen(dtUsuario usu) {
@@ -165,7 +166,6 @@ public class ContUsuario implements iConUsuario {
             ussig.seguir(usaseg);
         } catch (Exception e) {
         }
-        
 
     }
 
@@ -227,7 +227,7 @@ public class ContUsuario implements iConUsuario {
     @Override
     public List<String> listarProponentes(String nick) {
         List<String> retornar = new ArrayList<String>();
- /*       Set set = usuarios.entrySet();
+        /*       Set set = usuarios.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
@@ -238,22 +238,20 @@ public class ContUsuario implements iConUsuario {
 
         }
         return retornar; */
-        if(nick.isEmpty()){
-            for(String key: this.usuarios.keySet()){
-                if(this.usuarios.get(key) instanceof proponente){
+        if (nick.isEmpty()) {
+            for (String key : this.usuarios.keySet()) {
+                if (this.usuarios.get(key) instanceof proponente) {
                     retornar.add(key);
                 }
             }
-        }
-        else{
-            for(String key: this.usuarios.keySet()){
-                if(this.usuarios.get(key) instanceof proponente && key.contains(nick)){
+        } else {
+            for (String key : this.usuarios.keySet()) {
+                if (this.usuarios.get(key) instanceof proponente && key.contains(nick)) {
                     retornar.add(key);
                 }
             }
         }
 
-        
         return retornar;
     }
 
@@ -290,29 +288,33 @@ public class ContUsuario implements iConUsuario {
     public List<dtPropuesta> listarPropuestas(String idProponente) {
         List<dtPropuesta> retornar = new ArrayList<dtPropuesta>();
         List<dtPropuesta> aux = new ArrayList<dtPropuesta>();
-        
+
         proponente p = (proponente) this.usuarios.get(idProponente);
         aux = p.getTodasPropuestas();
-        Iterator it= aux.iterator();
-        while(it.hasNext()){
-            dtPropuesta dtp=(dtPropuesta) it.next();
-            dtp.montoactual=this.montopropuesta(dtp.titulo);
-            retornar.add(dtp);
+        if (aux.isEmpty() == false) {
+            Iterator it = aux.iterator();
+            while (it.hasNext()) {
+                dtPropuesta dtp = (dtPropuesta) it.next();
+                dtp.montoactual = this.montopropuesta(dtp.titulo);
+                retornar.add(dtp);
+            }
+            aux.clear();
         }
-        aux.clear();
-        
         return retornar;
     }
 
     @Override
     public List<String> listarColaboradores(String idPropuesta) {
         List<String> res = new ArrayList<>();
-        Iterator it = this.usuarios.keySet().iterator();
-        while (it.hasNext()) {
-            colaborador c = (colaborador) this.usuarios.get((String) it.next());
-            if (c.colaborasconpropuesta(idPropuesta)) {
-                res.add(c.getNickname());
+        for (String key : this.usuarios.keySet()) {
+            if (this.usuarios.get(key) instanceof colaborador) {
+                colaborador c = (colaborador) this.usuarios.get(key);
+                if (c.colaborasconpropuesta(idPropuesta)) {
+                    res.add(c.getNickname());
+                }
+
             }
+
         }
         return res;
     }
@@ -332,9 +334,8 @@ public class ContUsuario implements iConUsuario {
                 throw new Exception("El usuario " + nicknameASeguir + " que desea seguir no existe");
             }
             if (!us.loSigue(nicknameASeguir)) {
-                dtUsuario dtUsu = new dtUsuario(us.getNickname(), null, null, null, null, null);
-                dtUsuario dtase = new dtUsuario(as.getNickname(), null, null, null, null, null);
-                boolean res = this.seguirdejardeseguir.seguir(dtUsu, dtase);
+                dtSeguidores dts = new dtSeguidores(nicknameSeguidor, nicknameASeguir);
+                boolean res = this.seguirdejardeseguir.seguir(dts);
                 if (res) {
                     us.seguir(as);
                 }
@@ -361,9 +362,8 @@ public class ContUsuario implements iConUsuario {
             if (!us.loSigue(nicknameADejarDeSeguir)) {
                 throw new Exception("El usuario " + nicknameADejarDeSeguir + " no se encuentra entre tus usuarios seguidos");
             } else {
-                dtUsuario dtUsu = new dtUsuario(us.getNickname(), null, null, null, null, null);
-                dtUsuario dtase = new dtUsuario(adds.getNickname(), null, null, null, null, null);
-                boolean res = this.seguirdejardeseguir.dejardeseguir(dtUsu, dtase);
+                dtSeguidores dts = new dtSeguidores(nicknameSeguidor, nicknameADejarDeSeguir);
+                boolean res = this.seguirdejardeseguir.dejardeseguir(dts);
                 if (res) {
                     us.dejardeSeguir(adds);
                 }
@@ -410,13 +410,18 @@ public class ContUsuario implements iConUsuario {
 
         if (titulo.isEmpty()) {
             for (String key : this.usuarios.keySet()) {
-                proponente p = (proponente) this.usuarios.get(key);
-                ret.addAll(p.listarmispropuestas());
+                if (this.usuarios.get(key) instanceof proponente) {
+                    proponente p = (proponente) this.usuarios.get(key);
+                    ret.addAll(p.listarmispropuestas());
+
+                }
             }
         } else {
             for (String key : this.usuarios.keySet()) {
-                proponente p = (proponente) this.usuarios.get(key);
-                ret.addAll(p.listarmispropuestaslike(titulo));
+                if (this.usuarios.get(key) instanceof proponente) {
+                    proponente p = (proponente) this.usuarios.get(key);
+                    ret.addAll(p.listarmispropuestaslike(titulo));
+                }
             }
         }
 
@@ -426,17 +431,18 @@ public class ContUsuario implements iConUsuario {
     public dtPropuesta infoPropuesta(String titulo) throws Exception {
         dtPropuesta dtp = null;
         for (String key : this.usuarios.keySet()) {
-            proponente p = (proponente) this.usuarios.get(key);
-            if (p != null) {
-                dtp = p.getPropuestas(titulo);
-                dtp.montoactual=this.montopropuesta(dtp.titulo);
-            }
-            if (dtp != null && dtp.getTitulo().equals(titulo)) {
-                break;
+            if (this.usuarios.get(key) instanceof proponente) {
+                proponente p = (proponente) this.usuarios.get(key);
+                if (p.propuestasUsuario.containsKey(titulo)) {
+                    dtp = p.getPropuestas(titulo);
+                    dtp.montoactual = this.montopropuesta(dtp.titulo);
+                    
+                }
+
             }
         }
 
-        if (dtp != null) {
+        if (dtp.getTitulo()==titulo) {
             dtp.setColaboradores(this.listarColaboradores(titulo));
             dtp.setMontoTotal(this.montopropuesta(titulo));
             return dtp;
@@ -461,16 +467,15 @@ public class ContUsuario implements iConUsuario {
     @Override
     public List<String> listarusuarios(String nick) {
         List<String> lst = new ArrayList<String>();
-        if(nick.isEmpty()==false){
-            for(String key: this.usuarios.keySet()){
-                 if(key.contains(nick)){
+        if (nick.isEmpty() == false) {
+            for (String key : this.usuarios.keySet()) {
+                if (key.contains(nick)) {
                     lst.add(key);
                 }
-        
+
             }
-        }
-        else{
-            for(String key: this.usuarios.keySet()){
+        } else {
+            for (String key : this.usuarios.keySet()) {
                 lst.add(key);
             }
         }
@@ -527,8 +532,14 @@ public class ContUsuario implements iConUsuario {
 
     }
 
-    public void agregarEstadoAPropuesta(estado e, String titulo, dtFecha dtf, dtHora dth) {
-
+    public void agregarEstadoAPropuesta(estado e, String titulo, dtFecha dtf, dtHora dth,int orden) {
+        propuesta p = this.damePropuesta(titulo);
+        if (p.getTitulo() == titulo) {
+            boolean agrego=p.agregarNuevoEstado(e, dtf, dth,orden);
+            if(agrego){
+                estadopropper.agregarPropEstado(titulo, e.getNombre(), dtf.getFecha(), dth.getHora());
+            }
+        }
     }
 
     public propuesta damePropuesta(String titulo) {
@@ -661,9 +672,9 @@ public class ContUsuario implements iConUsuario {
             for (String key : u.seguidos.keySet()) {
                 usuario uaux;
                 uaux = u.seguidos.get(key);
-                dtUsuario us = new dtUsuario(u.getNickname(), null, null, null, null, null);
-                dtUsuario aux = new dtUsuario(uaux.getNickname(), null, null, null, null, null);
-                segdej.seguir(us, aux);
+                dtSeguidores dts = new dtSeguidores(u.getNickname(), uaux.getNickname());
+
+                segdej.seguir(dts);
             }
 
         }
@@ -797,30 +808,55 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public boolean registrarColaboracion(String titulo, String colab, int monto, String retorno) {
-        propuesta p=this.damePropuesta(titulo);
-        if(this.usuarios.get(colab) instanceof colaborador){
-            colaborador c= (colaborador) this.usuarios.get(colab);
-            if(c!=null){
-                if(p!=null && c.colaborasconpropuesta(titulo)==false){
-                    Calendar cal=Calendar.getInstance();        
-                    Date da=cal.getTime();        
-                    dtFecha dtf=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
-                    dtHora dth=new dtHora(da.getHours(),da.getMinutes());
-                    colProp cp=new colProp(dtf,dth,monto,retorno,p);
+        propuesta p = this.damePropuesta(titulo);
+        if (this.usuarios.get(colab) instanceof colaborador) {
+            colaborador c = (colaborador) this.usuarios.get(colab);
+            if (c != null) {
+                if (p != null && c.colaborasconpropuesta(titulo) == false) {
+                    Calendar cal = Calendar.getInstance();
+                    Date da = cal.getTime();
+                    da.setYear(2018);
+                    dtFecha dtf = new dtFecha(Integer.toString(da.getDay()), Integer.toString(da.getMonth()), Integer.toString(da.getYear()));
+                    dtHora dth = new dtHora(da.getHours(), da.getMinutes());
+                    colProp cp = new colProp(dtf, dth, monto, retorno, p);
                     c.colaboracionesUsuario.put(p.getTitulo(), cp);
                     colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno);
                     return true;
-                }
-                else
+                } else {
                     return false;
-                
-            }
-            else
+                }
+
+            } else {
                 return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void actualizardatospropuesta(dtPropuesta dtp,estado e,int orden, dtFecha dtf, dtHora dth) throws Exception{
+        
+        propuesta p=this.damePropuesta(dtp.getTitulo());
+        if(p.getTitulo()==dtp.getTitulo()){
+            p.setDescripcion(dtp.getDescripcion());
+            p.setImagen(dtp.getImagen());
+            p.setLugar(dtp.getLugar());
+            boolean estadoagregado=p.agregarNuevoEstado(e, dtf, dth, orden);
+            p.setFechapublicada(dtp.getFechapublicada());
+            p.setFecharealizacion(dtp.getFechaRealizacion());
+            p.setPrecioEntrada(dtp.getPrecioentrada());
+            p.setMontoRequerido(dtp.getMontorequerido());
+            
+            dtPropuestasBD dtpbd=new dtPropuestasBD(dtp.getTitulo(),dtp.getProponente(),dtp.getDescripcion(),dtp.getImagen(),dtp.getLugar(),dtp.getCategoria(),p.getRetorno(),dtp.getFechaRealizacion(),dtp.getFechapublicada(),dtp.getPrecioentrada(),dtp.getMontorequerido());
+            propPersis.actualizarPropuesta(dtpbd);
+            if(estadoagregado==true){
+                estadopropper.agregarPropEstado(p.getTitulo(), e.getNombre(), dtf.getFecha(), dth.getHora());
+            }
+           
         }
         else
-            return false;
+            throw new Exception("La propuesta " + dtp.getTitulo() + " que desea modificar no existe");
     }
-    
 
 }

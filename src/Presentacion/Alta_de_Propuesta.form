@@ -7,6 +7,8 @@
         <Property name="text" type="java.lang.String" value="Tipo de espectaculo"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JScrollBar" name="jScrollBar1">
+    </Component>
   </NonVisualComponents>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

@@ -70,6 +70,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         btndardealta.setText("Dar de Alta");
         btncancelar.setText("Cancelar");
         
+        
     }
 
     /**
@@ -82,6 +83,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -397,7 +399,9 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(controlardatos()){
             Calendar cal=Calendar.getInstance();
+            
             Date da=cal.getTime();
+            da.setYear(2018);
             dtFecha dtfpublicada=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
             dtFecha dtfrealizar=new dtFecha(txtdia.getText(),txtmes.getText(),txtanio.getText());
             
@@ -494,6 +498,26 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
 
     
     public boolean controlardatos(){
+        if(this.txtanio.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Anio vacio");
+            txtanio.selectAll();
+            txtanio.requestFocus();
+            return false;
+        }        
+        if(this.txtmes.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Mes vacio");
+            txtmes.selectAll();
+            txtmes.requestFocus();
+            return false;
+        }
+        if(this.txtdia.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Dia vacio");
+            txtdia.selectAll();
+            txtdia.requestFocus();
+            return false;
+        }
+
+        
         int anio=Integer.parseInt(txtanio.getText());
         int mes=Integer.parseInt(txtmes.getText());
         int dia=Integer.parseInt(txtdia.getText());
@@ -507,16 +531,87 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             re=cbporcentaje.getText();
         }
         
-        if(this.txtproponente1.getText()=="" || this.txttipoespectaculo.getText()=="" || this.txttitulo1.getText()=="" || txtlugar.getText()=="" || txtcostoentrada.getText()=="")
+        
+        if(this.txtproponente1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Proponente vacio");
+            txtproponente1.selectAll();
+            txtproponente1.requestFocus();
             return false;
-        if(anio<1940 || 2030>anio)
+        }
+        if(this.txttipoespectaculo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Categoria vacia");
+            txttipoespectaculo.selectAll();
+            txttipoespectaculo.requestFocus();
             return false;
-        if(mes<1 || mes > 12)
+        }
+        if(this.txttitulo1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Titulo vacio");
+            txttitulo1.selectAll();
+            txttitulo1.requestFocus();
             return false;
-        if(dia <1 || dia > 31)
+        }  
+        if(this.txtlugar.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Lugar vacio");
+            txtlugar.selectAll();
+            txtlugar.requestFocus();
             return false;
-        if(re=="")
+        }  
+        if(this.txtcostoentrada.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Costo de entrada vacio");
+            txtcostoentrada.selectAll();
+            txtcostoentrada.requestFocus();
             return false;
+        }
+        if(isNumeric(this.txtcostoentrada.getText())==false){
+            JOptionPane.showMessageDialog(null,"Costo de entrada no numerico");
+            txtmontorec.selectAll();
+            txtmontorec.requestFocus();
+            return false;
+        }        
+         if(this.txtcostoentrada.getText().contains(",") || this.txtcostoentrada.getText().contains(".") || this.txtcostoentrada.getText().contains(" ") ){
+            JOptionPane.showMessageDialog(null,"Costo de entrada no numerico");
+            txtmontorec.selectAll();
+            txtmontorec.requestFocus();
+            return false;
+        }         
+        if(this.txtmontorec.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Monto requerido vacio");
+            txtmontorec.selectAll();
+            txtmontorec.requestFocus();
+            return false;
+        }
+         if(this.txtmontorec.getText().contains(",") || this.txtmontorec.getText().contains(".") || this.txtmontorec.getText().contains(" ") ){
+            JOptionPane.showMessageDialog(null,"Monto requerido no numerico");
+            txtmontorec.selectAll();
+            txtmontorec.requestFocus();
+            return false;
+        }       
+        if(isNumeric(this.txtmontorec.getText())==false){
+            JOptionPane.showMessageDialog(null,"Monto requerido no numerico");
+            txtmontorec.selectAll();
+            txtmontorec.requestFocus();
+            return false;
+        } 
+        
+        if(anio<1940 || anio>2030){
+            JOptionPane.showMessageDialog(null,"Anio incorrecto");
+            txtanio.selectAll();
+            txtanio.requestFocus();            
+            return false;}
+        if(mes<1 || mes > 12){
+            JOptionPane.showMessageDialog(null,"Mes incorrecto");
+            txtmes.selectAll();
+            txtmes.requestFocus();             
+            return false;}
+        if(dia <1 || dia > 31){
+            JOptionPane.showMessageDialog(null,"Dia incorrecto");
+            txtdia.selectAll();
+            txtdia.requestFocus();             
+            return false;}
+        if(re==""){
+            JOptionPane.showMessageDialog(null,"Retorno incorrecto");
+            cbporcentaje.requestFocus();             
+            return false;}
         else
             return true;
       
@@ -581,6 +676,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -600,5 +696,16 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txttipoespectaculo;
     private javax.swing.JTextField txttitulo1;
     // End of variables declaration//GEN-END:variables
+ 
+    
+    private static boolean isNumeric(String cadena){
+	try {
+		Integer.parseInt(cadena);
+		return true;
+	} catch (NumberFormatException nfe){
+		return false;
+	}
+}
+
 }
 

@@ -27,10 +27,11 @@ public class propuestasPersistencia {
     public static void altaPropuesta(dtPropuestasBD dtp) throws SQLException {
         try {
             String sql = null;
-            sql = "INSERT INTO `Propuesta`(`titulo`, `descripcion`, `imagen`, `lugar`, `fecha`, `precio_entrada`, `monto_necesario`, `fecha_publicacion`, `proponente`, `categoria`, `retorno`)"
-                    + " VALUES ('" + dtp.getTitulo() + "','" + dtp.getDescripcion() + "','" + dtp.getImagen() + "','" + dtp.getLugar() + "','" + dtp.getFecha().getFecha() + "','" + Integer.toString(dtp.getPrecio_entrada()) + "','" + Integer.toString(dtp.getMonto_necesario()) + "','" + dtp.getFecha_publicacion().getFecha() + "','" + dtp.getNickproponente() + "," + dtp.getCategoria() + "','" + dtp.getRetorno() + "')";
+            sql = "INSERT INTO `cultuRarte`.`Propuesta`(`titulo`, `descripcion`, `imagen`, `lugar`, `fecha`, `precio_entrada`, `monto_necesario`, `fecha_publicacion`, `proponente`, `categoria`, `retorno`)"
+                    + " VALUES ('" + dtp.getTitulo() + "','" + dtp.getDescripcion() + "','" + dtp.getImagen() + "','" + dtp.getLugar() + "','" + dtp.getFecha().getFecha() + "','" + Integer.toString(dtp.getPrecio_entrada()) + "','" + Integer.toString(dtp.getMonto_necesario()) + "','" + dtp.getFecha_publicacion().getFecha() + "','" + dtp.getNickproponente() + "','" + dtp.getCategoria() + "','" + dtp.getRetorno() + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
+            System.out.println(sql);
             st.executeUpdate(sql);
             //   conexion.cerrar(conn);
         } catch (SQLException ex) {
@@ -39,7 +40,7 @@ public class propuestasPersistencia {
         }
 
     }
-
+   
     public dtFecha construirFecha(String fecha) {
         String[] splited = fecha.split("/");
         dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
@@ -77,6 +78,23 @@ public class propuestasPersistencia {
 
     public static Map<String, propuesta> cargarPropuestasNOBorrar() {
         return null;
+    }
+    
+    public static void actualizarPropuesta(dtPropuestasBD dtp) throws SQLException {
+        try {
+            String sql = null;
+            sql = "UPDATE `cultuRarte`.`Propuesta` SET `descripcion`='"+dtp.getDescripcion()+"', `imagen`='"+dtp.getImagen()+"', `lugar`='"+dtp.getLugar()+"', `fecha`='"+dtp.getFecha().getFecha()+"', `precio_entrada`='"+Integer.toString(dtp.getPrecio_entrada())+"', `monto_necesario`='"+Integer.toString(dtp.getMonto_necesario())+"', `fecha_publicacion`='"+dtp.getFecha_publicacion().getFecha()+"', `proponente`='"+dtp.getNickproponente()+"', `categoria`='"+dtp.getCategoria()+"', `retorno`='"+dtp.getRetorno()+"' WHERE `titulo`='"+dtp.getTitulo()+"'";
+                    
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            System.out.println(sql);
+            st.executeUpdate(sql);
+            //   conexion.cerrar(conn);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        }
+
     }
 
 }

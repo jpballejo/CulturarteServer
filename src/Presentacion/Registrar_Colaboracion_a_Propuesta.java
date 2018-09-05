@@ -5,11 +5,15 @@
  */
 package Presentacion;
 
+import Logica.ContPropuesta;
 import Logica.ContUsuario;
 import Logica.dtColaborador;
+import Logica.dtFecha;
+import Logica.dtHora;
 import Logica.dtProponente;
 import Logica.dtPropuesta;
 import Logica.dtUsuario;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +27,9 @@ import javax.swing.table.DefaultTableModel;
  * @author nicolasgutierrez
  */
 public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
-    ContUsuario contUsu = new ContUsuario();
+    ContUsuario contUsu = ContUsuario.getInstance();
+    ContPropuesta contProp= ContPropuesta.getInstance();
+    
    
     
           
@@ -400,7 +406,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         txtmontotoal.setText(Integer.toString(dtp.getMontoTotal()));
         txtestado.setText(dtp.getEstado());
          txttituloprop.setText(dtp.getTitulo());
-        
+        modelo.addRow(dat);
         
         } catch (Exception ex) {
             Logger.getLogger(Registrar_Colaboracion_a_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -413,7 +419,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         int col=tablecolaboradores.columnAtPoint(evt.getPoint());
         
         dtUsuario dtc;
-        dtc= contUsu.infoColaborador((String)tpropuestas.getValueAt(row, col));
+        dtc= contUsu.infoColaborador((String)tablecolaboradores.getValueAt(row, col));
         DefaultTableModel modelo= (DefaultTableModel) tablecolaborador.getModel();
         modelo.setRowCount(0);
         
@@ -436,38 +442,79 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                 re=cbporcentaje.getText();
             }
             
-        if(re.isEmpty()==false){          
-            if(txtmontoacolaborar.getText().isEmpty()==false && txtmontoacolaborar.getText().contains(",")==false && txtmontoacolaborar.getText().contains(".")==false && txtmontoacolaborar.getText().contains(" ")==false && isNumeric(txtmontoacolaborar.getText())){
-                if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")==false){
-                    if(txtnickcolaborador.getText().isEmpty()==false && txtnickcolaborador.getText().contains("Seleccione uno")==false){
-                       boolean b= contUsu.registrarColaboracion(txttituloprop.getText(), txtnickcolaborador.getText(), Integer.parseInt(txtmontoacolaborar.getText()), re);
-                        if(b){
-                             JOptionPane.showMessageDialog(null, "Colaboracion registrada");
-                        }
-                        else{
-                             JOptionPane.showMessageDialog(null, "Imposible registrar la colaboracion");
-                        }
-                    }
-                    else{
-                         JOptionPane.showMessageDialog(null, "Por favor seleccione un colaborador");
-                    }
-                }
-                else{
-                     JOptionPane.showMessageDialog(null, "Por favor seleccione una propuesta");
-                }
+
+    
+        
+            Calendar cal=Calendar.getInstance();
+            Date da=cal.getTime();
+            da.setYear(2018);
+            dtFecha dtf=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
+            dtHora dth=new dtHora(da.getHours(),da.getMinutes());
+                            
+        
+
+         
+           
+ 
+        if(txtestado.getText().contains("No financiada")==false){
+            if(txtestado.getText().contains("Cancelada")==false){        
+                if(txtestado.getText().contains("Financiada")==false){
+                    if(txtestado.getText().contains("Ingresada")==false){        
+                         if(re.isEmpty()==false){          
+                            if(txtmontoacolaborar.getText().isEmpty()==false && txtmontoacolaborar.getText().contains(",")==false && txtmontoacolaborar.getText().contains(".")==false && txtmontoacolaborar.getText().contains(" ")==false && isNumeric(txtmontoacolaborar.getText())){
+                                if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")==false){
+                                    if(txtnickcolaborador.getText().isEmpty()==false && txtnickcolaborador.getText().contains("Seleccione uno")==false){
+                                     boolean b= contUsu.registrarColaboracion(txttituloprop.getText(), txtnickcolaborador.getText(), Integer.parseInt(txtmontoacolaborar.getText()), re);
+                                     if(txtestado.getText().contains("Publicada") && b){
+                                         contProp.agregarEstadoAPropuesta("En financiacion", txttituloprop.getText(), dtf, dth);
+                                     } 
+                                     
+                                     if(b){
+                                            JOptionPane.showMessageDialog(null, "Colaboracion registrada");
+                                        }
+                                        else{
+                                            JOptionPane.showMessageDialog(null, "Imposible registrar la colaboracion");
+                                        }
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Por favor seleccione un colaborador");
+                                    }
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Por favor seleccione una propuesta");
+                                }
                 
-            }
-            else{
-                 JOptionPane.showMessageDialog(null, "Por favor coloque un monto valido");
-                 txtmontoacolaborar.selectAll();
-                 txtmontoacolaborar.requestFocus();
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Por favor coloque un monto valido");
+                                txtmontoacolaborar.selectAll();
+                                txtmontoacolaborar.requestFocus();
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Por favor seleccione un retorno");                
+                            cbporcentaje.requestFocus();
+                            cbentradas.requestFocus();
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No es posible registrar una colaboracion en una propuesta Ingresada, esta debe ser verificada por un administrador");
+                        txtestado.selectAll();
+                        txtestado.requestFocus();                
+                    }  
+                }else{
+                    JOptionPane.showMessageDialog(null, "La propuesta ya fue financiada y no acepta colaboraciones");
+                    txtestado.selectAll();
+                    txtestado.requestFocus(); 
+                }
+             }else{
+                 JOptionPane.showMessageDialog(null, "La propuesta ha sido cancelada");
+                 txtestado.selectAll();
+                 txtestado.requestFocus();   
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Por favor seleccione un retorno");                
-            cbporcentaje.requestFocus();
-            cbentradas.requestFocus();
+            JOptionPane.showMessageDialog(null, "La propuesta no se encuentra en financiacion debido a que su fecha caduco");
+            txtestado.selectAll();
+            txtestado.requestFocus();   
         }
-            
             
     }//GEN-LAST:event_btnaceptarActionPerformed
 

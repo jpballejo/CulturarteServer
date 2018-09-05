@@ -25,7 +25,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
     public Consulta_de_Propuesta() {
         initComponents();
         
-        this.setSize(625, 579);
+        this.setSize(774, 579);
         
         jLabel1.setText("Propuestas");
         jLabel2.setText("Imagen");
@@ -102,7 +102,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
             tablepropuesta.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 55, 367, 97));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 55, 540, 97));
 
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 169, -1, -1));
         getContentPane().add(txtimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 196, 100, 100));

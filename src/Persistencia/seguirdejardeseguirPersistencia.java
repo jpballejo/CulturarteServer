@@ -24,10 +24,10 @@ public class seguirdejardeseguirPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
 
-    public boolean seguir(dtUsuario us, dtUsuario uas) {
+    public boolean seguir(dtSeguidores dts) {
         try {
             Connection conn = conexion.getConexion();
-            String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`) VALUES ('" + us.getNickname() + "','" + uas.getNickname() + "')";
+            String sql = "INSERT INTO `cultuRarte`.`Seguidores`(`nickusuario`,`nickaseguir`) VALUES ('" + dts.getNickusuario() + "','" + dts.getNickaseguir() + "')";
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
          //   conexion.cerrar(conn);
@@ -38,9 +38,9 @@ public class seguirdejardeseguirPersistencia {
         }
     }
 
-    public boolean dejardeseguir(dtUsuario us, dtUsuario uas) {
+    public boolean dejardeseguir(dtSeguidores dts) {
         try {
-            String sql="DELETE FROM 'Seguidores' WHERE nickusuario ='"+us.getNickname()+"'  AND nickaseguir ='"+uas.getNickname()+"'";
+            String sql="DELETE FROM `cultuRarte`.`Seguidores` WHERE nickusuario='"+dts.getNickusuario()+"'  AND nickaseguir='"+dts.getNickaseguir()+"'";
             Connection conn = conexion.getConexion();
             Statement st=conn.createStatement();
             st.executeUpdate(sql);

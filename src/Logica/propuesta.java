@@ -87,21 +87,37 @@ public class propuesta {
     }
 
     public String getEstadoActual() {
-        int ides = estados.size();
+    /*   int ides = estados.size();
+       if( ides==1 || ides==0)
+           return "Ingresada";
+
         String est = null;
         propEstado propEst = estados.get(ides);
         est = propEst.getEstado().getNombre();
+        return est; */
+        String est= "Ingresada";
+        propEstado propEst=null;
+        for(int key: estados.keySet()){
+             propEst = estados.get(key);
+        }
+        if(propEst!=null && propEst.getEstado().getNombre().isEmpty()==false)
+            est=propEst.getEstado().getNombre();
+            
         return est;
+        
+
     }
 
     public TreeMap<Integer, propEstado> getEstados() {
         return this.estados;
     }
 
-    public void agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth, int orden) {
+    public boolean agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth, int orden) {
+        if(estados.containsKey(orden))
+            return false;
         propEstado pe = new propEstado(dtf, dth, e);
         this.estados.put(orden, pe);
-
+        return this.estados.containsKey(orden);
     }
 
     /**
@@ -276,5 +292,6 @@ public class propuesta {
         this.fecharealizacion = null;
 
     }
+
 
 }

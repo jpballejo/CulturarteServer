@@ -51,7 +51,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+        
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -135,7 +135,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 42, 403, 71));
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, labelimagen, org.jdesktop.beansbinding.ObjectProperty.create(), labelimagen, org.jdesktop.beansbinding.BeanProperty.create("icon"));
-        bindingGroup.addBinding(binding);
+        
 
         getContentPane().add(labelimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 151, 100, 100));
 
@@ -156,7 +156,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         ));
         jScrollPane3.setViewportView(tablecolaboradores);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 378, 208, 100));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 208, 100));
 
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 350, -1, -1));
 
@@ -219,7 +219,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, -1, -1));
 
-        bindingGroup.bind();
+       
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,7 +252,7 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         Object[] dat={dtp.getNombre(),dtp.getApellido(),dtp.getEmail(),dtp.getFechaNac().getFecha(),dtp.getSitioWeb(),dtp.getBiografia()};
         modelo.addRow(dat);
         
-        List<dtPropuesta> ldtp=ICU.listarPropuestas(jTable1.getValueAt(row, col).toString()); //otra forma
+        List<dtPropuesta> ldtp=ICU.listarPropuestas((String)jTable1.getValueAt(row, col)); //otra forma // jTable1.getValueAt(row, col).toString()
         DefaultTableModel modelo2=(DefaultTableModel) tablepropuestas1.getModel();
         modelo2.setRowCount(0);
         for (int i=0;i<ldtp.size();i++) {
@@ -269,14 +269,15 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         int row=jTable1.rowAtPoint(evt.getPoint());
         int col=jTable1.columnAtPoint(evt.getPoint());
-        Object[] dat3= (Object[]) (jTable1.getValueAt(row, col));
-        dtPropuesta dtp=ICP.infoProp(dat3[0].toString()); //pide el titulo al array
+        String titulo= (String)tablepropuestas1.getValueAt(row, col);
+        dtPropuesta dtp=ICP.infoProp(titulo); //pide el titulo al array
         DefaultTableModel model=(DefaultTableModel) tableinfopropuesta.getModel();
         model.setRowCount(0);
         
         Object[] inf={dtp.getTitulo(),dtp.getDescripcion(),dtp.getLugar(),dtp.getFechaRealizacion().getFecha()};
         model.addRow(inf);
-        labelmonto.setText(Integer.toString(dtp.getMontorequerido()));
+        labelmonto.setText(Integer.toString(dtp.getMontoTotal()));
+        
         List<String> lc=dtp.detColaboradores();
         DefaultTableModel model2=(DefaultTableModel) tablecolaboradores.getModel();
         model2.setRowCount(0);
@@ -317,6 +318,6 @@ public class Consulta_de_Perfil_de_Proponente extends javax.swing.JInternalFrame
     private javax.swing.JTable tableproponente;
     private javax.swing.JTable tablepropuestas1;
     private javax.swing.JTextField txtbuscar;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+  
     // End of variables declaration//GEN-END:variables
 }

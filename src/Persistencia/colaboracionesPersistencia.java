@@ -26,7 +26,7 @@ public class colaboracionesPersistencia {
     public boolean registrarColaboracion(String colaborador, String titulo, String fecha, String hora, String monto, String retorno) {
         try {
             String sql = null;
-            sql = "INSERT INTO 'Colaboraciones' ('nickusuario', 'tituloprop', 'fecha', 'hora', 'monto', 'retorno') VALUES ('" + colaborador + "','" + titulo + "','" + fecha + "','" + hora + "','" + monto + "','" + retorno + "')";
+            sql = "INSERT INTO `cultuRarte`.`Colaboraciones` (`nickusuario`, `tituloprop`, `fecha`, `hora`, `monto`, `retorno`) VALUES ('" + colaborador + "','" + titulo + "','" + fecha + "','" + hora + "','" + monto + "','" + retorno + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -42,7 +42,7 @@ public class colaboracionesPersistencia {
     public boolean eliminarColaboracion(String colaborador, String titulo) {
         try {
             String sql = null;
-            sql = "DELETE FROM 'Colaboraciones' WHERE nickusuario ='" + colaborador + "' AND tituloprop ='" + titulo + "'";
+            sql = "DELETE FROM `cultuRarte`.`Colaboraciones` WHERE nickusuario='" + colaborador + "' AND tituloprop ='" + titulo + "'";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);

@@ -34,6 +34,9 @@ public interface iConPropuesta {
     public abstract categoria getCategoria(String cateNombre);
     public abstract void levantarBDdesdeMemoria();
     public abstract void cargarEstadosProp(propuesta prop,ArrayList<dtEstadosPropuestas> estProp);
-    
+    public abstract int getIdEstado(String estadoNom);
+    public abstract void agregarEstadoAPropuesta(String e, String titulo, dtFecha dtf, dtHora dth);
+    public abstract void actualizardatospropuesta(dtPropuesta dtp,String e, dtFecha dtf, dtHora dth) throws Exception;
+    public abstract List<String> listarEstados();
 }
     

@@ -24,7 +24,7 @@ public class estadoPropuestaPersistencia {
     public boolean agregarPropEstado(String titulo, String estado, String fecha, String hora) {
         try {
             String sql = null;
-            sql = "INSERT INTO 'estadoPropuesta' ('propuesta', 'estado', 'fecha', 'hora') VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "')";
+            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -38,7 +38,7 @@ public class estadoPropuestaPersistencia {
     public boolean eliminarPropEstado(String propuesta, String estado) {
         try {
             String sql = null;
-            sql = "DELETE FROM 'estadoPropuesta' WHERE propuesta='" + propuesta + "' AND estado='" + estado + "'";
+            sql = "DELETE FROM `cultuRarte`.`estadoPropuesta` WHERE propuesta='" + propuesta + "' AND estado='" + estado + "'";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
