@@ -79,6 +79,7 @@ public class ContCargaBD implements iContCargaBD {
         this.estadosPer = estadosV;
     }
 
+
     public void setearEstadoPropuesta(dtEstadosPropuestas estProp) {
         try {
             for (int i = 0; i < estaPropPer.size(); i++) {
@@ -149,7 +150,7 @@ public class ContCargaBD implements iContCargaBD {
         for (int i = 0; i < usuariosPer.size(); i++) {
             try {
                 dtUsuario usuAlta = (dtUsuario) usuariosPer.get(i);
-               bdCul.altaUsuario(usuAlta);
+                bdCul.altaUsuario(usuAlta);
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
@@ -167,16 +168,18 @@ public class ContCargaBD implements iContCargaBD {
         }
 
     }
-    private void cargarCategorias(){
+
+    private void cargarCategorias() {
         try {
-            for (int i =0;i<categoriasPer.size();i++){
-            dtCategoria dtcat=categoriasPer.get(i);
-            bdCul.altaCategoriaCD(dtcat);
+            for (int i = 0; i < categoriasPer.size(); i++) {
+                dtCategoria dtcat = categoriasPer.get(i);
+                bdCul.altaCategoriaCD(dtcat);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
+
     private void cargarPropuestas() {
         for (int i = 0; i < propuestasPer.size(); i++) {
             dtPropuestasBD prop = (dtPropuestasBD) propuestasPer.get(i);
@@ -204,8 +207,6 @@ public class ContCargaBD implements iContCargaBD {
     private boolean truncarCategoria() {
         return false;
     }
-
-  
 
     private void cargarColaboraciones() {
     }
