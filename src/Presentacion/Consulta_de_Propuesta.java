@@ -110,7 +110,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 169, -1, -1));
         getContentPane().add(txtestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 164, 206, -1));
 
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 196, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, -1));
 
         tablacolaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +125,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(tablacolaboradores);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 218, 247, 168));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 247, 168));
 
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 308, -1, -1));
 
@@ -142,7 +142,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

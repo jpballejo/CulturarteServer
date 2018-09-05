@@ -863,4 +863,44 @@ public class ContUsuario implements iConUsuario {
             throw new Exception("La propuesta " + dtp.getTitulo() + " que desea modificar no existe");
     }
 
+    List<String> listarPropuestasPorEstado(String estado) {
+        List<String> retorno= new ArrayList<>();
+        
+        for(String ku: this.usuarios.keySet()){
+            if(this.usuarios.get(ku) instanceof proponente){
+                proponente prop=(proponente) this.usuarios.get(ku);
+                for(String kp: prop.propuestasUsuario.keySet()){
+                    propuesta p=prop.propuestasUsuario.get(kp);
+                    if(p.getEstadoActual().contains(estado)){
+                        retorno.add(kp);
+                    }
+                }
+            
+            }
+        }
+        return retorno;
+    }
+
+    void eliminarcolaboracion(String nickname, String titulo) throws Exception {
+       colaborador c=this.damecolaborador(nickname);
+       if(c.getNickname().contentEquals(nickname)){
+           colProp cp=c.colaboracionesUsuario.remove(titulo);
+           cp.eliminate();
+           colabPer.eliminarColaboracion(nickname, titulo);
+       }
+       else
+         throw new Exception("El colaborador " + nickname + " no existe");  
+    }
+
+    
+    public colaborador damecolaborador(String nick){
+        for(String key: this.usuarios.keySet()){
+            if(this.usuarios.get(key) instanceof colaborador && key.contentEquals(nick)){
+                colaborador c= (colaborador) this.usuarios.get(key);
+                return c;
+            }
+        }
+        
+        return null;   
+    }
 }

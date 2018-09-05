@@ -403,7 +403,7 @@ public class ContPropuesta implements iConPropuesta {
     
     @Override
     public void agregarEstadoAPropuesta(String e, String titulo, dtFecha dtf, dtHora dth) {
-        cUsuario.agregarEstadoAPropuesta(getEstado(e), titulo, dtf, dth, getIdEstado(titulo));
+        cUsuario.agregarEstadoAPropuesta(getEstado(e), titulo, dtf, dth, getIdEstado(e));
     }
     
     @Override
@@ -418,6 +418,22 @@ public class ContPropuesta implements iConPropuesta {
     @Override
     public void actualizardatospropuesta(dtPropuesta dtp, String e, dtFecha dtf, dtHora dth) throws Exception {        
         cUsuario.actualizardatospropuesta(dtp, this.getEstado(e), this.getIdEstado(e), dtf, dth);
+    }
+
+    @Override
+    public List<String> listarPropuestasPorEstado(String estado) {
+        return cUsuario.listarPropuestasPorEstado(estado);
+    }
+
+    public List<String> listarCategoriasBeta() {
+       List<String> retorno = new ArrayList<>();
+        for (String key : this.categorias.keySet()) {
+             categoria c=this.categorias.get(key);
+             String categoriacompleta=c.getNombre()+"/"+c.getPadre().getNombre();
+             retorno.add(categoriacompleta);
+            
+        }  
+        return retorno;
     }
     
 }

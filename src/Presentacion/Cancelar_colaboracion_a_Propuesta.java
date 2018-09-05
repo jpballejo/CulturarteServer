@@ -5,17 +5,43 @@
  */
 package Presentacion;
 
+import Logica.ContColaboracion;
+import Logica.ContUsuario;
+import Logica.dtColProp;
+import Logica.dtCola;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
 
+    private ContUsuario ICU = ContUsuario.getInstance();
+    private ContColaboracion ICC= ContColaboracion.getInstance();    
+
     /**
      * Creates new form Cancelar_colaboracion_a_Propuesta
      */
     public Cancelar_colaboracion_a_Propuesta() {
         initComponents();
+        
+        this.setSize(775, 567);
+        
+        jLabel1.setText("Colaboradores");
+        jLabel2.setText("Colaboracion seleccionada:");
+        jLabel3.setText("Titulo");
+        jLabel4.setText("Nickname");
+        labeltitulo.setText("Seleccione una colaboracion");
+        labelnickname.setText("Seleccione una colaboracion");
+        btncancelar.setText("Cancelar");
+        btnconfirmar.setText("Eliminar");
+        
     }
 
     /**
@@ -28,25 +54,44 @@ public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFram
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablecolaboraciones = new javax.swing.JTable();
+        tablacolaboradores = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablacolaboracion = new javax.swing.JTable();
         btnconfirmar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablacolaboraciones = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        labeltitulo = new javax.swing.JLabel();
+        labelnickname = new javax.swing.JLabel();
 
-        tablecolaboraciones.setModel(new javax.swing.table.DefaultTableModel(
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablacolaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Nickname", "Titulo"
+                "Nickname"
             }
         ));
-        jScrollPane1.setViewportView(tablecolaboraciones);
+        tablacolaboradores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablacolaboradoresMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablacolaboradores);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 95, 120, 400));
+
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 28, -1, -1));
 
         tablacolaboracion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -56,59 +101,147 @@ public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFram
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nickname", "Fecha", "Hora", "Monto", "Retorno"
+                "Titulo", "Fecha", "Hora", "Monto", "Retorno"
             }
         ));
         jScrollPane2.setViewportView(tablacolaboracion);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btncancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnconfirmar))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(254, 254, 254)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btncancelar)
-                            .addComponent(btnconfirmar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28))
-        );
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 560, 160));
+
+        btnconfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconfirmarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnconfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, -1, -1));
+
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, -1, -1));
+
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, -1));
+
+        tablacolaboraciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Titulo", "Nickname"
+            }
+        ));
+        tablacolaboraciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablacolaboracionesMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablacolaboraciones);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 290, 250));
+
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
+
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
+
+        getContentPane().add(labeltitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, -1));
+
+        getContentPane().add(labelnickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtbuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyPressed
+        // TODO add your handling code here:
+        List<String> colaboradores= ICU.listarColaboradoresporNick(txtbuscar.getText());
+        DefaultTableModel modelo=(DefaultTableModel) tablacolaboradores.getModel();
+        modelo.setRowCount(0);
+        for (int i=0;i<colaboradores.size();i++) {
+            String c=colaboradores.get(i);
+            Object[] dat={c};
+            modelo.addRow(dat);
+        }
+    }//GEN-LAST:event_txtbuscarKeyPressed
+
+    private void tablacolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablacolaboradoresMouseClicked
+        // TODO add your handling code here:
+        int row=tablacolaboradores.rowAtPoint(evt.getPoint());
+        int col=tablacolaboradores.columnAtPoint(evt.getPoint());
+        
+        DefaultTableModel modelo=(DefaultTableModel) tablacolaboraciones.getModel();
+        modelo.setRowCount(0);
+        List<dtCola> list=ICC.listarcolaboracionesdelcolaborador((String)tablacolaboradores.getValueAt(row, col));
+        labelnickname.setText((String)tablacolaboradores.getValueAt(row, col));
+        Iterator it=list.iterator();
+        while(it.hasNext()){
+            dtCola dtco=(dtCola) it.next();
+            Object[] dat={dtco.getTitulo(),(String)tablacolaboradores.getValueAt(row, col)};
+            modelo.addRow(dat);
+        }
+    }//GEN-LAST:event_tablacolaboradoresMouseClicked
+
+    private void tablacolaboracionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablacolaboracionesMouseClicked
+        // TODO add your handling code here:
+        int row=tablacolaboraciones.rowAtPoint(evt.getPoint());
+        int col=tablacolaboraciones.columnAtPoint(evt.getPoint());        
+        DefaultTableModel modelo=(DefaultTableModel) tablacolaboracion.getModel();
+        modelo.setRowCount(0);
+        
+        labeltitulo.setText((String)tablacolaboraciones.getValueAt(row, col));
+        dtColProp dtcp=ICC.seleccionarColaboracion(labelnickname.getText(),(String)tablacolaboraciones.getValueAt(row, col));       
+        
+            Object[] dat={(String)tablacolaboraciones.getValueAt(row, col),dtcp.getFecha().getFecha(),dtcp.getHora().getHora(),dtcp.getMontoColaborado(),dtcp.getRetorno()};
+            modelo.addRow(dat);  
+    }//GEN-LAST:event_tablacolaboracionesMouseClicked
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btncancelarActionPerformed
+
+    private void btnconfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfirmarActionPerformed
+        // TODO add your handling code here:
+        try {
+        if(labelnickname.getText().isEmpty() || labeltitulo.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"Seleccione una propuesta");
+        else{
+            
+                ICC.eliminarcolaboracion(labelnickname.getText(), labeltitulo.getText());
+                JOptionPane.showMessageDialog(null,"Colaboracion eliminada"); 
+            }
+         } catch (Exception ex) {
+                Logger.getLogger(Cancelar_colaboracion_a_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnconfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btnconfirmar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel labelnickname;
+    private javax.swing.JLabel labeltitulo;
     private javax.swing.JTable tablacolaboracion;
-    private javax.swing.JTable tablecolaboraciones;
+    private javax.swing.JTable tablacolaboraciones;
+    private javax.swing.JTable tablacolaboradores;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

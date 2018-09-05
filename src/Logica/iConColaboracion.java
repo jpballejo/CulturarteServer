@@ -27,6 +27,7 @@ public interface iConColaboracion {
     public abstract void eliminar() throws Exception;
     public abstract void borrartodocColaboraciones();
     public abstract List<dtCola> listarcolaboracionesdelcolaborador(String nickcolaborador);
+    public abstract void eliminarcolaboracion(String nickname, String titulo) throws Exception;
 
     public void levantarBDdesdeMemoria();
 

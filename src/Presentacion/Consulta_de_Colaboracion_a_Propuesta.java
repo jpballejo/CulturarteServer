@@ -27,6 +27,14 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
      */
     public Consulta_de_Colaboracion_a_Propuesta() {
         initComponents();
+        
+        this.setSize(626, 582);
+        
+        jLabel1.setText("Colaboradores");
+        jLabel4.setText("Colaboraciones realizadas");
+        labelnick.setText("Seleccione un colaborador");
+        jLabel5.setText("Informacion de colaboracion");
+        jButton1.setText("Cancelar");
     }
 
     /**
@@ -49,6 +57,7 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
         tablainfocol = new javax.swing.JTable();
         txtbuscar = new javax.swing.JTextField();
         labelnick = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -127,6 +136,13 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
 
         getContentPane().add(labelnick, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, 20));
 
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -177,8 +193,14 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
         
     }//GEN-LAST:event_tablacolaboracionesMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
