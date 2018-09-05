@@ -115,7 +115,7 @@ public class BDCulturarte {
     }
 
     public boolean cargarUsusOrigin(dtUsuario usuOrigen) {
-        return true;
+        return true;  
     }
 
     public boolean cargarPropuestasOrigin(dtPropuestasBD prop) {
