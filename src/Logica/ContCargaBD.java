@@ -5,32 +5,212 @@
  */
 package Logica;
 
+import Persistencia.BDCulturarte;
+import Persistencia.estadoPersistencia;
+import Persistencia.propuestasPersistencia;
+import Persistencia.usuariosPersistencia;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author juan
  */
-public class ContCargaBD implements iContCargaBD{
+public class ContCargaBD implements iContCargaBD {
+//import clases
 
-    @Override
-    public void alterBd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static ContCargaBD instance;
+    private BDCulturarte bdCul = new BDCulturarte();
+    private usuariosPersistencia usuPersistencia = new usuariosPersistencia();
+    private propuestasPersistencia propPersistencia = new propuestasPersistencia();
+    private estadoPersistencia estadoPersistencia = new estadoPersistencia();
+
+//arreglos dt para carga -- filtrados!
+    private ArrayList<dtUsuario> usuariosPer = new ArrayList<>();
+    private ArrayList<dtCategoria> categoriasPer = new ArrayList<>();
+    private ArrayList<dtEstado> estadosPer = new ArrayList<>();
+    private ArrayList<dtPropuestasBD> propuestasPer = new ArrayList<>();
+    private ArrayList<dtColaboracionCompleto> colaboracionesPer = new ArrayList<>();
+    private ArrayList<dtEstadosPropuestas> estadosPropuestaPer = new ArrayList<>();
+//arreglos primitivos para carga -- bruto
+    private ArrayList<String> usuPer = new ArrayList<>();
+    private ArrayList<String> propPer = new ArrayList<>();
+    private ArrayList<dtColaboraciones> colPer = new ArrayList<>();
+    private ArrayList<dtEstadosPropuestas> estaPropPer = new ArrayList<>();
+
+    public static ContCargaBD getInstance() {
+        if (instance == null) {
+            instance = new ContCargaBD();
+        }
+        return instance;
     }
 
-    @Override
-    public void cargarUsuarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ContCargaBD() {
+
+    }
+//funciones levantar per -3-
+
+    public void levantaBDusuPer() {
+        bdCul.levantaUsusOrigin(usuPer);
     }
 
-    @Override
-    public void cargarEstados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void levantarBDproPer() {
+        bdCul.levantarPropuestasOrigin(propPer);
     }
 
-    @Override
-    public void cargarCategorias() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void levantarBDcolPer() {
+        bdCul.levantarColaboracionesOrigin(colPer);
     }
-    
-    
-    
+
+    public void levantarBDestadosPropPer() {
+        bdCul.levantarEstadosOrigin(estaPropPer);
+    }
+
+    public boolean cargarDatos() {
+        return true;
+    }
+
+    public void setearCategoria(dtCategoria dtcat) {
+        categoriasPer.add(dtcat);
+    }
+
+    public void setearEstado(ArrayList<dtEstado> estadosV) {
+        this.estadosPer = estadosV;
+    }
+
+    public void setearEstadoPropuesta(dtEstadosPropuestas estProp) {
+        try {
+            for (int i = 0; i < estaPropPer.size(); i++) {
+                dtEstadosPropuestas dtcontrol = (dtEstadosPropuestas) estaPropPer.get(i);
+                String estado = null, titulo = null;
+                estado = dtcontrol.getEstado();
+                titulo = dtcontrol.getTituloprop();
+                dtFecha fecha = dtcontrol.getFecha();
+                if (estProp.getEstado().equals(estado)) {
+                    if (estProp.getTituloprop().equals(titulo)) {
+                        if (estProp.getFecha().equals(fecha)) {
+                            estadosPropuestaPer.add(estProp);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void agregardtusu(dtUsuario us) {
+        try {
+            for (int i = 0; i < usuPer.size(); i++) {
+                String usuN = usuPer.get(i);
+                if (us.getNickname().equals(usuN)) {
+                    usuariosPer.add(us);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    public void agregardtpropuesta(dtPropuestasBD dtprop) {
+        try {
+            for (int i = 0; i > propPer.size(); i++) {
+                String tituloP = propPer.get(i);
+                if (dtprop.getTitulo().equals(tituloP)) {
+                    propuestasPer.add(dtprop);
+                }
+
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    public void agregardtcolaboraciones(dtColaboracionCompleto dtcol) {
+        try {
+            for (int i = 0; i < colPer.size(); i++) {
+                dtColaboraciones dtcola = colPer.get(i);
+                if ((dtcol.getNickname().equals(dtcola.getNickname()) == true) && (dtcol.getTitulo().equals(dtcola.getIdPropuesta()))) {
+                    if (dtcol.getFecha().equals(dtcola.getFecha())) {
+                        colaboracionesPer.add(dtcol);
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void cargarUsuarios() {
+        for (int i = 0; i < usuariosPer.size(); i++) {
+            try {
+                dtUsuario usuAlta = (dtUsuario) usuariosPer.get(i);
+               bdCul.altaUsuario(usuAlta);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    private void cargarEstados() {
+        try {
+            for (int i = 0; i < estadosPer.size(); i++) {
+                dtEstado esta = (dtEstado) estadosPer.get(i);
+                bdCul.agregarEstadoCD(esta);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    private void cargarCategorias(){
+        try {
+            for (int i =0;i<categoriasPer.size();i++){
+            dtCategoria dtcat=categoriasPer.get(i);
+            bdCul.altaCategoriaCD(dtcat);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    private void cargarPropuestas() {
+        for (int i = 0; i < propuestasPer.size(); i++) {
+            dtPropuestasBD prop = (dtPropuestasBD) propuestasPer.get(i);
+            bdCul.altaPropuestaCD(prop);
+        }
+    }
+
+    private boolean truncarTablas() {
+
+        return false;
+    }
+
+    private boolean truncarUsuarios() {
+        return false;
+    }
+
+    private boolean truncarPropuestas() {
+        return false;
+    }
+
+    private boolean truncarColaboraciones() {
+        return false;
+    }
+
+    private boolean truncarCategoria() {
+        return false;
+    }
+
+  
+
+    private void cargarColaboraciones() {
+    }
+
+    private void cargarEstadosPropuestas() {
+    }
+
 }

@@ -40,14 +40,21 @@ public class ContPropuesta implements iConPropuesta {
     propuestasPersistencia propPer = new propuestasPersistencia();
     estadoPropuestaPersistencia estPropPer = new estadoPropuestaPersistencia();
     private Map<String, Integer> idEstado = new HashMap<String, Integer>();
-
-    private void cargaridEstado() {
-        this.idEstado.put("Cancelada", 6);
-        this.idEstado.put("No financiada", 5);
-        this.idEstado.put("Financiada", 4);
-        this.idEstado.put("En financiacion", 3);
-        this.idEstado.put("Publicada", 2);
-        this.idEstado.put("Ingresada", 1);
+    ContCargaBD contCarga = ContCargaBD.getInstance();
+    
+    
+    private void cargaridEstado(ArrayList<dtEstado> nomEstados) {
+        try {
+           for (int i =0;i<nomEstados.size();i++){
+       dtEstado est= (dtEstado) nomEstados.get(i);
+       idEstado.put(est.getNombre(),est.getNumero());
+       }
+           contCarga.setearEstado(nomEstados);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+       
+        
     }
 
     public boolean moverImagenesProp() {
@@ -115,7 +122,6 @@ public class ContPropuesta implements iConPropuesta {
 
     @Override
     public void cargarPropuestas() {
-        cargaridEstado();
         cargaCategorias();
         cargaEstados();
         cargaPropuestas();
@@ -138,16 +144,18 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     @Override
-    //revisdar jp
+    //revisado jp---cambio atributos que se pasan al constructor/testear!
     public void datosPropuesta(dtPropuesta dtp) {
-        //propuesta p = new propuesta(dtp.getTitulo(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido(), dtp.retorno, this.estados.get(dtp.estado));
-        // cUsuario.linkearpropuesta(p, dtp.getProponente());
+        estado esta = (estado)estados.get(dtp.getEstado());
+        categoria cat= (categoria)categorias.get(dtp.getCategoria());
+        propuesta p = new propuesta(dtp.getTitulo(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido(), dtp.getRetorno(), esta,cat);
+         cUsuario.linkearpropuesta(p, dtp.getProponente());
 
-        dtPropuestasBD dtpbd = new dtPropuestasBD(dtp.getTitulo(), dtp.proponente, dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getCategoria(), dtp.retorno, dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido());
+        dtPropuestasBD dtpbd = new dtPropuestasBD(dtp.getTitulo(), dtp.getProponente(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getCategoria(), dtp.getRetorno(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido());
         try {
             propuestasPersistencia.altaPropuesta(dtpbd);
         } catch (SQLException ex) {
-            Logger.getLogger(ContPropuesta.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -210,6 +218,7 @@ public class ContPropuesta implements iConPropuesta {
             System.out.println(dtcate.size());
             for (int p = 0; p < dtcate.size(); p++) {
                 dtCategoria dtcatp = (dtCategoria) dtcate.get(p);
+                
                 if (dtcatp.getPadre() != null) {
                     categoria catp = (categoria) categorias.get(dtcatp.getPadre());
                     categoria cath = (categoria) categorias.get(dtcatp.getNombre());
@@ -223,15 +232,20 @@ public class ContPropuesta implements iConPropuesta {
     }//revisado
 
     public void cargaEstados() {
-        ArrayList<String> nomEstados = new ArrayList<>();
+        ArrayList<dtEstado> nomEstados = new ArrayList<>();
         estPer.CargarEstados(nomEstados);
         for (int i = 0; i < nomEstados.size(); i++) {
-            estado nuevoEstado = new estado(nomEstados.get(i));
+            dtEstado est = nomEstados.get(i);
+            String nombre=est.getNombre();
+            estado nuevoEstado = new estado(nombre);
             estados.put(nuevoEstado.getNombre(), nuevoEstado);
         }
+        cargaridEstado(nomEstados);
     }
 
     public void cargaPropuestas() {
+        contCarga.levantarBDproPer();
+        contCarga.levantarBDestadosPropPer();
         ArrayList<dtPropuestasBD> dtpropuestasDb = new ArrayList<dtPropuestasBD>();
         propPer.cargarPropuestas(dtpropuestasDb);
         ArrayList<dtEstadosPropuestas> estProp = new ArrayList<>();

@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class categoriaPersistencia {
 
-      static ConexionDB conexion = new ConexionDB();
+    static ConexionDB conexion = new ConexionDB();
 
     public static void altaCategoria(String nombre, String padre) throws Exception {
         try {
@@ -30,13 +30,15 @@ public class categoriaPersistencia {
             Statement st = conn.createStatement();
             sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + nombre + "','" + padre + "')";
             st.executeUpdate(sql);
-           // conexion.cerrar(conn);
+            // conexion.cerrar(conn);
 
         } catch (SQLException ex) {
             throw new Exception("Error al insertar los datos en la BD");
         }
 
     }
+
+    
 
     public void borrarCategoria(String nombre) throws Exception {
         try {
@@ -54,29 +56,28 @@ public class categoriaPersistencia {
     }
 
     public void cargarCat(ArrayList<dtCategoria> categorias) {
-        
-        
+
         try {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             String sql = "SELECT * FROM cultuRarte.Categoria";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String nombre =null;
+                String nombre = null;
                 String padre = null;
-                nombre= rs.getString(1);
-                padre=rs.getString(2);
-                if (padre!=null) {
+                nombre = rs.getString(1);
+                padre = rs.getString(2);
+                if (padre != null) {
                     dtCategoria dtCat = new dtCategoria(nombre, padre);
                     categorias.add(dtCat);
                 }
-                if (padre==null) {
+                if (padre == null) {
                     dtCategoria dtCat = new dtCategoria(nombre, null);
                     categorias.add(dtCat);
                 }
 
             }
-            
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -114,7 +115,7 @@ public class categoriaPersistencia {
                 }
 
             }
-           // conexion.cerrar(conn);
+            // conexion.cerrar(conn);
 
             return list;
         } catch (SQLException ex) {

@@ -39,6 +39,8 @@ public class propuestasPersistencia {
         }
 
     }
+    
+    
 
     public dtFecha construirFecha(String fecha) {
         String[] splited = fecha.split("/");

@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class dtPropuesta {
 
-    String titulo, descripcion, imagen, lugar, estado, categoria, proponente, retorno;
+    String titulo, descripcion, imagen, lugar, estado, categoria, proponente;
+    private String retorno;
     dtFecha fechaRealizacion, fechapublicada;
     int precioentrada, montorequerido, montoactual;
     List<String> colaboradores;
@@ -141,5 +142,12 @@ public class dtPropuesta {
     
     public void setMontoTotal(int m){
         this.montoactual=m;
+    }
+
+    /**
+     * @return the retorno
+     */
+    public String getRetorno() {
+        return retorno;
     }
 }
