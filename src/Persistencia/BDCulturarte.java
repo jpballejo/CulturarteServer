@@ -145,23 +145,84 @@ public class BDCulturarte {
     
 
     public boolean cargaUsuariosOrigin(String usu) {
-        return false;
+        try {
+            String sql=null;
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();
+            
+            sql= "INSERT INTO `usuPer`(`idusuPer`)VALUES('"+usu+"')";
+            st.executeUpdate(sql);
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     public boolean cargaPropuestasOrigin(String prop) {
-        return false;
+        try {
+            String sql=null;
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();
+            
+            sql= "INSERT INTO `propPer`(`idpropPer`)VALUES('"+prop+"')";
+            st.executeUpdate(sql);
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }        
+        
     }
 
     public boolean cargaEstadoPropuestasOrigin(dtEstadosPropuestas estaprop) {
-        return false;
+        try {
+            String sql=null;    
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();
+            
+            sql= "INSERT INTO `propEstPer`(`propId`,`estado`,`fecha`)VALUES('"+estaprop.getTituloprop()+"','"+estaprop.getEstado()+"','"+estaprop.getFecha()+"')";
+            st.executeUpdate(sql);
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     public boolean cargaSeguidoresOrigin(dtSeguidores sig) {
-        return false;
+         try {
+            String sql=null;    
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();
+            
+            sql= "INSERT INTO `SeguidoresPer`(`usuSeguidor`,`usuSeguido`)VALUES('"+sig.getNickusuario()+"','"+sig.getNickaseguir()+"')";
+            st.executeUpdate(sql);
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }       
     }
 
     public boolean cargaColaboracionesOrigin(dtColaboraciones cola) {
-        return false;
+         try {
+            String sql=null;    
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();
+            
+            sql= "INSERT INTO `colPersistencia`(`colaborador`,`propuesta`,`fecha`)VALUES('"+cola.getNickname()+"','"+cola.getIdPropuesta()+"','"+cola.getFecha().getFecha()+"')";
+            st.executeUpdate(sql);
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        } 
     }
 
     public void altaUsuario(dtUsuario dtUsu) throws Exception {

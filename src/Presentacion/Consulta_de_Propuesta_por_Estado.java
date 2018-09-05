@@ -5,17 +5,42 @@
  */
 package Presentacion;
 
+import Logica.ContPropuesta;
+import Logica.ContUsuario;
+import Logica.dtPropuesta;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nicolasgutierrez
  */
 public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame {
 
+    ContUsuario contUsu = ContUsuario.getInstance();
+    ContPropuesta contProp= ContPropuesta.getInstance();
     /**
      * Creates new form Consulta_de_Propuesta_por_Estado
      */
     public Consulta_de_Propuesta_por_Estado() {
         initComponents();
+        
+        this.setSize(844, 580);
+        
+        jLabel1.setText("Estados");
+        jButton2.setText("Cargar");
+        jLabel6.setText("Propuestas en estado");
+        labelestado.setText("Seleccione un estado");
+        jLabel2.setText("Imagen");
+        jLabel3.setText("Estado");
+        txtestado.setText("Seleccione una propuesta");
+        jLabel5.setText("Monto total");
+        jLabel4.setText("Colaboradores");
+        jButton1.setText("Cancelar");
+        
+        
     }
 
     /**
@@ -42,7 +67,13 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
         txtmontotoal = new javax.swing.JTextField();
         txtimagen = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        spinnerestados = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableestados = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        labelestado = new javax.swing.JLabel();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablepropuestas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -55,7 +86,16 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
                 "Titulo"
             }
         ));
+        tablepropuestas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablepropuestasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablepropuestas);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 130, 250));
+
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 36, -1, 20));
 
         tablepropuesta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,6 +110,15 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
         ));
         jScrollPane2.setViewportView(tablepropuesta);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 67, 610, 97));
+
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 181, -1, -1));
+
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 181, -1, -1));
+        getContentPane().add(txtestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 176, 206, -1));
+
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+
         tablacolaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -83,81 +132,118 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
         ));
         jScrollPane3.setViewportView(tablacolaboradores);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel6)
-                    .addComponent(spinnerestados))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtestado))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)))
-                            .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(40, 40, 40))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(135, 135, 135))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinnerestados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 247, 168));
+
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 320, -1, -1));
+        getContentPane().add(txtmontotoal, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 342, 89, -1));
+        getContentPane().add(txtimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 208, 100, 100));
+
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 130, -1));
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, -1, -1));
+
+        tableestados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Nombre"
+            }
+        ));
+        tableestados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableestadosMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tableestados);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 130, 150));
+
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, -1));
+
+        getContentPane().add(labelestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         List<String> estados= contProp.listarEstados();
+        DefaultTableModel modelo2=(DefaultTableModel) tableestados.getModel();
+        modelo2.setRowCount(0);
+        for(int x=0;x<estados.size();x++){
+            String e=estados.get(x);
+            Object[] dat2={e};
+            modelo2.addRow(dat2);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tableestadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableestadosMouseClicked
+        // TODO add your handling code here:
+        int row=tableestados.rowAtPoint(evt.getPoint());
+        int col=tableestados.columnAtPoint(evt.getPoint());
+        
+        List<String> propuestas= contProp.listarPropuestasPorEstado((String)tableestados.getValueAt(row, col));
+        labelestado.setText((String)tableestados.getValueAt(row, col));
+        DefaultTableModel modelo2=(DefaultTableModel) tablepropuestas.getModel();
+        modelo2.setRowCount(0);
+        for(int x=0;x<propuestas.size();x++){
+            String e=propuestas.get(x);
+            Object[] dat2={e};
+            modelo2.addRow(dat2);
+        }
+    }//GEN-LAST:event_tableestadosMouseClicked
+
+    private void tablepropuestasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepropuestasMouseClicked
+        try {
+            // TODO add your handling code here:
+            int row=tablepropuestas.rowAtPoint(evt.getPoint());
+            int col=tablepropuestas.columnAtPoint(evt.getPoint());           
+            dtPropuesta dtp=contProp.mostrarInfoPropuesta((String)tablepropuestas.getValueAt(row, col));
+            
+        DefaultTableModel model=(DefaultTableModel) tablepropuesta.getModel();
+        model.setRowCount(0);
+        Object[] dato={dtp.getTitulo(),dtp.getDescripcion(),dtp.getLugar(),dtp.getFechaRealizacion().getFecha(),dtp.getPrecioentrada(),dtp.getMontorequerido()};
+        txtestado.setText(dtp.getEstado());
+        txtmontotoal.setText(Integer.toString(dtp.getMontoTotal()));
+        model.addRow(dato);
+        DefaultTableModel model2=(DefaultTableModel) tablacolaboradores.getModel();
+        model2.setRowCount(0);
+        List<String> colabs=dtp.detColaboradores();
+        for (int i=0;i<colabs.size();i++){
+            String c=colabs.get(i);
+            Object[] dat={c};
+            model2.addRow(dat);      
+        }            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Consulta_de_Propuesta_por_Estado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_tablepropuestasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -167,8 +253,10 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSpinner spinnerestados;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel labelestado;
     private javax.swing.JTable tablacolaboradores;
+    private javax.swing.JTable tableestados;
     private javax.swing.JTable tablepropuesta;
     private javax.swing.JTable tablepropuestas;
     private javax.swing.JTextField txtestado;

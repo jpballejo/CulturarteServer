@@ -38,5 +38,6 @@ public interface iConPropuesta {
     public abstract void agregarEstadoAPropuesta(String e, String titulo, dtFecha dtf, dtHora dth);
     public abstract void actualizardatospropuesta(dtPropuesta dtp,String e, dtFecha dtf, dtHora dth) throws Exception;
     public abstract List<String> listarEstados();
+    public abstract List<String> listarPropuestasPorEstado(String estado);
 }
     

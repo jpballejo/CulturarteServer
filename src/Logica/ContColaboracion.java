@@ -130,4 +130,9 @@ public class ContColaboracion implements iConColaboracion {
         return cUsuario.colaboracionesde(nickcolaborador);
     }
 
+    @Override
+    public void eliminarcolaboracion(String nickname, String titulo) throws Exception {
+        cUsuario.eliminarcolaboracion(nickname,titulo);
+    }
+
 }

@@ -79,5 +79,11 @@ public class colProp {
     public void setPropuesta(propuesta p) {
         this.propColaborada=p;
     }
+
+    void eliminate() {
+        this.propColaborada=null;
+        this.fecha=null;
+        this.hora=null;
+    }
  
 }
