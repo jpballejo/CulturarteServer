@@ -223,7 +223,7 @@ public class Alta_perfil extends javax.swing.JFrame {
      {JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
        limpiarTxt();}
      else{
-     JOptionPane.showMessageDialog(null, "No hay chance perro");
+     JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario");
      }
     }//GEN-LAST:event_jb_aceptarActionPerformed
 

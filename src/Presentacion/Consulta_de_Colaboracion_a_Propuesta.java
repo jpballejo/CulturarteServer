@@ -164,6 +164,7 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
 
     private void tablacolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablacolaboradoresMouseClicked
         // TODO add your handling code here:
+        vaciarTablas();
         int row=tablacolaboradores.rowAtPoint(evt.getPoint());
         int col=tablacolaboradores.columnAtPoint(evt.getPoint());
         
@@ -213,4 +214,9 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
     private javax.swing.JTable tablainfocol;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
+
+    public void vaciarTablas(){
+    DefaultTableModel modelo=(DefaultTableModel) tablainfocol.getModel();
+    modelo.setRowCount(0);   
+    }
 }
