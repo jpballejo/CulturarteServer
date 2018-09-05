@@ -8,6 +8,7 @@ package Persistencia;
 import Logica.dtFecha;
 import Logica.dtPropuestasBD;
 import Logica.propuesta;
+import static Persistencia.usuariosPersistencia.conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,8 +79,28 @@ public class propuestasPersistencia {
 
     }
 
-    public static Map<String, propuesta> cargarPropuestasNOBorrar() {
-        return null;
+    public static Map<String, String> cargarPropuestasNOBorrar() {
+        Map<String,String> retorno=new HashMap<>();
+        try {
+            String sql = null;
+            Connection con = conexion.getConexion();
+            Statement st = (Statement) con.createStatement();         
+            sql="SELECT * FROM `cultuRarte`.`propPer`";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String nick = rs.getString(1); 
+                retorno.put(nick, nick);
+            } 
+            
+            return retorno;
+            
+            
+            
+        } catch (Exception e) {
+            
+            System.err.println(e.getMessage());
+            return null;
+        }         
     }
     
     public static void actualizarPropuesta(dtPropuestasBD dtp) throws SQLException {

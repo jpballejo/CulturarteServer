@@ -576,7 +576,7 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public void borrartodocUsuario() {
-        Map<String, usuario> anoborrar = usuariosPersistencia.usuariosANoBorrar();
+        Map<String, String> anoborrar = usuariosPersistencia.usuariosANoBorrar();
         //VACIAR LOS SEGUIDOS POR LOS USUARIOS QUE SERAN ELIMINADOS
 
         for (String key : this.usuarios.keySet()) {
@@ -607,7 +607,7 @@ public class ContUsuario implements iConUsuario {
     }
 
     public void borrarColaboraciones() {
-        Map<String, usuario> anoborrar = usuariosPersistencia.usuariosANoBorrar();
+        Map<String, String> anoborrar = usuariosPersistencia.usuariosANoBorrar();
         for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof colaborador && anoborrar.containsKey(key) == false) {
                 colaborador c = (colaborador) this.usuarios.get(key);
@@ -617,7 +617,7 @@ public class ContUsuario implements iConUsuario {
         }
 
         //ELIMINAR COLABORACIONES POSIBLES DE LOS USUARIOS DE PRUEBA CON PROPUESTAS QUE SERAN BORRADAS
-        Map<String, propuesta> lista = propuestasPersistencia.cargarPropuestasNOBorrar();
+        Map<String, String> lista = propuestasPersistencia.cargarPropuestasNOBorrar();
         for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof colaborador && anoborrar.containsKey(key) == true) {
                 colaborador c = (colaborador) this.usuarios.get(key);
@@ -630,8 +630,8 @@ public class ContUsuario implements iConUsuario {
         }
     }
 
-    public void borrarPropuestas(Map<String, propuesta> pnoborrar) {
-        Map<String, usuario> anoborrar = usuariosPersistencia.usuariosANoBorrar();
+    public void borrarPropuestas(Map<String, String> pnoborrar) {
+        Map<String, String> anoborrar = usuariosPersistencia.usuariosANoBorrar();
         for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof proponente && anoborrar.containsKey(key) == false) {
                 proponente p = (proponente) this.usuarios.get(key);

@@ -89,7 +89,7 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
         return this.colaboracionesUsuario.isEmpty();
     }
 
-    public void eliminalasrestantes(Map<String, propuesta> lista){
+    public void eliminalasrestantes(Map<String, String> lista){
     
         for(String key: this.colaboracionesUsuario.keySet()){
             if(lista.containsKey(key)==false){

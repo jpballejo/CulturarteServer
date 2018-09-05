@@ -133,7 +133,7 @@ public class usuario {
         return this.seguidos.isEmpty();
     }
     
-    public void NoSigasAlosQueNoEstenAca(Map<String, usuario> anoborrar){
+    public void NoSigasAlosQueNoEstenAca(Map<String, String> anoborrar){
         for(String key: this.seguidos.keySet()){
             if(anoborrar.containsKey(key)==false)
                 this.seguidos.remove(key);

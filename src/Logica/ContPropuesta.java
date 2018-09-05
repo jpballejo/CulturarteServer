@@ -344,7 +344,7 @@ public class ContPropuesta implements iConPropuesta {
     // //////// trunkate y carga bd
     @Override
     public void borrartodocPropuesta() {
-        Map<String, propuesta> lista = propuestasPersistencia.cargarPropuestasNOBorrar();
+        Map<String, String> lista = propuestasPersistencia.cargarPropuestasNOBorrar();
         cUsuario.borrarPropuestas(lista);
     }
     
