@@ -230,7 +230,16 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private void cargarSeguidores() {
-        
+        try {
+            for(int i =0;i<seguidoresUPer.size();i++){
+            dtSeguidores sig = seguidoresUPer.get(i);
+            bdCul.agregarSeguidoresCD(sig);
+            }
+            
+        } catch (Exception e) {
+                    System.err.println(e.getMessage());
+
+        }
         
     }
 
@@ -284,6 +293,8 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private boolean cargaSeguidoresOrigin() {
+        
+        
         return false;
     }
 
