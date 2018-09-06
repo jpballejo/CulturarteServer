@@ -576,40 +576,36 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public void borrartodocUsuario() {
-        Map<String, String> anoborrar = usuariosPersistencia.usuariosANoBorrar();
+       
         //VACIAR LOS SEGUIDOS POR LOS USUARIOS QUE SERAN ELIMINADOS
 
         for (String key : this.usuarios.keySet()) {
-            if (anoborrar.containsKey(key) == false) {
+             
                 usuario u;
                 u = this.usuarios.get(key);
                 u.eliminartodoslosseguidos();
-            }
+            
         }
 
         //SACAR DE LOS USUARIOS DE PRUEBA POSIBLE SEGUIMIENTO A USUARIOS QUE SERAN BORRADOS
-        for (String key : this.usuarios.keySet()) {
+ /*       for (String key : this.usuarios.keySet()) {
             if (anoborrar.containsKey(key) == true) {
                 usuario us;
                 us = this.usuarios.get(key);
                 us.NoSigasAlosQueNoEstenAca(anoborrar);
 
             }
-        }
+        } */
 
         //SACA EL PUNTERO AL USUARIO RECORDADO SI ESTE DEBE SER ELIMINADO
-        if (this.usuariorecordado != null) {
-            if (anoborrar.containsKey(this.usuariorecordado.getNickname()) == false) {
-                this.usuariorecordado = null;
-            }
-        }
+
 
     }
 
     public void borrarColaboraciones() {
-        Map<String, String> anoborrar = usuariosPersistencia.usuariosANoBorrar();
+        
         for (String key : this.usuarios.keySet()) {
-            if (this.usuarios.get(key) instanceof colaborador && anoborrar.containsKey(key) == false) {
+            if (this.usuarios.get(key) instanceof colaborador ) {
                 colaborador c = (colaborador) this.usuarios.get(key);
                 c.eliminarcolaboraciones();
             }
@@ -617,8 +613,8 @@ public class ContUsuario implements iConUsuario {
         }
 
         //ELIMINAR COLABORACIONES POSIBLES DE LOS USUARIOS DE PRUEBA CON PROPUESTAS QUE SERAN BORRADAS
-        Map<String, String> lista = propuestasPersistencia.cargarPropuestasNOBorrar();
-        for (String key : this.usuarios.keySet()) {
+        
+     /*   for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof colaborador && anoborrar.containsKey(key) == true) {
                 colaborador c = (colaborador) this.usuarios.get(key);
                 if (c.notenescolaboraciones() == false) { //SI EL USUARIO TIENE AL MENOS UNA COLPROP
@@ -627,13 +623,13 @@ public class ContUsuario implements iConUsuario {
                 }
             }
 
-        }
+        } */
     }
 
     public void borrarPropuestas(Map<String, String> pnoborrar) {
-        Map<String, String> anoborrar = usuariosPersistencia.usuariosANoBorrar();
+        
         for (String key : this.usuarios.keySet()) {
-            if (this.usuarios.get(key) instanceof proponente && anoborrar.containsKey(key) == false) {
+            if (this.usuarios.get(key) instanceof proponente ) {
                 proponente p = (proponente) this.usuarios.get(key);
                 p.borratuspropuestas();
 

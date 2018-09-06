@@ -290,6 +290,7 @@ public class propuesta {
         this.categoria = null;
         this.fechapublicada = null;
         this.fecharealizacion = null;
+        this.estados=null;
 
     }
 

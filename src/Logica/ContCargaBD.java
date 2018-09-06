@@ -388,4 +388,33 @@ public class ContCargaBD implements iContCargaBD {
         return bdCul.truncarPropuesta();
     }
 
+    void borrarColecciones() {
+       this.categoriasPer=null;
+       System.out.println("vacio CategoriasPer");
+       this.colPer=null;
+       System.out.println("vacio colPer");
+       this.colaboracionesPer=null;
+       System.out.println("vacio colaboracionesPer");
+       this.estaPropPer=null;
+       System.out.println("vacio estaPropPer");
+       this.estadosPer=null;
+       System.out.println("vacio estadosPer");
+       this.estadosPropuestaPer=null;
+       System.out.println("vacio estadosPropuestaPer");
+       this.propPer=null;
+       System.out.println("vacio propPer");
+       this.propuestasPer=null;
+       System.out.println("vacio propuestasPer");
+       this.seguidoresPer=null;
+       System.out.println("vacio seguidoresPer");
+       this.seguidoresUPer=null;
+       System.out.println("vacio seguidoresUsPer");
+       this.usuPer=null;
+       System.out.println("vacio usuPer");
+       this.usuariosPer=null;
+       System.out.println("vacio usuariosPer");
+       System.out.println("vacio TODO");
+      
+    }
+
 }
