@@ -261,6 +261,11 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         jm_cargarDatos.add(jMenuItem16);
 
         jm_configuracionGeneral.setText("Configuracion general");
+        jm_configuracionGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_configuracionGeneralActionPerformed(evt);
+            }
+        });
         jm_cargarDatos.add(jm_configuracionGeneral);
 
         jMenuBar1.add(jm_cargarDatos);
@@ -389,10 +394,14 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
 
-        fabrica.borrartodo();
+      //  fabrica.borrartodo();
         contCarga.limpiarCargar();
 
     }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jm_configuracionGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_configuracionGeneralActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jm_configuracionGeneralActionPerformed
 
     /**
      * @param args the command line arguments

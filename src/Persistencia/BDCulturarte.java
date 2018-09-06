@@ -132,6 +132,9 @@ public class BDCulturarte {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
+       
+        
+        
         }
     }
 

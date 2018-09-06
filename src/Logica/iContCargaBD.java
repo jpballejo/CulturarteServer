@@ -17,11 +17,11 @@ public interface iContCargaBD {
 
     public abstract void agregardtcolaboraciones(dtColaboracionCompleto dtcol);
 
-    public abstract void agregardtpropuesta(dtPropuestasBD dtprop);
+    public abstract void agregardtpropuesta(ArrayList<dtPropuestasBD> dtpropuesta);
 
     public abstract void setearEstado(ArrayList<dtEstado> estadosV);
 
-    public abstract void setearCategoria(dtCategoria dtcat);
+    public abstract void setearCategoria(ArrayList<dtCategoria> dtcat);
 
     public abstract void setearEstadoPropuesta(dtEstadosPropuestas estProp);
 

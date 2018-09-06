@@ -88,6 +88,10 @@ public class colaboracionesPersistencia {
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
+     
+        
+        
+        
         }
 
     }

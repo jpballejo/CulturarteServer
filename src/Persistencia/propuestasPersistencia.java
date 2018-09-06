@@ -57,10 +57,7 @@ public class propuestasPersistencia {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String imagen = null;
-                if (rs.getString(3) != null) {
-                    imagen = rs.getString(3);
-                }
+                String imagen = rs.getString(3);
                 dtFecha dtf = construirFecha(rs.getString(5));
                 dtFecha dtfp = construirFecha(rs.getString(8));
                 int precio=0; int monto=0;

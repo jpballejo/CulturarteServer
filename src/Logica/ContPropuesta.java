@@ -40,7 +40,7 @@ public class ContPropuesta implements iConPropuesta {
     propuestasPersistencia propPer = new propuestasPersistencia();
     estadoPropuestaPersistencia estPropPer = new estadoPropuestaPersistencia();
     private Map<String, Integer> idEstado = new HashMap<String, Integer>();
-    ContCargaBD contCarga = ContCargaBD.getInstance();
+    private ContCargaBD contCarga = ContCargaBD.getInstance();
     
     private void cargaridEstado(ArrayList<dtEstado> nomEstados) {
         try {
@@ -214,7 +214,7 @@ public class ContPropuesta implements iConPropuesta {
         try {
             ArrayList<dtCategoria> dtcate = new ArrayList<>();
             catPer.cargarCat(dtcate);
-            
+            contCarga.setearCategoria(dtcate);
             System.out.println(dtcate.size());
             for (int i = (0); i < dtcate.size(); i++) {
                 System.out.print(i);
@@ -222,7 +222,7 @@ public class ContPropuesta implements iConPropuesta {
                 categoria cat = new categoria(dtcat.getNombre());
 
 
-                contCarga.setearCategoria(dtcat); //+++++++++++++++++++
+                 //+++++++++++++++++++
 
                 categorias.put(cat.getNombre(), cat);
             }
@@ -261,14 +261,16 @@ public class ContPropuesta implements iConPropuesta {
         contCarga.levantarBDestadosPropPer();
         ArrayList<dtPropuestasBD> dtpropuestasDb = new ArrayList<dtPropuestasBD>();
         propPer.cargarPropuestas(dtpropuestasDb);
+         contCarga.agregardtpropuesta(dtpropuestasDb);
         ArrayList<dtEstadosPropuestas> estProp = new ArrayList<>();
         estPer.CargarEstadosPropuestas(estProp);
         llenaEstadosCarga(estProp);
         for (int i = 0; i < dtpropuestasDb.size(); i++) {
             dtPropuestasBD dtProp = (dtPropuestasBD) dtpropuestasDb.get(i);
             sacarRutaImagen(dtProp);
+           
             propuesta prop = armarPropuesta(dtProp);
-            cargarEstadosProp(prop, estProp);
+            cargarEstadosProp(prop, estProp);//revisar if ==true
             String nick = dtProp.getNickproponente();
             cUsuario.esteUsuariopropusoestaProp(nick, prop);
         }

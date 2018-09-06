@@ -98,7 +98,7 @@ public class ContColaboracion implements iConColaboracion {
 
     public void cargarColaboraciones() {
         ArrayList<dtColaboracionCompleto> dtColaComp = new ArrayList<>();
-        
+   //////////////     
         try {
             contCarga.levantarBDcolPer();
             colPer.cargarColaboraciones(dtColaComp);

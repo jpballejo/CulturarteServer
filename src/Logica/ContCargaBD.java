@@ -109,8 +109,13 @@ public class ContCargaBD implements iContCargaBD {
 
     }
 
-    public void setearCategoria(dtCategoria dtcat) {
-        categoriasPer.add(dtcat);
+    public void setearCategoria(ArrayList<dtCategoria>  dtcate) {
+        
+        for (int i=0;i<dtcate.size();i++){
+        dtCategoria dtcat=dtcate.get(i);
+            categoriasPer.add(dtcat);
+        }
+        
     }
 
     public void setearEstado(ArrayList<dtEstado> estadosV) {
@@ -153,14 +158,23 @@ public class ContCargaBD implements iContCargaBD {
             System.err.println(e.getMessage());
         }
     }
-
+private boolean compruebaSeguidores(dtSeguidores ori, dtSeguidores comparar){
+String nickusuarioORI=ori.getNickusuario(), nickaseguirORI=ori.getNickaseguir();
+String nickusuarioCOMP=comparar.getNickusuario(), nickaseguirCOMP=comparar.getNickaseguir();
+if(nickusuarioORI.equals(nickusuarioCOMP)){
+if(nickaseguirORI.equals(nickaseguirCOMP)){
+return true;
+}
+}
+return false;
+}
     public void seteardtSeguidores(dtSeguidores dtseg) {
 // filtro seguidoresPer 
 
         try {
             for (int i = 0; i < seguidoresPer.size(); i++) {
                 dtSeguidores control = (dtSeguidores) seguidoresPer.get(i);
-                if (dtseg.equals(control)) {
+                if (compruebaSeguidores(dtseg, control)) {
                     seguidoresUPer.add(dtseg);
                 }
             }
@@ -185,15 +199,17 @@ public class ContCargaBD implements iContCargaBD {
 
     }
 
-    public void agregardtpropuesta(dtPropuestasBD dtprop) {
+    public void agregardtpropuesta(ArrayList<dtPropuestasBD> dtpropuesta) {
         try {
-            for (int i = 0; i > propPer.size(); i++) {
+            for (int p=0;p<dtpropuesta.size();p++){
+            dtPropuestasBD dtprop=(dtPropuestasBD)dtpropuesta.get(p);
+                for (int i = 0; i < propPer.size(); i++) {
                 String tituloP = propPer.get(i);
                 if (dtprop.getTitulo().equals(tituloP)) {
                     propuestasPer.add(dtprop);
                 }
 
-            }
+            }}
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -256,7 +272,7 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private void cargarPropuestas() {
-        for (int i = 0; i < propuestasPer.size(); i++) {
+        for (int i = 0; i < propuestasPer.size(); i++) {//revisar 
             dtPropuestasBD prop = (dtPropuestasBD) propuestasPer.get(i);
             bdCul.altaPropuestaCD(prop);
         }
@@ -264,7 +280,7 @@ public class ContCargaBD implements iContCargaBD {
 
     private void cargarColaboraciones() {
         try {
-            for (int i = 0; i < colaboracionesPer.size(); i++) {
+            for (int i = 0; i < colaboracionesPer.size(); i++) {//rev
                 dtColaboracionCompleto dtcola = (dtColaboracionCompleto) colaboracionesPer.get(i);
                 bdCul.altaColaboracionCD(dtcola);
             }
@@ -405,5 +421,7 @@ public class ContCargaBD implements iContCargaBD {
     private boolean truncarPropuestas() {
         return bdCul.truncarPropuesta();
     }
+
+  
 
 }
