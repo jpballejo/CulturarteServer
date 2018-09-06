@@ -422,6 +422,33 @@ return false;
         return bdCul.truncarPropuesta();
     }
 
-  
+    void borrarColecciones() {
+       this.categoriasPer.clear();
+       System.out.println("vacio CategoriasPer");
+       this.colPer.clear();
+       System.out.println("vacio colPer");
+       this.colaboracionesPer.clear();
+       System.out.println("vacio colaboracionesPer");
+       this.estaPropPer.clear();
+       System.out.println("vacio estaPropPer");
+       this.estadosPer.clear();
+       System.out.println("vacio estadosPer");
+       this.estadosPropuestaPer.clear();
+       System.out.println("vacio estadosPropuestaPer");
+       this.propPer.clear();
+       System.out.println("vacio propPer");
+       this.propuestasPer.clear();
+       System.out.println("vacio propuestasPer");
+       this.seguidoresPer.clear();
+       System.out.println("vacio seguidoresPer");
+       this.seguidoresUPer.clear();
+       System.out.println("vacio seguidoresUsPer");
+       this.usuPer.clear();
+       System.out.println("vacio usuPer");
+       this.usuariosPer.clear();
+       System.out.println("vacio usuariosPer");
+       System.out.println("vacio TODO");
+      
+    }
 
 }

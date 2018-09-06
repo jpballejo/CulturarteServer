@@ -136,7 +136,6 @@ public class ContColaboracion implements iConColaboracion {
     }
 
     void borrarColecciones() {
-        this.colPer=null;
         this.colaboracion=null;
     }
 

@@ -444,10 +444,10 @@ public class ContPropuesta implements iConPropuesta {
     }
 
     void borrarColecciones() {
-        this.listaImagenes=null;
-        this.categorias=null;
-        this.estados=null;
-        this.idEstado=null;
+        this.listaImagenes.clear();
+        this.categorias.clear();
+        this.estados.clear();
+        this.idEstado.clear();
         
     }
     

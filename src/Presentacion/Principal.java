@@ -10,6 +10,7 @@ import Logica.ContColaboracion;
 import Logica.ContPropuesta;
 import Logica.ContUsuario;
 import Logica.culturarteFabrica;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -393,10 +394,14 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
     }//GEN-LAST:event_jm_consultaColaboracionActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-
-      //  fabrica.borrartodo();
         contCarga.limpiarCargar();
-
+        fabrica.borrartodo();
+        System.out.println("Borro todo");
+        contUsuario.cargarUsuarios();
+        contPropuesta.cargarPropuestas();
+        contColaboracion.cargarColaboracion();       
+        
+        JOptionPane.showMessageDialog(null, "Datos de prueba cargados con exito");
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jm_configuracionGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_configuracionGeneralActionPerformed

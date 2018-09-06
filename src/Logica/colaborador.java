@@ -77,12 +77,11 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
     
     public void eliminarcolaboraciones(){
         for(String key: this.colaboracionesUsuario.keySet()){
-            colProp cp=this.colaboracionesUsuario.remove(key);
-            cp.setPropuesta(null);
-            cp.setFecha(null);
-            cp.setHora(null);
-           
+            colProp cp=this.colaboracionesUsuario.get(key);
+            cp.eliminate();
         }
+        
+        this.colaboracionesUsuario.clear();
     }
     
     public boolean notenescolaboraciones(){

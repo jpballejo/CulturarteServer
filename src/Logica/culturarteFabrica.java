@@ -58,6 +58,7 @@ public class culturarteFabrica {
             ic.borrarColecciones();
             ip.borrarColecciones();
             iu.borrarColecciones();
+            ContCargaBD.getInstance().borrarColecciones();
             
         }
 
