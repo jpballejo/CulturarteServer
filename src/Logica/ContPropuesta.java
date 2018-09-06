@@ -214,11 +214,13 @@ public class ContPropuesta implements iConPropuesta {
         try {
             ArrayList<dtCategoria> dtcate = new ArrayList<>();
             catPer.cargarCat(dtcate);
+            
             System.out.println(dtcate.size());
             for (int i = (0); i < dtcate.size(); i++) {
                 System.out.print(i);
                 dtCategoria dtcat = (dtCategoria) dtcate.get(i);
                 categoria cat = new categoria(dtcat.getNombre());
+                contCarga.setearCategoria(dtcat);
                 categorias.put(cat.getNombre(), cat);
             }
             //dtcate.lastIndexOf(null);
