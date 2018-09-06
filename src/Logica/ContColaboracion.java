@@ -20,7 +20,7 @@ public class ContColaboracion implements iConColaboracion {
     private colProp colaboracion;
     private ContUsuario cUsuario = ContUsuario.getInstance();
     private colaboracionesPersistencia colPer = new colaboracionesPersistencia();
-    ContCargaBD contCarga = ContCargaBD.getInstance();
+    private ContCargaBD contCarga = ContCargaBD.getInstance();
     public static ContColaboracion getInstance() {
         if (instance == null) {
             instance = new ContColaboracion();
