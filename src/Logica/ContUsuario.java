@@ -905,4 +905,10 @@ public class ContUsuario implements iConUsuario {
         
         return null;   
     }
+
+    void borrarColecciones() {
+        this.listaImagenes=null;
+        this.usuariorecordado=null;
+        this.usuarios=null;
+    }
 }

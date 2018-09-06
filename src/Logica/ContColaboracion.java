@@ -135,4 +135,9 @@ public class ContColaboracion implements iConColaboracion {
         cUsuario.eliminarcolaboracion(nickname,titulo);
     }
 
+    void borrarColecciones() {
+        this.colPer=null;
+        this.colaboracion=null;
+    }
+
 }

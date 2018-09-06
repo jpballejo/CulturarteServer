@@ -436,5 +436,13 @@ public class ContPropuesta implements iConPropuesta {
         }  
         return retorno;
     }
+
+    void borrarColecciones() {
+        this.listaImagenes=null;
+        this.categorias=null;
+        this.estados=null;
+        this.idEstado=null;
+        
+    }
     
 }

@@ -61,7 +61,9 @@ public class culturarteFabrica {
             ic.borrartodocColaboraciones();
             ip.borrartodocPropuesta();
             iu.borrartodocUsuario();
-            
+            ic.borrarColecciones();
+            ip.borrarColecciones();
+            iu.borrarColecciones();
             
         }
 
