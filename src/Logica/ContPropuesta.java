@@ -220,7 +220,10 @@ public class ContPropuesta implements iConPropuesta {
                 System.out.print(i);
                 dtCategoria dtcat = (dtCategoria) dtcate.get(i);
                 categoria cat = new categoria(dtcat.getNombre());
-                contCarga.setearCategoria(dtcat);
+
+
+                contCarga.setearCategoria(dtcat); //+++++++++++++++++++
+
                 categorias.put(cat.getNombre(), cat);
             }
             //dtcate.lastIndexOf(null);
@@ -436,6 +439,14 @@ public class ContPropuesta implements iConPropuesta {
             
         }  
         return retorno;
+    }
+
+    void borrarColecciones() {
+        this.listaImagenes=null;
+        this.categorias=null;
+        this.estados=null;
+        this.idEstado=null;
+        
     }
     
 }

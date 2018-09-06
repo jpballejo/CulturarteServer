@@ -223,7 +223,7 @@ public class Alta_perfil extends javax.swing.JFrame {
      {JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
        limpiarTxt();}
      else{
-     JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario");
+    // JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario");
      }
     }//GEN-LAST:event_jb_aceptarActionPerformed
 
@@ -385,10 +385,15 @@ public class Alta_perfil extends javax.swing.JFrame {
        dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta,jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
        contUsu.agregarUsu(dtprop);
        return true;
-        }}
+        }
        
-       }else {JOptionPane.showMessageDialog(null,"Ya existe un usuario con el mismo nickname");}
-        } catch (Exception ex) {
+       }else {JOptionPane.showMessageDialog(null,"Ya existe un usuario con el mismo nickname");
+                return false;
+            }
+        }else {
+           return false;
+       }
+   } catch (Exception ex) {
            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
        }
         return false; }

@@ -787,7 +787,7 @@ public class ContUsuario implements iConUsuario {
 
     public void linkearpropuesta(propuesta p, String prop) {
         for (String key : this.usuarios.keySet()) {
-            if (key == prop) {
+            if (key.contentEquals(prop)) {
                 if (this.usuarios.get(key) instanceof proponente) {
                     proponente pr = (proponente) this.usuarios.get(key);
                     pr.propuestasUsuario.put(p.getTitulo(), p);
@@ -904,5 +904,11 @@ public class ContUsuario implements iConUsuario {
         }
         
         return null;   
+    }
+
+    void borrarColecciones() {
+        this.listaImagenes=null;
+        this.usuariorecordado=null;
+        this.usuarios=null;
     }
 }

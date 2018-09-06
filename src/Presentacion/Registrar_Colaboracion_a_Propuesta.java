@@ -407,6 +407,29 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         txtestado.setText(dtp.getEstado());
          txttituloprop.setText(dtp.getTitulo());
         modelo.addRow(dat);
+        cbentradas.setEnabled(false);
+        cbporcentaje.setEnabled(false);
+        
+       /* System.out.println(dtp.getRetorno()+" xd");
+        String[] rets=dtp.getRetorno().split("/");
+        String one=rets[0],two=rets[1];
+        System.out.println(one+" y "+two);
+        if(one.contentEquals("Entrada") || two.contentEquals("Entrada") ){
+            cbentradas.setEnabled(true);
+        }
+        if(one.contentEquals("Porcentaje") || two.contentEquals("Porcentaje")){
+            cbporcentaje.setEnabled(true);
+        }
+         */
+       
+       if(dtp.getRetorno().contentEquals("Entrada"))
+            cbentradas.setEnabled(true);
+       if(dtp.getRetorno().contentEquals("Porcentaje"))
+            cbporcentaje.setEnabled(true);
+       if(dtp.getRetorno().contentEquals("Entrada/Porcentaje")){
+           cbporcentaje.setEnabled(true);
+           cbentradas.setEnabled(true);
+       }
         
         } catch (Exception ex) {
             Logger.getLogger(Registrar_Colaboracion_a_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,12 +473,14 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             da.setYear(2018);
             dtFecha dtf=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
             dtHora dth=new dtHora(da.getHours(),da.getMinutes());
-                            
+          
+        
+               
         
 
          
            
- 
+          
         if(txtestado.getText().contains("No financiada")==false){
             if(txtestado.getText().contains("Cancelada")==false){        
                 if(txtestado.getText().contains("Financiada")==false){
@@ -471,6 +496,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                                      
                                      if(b){
                                             JOptionPane.showMessageDialog(null, "Colaboracion registrada");
+                                            limpiarlabasura();
                                         }
                                         else{
                                             JOptionPane.showMessageDialog(null, "Imposible registrar la colaboracion");
@@ -515,6 +541,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
             txtestado.selectAll();
             txtestado.requestFocus();   
         }
+        
             
     }//GEN-LAST:event_btnaceptarActionPerformed
 
@@ -571,6 +598,25 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
 		return false;
 	}
 }
+
+    private void limpiarlabasura() {
+        DefaultTableModel modelo= (DefaultTableModel) jTable_propuestas.getModel();
+        modelo.setRowCount(0);
+
+        DefaultTableModel modelo2= (DefaultTableModel) tablecolaboradores.getModel();
+        modelo2.setRowCount(0);   
+        
+        DefaultTableModel modelo3= (DefaultTableModel) tablecolaborador.getModel();
+        modelo3.setRowCount(0);   
+        
+        cbporcentaje.setSelected(false);
+        cbentradas.setSelected(false);
+        txtmontotoal.setText("");
+        busuqedacolaboradores.setText("");
+        txtestado.setText("");
+        txtmontoacolaborar.setText("");
+    }
+    
     
     }
 

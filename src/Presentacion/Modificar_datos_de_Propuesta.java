@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -66,7 +67,7 @@ public class Modificar_datos_de_Propuesta extends javax.swing.JInternalFrame {
         jLabel12.setText("Categoria");
         labelcategoria.setText("Seleccione una propuesta");
         jLabel15.setText("Fecha publicacion");
-        labelfechacreacion.setText("Descripcion");
+        labelfechacreacion.setText("Seleccione una propuesta");
         jLabel16.setText("Retorno");
         labelretorno.setText("Seleccione una propuesta");
         btncancelar.setText("Cancelar");
@@ -364,7 +365,8 @@ public class Modificar_datos_de_Propuesta extends javax.swing.JInternalFrame {
         
         
         contProp.actualizardatospropuesta(dtp, txtestado.getText(), dtf2, dth2);
-        
+        JOptionPane.showMessageDialog(null, "Propuesta modificada con exito");
+        sacarlabasura();
         
         
         } catch (Exception ex){
@@ -453,5 +455,21 @@ public class Modificar_datos_de_Propuesta extends javax.swing.JInternalFrame {
         Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
     }
    }
+
+    private void sacarlabasura() {
+        labeltitulo.setText("Seleccione una propuesta");
+        labelproponente.setText("Seleccione una propuesta");
+        labelcategoria.setText("Seleccione una propuesta");
+        labelretorno.setText("Seleccione una propuesta");  
+        labelfechacreacion.setText("Seleccione una propuesta");
+        txtdescripcion.setText("");
+        txtlugar.setText("");
+        txtdiadia.setText("");
+        txtmesmes.setText("");
+        txtanioanio.setText("");
+        txtestado.setText("");
+        txtprecioetrada.setText("");
+        txtmontorequerido.setText("");
+    }
 
 }
