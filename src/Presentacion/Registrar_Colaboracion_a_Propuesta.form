@@ -405,7 +405,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="cbentradas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entradas"/>
+        <Property name="text" type="java.lang.String" value="Entrada"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="busuqedacolaboradores">
