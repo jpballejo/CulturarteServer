@@ -28,7 +28,7 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public void setExtendedState(int state) {
         super.setExtendedState(state); //To change body of generated methods, choose Tools | Templates.
     }
@@ -388,7 +388,10 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
     }//GEN-LAST:event_jm_consultaColaboracionActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-contCarga.limpiarCargar();
+
+        fabrica.borrartodo();
+        contCarga.limpiarCargar();
+
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**

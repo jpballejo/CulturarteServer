@@ -74,17 +74,17 @@ public class ContCargaBD implements iContCargaBD {
     public boolean limpiarCargar() {
 
         try {
-            if (truncarTablas()) {
-                System.out.println("ok tablas");
-            }
+
             if (truncarPropuestas()) {
                 System.out.println("ok propuestas");
             }
             if (truncarUsuarios()) {
                 System.out.println("ok usuarios");
             }
-            
-            if(cargarDatos()){System.out.println("OK CARGA....");}
+
+            if (cargarDatos()) {
+                System.out.println("OK CARGA....");
+            }
             return true;
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -114,7 +114,23 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     public void setearEstado(ArrayList<dtEstado> estadosV) {
-        this.estadosPer = estadosV;
+        try {
+
+            for (int i = 0; i < estadosV.size(); i++) {
+                dtEstado e = (dtEstado) estadosV.get(i);
+                estadosPer.add(e);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    private boolean comparaFecha(dtFecha fecha1, dtFecha fecha2) {
+        String fecha = null, fechacomp = null;
+        fecha = fecha1.getFecha();
+        fechacomp = fecha2.getFecha();
+        return fechacomp.equals(fecha);
     }
 
     public void setearEstadoPropuesta(dtEstadosPropuestas estProp) {
@@ -127,7 +143,7 @@ public class ContCargaBD implements iContCargaBD {
                 dtFecha fecha = dtcontrol.getFecha();
                 if (estProp.getEstado().equals(estado)) {
                     if (estProp.getTituloprop().equals(titulo)) {
-                        if (estProp.getFecha().equals(fecha)) {
+                        if (comparaFecha(estProp.getFecha(), fecha)) {
                             estadosPropuestaPer.add(estProp);
                         }
                     }
@@ -184,12 +200,14 @@ public class ContCargaBD implements iContCargaBD {
 
     }
 
+   
+
     public void agregardtcolaboraciones(dtColaboracionCompleto dtcol) {
         try {
             for (int i = 0; i < colPer.size(); i++) {
                 dtColaboraciones dtcola = colPer.get(i);
                 if ((dtcol.getNickname().equals(dtcola.getNickname()) == true) && (dtcol.getTitulo().equals(dtcola.getIdPropuesta()))) {
-                    if (dtcol.getFecha().equals(dtcola.getFecha())) {
+                    if (comparaFecha(dtcol.getFecha(), dtcola.getFecha())) {
                         colaboracionesPer.add(dtcol);
                     }
 
