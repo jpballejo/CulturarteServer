@@ -18,6 +18,7 @@ import Logica.dtPropuestasBD;
 import Logica.dtSeguidores;
 import Logica.dtUsuario;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -226,17 +227,22 @@ public class BDCulturarte {
             Statement st = (Statement) con.createStatement();
             if (dtUsu instanceof dtProponente) {
                 dtProponente dtProp = (dtProponente) dtUsu;
+                String pagWeb =dtProp.getSitioWeb();
+                String bio= dtProp.getBiografia();
                 sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('" + dtProp.getNickname() + "','" + dtProp.getNombre() + "','" + dtProp.getApellido() + "','" + dtProp.getEmail() + "','" + dtProp.getFechaNac().getFecha() + "','" + dtProp.getImagen() + "')";
-                sqlProp = "INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('" + dtProp.getNickname() + "','" + dtProp.getDireccion() + "','" + dtProp.getSitioWeb() + "','" + dtProp.getBiografia() + "')";
+                sqlProp = "INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('"+dtProp.getNickname()+"','"+dtProp.getDireccion()+"','"+pagWeb+"','"+bio+"')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlProp);
-
+                System.out.println(sqlUsu);
+                System.out.println(sqlProp);
+          
+               
             }
-
+//acomodar estos 
             if (dtUsu instanceof dtColaborador) {
                 dtColaborador dtCol = (dtColaborador) dtUsu;
                 sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('" + dtCol.getNickname() + "','" + dtCol.getNombre() + "','" + dtCol.getApellido() + "','" + dtCol.getEmail() + "','" + dtCol.getFechaNac().getFecha() + "','" + dtCol.getImagen() + "')";
-                sqlCol = "INSERT INTO colaborador (`idUsuario`) VALUES ('" + dtCol.getNickname() + "')";
+                sqlCol = "INSERT INTO `colaborador` (`idUsuario`) VALUES ('" + dtCol.getNickname() + "')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlCol);
 
@@ -269,7 +275,7 @@ public class BDCulturarte {
         try {
             String sql = null;
             sql = "INSERT INTO `Propuesta`(`titulo`, `descripcion`, `imagen`, `lugar`, `fecha`, `precio_entrada`, `monto_necesario`, `fecha_publicacion`, `proponente`, `categoria`, `retorno`)"
-                    + " VALUES ('" + dtp.getTitulo() + "','" + dtp.getDescripcion() + "','" + dtp.getImagen() + "','" + dtp.getLugar() + "','" + dtp.getFecha().getFecha() + "','" + Integer.toString(dtp.getPrecio_entrada()) + "','" + Integer.toString(dtp.getMonto_necesario()) + "','" + dtp.getFecha_publicacion().getFecha() + "','" + dtp.getNickproponente() + "," + dtp.getCategoria() + "','" + dtp.getRetorno() + "')";
+                    + " VALUES ('" + dtp.getTitulo() + "','" + dtp.getDescripcion() + "','" + dtp.getImagen() + "','" + dtp.getLugar() + "','" + dtp.getFecha().getFecha() + "','" + Integer.toString(dtp.getPrecio_entrada()) + "','" + Integer.toString(dtp.getMonto_necesario()) + "','" + dtp.getFecha_publicacion().getFecha() + "','" + dtp.getNickproponente() + "','" + dtp.getCategoria() + "','" + dtp.getRetorno() + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -288,11 +294,12 @@ public class BDCulturarte {
             String sql = null;
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
-            if (!cat.getPadre().isEmpty()) {
-                sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + cat.getNombre() + "','" + cat.getPadre() + "')";
+            String padre= cat.getPadre();
+            if (padre!=null) {
+                sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + cat.getNombre() + "','" + padre + "')";
                 st.executeUpdate(sql);
             }
-            if (cat.getPadre().isEmpty()) {
+            if (padre==null) {
                 sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`)VALUES('" + cat.getNombre() + "')";
                 st.executeUpdate(sql);
             }

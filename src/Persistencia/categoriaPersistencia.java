@@ -67,11 +67,11 @@ public class categoriaPersistencia {
                 String padre = null;
                 nombre = rs.getString(1);
                 padre = rs.getString(2);
-                if (!padre.isEmpty()) {
+                if (padre != null) { //!padre.isEmpty()
                     dtCategoria dtCat = new dtCategoria(nombre, padre);
                     categorias.add(dtCat);
                 }
-                if (padre.isEmpty()) {
+                if (padre==null) {  //padre.isEmpty()
                     dtCategoria dtCat = new dtCategoria(nombre, null);
                     categorias.add(dtCat);
                 }

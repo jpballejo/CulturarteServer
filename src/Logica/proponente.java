@@ -167,9 +167,17 @@ public class proponente extends usuario {
 //         }
 //     }
     public void borratuspropuestas() {
-        for (String key : this.propuestasUsuario.keySet()) {
-            propuesta p = this.propuestasUsuario.remove(key);
+        try {
+            for (String key : this.propuestasUsuario.keySet()) {
+            propuesta p = this.propuestasUsuario.get(key); //            propuesta p = this.propuestasUsuario.remove(key);
             p.desvincular();
         }
+            
+            this.propuestasUsuario.clear();
+            
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
     }
 }

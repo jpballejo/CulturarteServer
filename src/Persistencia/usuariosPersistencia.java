@@ -92,7 +92,7 @@ public class usuariosPersistencia {
                 usu.beforeFirst();
                 while (usu.next() && seguir == 0) {
                     if (prop.getString(1).equals(usu.getString(1)) == true) {
-                        dtUsuario dtProp = new dtProponente(usu.getString(2), usu.getString(3), usu.getString(1), usu.getString(6), usu.getString(4), construirFecha(usu.getString(5)), prop.getString(2), prop.getString(3), prop.getString(4));
+                        dtProponente dtProp = new dtProponente(usu.getString(2), usu.getString(3), usu.getString(1), usu.getString(6), usu.getString(4), construirFecha(usu.getString(5)), prop.getString(2), prop.getString(4), prop.getString(3));
                         usuarios.add(dtProp);
                         seguir = 1;
                     }

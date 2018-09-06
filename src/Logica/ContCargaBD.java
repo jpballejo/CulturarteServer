@@ -109,13 +109,13 @@ public class ContCargaBD implements iContCargaBD {
 
     }
 
-    public void setearCategoria(ArrayList<dtCategoria>  dtcate) {
-        
-        for (int i=0;i<dtcate.size();i++){
-        dtCategoria dtcat=dtcate.get(i);
+    public void setearCategoria(ArrayList<dtCategoria> dtcate) {
+
+        for (int i = 0; i < dtcate.size(); i++) {
+            dtCategoria dtcat = dtcate.get(i);
             categoriasPer.add(dtcat);
         }
-        
+
     }
 
     public void setearEstado(ArrayList<dtEstado> estadosV) {
@@ -158,16 +158,18 @@ public class ContCargaBD implements iContCargaBD {
             System.err.println(e.getMessage());
         }
     }
-private boolean compruebaSeguidores(dtSeguidores ori, dtSeguidores comparar){
-String nickusuarioORI=ori.getNickusuario(), nickaseguirORI=ori.getNickaseguir();
-String nickusuarioCOMP=comparar.getNickusuario(), nickaseguirCOMP=comparar.getNickaseguir();
-if(nickusuarioORI.equals(nickusuarioCOMP)){
-if(nickaseguirORI.equals(nickaseguirCOMP)){
-return true;
-}
-}
-return false;
-}
+
+    private boolean compruebaSeguidores(dtSeguidores ori, dtSeguidores comparar) {
+        String nickusuarioORI = ori.getNickusuario(), nickaseguirORI = ori.getNickaseguir();
+        String nickusuarioCOMP = comparar.getNickusuario(), nickaseguirCOMP = comparar.getNickaseguir();
+        if (nickusuarioORI.equals(nickusuarioCOMP)) {
+            if (nickaseguirORI.equals(nickaseguirCOMP)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void seteardtSeguidores(dtSeguidores dtseg) {
 // filtro seguidoresPer 
 
@@ -201,22 +203,21 @@ return false;
 
     public void agregardtpropuesta(ArrayList<dtPropuestasBD> dtpropuesta) {
         try {
-            for (int p=0;p<dtpropuesta.size();p++){
-            dtPropuestasBD dtprop=(dtPropuestasBD)dtpropuesta.get(p);
+            for (int p = 0; p < dtpropuesta.size(); p++) {
+                dtPropuestasBD dtprop = (dtPropuestasBD) dtpropuesta.get(p);
                 for (int i = 0; i < propPer.size(); i++) {
-                String tituloP = propPer.get(i);
-                if (dtprop.getTitulo().equals(tituloP)) {
-                    propuestasPer.add(dtprop);
-                }
+                    String tituloP = propPer.get(i);
+                    if (dtprop.getTitulo().equals(tituloP)) {
+                        propuestasPer.add(dtprop);
+                    }
 
-            }}
+                }
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
     }
-
-   
 
     public void agregardtcolaboraciones(dtColaboracionCompleto dtcol) {
         try {
@@ -423,32 +424,32 @@ return false;
     }
 
     void borrarColecciones() {
-       this.categoriasPer.clear();
-       System.out.println("vacio CategoriasPer");
-       this.colPer.clear();
-       System.out.println("vacio colPer");
-       this.colaboracionesPer.clear();
-       System.out.println("vacio colaboracionesPer");
-       this.estaPropPer.clear();
-       System.out.println("vacio estaPropPer");
-       this.estadosPer.clear();
-       System.out.println("vacio estadosPer");
-       this.estadosPropuestaPer.clear();
-       System.out.println("vacio estadosPropuestaPer");
-       this.propPer.clear();
-       System.out.println("vacio propPer");
-       this.propuestasPer.clear();
-       System.out.println("vacio propuestasPer");
-       this.seguidoresPer.clear();
-       System.out.println("vacio seguidoresPer");
-       this.seguidoresUPer.clear();
-       System.out.println("vacio seguidoresUsPer");
-       this.usuPer.clear();
-       System.out.println("vacio usuPer");
-       this.usuariosPer.clear();
-       System.out.println("vacio usuariosPer");
-       System.out.println("vacio TODO");
-      
+        this.categoriasPer.clear();
+        System.out.println("vacio CategoriasPer");
+        this.colPer.clear();
+        System.out.println("vacio colPer");
+        this.colaboracionesPer.clear();
+        System.out.println("vacio colaboracionesPer");
+        this.estaPropPer.clear();
+        System.out.println("vacio estaPropPer");
+        this.estadosPer.clear();
+        System.out.println("vacio estadosPer");
+        this.estadosPropuestaPer.clear();
+        System.out.println("vacio estadosPropuestaPer");
+        this.propPer.clear();
+        System.out.println("vacio propPer");
+        this.propuestasPer.clear();
+        System.out.println("vacio propuestasPer");
+        this.seguidoresPer.clear();
+        System.out.println("vacio seguidoresPer");
+        this.seguidoresUPer.clear();
+        System.out.println("vacio seguidoresUsPer");
+        this.usuPer.clear();
+        System.out.println("vacio usuPer");
+        this.usuariosPer.clear();
+        System.out.println("vacio usuariosPer");
+        System.out.println("vacio TODO");
+
     }
 
 }
