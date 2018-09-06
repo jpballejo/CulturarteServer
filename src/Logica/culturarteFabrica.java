@@ -34,13 +34,7 @@ public class culturarteFabrica {
             levantarBDdesdeMemoria();
         }
         
-        public void cargarDesdeBD(){
-          
-            iu.cargarUsuarios();
-            ip.cargarPropuestas();
-            ic.cargarColaboracion();
-        }
-    
+            
         public iConColaboracion getIContColaboracion(){
             iConColaboracion icc= ContColaboracion.getInstance();
             return icc;
