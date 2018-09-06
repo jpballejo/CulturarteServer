@@ -129,7 +129,7 @@ public class ContUsuario implements iConUsuario {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
 
         moverImagenesUsu();
