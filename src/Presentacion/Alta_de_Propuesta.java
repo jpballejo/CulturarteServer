@@ -65,7 +65,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         jLabel6.setText("Lugar");
         jLabel13.setText("Retornos posibles");
         cbporcentaje.setText("Porcentaje");
-        cbentradas.setText("Entradas");
+        cbentradas.setText("Entrada");
         jLabel16.setText("Monto requerido");
         jLabel11.setText("Costo entrada");
         jLabel12.setText("Imagen");
@@ -182,16 +182,16 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
 
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 126, -1, -1));
 
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 182, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 296, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, -1, -1));
 
         txtlugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtlugarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtlugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 333, 160, -1));
+        getContentPane().add(txtlugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 160, -1));
 
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 126, -1, -1));
 
@@ -240,7 +240,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnexplorar, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 298, -1, -1));
 
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 371, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
         btndardealta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,13 +333,13 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
 
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 18, -1, -1));
 
-        getContentPane().add(cbporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 405, -1, -1));
+        getContentPane().add(cbporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
 
-        getContentPane().add(cbentradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 440, -1, -1));
+        getContentPane().add(cbentradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, -1, -1));
 
         jScrollPane1.setViewportView(txtdescripcion);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 206, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 220, 150));
         getContentPane().add(labelimage, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, 130, 100));
 
         txtmontorec.addActionListener(new java.awt.event.ActionListener() {
@@ -349,7 +349,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
         });
         getContentPane().add(txtmontorec, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 510, 160, -1));
 
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 480, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, -1, -1));
 
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,6 +423,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             ICP.datosPropuesta(dtp);
             
             JOptionPane.showMessageDialog(null, "Propuesta agregada con exito");
+            sacarlabasura();
         }
         else{
             JOptionPane.showMessageDialog(null, "Controle los datos");
@@ -709,6 +710,21 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
 		return false;
 	}
 }
+
+    private void sacarlabasura() {
+        txtproponente1.setText("");
+        txttipoespectaculo.setText("");
+        txttitulo1.setText("");
+        txtdescripcion.setText("");
+        txtlugar.setText("");
+        txtmontorec.setText("");
+        txtdia.setText("");
+        txtmes.setText("");
+        txtanio.setText("");
+        txtcostoentrada.setText("");
+        cbporcentaje.setSelected(false);
+        cbentradas.setSelected(false);
+    }
 
 }
 

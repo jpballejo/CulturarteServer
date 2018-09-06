@@ -220,6 +220,7 @@ public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFram
             
                 ICC.eliminarcolaboracion(labelnickname.getText(), labeltitulo.getText());
                 JOptionPane.showMessageDialog(null,"Colaboracion eliminada"); 
+                limpiartodo();
             }
          } catch (Exception ex) {
                 Logger.getLogger(Cancelar_colaboracion_a_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -249,6 +250,14 @@ public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFram
     public void vaciarTablas(){
         DefaultTableModel modelo=(DefaultTableModel) tablacolaboracion.getModel();
         modelo.setRowCount(0);
+        
+        DefaultTableModel modelo2=(DefaultTableModel) tablacolaboraciones.getModel();
+        modelo2.setRowCount(0);        
 }
+
+    private void limpiartodo() {
+        labeltitulo.setText("Seleccione una colaboracion");
+        labelnickname.setText("Seleccione una colaboracion");      
+    }
 
 }
