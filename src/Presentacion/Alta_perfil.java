@@ -87,6 +87,7 @@ public class Alta_perfil extends javax.swing.JFrame {
         jtp_biografia = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -337,6 +338,16 @@ public class Alta_perfil extends javax.swing.JFrame {
         }
         return true;
    }
+     private boolean fechaok (){
+         int dia =0,mes=0,anio=0;
+         dia=jdc_fechaNac.getDate().getDay();
+         mes=jdc_fechaNac.getDate().getMonth();
+         dia=jdc_fechaNac.getDate().getYear();
+         
+         int Cdia=1,cMes=1,Canio=1945;
+     
+     return true;
+     }
    private dtFecha getFechajdc(){
            dtFecha fecha;
            fecha = new dtFecha(Integer.toString(jdc_fechaNac.getDate().getDay()),Integer.toString(jdc_fechaNac.getDate().getMonth()),Integer.toString(jdc_fechaNac.getDate().getYear()));
@@ -364,6 +375,7 @@ public class Alta_perfil extends javax.swing.JFrame {
         jT_web.disable();
         jtp_biografia.disable();
         jb_aceptar.disable();
+        jL_imagenP.setIcon(null);
         
     }
 

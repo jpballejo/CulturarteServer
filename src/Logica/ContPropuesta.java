@@ -261,7 +261,7 @@ public class ContPropuesta implements iConPropuesta {
         contCarga.levantarBDestadosPropPer();
         ArrayList<dtPropuestasBD> dtpropuestasDb = new ArrayList<dtPropuestasBD>();
         propPer.cargarPropuestas(dtpropuestasDb);
-         contCarga.agregardtpropuesta(dtpropuestasDb);
+        contCarga.agregardtpropuesta(dtpropuestasDb);
         ArrayList<dtEstadosPropuestas> estProp = new ArrayList<>();
         estPer.CargarEstadosPropuestas(estProp);
         llenaEstadosCarga(estProp);
