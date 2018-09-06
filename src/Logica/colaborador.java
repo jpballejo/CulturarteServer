@@ -81,7 +81,7 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
             cp.eliminate();
         }
         
-        this.colaboracionesUsuario=null;
+        this.colaboracionesUsuario.clear();
     }
     
     public boolean notenescolaboraciones(){

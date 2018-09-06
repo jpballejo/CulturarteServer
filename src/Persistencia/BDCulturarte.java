@@ -365,7 +365,7 @@ public class BDCulturarte {
             String sql = "TRUNCATE `cultuRarte`.`Categoria`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -379,7 +379,7 @@ public class BDCulturarte {
             String sql = "TRUNCATE `cultuRarte`.`Colaboraciones`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -394,7 +394,7 @@ public class BDCulturarte {
             String sql = "TRUNCATE `cultuRarte`.`Favoritos`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -408,7 +408,7 @@ public class BDCulturarte {
             String sql = "TRUNCATE `cultuRarte`.`Proponente`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -418,18 +418,18 @@ public class BDCulturarte {
 
     public boolean truncarPropuesta() {
         try {
-           
-            truncarColaboraciones();
             truncarEstadoPropuesta();
+            truncarColaboraciones();
             truncarEstado();
+            truncarCategoria();
             //previo
             Connection conn = conexion.getConexion();
             String sql = "TRUNCATE `cultuRarte`.`Propuesta`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             //posteriormente
-            truncarCategoria();
+            
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -456,7 +456,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`Seguidores`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -470,7 +470,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`SeguidoresPer`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -484,7 +484,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`colPersistencia`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -498,7 +498,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`colaborador`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -512,7 +512,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`estado`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -526,7 +526,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`estadoPropuesta`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -540,7 +540,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`propEstPer`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -554,7 +554,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`propPer`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -568,7 +568,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`usuPer`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -587,7 +587,7 @@ public boolean truncarPer(){
             String sql = "TRUNCATE `cultuRarte`.`usuario`";
             Statement st = conn.createStatement();
             System.out.println(sql);
-            st.execute(sql);
+            st.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());

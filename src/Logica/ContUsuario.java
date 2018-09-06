@@ -68,7 +68,7 @@ public class ContUsuario implements iConUsuario {
 
     public boolean moverImagenesUsu() {
         //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
-        int tam = listaImagenes.size();
+     //   int tam = listaImagenes.size();
         for (int i = 0; i < listaImagenes.size(); i++) {
             try {
                 String inicio = null;
@@ -129,7 +129,7 @@ public class ContUsuario implements iConUsuario {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
 
         moverImagenesUsu();
@@ -903,8 +903,8 @@ public class ContUsuario implements iConUsuario {
     }
 
     void borrarColecciones() {
-        this.listaImagenes=null;
+        this.listaImagenes.clear();
         this.usuariorecordado=null;
-        this.usuarios=null;
+        this.usuarios.clear();
     }
 }
