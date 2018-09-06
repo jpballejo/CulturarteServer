@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
     ContUsuario contUsu = ContUsuario.getInstance();
     ContPropuesta contProp= ContPropuesta.getInstance();
-    
+           int maxmonto;
    
     
           
@@ -41,6 +41,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         this.setSize(666, 553);
         //String titulo[]={"nickName"};
        // llenarGrilla(jTable_proponente, titulo, proponentes);
+
        jLabel1.setText("Propuestas");
        jLabel5.setText("Monto total recaudado");
        jLabel3.setText("Estado");
@@ -54,7 +55,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
        btnaceptar.setText("Aceptar");
        btncancelar.setText("Cancelar");
        cbporcentaje.setText("Porcentaje");
-       cbentradas.setText("Entradas");
+       cbentradas.setText("Entrada");
     }
 
     /**
@@ -368,6 +369,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         
         cbentradas.setSelected(false);
         cbporcentaje.setSelected(false);
+        maxmonto=0;
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed
@@ -393,6 +395,8 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     private void tpropuestasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tpropuestasMouseClicked
         // TODO add your handling code here:
         try {
+        limpiarlabasura();   
+            
         int row=tpropuestas.rowAtPoint(evt.getPoint());
         int col=tpropuestas.columnAtPoint(evt.getPoint());
         dtPropuesta dtp;
@@ -430,6 +434,8 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
            cbporcentaje.setEnabled(true);
            cbentradas.setEnabled(true);
        }
+       
+       maxmonto=dtp.getMontorequerido()-dtp.getMontoTotal();
         
         } catch (Exception ex) {
             Logger.getLogger(Registrar_Colaboracion_a_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
@@ -480,11 +486,12 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
 
          
            
-          
-        if(txtestado.getText().contains("No financiada")==false){
-            if(txtestado.getText().contains("Cancelada")==false){        
-                if(txtestado.getText().contains("Financiada")==false){
-                    if(txtestado.getText().contains("Ingresada")==false){        
+   // if(Integer.parseInt(txtmontoacolaborar.getText())<=maxmonto){ 
+    if(txtestado.getText().contains("No financiada")==false){
+        if(txtestado.getText().contains("Cancelada")==false){        
+            if(txtestado.getText().contains("Financiada")==false){
+                if(txtestado.getText().contains("Ingresada")==false){   
+                    if(Integer.parseInt(txtmontoacolaborar.getText())<=maxmonto){       
                          if(re.isEmpty()==false){          
                             if(txtmontoacolaborar.getText().isEmpty()==false && txtmontoacolaborar.getText().contains(",")==false && txtmontoacolaborar.getText().contains(".")==false && txtmontoacolaborar.getText().contains(" ")==false && isNumeric(txtmontoacolaborar.getText())){
                                 if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")==false){
@@ -493,6 +500,14 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                                      if(txtestado.getText().contains("Publicada") && b){
                                          contProp.agregarEstadoAPropuesta("En financiacion", txttituloprop.getText(), dtf, dth);
                                      } 
+                                 
+                                     if(txtestado.getText().contains("En financiacion") && (maxmonto-Integer.parseInt(txtmontoacolaborar.getText()))==0 && b){
+                                         contProp.agregarEstadoAPropuesta("Financiada", txttituloprop.getText(), dtf, dth);
+                                     }      
+                                    
+                                     if(txtestado.getText().contains("Publicada") && (maxmonto-Integer.parseInt(txtmontoacolaborar.getText()))==0 && b){
+                                         contProp.agregarEstadoAPropuesta("Financiada", txttituloprop.getText(), dtf, dth);
+                                     }                                           
                                      
                                      if(b){
                                             JOptionPane.showMessageDialog(null, "Colaboracion registrada");
@@ -522,25 +537,35 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                             cbentradas.requestFocus();
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null, "No es posible registrar una colaboracion en una propuesta Ingresada, esta debe ser verificada por un administrador");
-                        txtestado.selectAll();
-                        txtestado.requestFocus();                
-                    }  
+                        JOptionPane.showMessageDialog(null, "El monto de colaboracion es superior al necesario por la propuesta, maximo posible: "+maxmonto);
+                        txtmontoacolaborar.selectAll();
+                        txtmontoacolaborar.requestFocus();         
+                    }                         
                 }else{
-                    JOptionPane.showMessageDialog(null, "La propuesta ya fue financiada y no acepta colaboraciones");
+                    JOptionPane.showMessageDialog(null, "No es posible registrar una colaboracion en una propuesta Ingresada, esta debe ser verificada por un administrador");
                     txtestado.selectAll();
-                    txtestado.requestFocus(); 
-                }
-             }else{
-                 JOptionPane.showMessageDialog(null, "La propuesta ha sido cancelada");
-                 txtestado.selectAll();
-                 txtestado.requestFocus();   
+                    txtestado.requestFocus();                
+                }  
+            }else{
+                JOptionPane.showMessageDialog(null, "La propuesta ya fue financiada y no acepta colaboraciones");
+                txtestado.selectAll();
+                txtestado.requestFocus(); 
             }
         }else{
-            JOptionPane.showMessageDialog(null, "La propuesta no se encuentra en financiacion debido a que su fecha caduco");
+            JOptionPane.showMessageDialog(null, "La propuesta ha sido cancelada");
             txtestado.selectAll();
             txtestado.requestFocus();   
         }
+    }else{
+        JOptionPane.showMessageDialog(null, "La propuesta no se encuentra en financiacion debido a que su fecha caduco");
+        txtestado.selectAll();
+        txtestado.requestFocus();   
+    }
+//    }else{
+//        JOptionPane.showMessageDialog(null, "El monto de colaboracion es superior al necesario por la propuesta, maximo posible: "+maxmonto);
+//        txtmontoacolaborar.selectAll();
+ //       txtmontoacolaborar.requestFocus();         
+//    }        
         
             
     }//GEN-LAST:event_btnaceptarActionPerformed
@@ -608,6 +633,8 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         
         DefaultTableModel modelo3= (DefaultTableModel) tablecolaborador.getModel();
         modelo3.setRowCount(0);   
+        
+        
         
         cbporcentaje.setSelected(false);
         cbentradas.setSelected(false);

@@ -773,7 +773,7 @@ public class ContUsuario implements iConUsuario {
         for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof proponente) {
                 proponente p = (proponente) this.usuarios.get(key);
-                if (p.propuestasUsuario.containsKey(key)) {
+                if (p.propuestasUsuario.containsKey(titulo)) {
                     return p.getNickname();
                 }
             }
