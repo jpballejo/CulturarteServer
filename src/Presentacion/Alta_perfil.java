@@ -205,6 +205,9 @@ public class Alta_perfil extends javax.swing.JFrame {
         jT_web.disable();
         jtp_biografia.disable();
         jrb_proponente.setSelected(false);
+        jT_web.setText("");
+        jT_direccion.setText("");
+        jtp_biografia.setText("");
        
     }//GEN-LAST:event_jrb_colaboradorActionPerformed
 
@@ -369,31 +372,32 @@ public class Alta_perfil extends javax.swing.JFrame {
 
    private boolean altaPerfil(){
        
-   try {
-      
-       if(controlDatos()==true){
-            if(contUsu.existeUsuario(jT_nick.getText())==false){
-       if (usuTipo==false){
-      
-           dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText()
-                   ,imagenRuta, jT_email.getText(), getFechajdc());
-           contUsu.agregarUsu(dtCola);
-           return true;
-       } 
-    
-        if (usuTipo==true && jT_direccion.getText()!=null&&jtp_biografia.getText()!=null&&jT_web.getText()!=null){
-       dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta,jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
-       contUsu.agregarUsu(dtprop);
-       return true;
-        }
-       
-       }else {JOptionPane.showMessageDialog(null,"Ya existe un usuario con el mismo nickname");
-                return false;
-            }
-        }else {
-           return false;
-       }
-   } catch (Exception ex) {
+       try {
+
+           if (controlDatos() == true) {
+               if (contUsu.existeUsuario(jT_nick.getText()) == false) {
+                   if (usuTipo == false) {
+
+                       dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText(),
+                                imagenRuta, jT_email.getText(), getFechajdc());
+                       contUsu.agregarUsu(dtCola);
+                       return true;
+                   }
+
+                   if (usuTipo == true && jT_direccion.getText() != null && jtp_biografia.getText() != null && jT_web.getText() != null) {
+                       dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta, jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
+                       contUsu.agregarUsu(dtprop);
+                       return true;
+                   }
+
+               } else {
+                   JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nickname");
+                   return false;
+               }
+           } else {
+               return false;
+           }
+       } catch (Exception ex) {
            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
        }
         return false; }
