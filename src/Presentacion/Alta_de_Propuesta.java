@@ -488,8 +488,8 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
         
-        int row=jTable1.rowAtPoint(evt.getPoint());
-        int col=jTable1.columnAtPoint(evt.getPoint());
+        int row=jTable2.rowAtPoint(evt.getPoint());
+        int col=jTable2.columnAtPoint(evt.getPoint());
         
         txttipoespectaculo.setText((String)jTable2.getValueAt(row, col));
     }//GEN-LAST:event_jTable2MouseClicked
