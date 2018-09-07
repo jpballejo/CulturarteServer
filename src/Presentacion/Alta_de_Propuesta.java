@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -452,7 +453,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             sacarlabasura();
         }
         else{
-            JOptionPane.showMessageDialog(null, "Controle los datos");
+          // JOptionPane.showMessageDialog(null, "Controle los datos");
         }
             
     }//GEN-LAST:event_btndardealtaActionPerformed
@@ -487,8 +488,8 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
         
-        int row=jTable1.rowAtPoint(evt.getPoint());
-        int col=jTable1.columnAtPoint(evt.getPoint());
+        int row=jTable2.rowAtPoint(evt.getPoint());
+        int col=jTable2.columnAtPoint(evt.getPoint());
         
         txttipoespectaculo.setText((String)jTable2.getValueAt(row, col));
     }//GEN-LAST:event_jTable2MouseClicked
@@ -547,6 +548,21 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             return false;
         }
 
+        boolean existp=false;
+        List<String> propss=ICP.listartodasPropuestas("");
+        Iterator ite=propss.iterator();
+        while(ite.hasNext()){
+            String stp=(String) ite.next();
+            if(stp.contentEquals(txttitulo1.getText())){
+                existp=true;
+            }
+        }
+        if(existp==true){
+            JOptionPane.showMessageDialog(null,"Ya existe una propuesta con este titulo");
+            txttitulo1.selectAll();
+            txttitulo1.requestFocus(); 
+            return false;
+        }
         
         int anio=Integer.parseInt(txtanio.getText());
         int mes=Integer.parseInt(txtmes.getText());
@@ -623,7 +639,7 @@ public class Alta_de_Propuesta extends javax.swing.JInternalFrame {
             return false;
         } 
         
-        if(anio<1940 || anio>2030){
+        if(anio<2018 || anio>2030){
             JOptionPane.showMessageDialog(null,"Anio incorrecto");
             txtanio.selectAll();
             txtanio.requestFocus();            

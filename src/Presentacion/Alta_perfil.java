@@ -212,7 +212,10 @@ public class Alta_perfil extends javax.swing.JFrame {
         jT_web.disable();
         jtp_biografia.disable();
         jrb_proponente.setSelected(false);
-
+        jT_web.setText("");
+        jT_direccion.setText("");
+        jtp_biografia.setText("");
+       
     }//GEN-LAST:event_jrb_colaboradorActionPerformed
 
     private void jrb_proponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_proponenteActionPerformed
@@ -394,6 +397,7 @@ public class Alta_perfil extends javax.swing.JFrame {
 
     }
 
+
     private boolean altaPerfil() {
 
         try {
@@ -425,33 +429,37 @@ public class Alta_perfil extends javax.swing.JFrame {
             Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-    }
 
-    private void selecImagen() {
-        FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
-        navegadorArchivos.setFileFilter(filtroImagen);
-        navegadorArchivos.showOpenDialog(this);
-        File imagen = navegadorArchivos.getSelectedFile();
-        String path = navegadorArchivos.getSelectedFile().getPath();
-        jL_imagenP.setIcon(new ImageIcon(path));
-        ImageIcon icon = new ImageIcon(path);
-        Image foto = icon.getImage();
-        Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
-        ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
-        jL_imagenP.setIcon(nuevoIcono);
-        //BufferedImage img= nuevoIcono;
-        salvarImagen(foto);
+  
     }
+    
+   private void selecImagen(){
+       FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+       navegadorArchivos.setFileFilter(filtroImagen);
+       navegadorArchivos.showOpenDialog(this);
+       File imagen = navegadorArchivos.getSelectedFile();
+       String path = navegadorArchivos.getSelectedFile().getPath();
+       jL_imagenP.setIcon(new ImageIcon(path));
+       ImageIcon icon = new ImageIcon(path);
+       Image foto = icon.getImage();
+       Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
+       ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
+       jL_imagenP.setIcon(nuevoIcono);
+       //BufferedImage img= nuevoIcono;
+       salvarImagen(foto);}
 
-    private void salvarImagen(Image imagen) {
-        BufferedImage img = (BufferedImage) imagen;
-        File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil" + jT_nick.getText() + ".png");
-        imagenRuta = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil" + jT_nick.getText() + ".png";
-        try {
-            ImageIO.write(img, "png", outputfile);
-        } catch (IOException ex) {
-            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
-        }
+ 
+   
+   private void salvarImagen(Image imagen){
+   BufferedImage img = (BufferedImage) imagen;
+   File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png");
+   imagenRuta="/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png";
+    try { 
+        ImageIO.write(img, "png", outputfile);
+    } catch (IOException ex) {
+        Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+
     }
-
+ 
+   }
 }
