@@ -10,6 +10,7 @@ import Logica.dtColaborador;
 import Logica.dtFecha;
 import Logica.dtProponente;
 import Logica.dtUsuario;
+import com.toedter.calendar.IDateEditor;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -31,24 +32,29 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Alta_perfil extends javax.swing.JFrame {
 // variables y cosas generales;
+
     ContUsuario contUsu = ContUsuario.getInstance();
-    boolean usuTipo = false;
-    String imagenRuta ="COSO";
+    boolean usuTipo;
+    String imagenRuta = "COSO";
     JFileChooser navegadorArchivos = new JFileChooser();
+
     /**
      * Creates new form Alta_perfil
      */
     public Alta_perfil() {
         initComponents();
-        String imagenRuta=null;
-        JFileChooser navegadorArchivos=new JFileChooser();
+        String imagenRuta = null;
+        JFileChooser navegadorArchivos = new JFileChooser();
         jT_direccion.enable(false);
         jT_web.enable(false);
         jtp_biografia.enable(false);
-        jb_aceptar.enable(false);
+        jb_aceptar.setEnabled(false);
         this.setLocationRelativeTo(null);
-       // jdc_fechaNac.setMinSelectableDate(new Date(1940, 1, 1));
-        //jdc_fechaNac.setMaxSelectableDate(new Date(2000, 1, 1));
+        Date min = new Date("1950/01/01");
+        Date max = new Date("2000/12/31");
+        jdc_fechaNac.getDateEditor().setEnabled(false);
+        jdc_fechaNac.setMaxSelectableDate(max);
+        jdc_fechaNac.setMinSelectableDate(min);
     }
 
     /**
@@ -194,25 +200,25 @@ public class Alta_perfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
-        limpiarTxt();        
+        limpiarTxt();
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_cancelarActionPerformed
 
     private void jrb_colaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_colaboradorActionPerformed
-        usuTipo=false;
-        jb_aceptar.disable();
+        usuTipo = false;
+        jb_aceptar.setEnabled(true);
         jT_direccion.disable();
         jT_web.disable();
         jtp_biografia.disable();
         jrb_proponente.setSelected(false);
-       
+
     }//GEN-LAST:event_jrb_colaboradorActionPerformed
 
     private void jrb_proponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_proponenteActionPerformed
         jrb_colaborador.setSelected(false);
-        usuTipo=true;
-        jb_aceptar.enable();
+        usuTipo = true;
+        jb_aceptar.setEnabled(true);
         jT_direccion.enable();
         jT_web.enable();
         jtp_biografia.enable();
@@ -220,12 +226,12 @@ public class Alta_perfil extends javax.swing.JFrame {
     }//GEN-LAST:event_jrb_proponenteActionPerformed
 
     private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
-     if(altaPerfil()==true)
-     {JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
-       limpiarTxt();}
-     else{
-    // JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario");
-     }
+        if (altaPerfil() == true) {
+            JOptionPane.showMessageDialog(null, "Usuario agregado con exito");
+            limpiarTxt();
+        } else {
+            // JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario");
+        }
     }//GEN-LAST:event_jb_aceptarActionPerformed
 
     private void jb_examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_examinarActionPerformed
@@ -297,70 +303,79 @@ public class Alta_perfil extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 // funciones
-    
-     private boolean controlDatos () throws Exception{
+    private boolean controlDatos() throws Exception {
 
-       
-        if(jT_nick.getText()==null){
-            JOptionPane.showMessageDialog(null,"Nickname vacio");
+        if (jT_nick.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Nickname vacio");
             jT_nick.selectAll();
             jT_nick.requestFocus();
             return false;
         }
-        if(jT_nombre.getText()==null){
-            JOptionPane.showMessageDialog(null,"Nombre vacio");
+        if (jT_nombre.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Nombre vacio");
             jT_nombre.selectAll();
             jT_nombre.requestFocus();
             return false;
         }
-        if(jT_apellido.getText()==null){
-            JOptionPane.showMessageDialog(null,"Apellido vacio");
+        if (jT_apellido.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Apellido vacio");
             jT_apellido.selectAll();
             jT_apellido.requestFocus();
             return false;
         }
-        if(jT_email.getText()==null){
-            JOptionPane.showMessageDialog(null,"Email vacio");
+        if (jT_email.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Email vacio");
             jT_email.selectAll();
             jT_email.requestFocus();
             return false;
         }
-        if(compruebaEmail(jT_email.getText())!=true){
-            JOptionPane.showMessageDialog(null,"Email incorrecto");
+        if (compruebaEmail(jT_email.getText()) != true) {
+            JOptionPane.showMessageDialog(null, "Email incorrecto");
             jT_email.selectAll();
             jT_email.requestFocus();
             return false;
         }
-        if(jdc_fechaNac==null){
-            JOptionPane.showMessageDialog(null,"Fecha nacimiento vacia");
-           jdc_fechaNac.requestFocus();
-           return false;
+        if (jdc_fechaNac == null) {
+            JOptionPane.showMessageDialog(null, "Fecha nacimiento vacia");
+            jdc_fechaNac.requestFocus();
+            return false;
         }
         return true;
-   }
-     private boolean fechaok (){
-         int dia =0,mes=0,anio=0;
-         dia=jdc_fechaNac.getDate().getDay();
-         mes=jdc_fechaNac.getDate().getMonth();
-         dia=jdc_fechaNac.getDate().getYear();
-         
-         int Cdia=1,cMes=1,Canio=1945;
-     
-     return true;
-     }
-   private dtFecha getFechajdc(){
-           dtFecha fecha;
-           fecha = new dtFecha(Integer.toString(jdc_fechaNac.getDate().getDay()),Integer.toString(jdc_fechaNac.getDate().getMonth()),Integer.toString(jdc_fechaNac.getDate().getYear()));
-           return fecha;}
-   private boolean compruebaEmail(String email){
-         // Patrón para validar el email
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        Matcher mather = pattern.matcher(email);
-        
-    return mather.find();
     }
-   private void limpiarTxt(){
+
+    private boolean fechaok() {
+        int dia = 0, mes = 0, anio = 0;
+        dia = jdc_fechaNac.getDate().getDay();
+        mes = jdc_fechaNac.getDate().getMonth();
+        anio = jdc_fechaNac.getDate().getYear();
+
+        int Cdia = 01, cMes = 01, Canio = 1945;
+        if (dia == Cdia) {
+            if (mes == cMes) {
+                if (anio == Canio) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private dtFecha getFechajdc() {
+        dtFecha fecha;
+        fecha = new dtFecha(Integer.toString(jdc_fechaNac.getDate().getDay()), Integer.toString(jdc_fechaNac.getDate().getMonth()), Integer.toString(jdc_fechaNac.getDate().getYear()));
+        return fecha;
+    }
+
+    private boolean compruebaEmail(String email) {
+        // Patrón para validar el email
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mather = pattern.matcher(email);
+
+        return mather.find();
+    }
+
+    private void limpiarTxt() {
         jT_nick.setText(" ");
         jT_nombre.setText(" ");
         jT_apellido.setText(" ");
@@ -376,70 +391,67 @@ public class Alta_perfil extends javax.swing.JFrame {
         jtp_biografia.disable();
         jb_aceptar.disable();
         jL_imagenP.setIcon(null);
-        
+
     }
 
-   private boolean altaPerfil(){
-       
-   try {
-      
-       if(controlDatos()==true){
-            if(contUsu.existeUsuario(jT_nick.getText())==false){
-       if (usuTipo==false){
-      
-           dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText()
-                   ,imagenRuta, jT_email.getText(), getFechajdc());
-           contUsu.agregarUsu(dtCola);
-           return true;
-       } 
-    
-        if (usuTipo==true && jT_direccion.getText()!=null&&jtp_biografia.getText()!=null&&jT_web.getText()!=null){
-       dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta,jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
-       contUsu.agregarUsu(dtprop);
-       return true;
-        }
-       
-       }else {JOptionPane.showMessageDialog(null,"Ya existe un usuario con el mismo nickname");
+    private boolean altaPerfil() {
+
+        try {
+
+            if (controlDatos() == true) {
+                if (contUsu.existeUsuario(jT_nick.getText()) == false) {
+                    if (usuTipo == false) {
+
+                        dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText(),
+                                 imagenRuta, jT_email.getText(), getFechajdc());
+                        contUsu.agregarUsu(dtCola);
+                        return true;
+                    }
+
+                    if (usuTipo == true) {
+                        dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta, jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
+                        contUsu.agregarUsu(dtprop);
+                        return true;
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nickname");
+                    return false;
+                }
+            } else {
                 return false;
             }
-        }else {
-           return false;
-       }
-   } catch (Exception ex) {
-           Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
-       }
-        return false; }
-   
-   
-   private void selecImagen(){
-       FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
-       navegadorArchivos.setFileFilter(filtroImagen);
-       navegadorArchivos.showOpenDialog(this);
-       File imagen = navegadorArchivos.getSelectedFile();
-       String path = navegadorArchivos.getSelectedFile().getPath();
-       jL_imagenP.setIcon(new ImageIcon(path));
-       ImageIcon icon = new ImageIcon(path);
-       Image foto = icon.getImage();
-       Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
-       ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
-       jL_imagenP.setIcon(nuevoIcono);
-       //BufferedImage img= nuevoIcono;
-       salvarImagen(foto);}
-
- 
-   
-   private void salvarImagen(Image imagen){
-   BufferedImage img = (BufferedImage) imagen;
-   File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png");
-   imagenRuta="/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png";
-    try { 
-        ImageIO.write(img, "png", outputfile);
-    } catch (IOException ex) {
-        Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
-   }
 
+    private void selecImagen() {
+        FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        navegadorArchivos.setFileFilter(filtroImagen);
+        navegadorArchivos.showOpenDialog(this);
+        File imagen = navegadorArchivos.getSelectedFile();
+        String path = navegadorArchivos.getSelectedFile().getPath();
+        jL_imagenP.setIcon(new ImageIcon(path));
+        ImageIcon icon = new ImageIcon(path);
+        Image foto = icon.getImage();
+        Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
+        jL_imagenP.setIcon(nuevoIcono);
+        //BufferedImage img= nuevoIcono;
+        salvarImagen(foto);
+    }
 
-
+    private void salvarImagen(Image imagen) {
+        BufferedImage img = (BufferedImage) imagen;
+        File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil" + jT_nick.getText() + ".png");
+        imagenRuta = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil" + jT_nick.getText() + ".png";
+        try {
+            ImageIO.write(img, "png", outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
