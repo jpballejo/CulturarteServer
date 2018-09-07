@@ -42,8 +42,8 @@ public class ContUsuario implements iConUsuario {
     private Map<String, usuario> usuarios = new HashMap<String, usuario>();
     seguirdejardeseguirPersistencia segdej = new seguirdejardeseguirPersistencia();
     colaboracionesPersistencia colabPer = new colaboracionesPersistencia();
-    estadoPropuestaPersistencia estadopropper= new estadoPropuestaPersistencia();
-    propuestasPersistencia propPersis= new propuestasPersistencia();
+    estadoPropuestaPersistencia estadopropper = new estadoPropuestaPersistencia();
+    propuestasPersistencia propPersis = new propuestasPersistencia();
 
     public boolean existeUsuario(String nickName) {
         if (usuarios.containsKey(nickName) == true) {
@@ -57,7 +57,6 @@ public class ContUsuario implements iConUsuario {
     private usuario usuariorecordado;
     private seguirdejardeseguirPersistencia seguirdejardeseguir = new seguirdejardeseguirPersistencia();
     private cancelarcolaboracionPersistencia cancelarcolab = new cancelarcolaboracionPersistencia();
-    
 
     public static ContUsuario getInstance() {
         if (instance == null) {
@@ -68,7 +67,7 @@ public class ContUsuario implements iConUsuario {
 
     public boolean moverImagenesUsu() {
         //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
-     //   int tam = listaImagenes.size();
+        //   int tam = listaImagenes.size();
         for (int i = 0; i < listaImagenes.size(); i++) {
             try {
                 String inicio = null;
@@ -112,12 +111,12 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public void cargarUsuarios() {
-        
+
         try {
             contCarga.levantaBDusuPer();
             ArrayList<dtUsuario> dtUsuarios = new ArrayList<dtUsuario>();
             dtUsuarios = usuPer.cargaUsuarios();
-            
+
             int tam = dtUsuarios.size();
             //Iterator<dtUsuario> iterador = dtUsuarios.iterator();
             for (int i = 0; i < dtUsuarios.size(); i++) {
@@ -192,7 +191,6 @@ public class ContUsuario implements iConUsuario {
 
         }
     }
-
     /**
      *
      * @param dtusu
@@ -204,6 +202,7 @@ public class ContUsuario implements iConUsuario {
 
             if (dtusu instanceof dtProponente) {
                 dtProponente dtProp = (dtProponente) dtusu;
+
                 proponente usuProp = new proponente((dtProp.getNickname()), dtProp.getNombre(), dtProp.getApellido(), dtProp.getEmail(), dtProp.getImagen(),
                         dtProp.getFechaNac(), dtProp.getDireccion(), dtProp.getBiografia(), dtProp.getSitioWeb());
                 usuarios.put(usuProp.getNickname(), usuProp);
@@ -442,13 +441,13 @@ public class ContUsuario implements iConUsuario {
                 if (p.propuestasUsuario.containsKey(titulo)) {
                     dtp = p.getPropuestas(titulo);
                     dtp.montoactual = this.montopropuesta(dtp.titulo);
-                    
+
                 }
 
             }
         }
 
-        if (dtp.getTitulo()==titulo) {
+        if (dtp.getTitulo() == titulo) {
             dtp.setColaboradores(this.listarColaboradores(titulo));
             dtp.setMontoTotal(this.montopropuesta(titulo));
             return dtp;
@@ -538,11 +537,11 @@ public class ContUsuario implements iConUsuario {
 
     }
 
-    public void agregarEstadoAPropuesta(estado e, String titulo, dtFecha dtf, dtHora dth,int orden) {
+    public void agregarEstadoAPropuesta(estado e, String titulo, dtFecha dtf, dtHora dth, int orden) {
         propuesta p = this.damePropuesta(titulo);
         if (p.getTitulo() == titulo) {
-            boolean agrego=p.agregarNuevoEstado(e, dtf, dth,orden);
-            if(agrego){
+            boolean agrego = p.agregarNuevoEstado(e, dtf, dth, orden);
+            if (agrego) {
                 estadopropper.agregarPropEstado(titulo, e.getNombre(), dtf.getFecha(), dth.getHora());
             }
         }
@@ -576,19 +575,18 @@ public class ContUsuario implements iConUsuario {
 
     @Override
     public void borrartodocUsuario() {
-       
-        //VACIAR LOS SEGUIDOS POR LOS USUARIOS QUE SERAN ELIMINADOS
 
+        //VACIAR LOS SEGUIDOS POR LOS USUARIOS QUE SERAN ELIMINADOS
         for (String key : this.usuarios.keySet()) {
-             
-                usuario u;
-                u = this.usuarios.get(key);
-                u.eliminartodoslosseguidos();
-            
+
+            usuario u;
+            u = this.usuarios.get(key);
+            u.eliminartodoslosseguidos();
+
         }
 
         //SACAR DE LOS USUARIOS DE PRUEBA POSIBLE SEGUIMIENTO A USUARIOS QUE SERAN BORRADOS
- /*       for (String key : this.usuarios.keySet()) {
+        /*       for (String key : this.usuarios.keySet()) {
             if (anoborrar.containsKey(key) == true) {
                 usuario us;
                 us = this.usuarios.get(key);
@@ -596,16 +594,13 @@ public class ContUsuario implements iConUsuario {
 
             }
         } */
-
         //SACA EL PUNTERO AL USUARIO RECORDADO SI ESTE DEBE SER ELIMINADO
-
-
     }
 
     public void borrarColaboraciones() {
-        
+
         for (String key : this.usuarios.keySet()) {
-            if (this.usuarios.get(key) instanceof colaborador ) {
+            if (this.usuarios.get(key) instanceof colaborador) {
                 colaborador c = (colaborador) this.usuarios.get(key);
                 c.eliminarcolaboraciones();
             }
@@ -613,8 +608,7 @@ public class ContUsuario implements iConUsuario {
         }
 
         //ELIMINAR COLABORACIONES POSIBLES DE LOS USUARIOS DE PRUEBA CON PROPUESTAS QUE SERAN BORRADAS
-        
-     /*   for (String key : this.usuarios.keySet()) {
+        /*   for (String key : this.usuarios.keySet()) {
             if (this.usuarios.get(key) instanceof colaborador && anoborrar.containsKey(key) == true) {
                 colaborador c = (colaborador) this.usuarios.get(key);
                 if (c.notenescolaboraciones() == false) { //SI EL USUARIO TIENE AL MENOS UNA COLPROP
@@ -627,9 +621,9 @@ public class ContUsuario implements iConUsuario {
     }
 
     public void borrarPropuestas(Map<String, String> pnoborrar) {
-        
+
         for (String key : this.usuarios.keySet()) {
-            if (this.usuarios.get(key) instanceof proponente ) {
+            if (this.usuarios.get(key) instanceof proponente) {
                 proponente p = (proponente) this.usuarios.get(key);
                 p.borratuspropuestas();
 
@@ -837,74 +831,73 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public void actualizardatospropuesta(dtPropuesta dtp,estado e,int orden, dtFecha dtf, dtHora dth) throws Exception{
-        
-        propuesta p=this.damePropuesta(dtp.getTitulo());
-        if(p.getTitulo()==dtp.getTitulo()){
+    public void actualizardatospropuesta(dtPropuesta dtp, estado e, int orden, dtFecha dtf, dtHora dth) throws Exception {
+
+        propuesta p = this.damePropuesta(dtp.getTitulo());
+        if (p.getTitulo() == dtp.getTitulo()) {
             p.setDescripcion(dtp.getDescripcion());
             p.setImagen(dtp.getImagen());
             p.setLugar(dtp.getLugar());
-            boolean estadoagregado=p.agregarNuevoEstado(e, dtf, dth, orden);
+            boolean estadoagregado = p.agregarNuevoEstado(e, dtf, dth, orden);
             p.setFechapublicada(dtp.getFechapublicada());
             p.setFecharealizacion(dtp.getFechaRealizacion());
             p.setPrecioEntrada(dtp.getPrecioentrada());
             p.setMontoRequerido(dtp.getMontorequerido());
-            
-            dtPropuestasBD dtpbd=new dtPropuestasBD(dtp.getTitulo(),dtp.getProponente(),dtp.getDescripcion(),dtp.getImagen(),dtp.getLugar(),dtp.getCategoria(),p.getRetorno(),dtp.getFechaRealizacion(),dtp.getFechapublicada(),dtp.getPrecioentrada(),dtp.getMontorequerido());
+
+            dtPropuestasBD dtpbd = new dtPropuestasBD(dtp.getTitulo(), dtp.getProponente(), dtp.getDescripcion(), dtp.getImagen(), dtp.getLugar(), dtp.getCategoria(), p.getRetorno(), dtp.getFechaRealizacion(), dtp.getFechapublicada(), dtp.getPrecioentrada(), dtp.getMontorequerido());
             propPersis.actualizarPropuesta(dtpbd);
-            if(estadoagregado==true){
+            if (estadoagregado == true) {
                 estadopropper.agregarPropEstado(p.getTitulo(), e.getNombre(), dtf.getFecha(), dth.getHora());
             }
-           
-        }
-        else
+
+        } else {
             throw new Exception("La propuesta " + dtp.getTitulo() + " que desea modificar no existe");
+        }
     }
 
     List<String> listarPropuestasPorEstado(String estado) {
-        List<String> retorno= new ArrayList<>();
-        
-        for(String ku: this.usuarios.keySet()){
-            if(this.usuarios.get(ku) instanceof proponente){
-                proponente prop=(proponente) this.usuarios.get(ku);
-                for(String kp: prop.propuestasUsuario.keySet()){
-                    propuesta p=prop.propuestasUsuario.get(kp);
-                    if(p.getEstadoActual().contains(estado)){
+        List<String> retorno = new ArrayList<>();
+
+        for (String ku : this.usuarios.keySet()) {
+            if (this.usuarios.get(ku) instanceof proponente) {
+                proponente prop = (proponente) this.usuarios.get(ku);
+                for (String kp : prop.propuestasUsuario.keySet()) {
+                    propuesta p = prop.propuestasUsuario.get(kp);
+                    if (p.getEstadoActual().contains(estado)) {
                         retorno.add(kp);
                     }
                 }
-            
+
             }
         }
         return retorno;
     }
 
     void eliminarcolaboracion(String nickname, String titulo) throws Exception {
-       colaborador c=this.damecolaborador(nickname);
-       if(c.getNickname().contentEquals(nickname)){
-           colProp cp=c.colaboracionesUsuario.remove(titulo);
-           cp.eliminate();
-           colabPer.eliminarColaboracion(nickname, titulo);
-       }
-       else
-         throw new Exception("El colaborador " + nickname + " no existe");  
+        colaborador c = this.damecolaborador(nickname);
+        if (c.getNickname().contentEquals(nickname)) {
+            colProp cp = c.colaboracionesUsuario.remove(titulo);
+            cp.eliminate();
+            colabPer.eliminarColaboracion(nickname, titulo);
+        } else {
+            throw new Exception("El colaborador " + nickname + " no existe");
+        }
     }
 
-    
-    public colaborador damecolaborador(String nick){
-        for(String key: this.usuarios.keySet()){
-            if(this.usuarios.get(key) instanceof colaborador && key.contentEquals(nick)){
-                colaborador c= (colaborador) this.usuarios.get(key);
+    public colaborador damecolaborador(String nick) {
+        for (String key : this.usuarios.keySet()) {
+            if (this.usuarios.get(key) instanceof colaborador && key.contentEquals(nick)) {
+                colaborador c = (colaborador) this.usuarios.get(key);
                 return c;
             }
         }
-        
-        return null;   
+
+        return null;
     }
 
     void borrarColecciones() {
         this.listaImagenes.clear();
-        this.usuariorecordado=null;
+        this.usuariorecordado = null;
         this.usuarios.clear();
     }
 }
