@@ -32,13 +32,19 @@ public class ContCargaBD implements iContCargaBD {
     private ArrayList<dtColaboracionCompleto> colaboracionesPer = new ArrayList<>();
     private ArrayList<dtEstadosPropuestas> estadosPropuestaPer = new ArrayList<>();
     private ArrayList<dtSeguidores> seguidoresUPer = new ArrayList<>();
+
 //arreglos primitivos para carga -- bruto
     private ArrayList<String> usuPer = new ArrayList<>();
     private ArrayList<String> propPer = new ArrayList<>();
     private ArrayList<dtColaboraciones> colPer = new ArrayList<>();
     private ArrayList<dtEstadosPropuestas> estaPropPer = new ArrayList<>();
     private ArrayList<dtSeguidores> seguidoresPer = new ArrayList<>();
+    private ArrayList<dtCategoria> catPer = new ArrayList<>();
 
+//Variables movimiento de imagenes --
+    
+    private String imagenUSU=null, imagenPropuesta=null;
+    
     public static ContCargaBD getInstance() {
         if (instance == null) {
             instance = new ContCargaBD();
@@ -69,6 +75,10 @@ public class ContCargaBD implements iContCargaBD {
 
     public void levantarBDseguidoresPer() {
         bdCul.levantarSeguidoresOrigin(seguidoresPer);
+    }
+
+    public void levantarBDCategoriasPer() {
+        bdCul.levantarCategoriasOrigin(catPer);
     }
 
     public boolean limpiarCargar() {
@@ -109,12 +119,31 @@ public class ContCargaBD implements iContCargaBD {
 
     }
 
-    public void setearCategoria(ArrayList<dtCategoria> dtcate) {
+    public boolean comparaCadenas(String cad1, String cad2) {
+        
+        return cad1.equals(cad2);
 
+    }
+
+    public void setearCategoria(ArrayList<dtCategoria> dtcate) {
+        try {
         for (int i = 0; i < dtcate.size(); i++) {
             dtCategoria dtcat = dtcate.get(i);
-            categoriasPer.add(dtcat);
+          for (int p = 0; p < catPer.size(); p++) {
+                dtCategoria control = catPer.get(p);
+                System.err.println(dtcat.getNombre() + "  "+control.getNombre());
+               if (comparaCadenas(dtcat.getNombre(), control.getNombre())) {
+                    categoriasPer.add(dtcat);
+
+                }
+
+            }
+
+        }    
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
+        
 
     }
 
@@ -450,6 +479,34 @@ public class ContCargaBD implements iContCargaBD {
         System.out.println("vacio usuariosPer");
         System.out.println("vacio TODO");
 
+    }
+
+    /**
+     * @return the imagenUSU
+     */
+    public String getImagenUSU() {
+        return imagenUSU;
+    }
+
+    /**
+     * @param imagenUSU the imagenUSU to set
+     */
+    public void setImagenUSU(String imagenUSU) {
+        this.imagenUSU = imagenUSU;
+    }
+
+    /**
+     * @return the imagenPropuesta
+     */
+    public String getImagenPropuesta() {
+        return imagenPropuesta;
+    }
+
+    /**
+     * @param imagenPropuesta the imagenPropuesta to set
+     */
+    public void setImagenPropuesta(String imagenPropuesta) {
+        this.imagenPropuesta = imagenPropuesta;
     }
 
 }

@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package Persistencia;
-import Logica.categoria;
 import Logica.dtColaborador;
 import Logica.dtFecha;
 import Logica.dtProponente;
 import Logica.dtSeguidores;
 import Logica.dtUsuario;
-import Logica.usuario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,7 +90,7 @@ public class usuariosPersistencia {
                 usu.beforeFirst();
                 while (usu.next() && seguir == 0) {
                     if (prop.getString(1).equals(usu.getString(1)) == true) {
-                        dtProponente dtProp = new dtProponente(usu.getString(2), usu.getString(3), usu.getString(1), usu.getString(6), usu.getString(4), construirFecha(usu.getString(5)), prop.getString(2), prop.getString(4), prop.getString(3));
+                        dtProponente dtProp = new dtProponente(usu.getString(2), usu.getString(3), usu.getString(1), usu.getString(6), usu.getString(4), construirFecha(usu.getString(5)), prop.getString(2), prop.getString(4), prop.getString(3),usu.getString(7));
                         usuarios.add(dtProp);
                         seguir = 1;
                     }
@@ -124,7 +122,7 @@ public class usuariosPersistencia {
                 usu.beforeFirst();
                 while (usu.next() && seguir == 0) {
                     if (col.getString(1).equals(usu.getString(1))) {
-                        dtUsuario dtCol = new dtColaborador(usu.getString(2), usu.getString(3), usu.getString(1), usu.getString(6), usu.getString(4), construirFecha(usu.getString(5)));
+                        dtUsuario dtCol = new dtColaborador(usu.getString(2), usu.getString(3), usu.getString(1), usu.getString(6), usu.getString(4), construirFecha(usu.getString(5)),usu.getString(7));
                         usuarios.add(dtCol);
                         seguir = 1;
 

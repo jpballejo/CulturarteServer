@@ -23,8 +23,8 @@ public class proponente extends usuario {
 
     private String biografia, web;
 
-    public proponente(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String direccion, String biografia, String web) {
-        super(nickname, nombre, apellido, email, imagen, nacimiento);
+    public proponente(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String direccion, String biografia, String web,String pass) {
+        super(nickname, nombre, apellido, email, imagen, nacimiento,pass);
         this.direccion = direccion;
         this.biografia = biografia;
         this.web = web;
@@ -49,7 +49,7 @@ public class proponente extends usuario {
 
     public dtProponente getDtProponente() {
 
-        dtProponente dtprop = new dtProponente(this.nombre, this.apellido, this.nickname, this.imagen, this.email, this.nacimiento, this.direccion, this.biografia, this.web);
+        dtProponente dtprop = new dtProponente(this.nombre, this.apellido, this.nickname, this.imagen, this.email, this.nacimiento, this.direccion, this.biografia, this.web,this.password);
 
         return dtprop;
     }

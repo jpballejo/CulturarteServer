@@ -308,8 +308,8 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         // TODO add your handling code here:
         Alta_de_categoria adc=new Alta_de_categoria();
        // jDesktopPane1.add(adc);
-        this.getContentPane().add(adc);
-        adc.show();
+     this.getContentPane().add(adc);
+        adc.show(true);
     }//GEN-LAST:event_jm_altaCategoriaActionPerformed
 
     private void jm_altaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaPerfilActionPerformed

@@ -28,7 +28,7 @@ public dtColaborador getColaboradores(){
 }
 
 public dtColaborador getColaborador(){
-    dtColaborador dt=new dtColaborador(this.nombre,this.apellido,this.nickname,this.imagen,this.email,this.nacimiento);
+    dtColaborador dt=new dtColaborador(this.nombre,this.apellido,this.nickname,this.imagen,this.email,this.nacimiento,this.password);
     return dt;
 }
 
@@ -54,8 +54,8 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
 
    
 
-    public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
-        super(nickname, nombre, apellido, email, imagen, nacimiento);
+    public colaborador(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento,String pass) {
+        super(nickname, nombre, apellido, email, imagen, nacimiento,pass);
     }
  
     public boolean colaborasconpropuesta(String tituloprop){
