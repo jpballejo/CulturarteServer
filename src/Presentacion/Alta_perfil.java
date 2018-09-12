@@ -314,6 +314,13 @@ public class Alta_perfil extends javax.swing.JFrame {
             jT_nick.requestFocus();
             return false;
         }
+        if(jT_nick.getText().equals("jfk")){
+         JOptionPane.showMessageDialog(null, "No funca jfk");
+            jT_nick.selectAll();
+            jT_nick.requestFocus();
+            return false;
+        
+        }
         if (jT_nombre.getText() == null) {
             JOptionPane.showMessageDialog(null, "Nombre vacio");
             jT_nombre.selectAll();

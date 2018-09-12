@@ -7,6 +7,7 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -39,5 +40,8 @@ public interface iConPropuesta {
     public abstract void actualizardatospropuesta(dtPropuesta dtp,String e, dtFecha dtf, dtHora dth) throws Exception;
     public abstract List<String> listarEstados();
     public abstract List<String> listarPropuestasPorEstado(String estado);
+    public abstract List<dtCategoria> getdtCategorias();
+    public abstract Map<String, categoria> getCategorias();
+
 }
     

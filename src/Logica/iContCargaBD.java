@@ -36,6 +36,8 @@ public interface iContCargaBD {
     public abstract void levantarBDestadosPropPer();
 
     public abstract void levantarBDseguidoresPer();
+    
+    public abstract void levantarBDCategoriasPer();
 
     public abstract boolean cargarDatos();
 }

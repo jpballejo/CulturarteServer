@@ -18,11 +18,11 @@ import Logica.dtPropuestasBD;
 import Logica.dtSeguidores;
 import Logica.dtUsuario;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import org.jdesktop.beansbinding.Validator;
 
 /**
  *
@@ -133,9 +133,28 @@ public class BDCulturarte {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-       
-        
-        
+
+        }
+    }
+
+    public void levantarCategoriasOrigin(ArrayList<dtCategoria> catePer) {
+        try {
+            String sql = "SELECT * FROM cultuRarte.categoriasPer";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet rsCatPer = st.executeQuery(sql);
+            while (rsCatPer.next()) {
+
+                String padre = null;
+                if (rsCatPer.getString(2) != null) {
+                    padre = rsCatPer.getString(2);
+                }
+                dtCategoria dtCat = new dtCategoria(rsCatPer.getString(1), padre);
+                catePer.add(dtCat);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            
         }
     }
 
@@ -227,16 +246,15 @@ public class BDCulturarte {
             Statement st = (Statement) con.createStatement();
             if (dtUsu instanceof dtProponente) {
                 dtProponente dtProp = (dtProponente) dtUsu;
-                String pagWeb =dtProp.getSitioWeb();
-                String bio= dtProp.getBiografia();
+                String pagWeb = dtProp.getSitioWeb();
+                String bio = dtProp.getBiografia();
                 sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('" + dtProp.getNickname() + "','" + dtProp.getNombre() + "','" + dtProp.getApellido() + "','" + dtProp.getEmail() + "','" + dtProp.getFechaNac().getFecha() + "','" + dtProp.getImagen() + "')";
-                sqlProp = "INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('"+dtProp.getNickname()+"','"+dtProp.getDireccion()+"','"+pagWeb+"','"+bio+"')";
+                sqlProp = "INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('" + dtProp.getNickname() + "','" + dtProp.getDireccion() + "','" + pagWeb + "','" + bio + "')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlProp);
                 System.out.println(sqlUsu);
                 System.out.println(sqlProp);
-          
-               
+
             }
 //acomodar estos 
             if (dtUsu instanceof dtColaborador) {
@@ -294,12 +312,12 @@ public class BDCulturarte {
             String sql = null;
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
-            String padre= cat.getPadre();
-            if (padre!=null) {
+            String padre = cat.getPadre();
+            if (padre != null) {
                 sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + cat.getNombre() + "','" + padre + "')";
                 st.executeUpdate(sql);
             }
-            if (padre==null) {
+            if (padre == null) {
                 sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`)VALUES('" + cat.getNombre() + "')";
                 st.executeUpdate(sql);
             }
@@ -439,27 +457,29 @@ public class BDCulturarte {
             System.out.println(sql);
             st.executeUpdate(sql);
             //posteriormente
-            
+
             return true;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return false;
         }
     }
-public boolean truncarPer(){
-    try {
-        truncarProPer();
-        truncarPropEstPer();
-        truncarSeguidoresPer();
-        truncarUsuPer();
-        
-        return true;
-    } catch (Exception e) {
-        System.err.println(e.getMessage());
-        return false;
-        
+
+    public boolean truncarPer() {
+        try {
+            truncarProPer();
+            truncarPropEstPer();
+            truncarSeguidoresPer();
+            truncarUsuPer();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+
+        }
     }
-}
+
     public boolean truncarSeguidores() {
         try {
             Connection conn = conexion.getConexion();

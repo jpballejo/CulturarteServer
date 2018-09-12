@@ -168,6 +168,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
         
         DefaultTableModel model=(DefaultTableModel) tablepropuesta.getModel();
         model.setRowCount(0);
+        
         Object[] dato={dtp.getTitulo(),dtp.getDescripcion(),dtp.getLugar(),dtp.getFechaRealizacion().getFecha(),dtp.getPrecioentrada(),dtp.getMontorequerido()};
         txtestado.setText(dtp.getEstado());
         txtmontotoal1.setText(Integer.toString(dtp.getMontoTotal()));
