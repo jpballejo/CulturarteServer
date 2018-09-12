@@ -12,8 +12,8 @@ package Logica;
 
 public class dtColaborador extends dtUsuario {
     
-    public dtColaborador(String nombre, String apellido, String nickname, String imagen, String email, dtFecha fechaNac) {
-        super(nombre, apellido, nickname, imagen, email, fechaNac);
+    public dtColaborador(String nombre, String apellido, String nickname, String imagen, String email, dtFecha fechaNac, String pass) {
+        super(nombre, apellido, nickname, imagen, email, fechaNac,pass);
    
         
     }

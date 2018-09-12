@@ -11,16 +11,17 @@ package Logica;
  */
 public class dtUsuario {
 
-    private String nombre, apellido, nickname, imagen, email;
+    private String nombre, apellido, nickname, imagen, email,pass;
     private dtFecha fechaNac;
 
-    public dtUsuario(String nombre, String apellido, String nickname, String imagen, String email, dtFecha fechaNac) {
+    public dtUsuario(String nombre, String apellido, String nickname, String imagen, String email, dtFecha fechaNac,String pass) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nickname = nickname;
         this.imagen = imagen;
         this.email = email;
         this.fechaNac = fechaNac;
+        this.pass=pass;
     }
 
     /**
@@ -63,6 +64,13 @@ public class dtUsuario {
      */
     public dtFecha getFechaNac() {
         return fechaNac;
+    }
+
+    /**
+     * @return the pass
+     */
+    public String getPass() {
+        return pass;
     }
 
     

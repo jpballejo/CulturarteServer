@@ -248,7 +248,7 @@ public class BDCulturarte {
                 dtProponente dtProp = (dtProponente) dtUsu;
                 String pagWeb = dtProp.getSitioWeb();
                 String bio = dtProp.getBiografia();
-                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('" + dtProp.getNickname() + "','" + dtProp.getNombre() + "','" + dtProp.getApellido() + "','" + dtProp.getEmail() + "','" + dtProp.getFechaNac().getFecha() + "','" + dtProp.getImagen() + "')";
+                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`,`password`)VALUES('" + dtProp.getNickname() + "','" + dtProp.getNombre() + "','" + dtProp.getApellido() + "','" + dtProp.getEmail() + "','" + dtProp.getFechaNac().getFecha() + "','" + dtProp.getImagen() + "','"+dtProp.getPass()+"')";
                 sqlProp = "INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('" + dtProp.getNickname() + "','" + dtProp.getDireccion() + "','" + pagWeb + "','" + bio + "')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlProp);
@@ -259,7 +259,7 @@ public class BDCulturarte {
 //acomodar estos 
             if (dtUsu instanceof dtColaborador) {
                 dtColaborador dtCol = (dtColaborador) dtUsu;
-                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`)VALUES('" + dtCol.getNickname() + "','" + dtCol.getNombre() + "','" + dtCol.getApellido() + "','" + dtCol.getEmail() + "','" + dtCol.getFechaNac().getFecha() + "','" + dtCol.getImagen() + "')";
+                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`,`password`)VALUES('" + dtCol.getNickname() + "','" + dtCol.getNombre() + "','" + dtCol.getApellido() + "','" + dtCol.getEmail() + "','" + dtCol.getFechaNac().getFecha() + "','" + dtCol.getImagen() + "','"+dtCol.getPass()+"')";
                 sqlCol = "INSERT INTO `colaborador` (`idUsuario`) VALUES ('" + dtCol.getNickname() + "')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlCol);

@@ -22,6 +22,8 @@ public class usuario {
             apellido, 
             email, 
             imagen;
+    protected String password;
+    
    protected dtFecha nacimiento;
 
     protected Map<String, usuario> seguidos;
@@ -35,7 +37,7 @@ public class usuario {
     //CONSTRUCTORES//
     public usuario() {}
 
-    public usuario(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento) {
+    public usuario(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String password) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -43,6 +45,7 @@ public class usuario {
         this.imagen = imagen;
         this.nacimiento = nacimiento;
         this.seguidos=new HashMap<String, usuario>();
+        this.password =password;
     }
 
     //GETTERS//
@@ -138,6 +141,20 @@ public class usuario {
             if(anoborrar.containsKey(key)==false)
                 this.seguidos.remove(key);
         }
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 

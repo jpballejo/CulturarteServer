@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
@@ -21,7 +23,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class Alta_de_categoria extends javax.swing.JInternalFrame {
 
-    private Map<String, dtCategoria> cat = new HashMap<>();
+    private ArrayList< dtCategoria> cat = new ArrayList<>();
 
     ContPropuesta contProp = ContPropuesta.getInstance();
 
@@ -30,12 +32,23 @@ public class Alta_de_categoria extends javax.swing.JInternalFrame {
      */
     public Alta_de_categoria() {
         initComponents();
-
+        
+        //jT_categorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         this.jT_categorias.setModel(llenarjT());
 
     }
 
+    private void cargaCategorias() {
+        try {
+            cat = (ArrayList< dtCategoria>) contProp.getdtCategorias();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
     private DefaultMutableTreeNode crearNodo(String nomNodo) {
+        System.out.println(nomNodo);
         DefaultMutableTreeNode nuevo = new DefaultMutableTreeNode(nomNodo);
         return nuevo;
     }
@@ -44,13 +57,13 @@ public class Alta_de_categoria extends javax.swing.JInternalFrame {
         DefaultMutableTreeNode raiz = crearNodo("Categorias");
         DefaultTreeModel modelo = new DefaultTreeModel(raiz);
         try {
-            ArrayList<dtCategoria> cat = contProp.getdtCategorias();
 
             for (int i = 0; i < cat.size(); i++) {
                 dtCategoria categoriaNodo = cat.get(i);
                 String padre = categoriaNodo.getPadre();
                 if (padre == null) {
-                    modelo.insertNodeInto(nodos.get(categoriaNodo.getNombre()), raiz, 1);
+                    DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) nodos.get(categoriaNodo.getNombre());
+                    modelo.insertNodeInto(nodo, raiz, 0);
                 }
             }
 
@@ -63,29 +76,31 @@ public class Alta_de_categoria extends javax.swing.JInternalFrame {
 
     private void armarHijos(Map<String, DefaultMutableTreeNode> nodos, DefaultTreeModel modelo) {
         try {
-        ArrayList<dtCategoria> cat = contProp.getdtCategorias();
-        for (int i = 0; i < cat.size(); i++) {
-            dtCategoria catNodo = cat.get(i);
-            if (catNodo.getPadre() != null) {
-                DefaultMutableTreeNode padre = nodos.get(catNodo.getPadre());
-                DefaultMutableTreeNode hijo = nodos.get(catNodo.getNombre());
-                modelo.insertNodeInto(hijo, padre, 1);
+
+            for (int i = 0; i < cat.size(); i++) {
+                dtCategoria catNodo = cat.get(i);
+                if (catNodo.getPadre() != null) {
+                    DefaultMutableTreeNode padre = nodos.get(catNodo.getPadre());
+                    DefaultMutableTreeNode hijo = nodos.get(catNodo.getNombre());
+                    modelo.insertNodeInto(hijo, padre, 0);
+                }
             }
-        }    
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
+
     }
-private void llenarDtCat(ArrayList<dtCategoria> dtCat){
-//uhuuh
-}
+
+  
     private void armarNodos(Map<String, DefaultMutableTreeNode> nodos) {
         try {
-            ArrayList<dtCategoria> dtCat=new ArrayList<>();
-           dtCat=(ArrayList < dtCategoria >)contProp.getdtCategorias();
-            for (int i = 0; i < dtCat.size(); i++) {
-                dtCategoria ca = dtCat.get(i);
+            ArrayList<dtCategoria> dtCat = new ArrayList<>();
+
+            System.out.println(dtCat.size());
+            for (int i = 0; i < cat.size(); i++) {
+
+                dtCategoria ca = (dtCategoria) cat.get(i);
+                System.out.println(ca.getNombre());
                 nodos.put(ca.getNombre(), crearNodo(ca.getNombre()));
 
             }
@@ -100,6 +115,7 @@ private void llenarDtCat(ArrayList<dtCategoria> dtCat){
     private DefaultTreeModel llenarjT() {
         DefaultTreeModel modelo = null;
         try {
+            cargaCategorias();
             Map<String, DefaultMutableTreeNode> nodos = new HashMap<>();
             armarNodos(nodos);
             modelo = armarPadres(nodos);
@@ -130,6 +146,14 @@ private void llenarDtCat(ArrayList<dtCategoria> dtCat){
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jT_categorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jT_categoriasMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jT_categoriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jT_categorias);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 280, 509));
@@ -150,6 +174,20 @@ private void llenarDtCat(ArrayList<dtCategoria> dtCat){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jT_categoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_categoriasMouseClicked
+       
+    }//GEN-LAST:event_jT_categoriasMouseClicked
+
+    private void jT_categoriasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_categoriasMousePressed
+        TreePath Path = jT_categorias.getPathForLocation(evt.getX(),evt.getY());
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)Path.getLastPathComponent();
+        //if(node.isLeaf()){
+        jt_padre.setText(node.toString());
+        
+        //}
+        
+    }//GEN-LAST:event_jT_categoriasMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

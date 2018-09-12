@@ -91,6 +91,8 @@ public class Alta_perfil extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtp_biografia = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jT_Pass = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -98,19 +100,19 @@ public class Alta_perfil extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("NickName");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 15, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jLabel2.setText("Nombre");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel3.setText("Apellido");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 81, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel4.setText("Email");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 120, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel5.setText("Fecha Nacimiento");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 153, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jL_imagenP.setText("Imagen");
         jPanel1.add(jL_imagenP, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 198, 148, 137));
@@ -164,7 +166,7 @@ public class Alta_perfil extends javax.swing.JFrame {
         jPanel1.add(jT_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 42, 136, -1));
         jPanel1.add(jT_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 75, 136, -1));
         jPanel1.add(jT_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 108, 136, -1));
-        jPanel1.add(jdc_fechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 147, -1, -1));
+        jPanel1.add(jdc_fechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
         jPanel1.add(jT_web, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 9, 156, -1));
 
         jLabel8.setText("Direccion");
@@ -179,6 +181,10 @@ public class Alta_perfil extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtp_biografia);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 240, 350));
+
+        jLabel10.setText("Password");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        jPanel1.add(jT_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,6 +286,7 @@ public class Alta_perfil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jL_imagenP;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -290,6 +297,7 @@ public class Alta_perfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jT_Pass;
     private javax.swing.JTextField jT_apellido;
     private javax.swing.JTextField jT_direccion;
     private javax.swing.JTextField jT_email;
@@ -314,13 +322,12 @@ public class Alta_perfil extends javax.swing.JFrame {
             jT_nick.requestFocus();
             return false;
         }
-        if(jT_nick.getText().equals("jfk")){
-         JOptionPane.showMessageDialog(null, "No funca jfk");
-            jT_nick.selectAll();
-            jT_nick.requestFocus();
+       if(jT_Pass.getText()==null){
+       JOptionPane.showMessageDialog(null, "Password vacio");
+            jT_Pass.selectAll();
+            jT_Pass.requestFocus();
             return false;
-        
-        }
+       }
         if (jT_nombre.getText() == null) {
             JOptionPane.showMessageDialog(null, "Nombre vacio");
             jT_nombre.selectAll();
@@ -414,13 +421,13 @@ public class Alta_perfil extends javax.swing.JFrame {
                     if (usuTipo == false) {
 
                         dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText(),
-                                 imagenRuta, jT_email.getText(), getFechajdc());
+                                 imagenRuta, jT_email.getText(), getFechajdc(),jT_Pass.getText());
                         contUsu.agregarUsu(dtCola);
                         return true;
                     }
 
                     if (usuTipo == true) {
-                        dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta, jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText());
+                        dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta, jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText(),jT_Pass.getText());
                         contUsu.agregarUsu(dtprop);
                         return true;
                     }

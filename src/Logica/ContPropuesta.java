@@ -65,20 +65,21 @@ public class ContPropuesta implements iConPropuesta {
     public boolean moverImagenesProp() {
         //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
         int tam = listaImagenes.size();
-        for (int i = 0; i < listaImagenes.size(); i++) {
+        
             try {
+                for (int i = 0; i < listaImagenes.size(); i++) {
                 String inicio = null;
                 String destino = null;
                 String imagen = listaImagenes.get(i);
                 inicio = "/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/" + imagen;
                 destino = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesProp/" + imagen;
                 System.out.println(destino);
-                copiarArchivo(inicio, destino);
+                copiarArchivo(inicio, destino);}
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
                 return false;
             }
-        }
+        
         return true;
     }
 
@@ -217,7 +218,7 @@ public class ContPropuesta implements iConPropuesta {
             catPer.cargarCat(dtcate);
             contCarga.setearCategoria(dtcate);
             System.out.println(dtcate.size());
-            for (int i = (0); i < dtcate.size(); i++) {
+            for (int i = 0; i < dtcate.size(); i++) {
                 System.out.print(i);
                 dtCategoria dtcat = (dtCategoria) dtcate.get(i);
                 categoria cat = new categoria(dtcat.getNombre());
@@ -243,7 +244,8 @@ public class ContPropuesta implements iConPropuesta {
     }//revisado
 
     public void cargaEstados() {
-        ArrayList<dtEstado> nomEstados = new ArrayList<>();
+        try {
+            ArrayList<dtEstado> nomEstados = new ArrayList<>();
         estPer.CargarEstados(nomEstados);
         for (int i = 0; i < nomEstados.size(); i++) {
             dtEstado est = nomEstados.get(i);
@@ -253,6 +255,10 @@ public class ContPropuesta implements iConPropuesta {
 
         }
         cargaridEstado(nomEstados);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
     }
 
     public void cargaPropuestas() {
@@ -432,8 +438,13 @@ public class ContPropuesta implements iConPropuesta {
         while (it.hasNext()) {
             String stkey = (String) it.next();
             categoria cate = (categoria) categorias.get(stkey);
-            String nombre = cate.getNombre();
-            String padre = cate.getPadre().getNombre();
+            String nombre =null;
+            nombre = cate.getNombre();
+            String padre =null;
+            if(cate.getPadre()!=null){
+            padre= cate.getPadre().getNombre();
+            }
+            
             dtCategoria dtcat = new dtCategoria(nombre, padre);
             cat.add(dtcat);
         }
