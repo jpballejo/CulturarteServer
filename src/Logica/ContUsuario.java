@@ -900,4 +900,37 @@ public class ContUsuario implements iConUsuario {
         this.usuariorecordado = null;
         this.usuarios.clear();
     }
+
+    public dtUsuario usuarioLogin(String usuario) {
+        dtUsuario retorno = null;
+        if(usuario.contains("@")==false){ //Busqueda por Nick
+            if(this.usuarios.containsKey(usuario)){
+                if(this.usuarios.get(usuario) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usuario);
+                    retorno=p.getDtProponente();
+                }
+                else{
+                    colaborador c=(colaborador) this.usuarios.get(usuario);
+                    retorno=c.getColaborador();
+                }
+            }       
+        }
+        if(usuario.contains("@")==true){ //Busqueda por Correo
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usuario);
+                    if(p.getEmail().equals(usuario)){
+                        retorno=p.getDtProponente();
+                    }
+                }
+                else{
+                    colaborador c=(colaborador) this.usuarios.get(usuario);
+                    if(c.getEmail().equals(usuario)){
+                        retorno=c.getColaborador();
+                    }
+                }
+            }
+        }
+        return retorno;
+    }
 }

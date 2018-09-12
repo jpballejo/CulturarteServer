@@ -65,5 +65,9 @@ public class dtUsuario {
         return fechaNac;
     }
 
+    public String getPassword() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }
