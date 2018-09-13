@@ -901,6 +901,7 @@ public class ContUsuario implements iConUsuario {
         this.usuarios.clear();
     }
 
+
     @Override
     public ArrayList<proponente> getProponentes() {
 
@@ -923,3 +924,9 @@ public class ContUsuario implements iConUsuario {
         return propo;
     }
 }
+
+   
+    
+
+
+
