@@ -902,6 +902,7 @@ public class ContUsuario implements iConUsuario {
     }
 
 
+
     @Override
     public ArrayList<proponente> getProponentes() {
 
@@ -927,6 +928,8 @@ public class ContUsuario implements iConUsuario {
 
    
     
+
+
 
 
 
