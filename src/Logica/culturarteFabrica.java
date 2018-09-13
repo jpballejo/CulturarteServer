@@ -70,4 +70,16 @@ public class culturarteFabrica {
        ic.levantarBDdesdeMemoria();
     }
     
+    public void cargarinicio(){
+        iu.cargarUsuarios();
+        ip.cargarPropuestas();
+        ic.cargarColaboracion();
+    }
+
+    public String funcionprueba() {
+        return "exito";
+    }
+
+    
+    
 }

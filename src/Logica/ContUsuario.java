@@ -901,36 +901,44 @@ public class ContUsuario implements iConUsuario {
         this.usuarios.clear();
     }
 
-    public dtUsuario usuarioLogin(String usuario) {
+    public dtUsuario usuarioLogin(String usu) {
         dtUsuario retorno = null;
-        if(usuario.contains("@")==false){ //Busqueda por Nick
-            if(this.usuarios.containsKey(usuario)){
-                if(this.usuarios.get(usuario) instanceof proponente){
-                    proponente p=(proponente) this.usuarios.get(usuario);
+        if(usu.contains("@")==false){ //Busqueda por Nick
+            if(this.usuarios.containsKey(usu)){
+                if(this.usuarios.get(usu) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usu);
                     retorno=p.getDtProponente();
                 }
                 else{
-                    colaborador c=(colaborador) this.usuarios.get(usuario);
+                    colaborador c=(colaborador) this.usuarios.get(usu);
                     retorno=c.getColaborador();
                 }
             }       
         }
-        if(usuario.contains("@")==true){ //Busqueda por Correo
+        if(usu.contains("@")==true){ //Busqueda por Correo
             for(String key: this.usuarios.keySet()){
                 if(this.usuarios.get(key) instanceof proponente){
-                    proponente p=(proponente) this.usuarios.get(usuario);
-                    if(p.getEmail().equals(usuario)){
+                    proponente p=(proponente) this.usuarios.get(usu);
+                    if(p.getEmail().equals(usu)){
                         retorno=p.getDtProponente();
                     }
                 }
                 else{
-                    colaborador c=(colaborador) this.usuarios.get(usuario);
-                    if(c.getEmail().equals(usuario)){
+                    colaborador c=(colaborador) this.usuarios.get(usu);
+                    if(c.getEmail().equals(usu)){
                         retorno=c.getColaborador();
                     }
                 }
             }
         }
-        return retorno;
+        return retorno; 
+    
+        }
+
+    public void pruebabasica() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
+    }
+
+
+
