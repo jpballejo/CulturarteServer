@@ -15,14 +15,16 @@ public class dtColaboracionCompleto {
     int monto;
     dtFecha fecha;
     dtHora hora;
+    private String comentario;
     
-    public dtColaboracionCompleto(String n, String t, dtFecha dtf, dtHora dth, int m, String r) {
+    public dtColaboracionCompleto(String n, String t, dtFecha dtf, dtHora dth, int m, String r, String comen) {
         this.nickname=n;
         this.titulo=t;
         this.fecha=dtf;
         this.hora=dth;
         this.monto=m;
         this.retorno=r;
+        this.comentario=comen;
     }
 
     public String getNickname() {
@@ -49,31 +51,11 @@ public class dtColaboracionCompleto {
         return hora;
     }
 
-    
-    
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    /**
+     * @return the comentario
+     */
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public void setRetorno(String retorno) {
-        this.retorno = retorno;
-    }
-
-    public void setMonto(int monto) {
-        this.monto = monto;
-    }
-
-    public void setFecha(dtFecha fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setHora(dtHora hora) {
-        this.hora = hora;
-    }
-    
-    
 }

@@ -23,16 +23,20 @@ public class categoriaPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
 
-    public static void altaCategoria(String nombre, String padre) throws Exception {
+    public void altaCategoria(String nombre, String padre) throws Exception {
         try {
             String sql = null;
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
-            sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + nombre + "','" + padre + "')";
+            if(padre!=null){sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`,`padre`)VALUES ('" + nombre + "','" + padre + "')";
+            }
+            if (padre==null){sql = "INSERT INTO `cultuRarte`.`Categoria`(`nombre`)VALUES ('" + nombre + "')";}
+            
             st.executeUpdate(sql);
             // conexion.cerrar(conn);
 
         } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
             throw new Exception("Error al insertar los datos en la BD");
         }
 

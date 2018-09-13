@@ -178,7 +178,7 @@ public class ContUsuario implements iConUsuario {
         if (dtusu instanceof dtProponente) {
             dtProponente dtProp = (dtProponente) dtusu;
             proponente usuProp = new proponente((dtProp.getNickname()), dtProp.getNombre(), dtProp.getApellido(), dtProp.getEmail(), dtProp.getImagen(),
-                    dtProp.getFechaNac(), dtProp.getDireccion(), dtProp.getBiografia(), dtProp.getSitioWeb(),dtProp.getPass());
+                    dtProp.getFechaNac(), dtProp.getDireccion(), dtProp.getBiografia(), dtProp.getSitioWeb(), dtProp.getPass());
             usuarios.put(usuProp.getNickname(), usuProp);
 
         } else {
@@ -186,11 +186,12 @@ public class ContUsuario implements iConUsuario {
 
         if (dtusu instanceof dtColaborador) {
             dtColaborador colaborador = (dtColaborador) dtusu;
-            colaborador usuCola = new colaborador(colaborador.getNickname(), colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(), colaborador.getImagen(), colaborador.getFechaNac(),colaborador.getPass());
+            colaborador usuCola = new colaborador(colaborador.getNickname(), colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(), colaborador.getImagen(), colaborador.getFechaNac(), colaborador.getPass());
             usuarios.put(usuCola.getNickname(), usuCola);
 
         }
     }
+
     /**
      *
      * @param dtusu
@@ -204,7 +205,7 @@ public class ContUsuario implements iConUsuario {
                 dtProponente dtProp = (dtProponente) dtusu;
 
                 proponente usuProp = new proponente((dtProp.getNickname()), dtProp.getNombre(), dtProp.getApellido(), dtProp.getEmail(), dtProp.getImagen(),
-                        dtProp.getFechaNac(), dtProp.getDireccion(), dtProp.getBiografia(), dtProp.getSitioWeb(),dtProp.getPass());
+                        dtProp.getFechaNac(), dtProp.getDireccion(), dtProp.getBiografia(), dtProp.getSitioWeb(), dtProp.getPass());
                 usuarios.put(usuProp.getNickname(), usuProp);
                 usuPer.altaUsuario(dtusu);
             } else {
@@ -212,7 +213,7 @@ public class ContUsuario implements iConUsuario {
 
             if (dtusu instanceof dtColaborador) {
                 dtColaborador colaborador = (dtColaborador) dtusu;
-                colaborador usuCola = new colaborador(colaborador.getNickname(), colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(), colaborador.getImagen(), colaborador.getFechaNac(),colaborador.getPass());
+                colaborador usuCola = new colaborador(colaborador.getNickname(), colaborador.getNombre(), colaborador.getApellido(), colaborador.getEmail(), colaborador.getImagen(), colaborador.getFechaNac(), colaborador.getPass());
                 usuarios.put(usuCola.getNickname(), usuCola);
                 usuPer.altaUsuario(dtusu);
             }
@@ -263,7 +264,7 @@ public class ContUsuario implements iConUsuario {
     @Override
     public dtProponente infoProponente(String idProponente) {
         proponente p = (proponente) usuarios.get(idProponente);
-        dtProponente res = new dtProponente(p.getNombre(), p.getApellido(), p.getNickname(), p.getImagen(), p.getEmail(), p.getNacimiento(), p.getDireccion(), p.getBiografia(), p.getWeb(),p.getPassword());
+        dtProponente res = new dtProponente(p.getNombre(), p.getApellido(), p.getNickname(), p.getImagen(), p.getEmail(), p.getNacimiento(), p.getDireccion(), p.getBiografia(), p.getWeb(), p.getPassword());
         this.usuariorecordado = p;
         return res;
     }
@@ -802,8 +803,7 @@ public class ContUsuario implements iConUsuario {
 
     }
 
-    @Override
-    public boolean registrarColaboracion(String titulo, String colab, int monto, String retorno) {
+    public boolean registrarColaboracion(String titulo, String colab, int monto, String retorno, String comentario) {
         propuesta p = this.damePropuesta(titulo);
         if (this.usuarios.get(colab) instanceof colaborador) {
             colaborador c = (colaborador) this.usuarios.get(colab);
@@ -814,7 +814,7 @@ public class ContUsuario implements iConUsuario {
                     da.setYear(2018);
                     dtFecha dtf = new dtFecha(Integer.toString(da.getDay()), Integer.toString(da.getMonth()), Integer.toString(da.getYear()));
                     dtHora dth = new dtHora(da.getHours(), da.getMinutes());
-                    colProp cp = new colProp(dtf, dth, monto, retorno, p);
+                    colProp cp = new colProp(dtf, dth, monto, retorno, p, comentario);
                     c.colaboracionesUsuario.put(p.getTitulo(), cp);
                     colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno);
                     return true;
@@ -899,5 +899,27 @@ public class ContUsuario implements iConUsuario {
         this.listaImagenes.clear();
         this.usuariorecordado = null;
         this.usuarios.clear();
+    }
+
+    @Override
+    public ArrayList<proponente> getProponentes() {
+
+        ArrayList<proponente> propo = new ArrayList<>();
+        
+        try {
+            Iterator it = usuarios.keySet().iterator();
+            while(it.hasNext()){
+            String key = (String) it.next();
+            if((usuario)usuarios.get(key)instanceof proponente){
+            proponente prop = (proponente)(usuario)usuarios.get(key);
+            propo.add(prop);
+            
+            }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return propo;
     }
 }

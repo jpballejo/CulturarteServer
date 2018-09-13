@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -80,7 +79,7 @@ public class colaboracionesPersistencia {
                 String horaS = rs.getString(4);
                 dtHora dth= construirHora(horaS);
                 int monto = Integer.parseInt(rs.getString(5));
-                dtColaboracionCompleto dtc = new dtColaboracionCompleto(rs.getString(1), rs.getString(2), dtf, dth, monto, rs.getString(6));
+                dtColaboracionCompleto dtc = new dtColaboracionCompleto(rs.getString(1), rs.getString(2), dtf, dth, monto, rs.getString(6),rs.getString(7));
                 dtcolaboraciones.add(dtc);
 
             }

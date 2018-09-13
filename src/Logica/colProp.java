@@ -15,6 +15,7 @@ public class colProp {
     private dtHora hora;
     private int montocolaborado;
     private String retorno;
+    private String comentario;
 
 
     //METODOS//
@@ -34,12 +35,13 @@ public class colProp {
 }
 //CONSTRUCTOR//
 
-    public colProp(dtFecha fecha, dtHora hora, int montocolaborado, String retorno, propuesta prop) {
+    public colProp(dtFecha fecha, dtHora hora, int montocolaborado, String retorno, propuesta prop, String comen) {
         this.fecha = fecha;
         this.hora = hora;
         this.montocolaborado = montocolaborado;
         this.retorno = retorno;
         this.propColaborada=prop;
+        this.comentario=comen;
     }
     
     //GETTERS//
@@ -84,6 +86,20 @@ public class colProp {
         this.propColaborada=null;
         this.fecha=null;
         this.hora=null;
+    }
+
+    /**
+     * @return the comentario
+     */
+    public String getComentario() {
+        return comentario;
+    }
+
+    /**
+     * @param comentario the comentario to set
+     */
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
  
 }

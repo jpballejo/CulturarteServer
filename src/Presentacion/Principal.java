@@ -306,7 +306,7 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
 
     private void jm_altaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_altaCategoriaActionPerformed
         // TODO add your handling code here:
-        Alta_de_categoria adc=new Alta_de_categoria();
+        Alta_Categoria adc=new Alta_Categoria();
        // jDesktopPane1.add(adc);
      this.getContentPane().add(adc);
         adc.show(true);

@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public interface iConUsuario {
     public abstract List<String> listarProponentes(String text);
     public abstract void levantarBDdesdeMemoria();
     public abstract List<String> listarColaboradoresLike(String nick);
-    public abstract boolean registrarColaboracion(String titulo, String colaborador, int monto, String retorno);
+    public abstract boolean registrarColaboracion(String titulo, String colaborador, int monto, String retorno,String comentario);
     public abstract void actualizardatospropuesta(dtPropuesta dtp,estado e,int orden, dtFecha dtf, dtHora dth)throws Exception;
-    
+    public ArrayList<proponente> getProponentes();
 }

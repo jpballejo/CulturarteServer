@@ -42,6 +42,8 @@ public interface iConPropuesta {
     public abstract List<String> listarPropuestasPorEstado(String estado);
     public abstract List<dtCategoria> getdtCategorias();
     public abstract Map<String, categoria> getCategorias();
+    public abstract void altaCategoria(dtCategoria cate);
+    public abstract ArrayList<dtPropuestasBD> getdtPropIngr();
 
 }
     

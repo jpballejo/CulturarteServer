@@ -65,21 +65,22 @@ public class ContPropuesta implements iConPropuesta {
     public boolean moverImagenesProp() {
         //"/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/"
         int tam = listaImagenes.size();
-        
-            try {
-                for (int i = 0; i < listaImagenes.size(); i++) {
+
+        try {
+            for (int i = 0; i < listaImagenes.size(); i++) {
                 String inicio = null;
                 String destino = null;
                 String imagen = listaImagenes.get(i);
                 inicio = "/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/" + imagen;
                 destino = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesProp/" + imagen;
                 System.out.println(destino);
-                copiarArchivo(inicio, destino);}
-            } catch (IOException ex) {
-                System.err.println(ex.getMessage());
-                return false;
+                copiarArchivo(inicio, destino);
             }
-        
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        }
+
         return true;
     }
 
@@ -246,19 +247,19 @@ public class ContPropuesta implements iConPropuesta {
     public void cargaEstados() {
         try {
             ArrayList<dtEstado> nomEstados = new ArrayList<>();
-        estPer.CargarEstados(nomEstados);
-        for (int i = 0; i < nomEstados.size(); i++) {
-            dtEstado est = nomEstados.get(i);
-            String nombre = est.getNombre();
-            estado nuevoEstado = new estado(nombre);
-            estados.put(nuevoEstado.getNombre(), nuevoEstado);
+            estPer.CargarEstados(nomEstados);
+            for (int i = 0; i < nomEstados.size(); i++) {
+                dtEstado est = nomEstados.get(i);
+                String nombre = est.getNombre();
+                estado nuevoEstado = new estado(nombre);
+                estados.put(nuevoEstado.getNombre(), nuevoEstado);
 
-        }
-        cargaridEstado(nomEstados);
+            }
+            cargaridEstado(nomEstados);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
+
     }
 
     public void cargaPropuestas() {
@@ -369,7 +370,7 @@ public class ContPropuesta implements iConPropuesta {
     private void cargarcategoriasaBD() throws Exception {
         for (String key : this.getCategorias().keySet()) {
             categoria c = this.getCategorias().get(key);
-            categoriaPersistencia.altaCategoria(c.getNombre(), c.getPadre().getNombre());
+            catPer.altaCategoria(c.getNombre(), c.getPadre().getNombre());
         }
     }
 
@@ -431,29 +432,28 @@ public class ContPropuesta implements iConPropuesta {
      * @return the categorias
      */
     public ArrayList<dtCategoria> getdtCategorias() {
-                ArrayList<dtCategoria> cat = new ArrayList<>();
+        ArrayList<dtCategoria> cat = new ArrayList<>();
 
         try {
-        Iterator it = categorias.keySet().iterator();
-        while (it.hasNext()) {
-            String stkey = (String) it.next();
-            categoria cate = (categoria) categorias.get(stkey);
-            String nombre =null;
-            nombre = cate.getNombre();
-            String padre =null;
-            if(cate.getPadre()!=null){
-            padre= cate.getPadre().getNombre();
+            Iterator it = categorias.keySet().iterator();
+            while (it.hasNext()) {
+                String stkey = (String) it.next();
+                categoria cate = (categoria) categorias.get(stkey);
+                String nombre = null;
+                nombre = cate.getNombre();
+                String padre = null;
+                if (cate.getPadre() != null) {
+                    padre = cate.getPadre().getNombre();
+                }
+
+                dtCategoria dtcat = new dtCategoria(nombre, padre);
+                cat.add(dtcat);
             }
-            
-            dtCategoria dtcat = new dtCategoria(nombre, padre);
-            cat.add(dtcat);
-        }
-    
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
-        
+
         return cat;
 
     }
@@ -470,4 +470,59 @@ public class ContPropuesta implements iConPropuesta {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void altaCategoria(dtCategoria cate) {
+        try {
+            if (cate.getPadre() != null) {
+                if (cate.getPadre().equals("Categorias") != true) {
+                    categoria catP = (categoria) categorias.get(cate.getPadre());
+                    categoria categ = new categoria(catP, cate.getNombre());
+                    categorias.put(cate.getNombre(), catP);
+                    catPer.altaCategoria(cate.getNombre(), cate.getPadre());
+                }
+
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    @Override
+    /**
+     *
+     * retorna un arreglo de dtPropuestasBD con las propuestas
+     * con estado ingresado solamente
+     */
+    public ArrayList<dtPropuestasBD> getdtPropIngr() {
+        ArrayList<dtPropuestasBD> propu = new ArrayList<>();
+        ArrayList<proponente> proponentes = (ArrayList<proponente>) cUsuario.getProponentes();
+        for (int i=0;i<proponentes.size();i++){
+        proponente pro= (proponente)proponentes.get(i);
+        if(pro.noPropuestas()!=true){
+            cargaPropEstIngDt(propu, pro);
+        }
+        }
+        
+        return propu;
+    }
+    /**
+     *
+     * carga un arreglo de dtPropuestaBD con las propuestas con estado
+     * ingresado del proponente
+     * by Jp
+     */
+    private void cargaPropEstIngDt(ArrayList<dtPropuestasBD> propu,proponente prop){
+    ArrayList<propuesta> propuestas= (ArrayList<propuesta>)prop.getPropuestasObj();
+    for (int i =0;i<propuestas.size();i++){
+    propuesta pro=(propuesta)propuestas.get(i);
+    if(pro.getEstadoActual().equals("Ingresada")){
+        dtPropuestasBD dtprop = new dtPropuestasBD(pro.getTitulo(), prop.getNickname());
+        propu.add(dtprop);
+    //dtPropuestaComp dtprop=new dtPropuestaComp(titulo, descripcion, imagen, lugar, fechaPublicada, estado, categoria, fechaRealizacion, i, i, i)
+    }
+    
+    }
+    
+    }
 }
