@@ -924,12 +924,52 @@ public class ContUsuario implements iConUsuario {
 
         return propo;
     }
+
+
+    public dtUsuario usuarioLogin(String usu) {
+        dtUsuario retorno = null;
+        if(usu.contains("@")==false){ //Busqueda por Nick
+            if(this.usuarios.containsKey(usu)){
+                if(this.usuarios.get(usu) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usu);
+                    retorno=p.getDtProponente();
+                }
+                else{
+                    colaborador c=(colaborador) this.usuarios.get(usu);
+                    retorno=c.getColaborador();
+                }
+            }       
+        }
+        if(usu.contains("@")==true){ //Busqueda por Correo
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usu);
+                    if(p.getEmail().equals(usu)){
+                        retorno=p.getDtProponente();
+                    }
+                }
+                else{
+                    colaborador c=(colaborador) this.usuarios.get(usu);
+                    if(c.getEmail().equals(usu)){
+                        retorno=c.getColaborador();
+                    }
+                }
+            }
+        }
+        return retorno; 
+    
+        }
+
+    public void pruebabasica() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
    
     
 
 
+    
 
 
 
