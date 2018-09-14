@@ -18,6 +18,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +40,7 @@ public class ContPropuesta implements iConPropuesta {
     estadoPersistencia estPer = new estadoPersistencia();
     propuestasPersistencia propPer = new propuestasPersistencia();
     estadoPropuestaPersistencia estPropPer = new estadoPropuestaPersistencia();
+    ArrayList<propuesta> propuestas = new ArrayList<>();
     private Map<String, Integer> idEstado = new HashMap<String, Integer>();
     private ContCargaBD contCarga = ContCargaBD.getInstance();
 
@@ -524,5 +527,60 @@ public class ContPropuesta implements iConPropuesta {
     
     }
     
+    }
+    /**
+     *
+     * setea el estado a la propuesta, recibe dos string: el titulo y el estado by jp
+     */
+    public boolean nuevoEstadoProp(String idProp, String estado){
+        try {
+            for (int i =0;i<propuestas.size();i++){
+            propuesta p=(propuesta)propuestas.get(i);
+            if(p.getTitulo().equals(idProp)){
+                estado est = (estado)retornaEstado(estado);
+                dtFecha fecha = getFecha();
+                dtHora hora = getHora();
+                propEstado pE =new propEstado(fecha, hora, est);
+            p.setEstado(pE, getIdEstado(estado));
+            }
+            
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    return true;
+    }
+    /**
+     *
+     * retorna el estado que le pases by jp
+     */
+    private estado retornaEstado(String estado){
+    
+        estado get = estados.get(estado);
+        return get;
+    }
+    /**
+     *
+     * retorna un dtFecha con la fecha actual del sistema 
+     */
+       private dtFecha getFecha() {
+        dtFecha fecha = null;
+        Calendar cal = Calendar.getInstance();
+        Date da = cal.getTime();
+        da.setYear(2018);
+        fecha = new dtFecha(Integer.toString(da.getDay()), Integer.toString(da.getMonth()), Integer.toString(da.getYear()));
+        return fecha;
+    }
+     /**
+     *
+     * retorna un dtHora con la hora actual del sistema 
+     */
+    private dtHora getHora() {
+        dtHora hora = null;
+        Calendar cal = Calendar.getInstance();
+        Date da = cal.getTime();
+        da.setYear(2018);
+        hora = new dtHora(da.getHours(), da.getMinutes());
+        return hora;
     }
 }
