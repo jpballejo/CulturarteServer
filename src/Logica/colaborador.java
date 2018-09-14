@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -99,6 +100,14 @@ public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
             
             }
         }
+    }
+
+    public ArrayList<String> listarmiscolaboraciones() {
+        ArrayList<String> retorno= new ArrayList<>();
+        for(String key: this.colaboracionesUsuario.keySet()){
+            retorno.add(key);
+        }
+        return retorno;
     }
 
 }
