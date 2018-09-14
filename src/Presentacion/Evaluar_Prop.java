@@ -5,17 +5,30 @@
  */
 package Presentacion;
 
+import Logica.ContPropuesta;
+import Logica.dtPropuestasBD;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author juan
  */
 public class Evaluar_Prop extends javax.swing.JFrame {
 
+    String cancel_publicada = null;
+    ContPropuesta contP = ContPropuesta.getInstance();
+    ArrayList<dtPropuestasBD> propuestas = new ArrayList<>();
+
     /**
      * Creates new form Evaluar_Prop
      */
     public Evaluar_Prop() {
         initComponents();
+        btn_aceptar.setEnabled(false);
+        propuestas = (ArrayList<dtPropuestasBD>) contP.getdtPropIngr();
+        llenaGrilla(propuestas);
     }
 
     /**
@@ -34,8 +47,10 @@ public class Evaluar_Prop extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jR_publicada = new javax.swing.JRadioButton();
         jR_cancelada = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_aceptar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
+        jT_propuesta = new javax.swing.JTextField();
+        jT_proponente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,34 +66,102 @@ public class Evaluar_Prop extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla_propuestas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabla_propuestasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla_propuestas);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 38, 260, -1));
 
-        jT_busqueda.setText("jTextField1");
+        jT_busqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jT_busquedaKeyPressed(evt);
+            }
+        });
         getContentPane().add(jT_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 200, -1));
 
         jLabel1.setText("Buscar");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jR_publicada.setText("Publicada");
-        getContentPane().add(jR_publicada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
+        jR_publicada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jR_publicadaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jR_publicada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
 
         jR_cancelada.setText("Cancelada");
-        getContentPane().add(jR_cancelada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
+        jR_cancelada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jR_canceladaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jR_cancelada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
 
-        jButton1.setText("Aceptar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+        btn_aceptar.setText("Aceptar");
+        getContentPane().add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 100, -1));
 
-        jButton2.setText("Cancelar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, -1, -1));
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 430, 100, -1));
+
+        jT_propuesta.setText("Propuesta");
+        getContentPane().add(jT_propuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 210, -1));
+
+        jT_proponente.setText("Proponente");
+        getContentPane().add(jT_proponente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 210, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jR_publicadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jR_publicadaActionPerformed
+        // TODO add your handling code here:
+        btn_aceptar.setEnabled(true);
+        jR_cancelada.setSelected(false);
+        cancel_publicada = null;
+        cancel_publicada = "Publicada";
+    }//GEN-LAST:event_jR_publicadaActionPerformed
+
+    private void jR_canceladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jR_canceladaActionPerformed
+        btn_aceptar.setEnabled(true);
+        jR_publicada.setSelected(false);
+        cancel_publicada = null;
+        cancel_publicada = "Cancelada";
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jR_canceladaActionPerformed
+
+    private void tabla_propuestasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_propuestasMouseClicked
+     
+        int row = tabla_propuestas.rowAtPoint(evt.getPoint());
+        int col = tabla_propuestas.columnAtPoint(evt.getPoint());
+        System.out.println("fila" + row);
+        System.out.println("columna" + col);
+        jT_propuesta.setText((String) tabla_propuestas.getValueAt(row, 1));
+        jT_proponente.setText((String) tabla_propuestas.getValueAt(row, 2));
+    }//GEN-LAST:event_tabla_propuestasMouseClicked
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void jT_busquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_busquedaKeyPressed
+        buscarTXT(jT_busqueda.getText());
+    }//GEN-LAST:event_jT_busquedaKeyPressed
+
     /**
      * @param args the command line arguments
      */
+    private void altaEstado() {
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -111,15 +194,90 @@ public class Evaluar_Prop extends javax.swing.JFrame {
         });
     }
 
+    /**
+     *
+     * llena la grilla con los datos de un arreglo dtPropuestasBD, contiene el
+     * titulo de la propuesta y el nickname del proponente
+     *
+     *
+     */
+    private void llenaGrilla(ArrayList<dtPropuestasBD> prop) {
+        try {
+            DefaultTableModel modelo;
+            Vector vect = new Vector();
+            vect.add("Titulo");
+            vect.add("Proponente");
+            modelo = new DefaultTableModel(vect, prop.size());
+            for (int i = 0; i < prop.size(); i++) {
+                dtPropuestasBD p = (dtPropuestasBD) prop.get(i);
+                modelo.setValueAt(p.getTitulo(), i, 0);
+                modelo.setValueAt(p.getNickproponente(), i, 1);
+            }
+            tabla_propuestas.setModel(modelo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    /**
+     *
+     * busca coincidencias de titulo de propuesta y nickname de proponente,
+     * recibe un string refresca la grilla con los datos coincidentes by jp
+     */
+    private void buscarTXT(String textbusqueda) {
+        try {
+            ArrayList<dtPropuestasBD> filtro = new ArrayList<>();
+            for (int i = 0; i < propuestas.size(); i++) {
+                dtPropuestasBD dtp = (dtPropuestasBD) propuestas.get(i);
+                if (comparaParecido(dtp, textbusqueda)) {
+                    filtro.add(dtp);
+                }
+            }
+            llenaGrilla(filtro);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    /**
+     * funcion derivada de buscarTXT recibe un dtPropuestasBD y un String
+     * retorna true si la cadena de filtro esta contenida en la cadena titulo o
+     * nickname
+     */
+    private boolean comparaParecido(dtPropuestasBD dtc, String filtro) {
+        try {
+            String titulo = null, propo = null;
+            titulo = dtc.getTitulo();
+            propo = dtc.getNickproponente();
+            if (titulo != null && propo != null) {
+                if (titulo.contains(filtro)) {
+                    return true;
+                }
+                if (propo.contains(filtro)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        return false;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_aceptar;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jR_cancelada;
     private javax.swing.JRadioButton jR_publicada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_busqueda;
+    private javax.swing.JTextField jT_proponente;
+    private javax.swing.JTextField jT_propuesta;
     private javax.swing.JTable tabla_propuestas;
     // End of variables declaration//GEN-END:variables
 }

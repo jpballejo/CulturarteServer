@@ -107,6 +107,7 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         jm_consultaPropuesta = new javax.swing.JMenuItem();
         jm_consultaPropuestaEstado = new javax.swing.JMenuItem();
         jm_modificarPropuesta = new javax.swing.JMenuItem();
+        jM_Evaluar_prop = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jm_colaborar = new javax.swing.JMenuItem();
         jm_cancelarColaboracion = new javax.swing.JMenuItem();
@@ -220,6 +221,14 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
             }
         });
         jMenu2.add(jm_modificarPropuesta);
+
+        jM_Evaluar_prop.setText("Evaluar");
+        jM_Evaluar_prop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jM_Evaluar_propActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jM_Evaluar_prop);
 
         jMenuBar1.add(jMenu2);
 
@@ -410,6 +419,13 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         // TODO add your handling code here:
     }//GEN-LAST:event_jm_configuracionGeneralActionPerformed
 
+    private void jM_Evaluar_propActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jM_Evaluar_propActionPerformed
+ Evaluar_Prop evp=new Evaluar_Prop();
+        
+ evp.show();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jM_Evaluar_propActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,6 +463,7 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JMenuItem jM_Evaluar_prop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
