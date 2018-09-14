@@ -55,6 +55,9 @@ public class Alta_perfil extends javax.swing.JFrame {
         jdc_fechaNac.getDateEditor().setEnabled(false);
         jdc_fechaNac.setMaxSelectableDate(max);
         jdc_fechaNac.setMinSelectableDate(min);
+        jP_contra.setText(null);
+        jP_contraVS.setText(null);
+
     }
 
     /**
@@ -66,6 +69,7 @@ public class Alta_perfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -92,7 +96,11 @@ public class Alta_perfil extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtp_biografia = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
-        jT_Pass = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jP_contra = new javax.swing.JPasswordField();
+        jP_contraVS = new javax.swing.JPasswordField();
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -112,13 +120,13 @@ public class Alta_perfil extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel5.setText("Fecha Nacimiento");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jL_imagenP.setText("Imagen");
-        jPanel1.add(jL_imagenP, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 198, 148, 137));
+        jPanel1.add(jL_imagenP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 148, 137));
 
         jLabel6.setText("Imagen ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 198, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         jb_examinar.setText("Examinar");
         jb_examinar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +134,7 @@ public class Alta_perfil extends javax.swing.JFrame {
                 jb_examinarActionPerformed(evt);
             }
         });
-        jPanel1.add(jb_examinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 253, -1, -1));
+        jPanel1.add(jb_examinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
         jrb_proponente.setText("Proponente");
         jrb_proponente.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +142,7 @@ public class Alta_perfil extends javax.swing.JFrame {
                 jrb_proponenteActionPerformed(evt);
             }
         });
-        jPanel1.add(jrb_proponente, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 359, -1, -1));
+        jPanel1.add(jrb_proponente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, -1, -1));
 
         jrb_colaborador.setText("Colaborador");
         jrb_colaborador.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +150,7 @@ public class Alta_perfil extends javax.swing.JFrame {
                 jrb_colaboradorActionPerformed(evt);
             }
         });
-        jPanel1.add(jrb_colaborador, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 359, -1, -1));
+        jPanel1.add(jrb_colaborador, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         jb_aceptar.setText("Aceptar");
         jb_aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +158,7 @@ public class Alta_perfil extends javax.swing.JFrame {
                 jb_aceptarActionPerformed(evt);
             }
         });
-        jPanel1.add(jb_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 429, -1, -1));
+        jPanel1.add(jb_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
         jb_cancelar.setText("Cancelar");
         jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +166,7 @@ public class Alta_perfil extends javax.swing.JFrame {
                 jb_cancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jb_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 429, -1, -1));
+        jPanel1.add(jb_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, -1, -1));
 
         jLabel7.setText("Pagina Web");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 15, -1, -1));
@@ -166,7 +174,7 @@ public class Alta_perfil extends javax.swing.JFrame {
         jPanel1.add(jT_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 42, 136, -1));
         jPanel1.add(jT_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 75, 136, -1));
         jPanel1.add(jT_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 108, 136, -1));
-        jPanel1.add(jdc_fechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
+        jPanel1.add(jdc_fechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, -1, -1));
         jPanel1.add(jT_web, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 9, 156, -1));
 
         jLabel8.setText("Direccion");
@@ -183,23 +191,28 @@ public class Alta_perfil extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 240, 350));
 
         jLabel10.setText("Password");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
-        jPanel1.add(jT_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 130, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
+
+        jLabel11.setText("Confirmacion password");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, 20));
+
+        jP_contra.setText("jPasswordField1");
+        jPanel1.add(jP_contra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, -1));
+
+        jP_contraVS.setText("jPasswordField2");
+        jPanel1.add(jP_contraVS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 220, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
 
         pack();
@@ -221,7 +234,7 @@ public class Alta_perfil extends javax.swing.JFrame {
         jT_web.setText("");
         jT_direccion.setText("");
         jtp_biografia.setText("");
-       
+
     }//GEN-LAST:event_jrb_colaboradorActionPerformed
 
     private void jrb_proponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrb_proponenteActionPerformed
@@ -287,6 +300,7 @@ public class Alta_perfil extends javax.swing.JFrame {
     private javax.swing.JLabel jL_imagenP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -295,15 +309,17 @@ public class Alta_perfil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPasswordField jP_contra;
+    private javax.swing.JPasswordField jP_contraVS;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jT_Pass;
     private javax.swing.JTextField jT_apellido;
     private javax.swing.JTextField jT_direccion;
     private javax.swing.JTextField jT_email;
     private javax.swing.JTextField jT_nick;
     private javax.swing.JTextField jT_nombre;
     private javax.swing.JTextField jT_web;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jb_aceptar;
     private javax.swing.JButton jb_cancelar;
     private javax.swing.JButton jb_examinar;
@@ -322,12 +338,24 @@ public class Alta_perfil extends javax.swing.JFrame {
             jT_nick.requestFocus();
             return false;
         }
-       if(jT_Pass.getText()==null){
-       JOptionPane.showMessageDialog(null, "Password vacio");
-            jT_Pass.selectAll();
-            jT_Pass.requestFocus();
+        if (jP_contra.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una contraseña");
+            jP_contra.selectAll();
+            jP_contra.requestFocus();
             return false;
-       }
+        }
+        if (jP_contraVS.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar la confirmacion de la contraseña");
+            jP_contraVS.selectAll();
+            jP_contraVS.requestFocus();
+            return false;
+        }
+        if (jP_contra.getPassword().equals(jP_contraVS.getPassword()) != true) {
+            JOptionPane.showMessageDialog(null, "Contraseñas diferentes!");
+            jP_contra.selectAll();
+            jP_contra.requestFocus();
+            return false;
+        }
         if (jT_nombre.getText() == null) {
             JOptionPane.showMessageDialog(null, "Nombre vacio");
             jT_nombre.selectAll();
@@ -411,7 +439,6 @@ public class Alta_perfil extends javax.swing.JFrame {
 
     }
 
-
     private boolean altaPerfil() {
 
         try {
@@ -421,13 +448,13 @@ public class Alta_perfil extends javax.swing.JFrame {
                     if (usuTipo == false) {
 
                         dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText(),
-                                 imagenRuta, jT_email.getText(), getFechajdc(),jT_Pass.getText());
+                                imagenRuta, jT_email.getText(), getFechajdc(), jP_contra.getText());
                         contUsu.agregarUsu(dtCola);
                         return true;
                     }
 
                     if (usuTipo == true) {
-                        dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta, jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText(),jT_Pass.getText());
+                        dtProponente dtprop = new dtProponente(jT_nombre.getText(), jT_apellido.getText(), jT_nick.getText(), imagenRuta, jT_email.getText(), getFechajdc(), jT_direccion.getText(), jtp_biografia.getText(), jT_web.getText(), jP_contra.getText());
                         contUsu.agregarUsu(dtprop);
                         return true;
                     }
@@ -444,36 +471,34 @@ public class Alta_perfil extends javax.swing.JFrame {
         }
         return false;
 
-  
     }
-    
-   private void selecImagen(){
-       FileNameExtensionFilter filtroImagen=new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
-       navegadorArchivos.setFileFilter(filtroImagen);
-       navegadorArchivos.showOpenDialog(this);
-       File imagen = navegadorArchivos.getSelectedFile();
-       String path = navegadorArchivos.getSelectedFile().getPath();
-       jL_imagenP.setIcon(new ImageIcon(path));
-       ImageIcon icon = new ImageIcon(path);
-       Image foto = icon.getImage();
-       Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
-       ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
-       jL_imagenP.setIcon(nuevoIcono);
-       //BufferedImage img= nuevoIcono;
-       salvarImagen(foto);}
 
- 
-   
-   private void salvarImagen(Image imagen){
-   BufferedImage img = (BufferedImage) imagen;
-   File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png");
-   imagenRuta="/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil"+jT_nick.getText()+".png";
-    try { 
-        ImageIO.write(img, "png", outputfile);
-    } catch (IOException ex) {
-        Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+    private void selecImagen() {
+        FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        navegadorArchivos.setFileFilter(filtroImagen);
+        navegadorArchivos.showOpenDialog(this);
+        File imagen = navegadorArchivos.getSelectedFile();
+        String path = navegadorArchivos.getSelectedFile().getPath();
+        jL_imagenP.setIcon(new ImageIcon(path));
+        ImageIcon icon = new ImageIcon(path);
+        Image foto = icon.getImage();
+        Image nuevaFoto = foto.getScaledInstance(jL_imagenP.getWidth(), jL_imagenP.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon nuevoIcono = new ImageIcon(nuevaFoto);
+        jL_imagenP.setIcon(nuevoIcono);
+        //BufferedImage img= nuevoIcono;
+        salvarImagen(foto);
+    }
+
+    private void salvarImagen(Image imagen) {
+        BufferedImage img = (BufferedImage) imagen;
+        File outputfile = new File("/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil" + jT_nick.getText() + ".png");
+        imagenRuta = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesPerfil" + jT_nick.getText() + ".png";
+        try {
+            ImageIO.write(img, "png", outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
 
     }
- 
-   }
 }

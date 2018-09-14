@@ -85,16 +85,11 @@ public class propuesta {
         }
 
     }
-
+/**
+ *
+ * retorna un string con el estado actual de la propuesta comment by Jp
+ */
     public String getEstadoActual() {
-    /*   int ides = estados.size();
-       if( ides==1 || ides==0)
-           return "Ingresada";
-
-        String est = null;
-        propEstado propEst = estados.get(ides);
-        est = propEst.getEstado().getNombre();
-        return est; */
         String est= "Ingresada";
         propEstado propEst=null;
         for(int key: estados.keySet()){

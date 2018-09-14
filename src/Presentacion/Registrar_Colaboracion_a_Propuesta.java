@@ -27,12 +27,11 @@ import javax.swing.table.DefaultTableModel;
  * @author nicolasgutierrez
  */
 public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
-    ContUsuario contUsu = ContUsuario.getInstance();
-    ContPropuesta contProp= ContPropuesta.getInstance();
-           int maxmonto;
-   
     
-          
+    ContUsuario contUsu = ContUsuario.getInstance();
+    ContPropuesta contProp = ContPropuesta.getInstance();
+    int maxmonto;
+
     /**
      * Creates new form Registrar_Colaboracion_a_Propuesta
      */
@@ -40,22 +39,23 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         initComponents();
         this.setSize(666, 553);
         //String titulo[]={"nickName"};
-       // llenarGrilla(jTable_proponente, titulo, proponentes);
+        // llenarGrilla(jTable_proponente, titulo, proponentes);
 
-       jLabel1.setText("Propuestas");
-       jLabel5.setText("Monto total recaudado");
-       jLabel3.setText("Estado");
-       jLabel2.setText("Colaboradores");
-       jLabel8.setText("Propuesta");
-       txttituloprop.setText("Seleccione una");
-       jLabel4.setText("Colaborador");
-       txtnickcolaborador.setText("Seleccione uno");
-       jLabel6.setText("Tipo de retorno");
-       jLabel7.setText("Monto");
-       btnaceptar.setText("Aceptar");
-       btncancelar.setText("Cancelar");
-       cbporcentaje.setText("Porcentaje");
-       cbentradas.setText("Entrada");
+        jLabel1.setText("Propuestas");
+        jLabel5.setText("Monto total recaudado");
+        jLabel3.setText("Estado");
+        jLabel2.setText("Colaboradores");
+        jLabel8.setText("Propuesta");
+        txttituloprop.setText("Seleccione una");
+        jLabel4.setText("Colaborador");
+        txtnickcolaborador.setText("Seleccione uno");
+        jLabel6.setText("Tipo de retorno");
+        jLabel7.setText("Monto");
+        btnaceptar.setText("Aceptar");
+        btncancelar.setText("Cancelar");
+        cbporcentaje.setText("Porcentaje");
+        cbentradas.setText("Entrada");
+        jTA_comentario.setEnabled(false);
     }
 
     /**
@@ -94,6 +94,11 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         busuqedacolaboradores = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txttituloprop = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTA_comentario = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tpropuestas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,6 +118,11 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         });
         jScrollPane1.setViewportView(tpropuestas);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 57, 220, -1));
+
+        jLabel1.setText("Propuestas");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 27, -1, -1));
+
         jTable_propuestas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -126,11 +136,22 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         ));
         jScrollPane2.setViewportView(jTable_propuestas);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 25, 367, 97));
+
+        jLabel5.setText("Monto total recaudado");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 128, 150, -1));
+        getContentPane().add(txtmontotoal, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 161, 150, -1));
+
+        jLabel3.setText("Estado");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(464, 128, -1, -1));
+
+        txtestado.setEditable(false);
         txtestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtestadoActionPerformed(evt);
             }
         });
+        getContentPane().add(txtestado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 182, -1));
 
         tablecolaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,6 +171,11 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         });
         jScrollPane3.setViewportView(tablecolaboradores);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 245, 150, 230));
+
+        jLabel2.setText("  Colaboradores");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 192, -1, -1));
+
         tablecolaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -163,17 +189,36 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         ));
         jScrollPane4.setViewportView(tablecolaborador);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 220, 71));
+
+        jLabel4.setText("Colaborador");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
+
+        txtnickcolaborador.setText("Seleccione uno");
+        getContentPane().add(txtnickcolaborador, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
+
+        jLabel6.setText("Tipo de retorno");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 345, -1, -1));
+
+        jLabel7.setText("Monto");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, -1));
+        getContentPane().add(txtmontoacolaborar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 120, -1));
+
+        btnaceptar.setText("Aceptar");
         btnaceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnaceptarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnaceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 182, -1));
 
+        btncancelar.setText("Cancelar");
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
             }
         });
+        getContentPane().add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 480, 182, -1));
 
         busquedapropuestas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +230,13 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                 busquedapropuestasKeyPressed(evt);
             }
         });
+        getContentPane().add(busquedapropuestas, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 25, 147, -1));
+
+        cbporcentaje.setText("Procentaje");
+        getContentPane().add(cbporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 361, -1, -1));
+
+        cbentradas.setText("Entrada");
+        getContentPane().add(cbentradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 381, -1, -1));
 
         busuqedacolaboradores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,136 +248,22 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
                 busuqedacolaboradoresKeyPressed(evt);
             }
         });
+        getContentPane().add(busuqedacolaboradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 214, 140, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(busquedapropuestas, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(busuqedacolaboradores, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(83, 83, 83)
-                                        .addComponent(txtnickcolaborador))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(7, 7, 7)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtmontoacolaborar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(34, 34, 34)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cbentradas)
-                                                    .addComponent(cbporcentaje)))))
-                                    .addComponent(btnaceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txttituloprop))
-                            .addComponent(jLabel3)
-                            .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtmontotoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel8)
-                            .addComponent(txttituloprop))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtnickcolaborador))
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel6)
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(jLabel7))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(txtmontoacolaborar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(cbentradas))
-                                    .addComponent(cbporcentaje))
-                                .addGap(12, 12, 12)
-                                .addComponent(btnaceptar)
-                                .addGap(14, 14, 14)
-                                .addComponent(btncancelar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(busuqedacolaboradores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(busquedapropuestas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        jLabel8.setText("Propuesta");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
+
+        txttituloprop.setText("Seleccione una");
+        getContentPane().add(txttituloprop, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 157, -1));
+
+        jTA_comentario.setColumns(20);
+        jTA_comentario.setRows(5);
+        jScrollPane5.setViewportView(jTA_comentario);
+
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 155, 450));
+
+        jLabel9.setText("Comentario");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,12 +273,12 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     }//GEN-LAST:event_busquedapropuestasActionPerformed
 
     private void busquedapropuestasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busquedapropuestasKeyPressed
-            List<String> proponentes= contUsu.listartodaslaspropuestas(busquedapropuestas.getText());
-            DefaultTableModel modelo=(DefaultTableModel) tpropuestas.getModel();
-            modelo.setRowCount(0);
-            for (int i=0;i<proponentes.size();i++) {
-            String p=proponentes.get(i);
-            Object[] dat={p};
+        List<String> proponentes = contUsu.listartodaslaspropuestas(busquedapropuestas.getText());
+        DefaultTableModel modelo = (DefaultTableModel) tpropuestas.getModel();
+        modelo.setRowCount(0);
+        for (int i = 0; i < proponentes.size(); i++) {
+            String p = proponentes.get(i);
+            Object[] dat = {p};
             modelo.addRow(dat);
         }
     }//GEN-LAST:event_busquedapropuestasKeyPressed
@@ -350,16 +288,16 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     }//GEN-LAST:event_txtestadoActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        DefaultTableModel modelo=(DefaultTableModel) tpropuestas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tpropuestas.getModel();
         modelo.setRowCount(0);
         
-        DefaultTableModel modelo2= (DefaultTableModel) jTable_propuestas.getModel();
+        DefaultTableModel modelo2 = (DefaultTableModel) jTable_propuestas.getModel();
         modelo2.setRowCount(0);
         
-        DefaultTableModel modelo3= (DefaultTableModel) tablecolaboradores.getModel();
+        DefaultTableModel modelo3 = (DefaultTableModel) tablecolaboradores.getModel();
         modelo3.setRowCount(0);
         
-        DefaultTableModel modelo4= (DefaultTableModel) tablecolaborador.getModel();
+        DefaultTableModel modelo4 = (DefaultTableModel) tablecolaborador.getModel();
         modelo4.setRowCount(0);
         
         txtmontotoal.setText("");
@@ -369,7 +307,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         
         cbentradas.setSelected(false);
         cbporcentaje.setSelected(false);
-        maxmonto=0;
+        maxmonto = 0;
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed
@@ -380,41 +318,50 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
 
     private void busuqedacolaboradoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busuqedacolaboradoresKeyPressed
         // TODO add your handling code here:
-        
-        List<String> colaboradores= contUsu.listarColaboradoresLike(busuqedacolaboradores.getText());
-        DefaultTableModel modelo= (DefaultTableModel) tablecolaboradores.getModel();
+
+        List<String> colaboradores = contUsu.listarColaboradoresLike(busuqedacolaboradores.getText());
+        DefaultTableModel modelo = (DefaultTableModel) tablecolaboradores.getModel();
         modelo.setRowCount(0);
-        for (int i=0; i<colaboradores.size();i++){
-            String c=colaboradores.get(i);
-            Object[] dat={c};
+        for (int i = 0; i < colaboradores.size(); i++) {
+            String c = colaboradores.get(i);
+            Object[] dat = {c};
             modelo.addRow(dat);
         }
-        
-    }//GEN-LAST:event_busuqedacolaboradoresKeyPressed
 
+    }//GEN-LAST:event_busuqedacolaboradoresKeyPressed
+    private void habilitado(String estado) {
+        if (estado.equals("Financiada")) {
+            
+            jTA_comentario.setEnabled(true);
+        } else {
+            jTA_comentario.setEnabled(false);
+        }
+    }
     private void tpropuestasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tpropuestasMouseClicked
         // TODO add your handling code here:
         try {
-        limpiarlabasura();   
+            limpiarlabasura();
             
-        int row=tpropuestas.rowAtPoint(evt.getPoint());
-        int col=tpropuestas.columnAtPoint(evt.getPoint());
-        dtPropuesta dtp;
-        
-             dtp=contUsu.infoPropuesta((String)tpropuestas.getValueAt(row, col));
-        
-        
-        DefaultTableModel modelo= (DefaultTableModel) jTable_propuestas.getModel();
-        modelo.setRowCount(0);
-        Object[] dat={dtp.getTitulo(),dtp.getDescripcion(),dtp.getLugar(),dtp.getFechaRealizacion().getFecha(),dtp.getPrecioentrada(),dtp.getMontorequerido()};
-        txtmontotoal.setText(Integer.toString(dtp.getMontoTotal()));
-        txtestado.setText(dtp.getEstado());
-         txttituloprop.setText(dtp.getTitulo());
-        modelo.addRow(dat);
-        cbentradas.setEnabled(false);
-        cbporcentaje.setEnabled(false);
-        
-       /* System.out.println(dtp.getRetorno()+" xd");
+            int row = tpropuestas.rowAtPoint(evt.getPoint());
+            int col = tpropuestas.columnAtPoint(evt.getPoint());
+            dtPropuesta dtp;
+            
+            dtp = contUsu.infoPropuesta((String) tpropuestas.getValueAt(row, col));
+            
+            DefaultTableModel modelo = (DefaultTableModel) jTable_propuestas.getModel();
+            modelo.setRowCount(0);
+            Object[] dat = {dtp.getTitulo(), dtp.getDescripcion(), dtp.getLugar(), dtp.getFechaRealizacion().getFecha(), dtp.getPrecioentrada(), dtp.getMontorequerido()};
+            txtmontotoal.setText(Integer.toString(dtp.getMontoTotal()));
+            txtestado.setText(dtp.getEstado());
+            habilitado(dtp.getEstado());
+            
+            txttituloprop.setText(dtp.getTitulo());
+            
+            modelo.addRow(dat);
+            cbentradas.setEnabled(false);
+            cbporcentaje.setEnabled(false);
+
+            /* System.out.println(dtp.getRetorno()+" xd");
         String[] rets=dtp.getRetorno().split("/");
         String one=rets[0],two=rets[1];
         System.out.println(one+" y "+two);
@@ -424,19 +371,20 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         if(one.contentEquals("Porcentaje") || two.contentEquals("Porcentaje")){
             cbporcentaje.setEnabled(true);
         }
-         */
-       
-       if(dtp.getRetorno().contentEquals("Entrada"))
-            cbentradas.setEnabled(true);
-       if(dtp.getRetorno().contentEquals("Porcentaje"))
-            cbporcentaje.setEnabled(true);
-       if(dtp.getRetorno().contentEquals("Entrada/Porcentaje")){
-           cbporcentaje.setEnabled(true);
-           cbentradas.setEnabled(true);
-       }
-       
-       maxmonto=dtp.getMontorequerido()-dtp.getMontoTotal();
-        
+             */
+            if (dtp.getRetorno().contentEquals("Entrada")) {
+                cbentradas.setEnabled(true);
+            }
+            if (dtp.getRetorno().contentEquals("Porcentaje")) {
+                cbporcentaje.setEnabled(true);
+            }
+            if (dtp.getRetorno().contentEquals("Entrada/Porcentaje")) {
+                cbporcentaje.setEnabled(true);
+                cbentradas.setEnabled(true);
+            }
+            
+            maxmonto = dtp.getMontorequerido() - dtp.getMontoTotal();
+            
         } catch (Exception ex) {
             Logger.getLogger(Registrar_Colaboracion_a_Propuesta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -444,130 +392,137 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
 
     private void tablecolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablecolaboradoresMouseClicked
         // TODO add your handling code here:
-         int row=tablecolaboradores.rowAtPoint(evt.getPoint());
-        int col=tablecolaboradores.columnAtPoint(evt.getPoint());
+        int row = tablecolaboradores.rowAtPoint(evt.getPoint());
+        int col = tablecolaboradores.columnAtPoint(evt.getPoint());
         
         dtUsuario dtc;
-        dtc= contUsu.infoColaborador((String)tablecolaboradores.getValueAt(row, col));
-        DefaultTableModel modelo= (DefaultTableModel) tablecolaborador.getModel();
+        dtc = contUsu.infoColaborador((String) tablecolaboradores.getValueAt(row, col));
+        DefaultTableModel modelo = (DefaultTableModel) tablecolaborador.getModel();
         modelo.setRowCount(0);
         
-        Object[] dat={dtc.getNombre(),dtc.getApellido(),dtc.getEmail()};
+        Object[] dat = {dtc.getNombre(), dtc.getApellido(), dtc.getEmail()};
         modelo.addRow(dat);
         txtnickcolaborador.setText(dtc.getNickname());
-        
+
     }//GEN-LAST:event_tablecolaboradoresMouseClicked
+    private dtFecha getFecha() {
+        dtFecha fecha = null;
+        Calendar cal = Calendar.getInstance();
+        Date da = cal.getTime();
+        da.setYear(2018);
+        fecha = new dtFecha(Integer.toString(da.getDay()), Integer.toString(da.getMonth()), Integer.toString(da.getYear()));
+        return fecha;
+    }
+    
+    private dtHora getHora() {
+        dtHora hora = null;
+        Calendar cal = Calendar.getInstance();
+        Date da = cal.getTime();
+        da.setYear(2018);
+        hora = new dtHora(da.getHours(), da.getMinutes());
+        return hora;
+    }
+    
+    private String getPorcentaje() {
+        String re = null;
+        
+        if (cbentradas.isSelected() && !cbporcentaje.isSelected()) {
+            re = cbentradas.getText();
+        } else if (cbentradas.isSelected() && cbporcentaje.isSelected()) {
+            re = cbentradas.getText() + "/" + cbporcentaje.getText();
+        } else if (!cbentradas.isSelected() && cbporcentaje.isSelected()) {
+            re = cbporcentaje.getText();
+        }
+        return re;
+    }
+    
 
     private void btnaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarActionPerformed
         // TODO add your handling code here:
-        
-            String re="";
-        
-            if(cbentradas.isSelected()&&!cbporcentaje.isSelected()){
-                re=cbentradas.getText();
-            }else if(cbentradas.isSelected()&&cbporcentaje.isSelected()){
-                re=cbentradas.getText()+"/"+cbporcentaje.getText();
-            }else if(!cbentradas.isSelected()&&cbporcentaje.isSelected()){
-                re=cbporcentaje.getText();
-            }
-            
 
-    
-        
-            Calendar cal=Calendar.getInstance();
-            Date da=cal.getTime();
-            da.setYear(2018);
-            dtFecha dtf=new dtFecha(Integer.toString(da.getDay()),Integer.toString(da.getMonth()),Integer.toString(da.getYear()));
-            dtHora dth=new dtHora(da.getHours(),da.getMinutes());
-          
-        
-               
-        
+        String re = getPorcentaje();
+        dtFecha dtf = getFecha();
+        dtHora dth = getHora();
 
-         
-           
-   // if(Integer.parseInt(txtmontoacolaborar.getText())<=maxmonto){ 
-    if(txtestado.getText().contains("No financiada")==false){
-        if(txtestado.getText().contains("Cancelada")==false){        
-            if(txtestado.getText().contains("Financiada")==false){
-                if(txtestado.getText().contains("Ingresada")==false){   
-                    if(Integer.parseInt(txtmontoacolaborar.getText())<=maxmonto){       
-                         if(re.isEmpty()==false){          
-                            if(txtmontoacolaborar.getText().isEmpty()==false && txtmontoacolaborar.getText().contains(",")==false && txtmontoacolaborar.getText().contains(".")==false && txtmontoacolaborar.getText().contains(" ")==false && isNumeric(txtmontoacolaborar.getText())){
-                                if(txttituloprop.getText().isEmpty()==false && txttituloprop.getText().contains("Seleccione una")==false){
-                                    if(txtnickcolaborador.getText().isEmpty()==false && txtnickcolaborador.getText().contains("Seleccione uno")==false){
-                                     boolean b= contUsu.registrarColaboracion(txttituloprop.getText(), txtnickcolaborador.getText(), Integer.parseInt(txtmontoacolaborar.getText()), re);
-                                     if(txtestado.getText().contains("Publicada") && b){
-                                         contProp.agregarEstadoAPropuesta("En financiacion", txttituloprop.getText(), dtf, dth);
-                                     } 
-                                 
-                                     if(txtestado.getText().contains("En financiacion") && (maxmonto-Integer.parseInt(txtmontoacolaborar.getText()))==0 && b){
-                                         contProp.agregarEstadoAPropuesta("Financiada", txttituloprop.getText(), dtf, dth);
-                                     }      
+        // if(Integer.parseInt(txtmontoacolaborar.getText())<=maxmonto){ 
+        if (txtestado.getText().contains("No financiada") == false) {
+            if (txtestado.getText().contains("Cancelada") == false) {
+                if (txtestado.getText().contains("Financiada") == false) {
+                    if (txtestado.getText().contains("Ingresada") == false) {
+                        if (Integer.parseInt(txtmontoacolaborar.getText()) <= maxmonto) {
+                            if (re.isEmpty() == false) {
+                                if (txtmontoacolaborar.getText().isEmpty() == false && txtmontoacolaborar.getText().contains(",") == false && txtmontoacolaborar.getText().contains(".") == false && txtmontoacolaborar.getText().contains(" ") == false && isNumeric(txtmontoacolaborar.getText())) {
+                                    if (txttituloprop.getText().isEmpty() == false && txttituloprop.getText().contains("Seleccione una") == false) {
+                                        if (txtnickcolaborador.getText().isEmpty() == false && txtnickcolaborador.getText().contains("Seleccione uno") == false) {
+                                            
+                                            boolean b = contUsu.registrarColaboracion(txttituloprop.getText(), txtnickcolaborador.getText(), Integer.parseInt(txtmontoacolaborar.getText()), re, jTA_comentario.getText());
+                                            if (txtestado.getText().contains("Publicada") && b) {
+                                                contProp.agregarEstadoAPropuesta("En financiacion", txttituloprop.getText(), dtf, dth);
+                                            }
+                                            
+                                            if (txtestado.getText().contains("En financiacion") && (maxmonto - Integer.parseInt(txtmontoacolaborar.getText())) == 0 && b) {
+                                                contProp.agregarEstadoAPropuesta("Financiada", txttituloprop.getText(), dtf, dth);
+                                            }
+                                            
+                                            if (txtestado.getText().contains("Publicada") && (maxmonto - Integer.parseInt(txtmontoacolaborar.getText())) == 0 && b) {
+                                                contProp.agregarEstadoAPropuesta("Financiada", txttituloprop.getText(), dtf, dth);
+                                            }
+                                            
+                                            if (b) {
+                                                JOptionPane.showMessageDialog(null, "Colaboracion registrada");
+                                                limpiarlabasura();
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Imposible registrar la colaboracion");
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Por favor seleccione un colaborador");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Por favor seleccione una propuesta");
+                                    }
                                     
-                                     if(txtestado.getText().contains("Publicada") && (maxmonto-Integer.parseInt(txtmontoacolaborar.getText()))==0 && b){
-                                         contProp.agregarEstadoAPropuesta("Financiada", txttituloprop.getText(), dtf, dth);
-                                     }                                           
-                                     
-                                     if(b){
-                                            JOptionPane.showMessageDialog(null, "Colaboracion registrada");
-                                            limpiarlabasura();
-                                        }
-                                        else{
-                                            JOptionPane.showMessageDialog(null, "Imposible registrar la colaboracion");
-                                        }
-                                    }
-                                    else{
-                                        JOptionPane.showMessageDialog(null, "Por favor seleccione un colaborador");
-                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Por favor coloque un monto valido");
+                                    txtmontoacolaborar.selectAll();
+                                    txtmontoacolaborar.requestFocus();
                                 }
-                                else{
-                                    JOptionPane.showMessageDialog(null, "Por favor seleccione una propuesta");
-                                }
-                
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Por favor seleccione un retorno");
+                                cbporcentaje.requestFocus();
+                                cbentradas.requestFocus();
                             }
-                            else{
-                                JOptionPane.showMessageDialog(null, "Por favor coloque un monto valido");
-                                txtmontoacolaborar.selectAll();
-                                txtmontoacolaborar.requestFocus();
-                            }
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Por favor seleccione un retorno");                
-                            cbporcentaje.requestFocus();
-                            cbentradas.requestFocus();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El monto de colaboracion es superior al necesario por la propuesta, maximo posible: " + maxmonto);
+                            txtmontoacolaborar.selectAll();
+                            txtmontoacolaborar.requestFocus();
                         }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "El monto de colaboracion es superior al necesario por la propuesta, maximo posible: "+maxmonto);
-                        txtmontoacolaborar.selectAll();
-                        txtmontoacolaborar.requestFocus();         
-                    }                         
-                }else{
-                    JOptionPane.showMessageDialog(null, "No es posible registrar una colaboracion en una propuesta Ingresada, esta debe ser verificada por un administrador");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No es posible registrar una colaboracion en una propuesta Ingresada, esta debe ser verificada por un administrador");
+                        txtestado.selectAll();
+                        txtestado.requestFocus();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La propuesta ya fue financiada y no acepta colaboraciones");
                     txtestado.selectAll();
-                    txtestado.requestFocus();                
-                }  
-            }else{
-                JOptionPane.showMessageDialog(null, "La propuesta ya fue financiada y no acepta colaboraciones");
+                    txtestado.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "La propuesta ha sido cancelada");
                 txtestado.selectAll();
-                txtestado.requestFocus(); 
+                txtestado.requestFocus();
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "La propuesta ha sido cancelada");
+        } else {
+            JOptionPane.showMessageDialog(null, "La propuesta no se encuentra en financiacion debido a que su fecha caduco");
             txtestado.selectAll();
-            txtestado.requestFocus();   
+            txtestado.requestFocus();
         }
-    }else{
-        JOptionPane.showMessageDialog(null, "La propuesta no se encuentra en financiacion debido a que su fecha caduco");
-        txtestado.selectAll();
-        txtestado.requestFocus();   
-    }
 //    }else{
 //        JOptionPane.showMessageDialog(null, "El monto de colaboracion es superior al necesario por la propuesta, maximo posible: "+maxmonto);
 //        txtmontoacolaborar.selectAll();
- //       txtmontoacolaborar.requestFocus();         
+        //       txtmontoacolaborar.requestFocus();         
 //    }        
-        
-            
+
+
     }//GEN-LAST:event_btnaceptarActionPerformed
 
 
@@ -586,10 +541,13 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextArea jTA_comentario;
     private javax.swing.JTable jTable_propuestas;
     private javax.swing.JTable tablecolaborador;
     private javax.swing.JTable tablecolaboradores;
@@ -602,39 +560,36 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
     // End of variables declaration//GEN-END:variables
 
 // funciones
-    
-    private void llenarGrilla(JTable tabla, String titulo[], List<String> atributos){
+    private void llenarGrilla(JTable tabla, String titulo[], List<String> atributos) {
         // 
         Object[] fila = new Object[titulo.length];
-        DefaultTableModel modelo=new DefaultTableModel(null,titulo);
-        for (int i=0;i<atributos.size();i++) {
-            String p=atributos.get(i);
-            Object[] dat={p};
+        DefaultTableModel modelo = new DefaultTableModel(null, titulo);
+        for (int i = 0; i < atributos.size(); i++) {
+            String p = atributos.get(i);
+            Object[] dat = {p};
             modelo.addRow(dat);
         }
         tabla.setModel(modelo);
-        } 
+    }
     
-    private static boolean isNumeric(String cadena){
-	try {
-		Integer.parseInt(cadena);
-		return true;
-	} catch (NumberFormatException nfe){
-		return false;
-	}
-}
-
+    private static boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+    
     private void limpiarlabasura() {
-        DefaultTableModel modelo= (DefaultTableModel) jTable_propuestas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTable_propuestas.getModel();
         modelo.setRowCount(0);
-
-        DefaultTableModel modelo2= (DefaultTableModel) tablecolaboradores.getModel();
-        modelo2.setRowCount(0);   
         
-        DefaultTableModel modelo3= (DefaultTableModel) tablecolaborador.getModel();
-        modelo3.setRowCount(0);   
+        DefaultTableModel modelo2 = (DefaultTableModel) tablecolaboradores.getModel();
+        modelo2.setRowCount(0);
         
-        
+        DefaultTableModel modelo3 = (DefaultTableModel) tablecolaborador.getModel();
+        modelo3.setRowCount(0);
         
         cbporcentaje.setSelected(false);
         cbentradas.setSelected(false);
@@ -644,6 +599,4 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
         txtmontoacolaborar.setText("");
     }
     
-    
-    }
-
+}

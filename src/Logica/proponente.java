@@ -23,8 +23,8 @@ public class proponente extends usuario {
 
     private String biografia, web;
 
-    public proponente(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String direccion, String biografia, String web,String pass) {
-        super(nickname, nombre, apellido, email, imagen, nacimiento,pass);
+    public proponente(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String direccion, String biografia, String web, String pass) {
+        super(nickname, nombre, apellido, email, imagen, nacimiento, pass);
         this.direccion = direccion;
         this.biografia = biografia;
         this.web = web;
@@ -39,6 +39,15 @@ public class proponente extends usuario {
 
     }
 
+    /**
+     *
+     * return true si no posee propuestas
+     */
+    public boolean noPropuestas() {
+
+        return propuestasUsuario.isEmpty();
+    }
+
     public List<dtPropuestasProponente> getPropuestas() {
         List<dtPropuestasProponente> listaprop = null;
         Iterator it = propuestasUsuario.entrySet().iterator();
@@ -49,7 +58,7 @@ public class proponente extends usuario {
 
     public dtProponente getDtProponente() {
 
-        dtProponente dtprop = new dtProponente(this.nombre, this.apellido, this.nickname, this.imagen, this.email, this.nacimiento, this.direccion, this.biografia, this.web,this.password);
+        dtProponente dtprop = new dtProponente(this.nombre, this.apellido, this.nickname, this.imagen, this.email, this.nacimiento, this.direccion, this.biografia, this.web, this.password);
 
         return dtprop;
     }
@@ -99,22 +108,22 @@ public class proponente extends usuario {
     //METODOS//
     public dtPropuesta getPropuestas(String idPropuesta) {
         propuesta p = (propuesta) this.propuestasUsuario.get(idPropuesta);
-        
-            dtPropuesta prop = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(),0, p.getRetorno());
-            return prop;
-        
+
+        dtPropuesta prop = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0, p.getRetorno());
+        return prop;
+
     }
 
     public List<dtPropuesta> getTodasPropuestas() {
         List<dtPropuesta> retornar = new ArrayList<dtPropuesta>();
-        if(this.propuestasUsuario.isEmpty()==false){
-        Iterator it = this.propuestasUsuario.keySet().iterator();
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            propuesta p = this.propuestasUsuario.get(key);
-            dtPropuesta dtp = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0, p.getRetorno());
-            retornar.add(dtp);
-        }
+        if (this.propuestasUsuario.isEmpty() == false) {
+            Iterator it = this.propuestasUsuario.keySet().iterator();
+            while (it.hasNext()) {
+                String key = (String) it.next();
+                propuesta p = this.propuestasUsuario.get(key);
+                dtPropuesta dtp = new dtPropuesta(p.getTitulo(), p.getDescripcion(), p.getImagen(), p.getLugar(), p.getEstadoActual(), p.getCategoria(), this.getNickname(), p.getFecharealizacion(), p.getFechapublicada(), p.getPrecioEntrada(), p.getMontoRequerido(), 0, p.getRetorno());
+                retornar.add(dtp);
+            }
         }
         return retornar;
     }
@@ -169,15 +178,38 @@ public class proponente extends usuario {
     public void borratuspropuestas() {
         try {
             for (String key : this.propuestasUsuario.keySet()) {
-            propuesta p = this.propuestasUsuario.get(key); //            propuesta p = this.propuestasUsuario.remove(key);
-            p.desvincular();
-        }
-            
+                propuesta p = this.propuestasUsuario.get(key); //            propuesta p = this.propuestasUsuario.remove(key);
+                p.desvincular();
+            }
+
             this.propuestasUsuario.clear();
-            
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
+
+    }
+/**
+ *
+ * retorna un arreglo con las propuestas del proponente
+ * by Jp
+ */
+    public ArrayList<propuesta> getPropuestasObj() {
+
+        ArrayList<propuesta> propuestas = new ArrayList<>();
+
+        try {
+            Iterator it = propuestasUsuario.keySet().iterator();
+            while (it.hasNext()) {
+                String key = (String) it.next();
+                propuesta pro = (propuesta) propuestasUsuario.get(key);
+                propuestas.add(pro);
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return propuestas;
+
     }
 }

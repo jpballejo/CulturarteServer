@@ -15,14 +15,16 @@ public class dtColProp {
     dtFecha fecha;
     dtHora hora;
     int montoColaborado;
+    private String comentario;
     
 //CONSTRUCTOR//
-    public dtColProp(String nickname, String retorno, dtFecha fecha, dtHora hora, int montoColaborado) {
+    public dtColProp(String nickname, String retorno, dtFecha fecha, dtHora hora, int montoColaborado,String comen) {
         this.nickname = nickname;
         this.retorno = retorno;
         this.fecha = fecha;
         this.hora = hora;
         this.montoColaborado = montoColaborado;
+        this.comentario=comen;
     }
 
 //GETTERS//
@@ -65,6 +67,13 @@ public class dtColProp {
 
     public void setMontoColaborado(int montoColaborado) {
         this.montoColaborado = montoColaborado;
+    }
+
+    /**
+     * @return the comentario
+     */
+    public String getComentario() {
+        return comentario;
     }
     
     

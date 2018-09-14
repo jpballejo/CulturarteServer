@@ -31,7 +31,7 @@ public class culturarteFabrica {
         
         public void cargarDatosdePrueba(){
             borrartodo();
-            levantarBDdesdeMemoria();
+          //  levantarBDdesdeMemoria();
         }
         
             
@@ -62,13 +62,7 @@ public class culturarteFabrica {
             
         }
 
-    private void levantarBDdesdeMemoria() {
-                    
-        
-       iu.levantarBDdesdeMemoria();
-       ip.levantarBDdesdeMemoria();
-       ic.levantarBDdesdeMemoria();
-    }
+  
     
     public void cargarinicio(){
         iu.cargarUsuarios();
@@ -79,6 +73,13 @@ public class culturarteFabrica {
     public String funcionprueba() {
         return "exito";
     }
+
+    
+    
+  
+
+    
+
 
     
     

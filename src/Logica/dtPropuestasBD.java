@@ -29,6 +29,11 @@ public class dtPropuestasBD {
         this.monto_necesario = monto_necesario;
     }
 
+    public dtPropuestasBD(String titulo, String nickproponente) {
+        this.titulo = titulo;
+        this.nickproponente = nickproponente;
+    }
+
     public String getTitulo() {
         return titulo;
     }

@@ -87,7 +87,7 @@ public class ContColaboracion implements iConColaboracion {
     public dtColProp seleccionarColaboracion(String nickusuario, String titulo) {
         colProp cp = (colProp) this.cUsuario.seleccionarColaboracion(nickusuario, titulo);
         this.colaboracion = cp;
-        dtColProp dtcp = new dtColProp(nickusuario, cp.getRetorno(), cp.getFecha(), cp.getHora(), cp.getMontocolaborado());
+        dtColProp dtcp = new dtColProp(nickusuario, cp.getRetorno(), cp.getFecha(), cp.getHora(), cp.getMontocolaborado(),cp.getComentario());
         return dtcp;
     }
 
@@ -105,7 +105,7 @@ public class ContColaboracion implements iConColaboracion {
             for (int i = 0; i < dtColaComp.size(); i++) {
                 dtColaboracionCompleto dt = (dtColaboracionCompleto) dtColaComp.get(i);
                 contCarga.agregardtcolaboraciones(dt);
-                colProp cp = new colProp(dt.getFecha(), dt.getHora(), dt.getMonto(), dt.getRetorno(), null);
+                colProp cp = new colProp(dt.getFecha(), dt.getHora(), dt.getMonto(), dt.getRetorno(), null,dt.getComentario());
                 cUsuario.registrarcolaboracion(dt.getNickname(), dt.getTitulo(), cp);
 
             }
@@ -120,10 +120,7 @@ public class ContColaboracion implements iConColaboracion {
         cUsuario.borrarColaboraciones();
     }
 
-    @Override
-    public void levantarBDdesdeMemoria() {
-
-    }
+   
 
     @Override
     public List<dtCola> listarcolaboracionesdelcolaborador(String nickcolaborador) {
