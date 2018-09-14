@@ -1081,8 +1081,31 @@ public class ContUsuario implements iConUsuario {
         }
         return retorno;
     }
-    
+
+    public List<String> listarpropuestasmenosingresadas(String titulo) {
+        List<String> ret = new ArrayList();
+
+        if (titulo.isEmpty()) {
+            for (String key : this.usuarios.keySet()) {
+                if (this.usuarios.get(key) instanceof proponente) {
+                    proponente p = (proponente) this.usuarios.get(key);
+                    ret.addAll(p.listarmispropuestasmenosingresadas());
+
+                }
+            }
+        } else {
+            for (String key : this.usuarios.keySet()) {
+                if (this.usuarios.get(key) instanceof proponente) {
+                    proponente p = (proponente) this.usuarios.get(key);
+                    ret.addAll(p.listarmispropuestaslike(titulo));
+                }
+            }
+        }
+
+        return ret;        
     }
+    
+}
 
 
 
