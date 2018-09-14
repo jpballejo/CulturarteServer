@@ -447,7 +447,7 @@ public class ContUsuario implements iConUsuario {
             }
         }
 
-        if (dtp.getTitulo() == titulo) {
+        if (dtp.getTitulo().equals(titulo)) {
             dtp.setColaboradores(this.listarColaboradores(titulo));
             dtp.setMontoTotal(this.montopropuesta(titulo));
             return dtp;
@@ -938,6 +938,26 @@ public class ContUsuario implements iConUsuario {
     public void pruebabasica() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    /**
+     * Esta funcion se usa para tener informacion sin importar si es Colaborador o Proponente
+     * es usada en la pagina WEB
+     * @param nick
+     * @return 
+     */
+    public dtUsuario infoUsuarioGeneral(String nick) {
+        dtUsuario dtu = null;
+        if(this.usuarios.get(nick) instanceof proponente){
+            proponente p=(proponente) this.usuarios.get(nick);
+            dtu=p.getDtProponente();
+        }
+        if(this.usuarios.get(nick) instanceof colaborador){
+            colaborador c=(colaborador) this.usuarios.get(nick);
+            dtu=c.getColaborador();
+        }
+        return dtu;
+    }
+    
     }
 
 
