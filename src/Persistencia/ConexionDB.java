@@ -5,6 +5,7 @@
  */
 package Persistencia;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -38,12 +39,12 @@ public class ConexionDB {
     public static Connection getConexionConfigurada(String h, String p, String db, String u, String pas) {
         if (conexion == null) {
             try {              
-                                
+                         
+                Driver driver=new com.mysql.jdbc.Driver();
+                DriverManager.registerDriver(driver);
                 conexion = DriverManager.getConnection("jdbc:mysql://"+h+":"+p+"/"+db, u, pas);
                 } catch (SQLException ex) {
-                ex.printStackTrace();
-                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                System.err.println(ex.getMessage());}
         }
         return conexion;
     }
@@ -52,7 +53,8 @@ public class ConexionDB {
     public Connection getConexion() {
         if (conexion == null) {
             try {              
-                                
+                Driver driver=new com.mysql.jdbc.Driver();
+                DriverManager.registerDriver(driver);                
                 conexion = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, pass);
                 } catch (SQLException ex) {
                 System.err.println(ex.getMessage());

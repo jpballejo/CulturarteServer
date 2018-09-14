@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -448,7 +449,7 @@ public class ContUsuario implements iConUsuario {
             }
         }
 
-        if (dtp.getTitulo() == titulo) {
+        if (dtp.getTitulo().equals(titulo)) {
             dtp.setColaboradores(this.listarColaboradores(titulo));
             dtp.setMontoTotal(this.montopropuesta(titulo));
             return dtp;
@@ -963,13 +964,125 @@ public class ContUsuario implements iConUsuario {
     public void pruebabasica() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
 
-   
+    /**
+     * Esta funcion se usa para tener informacion sin importar si es Colaborador o Proponente
+     * es usada en la pagina WEB
+     * @param nick
+     * @return 
+     */
+    public dtUsuario infoUsuarioGeneral(String nick) {
+        dtUsuario dtu = null;
+        if(this.usuarios.get(nick) instanceof proponente){
+            proponente p=(proponente) this.usuarios.get(nick);
+            dtu=p.getDtProponente();
+        }
+        if(this.usuarios.get(nick) instanceof colaborador){
+            colaborador c=(colaborador) this.usuarios.get(nick);
+            dtu=c.getColaborador();
+        }
+        return dtu;
+    }
+/**
+ * Esta funcion es usada por la WEB para listar los usuarios que siguen a el usuario nick
+ * @param nick
+ * @return 
+ */
+    public List<String> listarmisseguidores(String nick) {
+        ArrayList<String> retorno= new ArrayList<>();
+        for(String key: this.usuarios.keySet()){
+            usuario u=this.usuarios.get(key);
+            if(u.seguidos.containsKey(nick)){
+                retorno.add(key);
+            }
+        }
+        return retorno;
+    }
+/**
+ * Esta funcion es usada por la WEB para listar los seguidores de un usuario
+ * @param nick
+ * @return 
+ */
+    public List<dtSigoA> listarmisseguidos(String nick) {
+        ArrayList<dtSigoA> retorno= new ArrayList<>();
+        usuario u= this.usuarios.get(nick);
+        for(String key:u.seguidos.keySet()){
+            if(u.seguidos.get(key) instanceof proponente){
+                dtSigoA dtsa=new dtSigoA(key,"Proponente");
+                retorno.add(dtsa);
+            }
+            if(u.seguidos.get(key) instanceof colaborador){
+                dtSigoA dtsa=new dtSigoA(key,"Colaborador");
+                retorno.add(dtsa);
+            }
+        }
+        return retorno;
+    }
     
+    public List<String> mispropuestasfavoritas(String nick){
+        ArrayList<String> retorno= new ArrayList<>();
+        usuario u=this.usuarios.get(nick);
+        for(String key: u.favoritas.keySet()){
+            retorno.add(key);
+        }
+        return retorno;
+    }
+    /**
+     * funcion utilizada por la WEB para listar las propuestas de un proponente ecepto las ingresadas
+     * @param nick
+     * @return 
+     */
+    public List<String> mispropuestasaceptadas(String nick){
+        ArrayList<String> retorno= new ArrayList<>();
+        if(this.usuarios.get(nick) instanceof proponente){
+            proponente p=(proponente) this.usuarios.get(nick);
+            for(String key: p.propuestasUsuario.keySet()){
+                propuesta prop=p.propuestasUsuario.get(key);
+                if(prop.getEstadoActual().equals("Ingresada")==false){
+                    retorno.add(prop.getTitulo());
+                }
+            }
+        }
+        return retorno;
+    }
 
+    public List<String> listarColaboraciones(String nick) {
+        ArrayList<String> retorno= new ArrayList<>();
+        if(this.usuarios.get(nick) instanceof colaborador){
+            colaborador c=(colaborador) this.usuarios.get(nick);
+            retorno=c.listarmiscolaboraciones();
+        }
+        return retorno;
+    }
 
+    public List<String> mispropuestasaingresadas(String nick) {
+        ArrayList<String> retorno= new ArrayList<>();
+        if(this.usuarios.get(nick) instanceof proponente){
+            proponente p=(proponente) this.usuarios.get(nick);
+            for(String key: p.propuestasUsuario.keySet()){
+                propuesta prop=p.propuestasUsuario.get(key);
+                if(prop.getEstadoActual().equals("Ingresada")){
+                    retorno.add(prop.getTitulo());
+                }
+            }
+        }
+        return retorno;        
+    }
+
+    public List<dtColProp> listarmiscolaboraciones(String nick) {
+        ArrayList<dtColProp> retorno= new ArrayList<>();
+        if(this.usuarios.get(nick) instanceof colaborador){
+            colaborador c=(colaborador) this.usuarios.get(nick);
+            for(String key: c.colaboracionesUsuario.keySet()){
+                colProp cp=c.colaboracionesUsuario.get(key);
+                dtColProp dtcp=new dtColProp(nick,cp.getFecha(),cp.getHora(),cp.getMontocolaborado(),key);
+                retorno.add(dtcp);
+            }
+        }
+        return retorno;
+    }
     
+    }
 
 
 

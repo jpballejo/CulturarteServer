@@ -27,7 +27,8 @@ public class usuario {
    protected dtFecha nacimiento;
 
     protected Map<String, usuario> seguidos;
-   
+    protected Map<String, propuesta> favoritas;
+    
     //METODOS
     public List<dtPropuestasProponente> getPropuestas() {
         return null;
@@ -45,6 +46,7 @@ public class usuario {
         this.imagen = imagen;
         this.nacimiento = nacimiento;
         this.seguidos=new HashMap<String, usuario>();
+        this.favoritas=new HashMap<String, propuesta>();
         this.password =password;
     }
 
