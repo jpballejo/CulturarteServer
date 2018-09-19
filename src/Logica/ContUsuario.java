@@ -934,10 +934,12 @@ public class ContUsuario implements iConUsuario {
                 if(this.usuarios.get(usu) instanceof proponente){
                     proponente p=(proponente) this.usuarios.get(usu);
                     retorno=p.getDtProponente();
+                    retorno.setRol("Proponente");
                 }
                 else{
                     colaborador c=(colaborador) this.usuarios.get(usu);
                     retorno=c.getColaborador();
+                    retorno.setRol("Colaborador");
                 }
             }       
         }
@@ -1103,6 +1105,23 @@ public class ContUsuario implements iConUsuario {
         }
 
         return ret;        
+    }
+    /**
+     * Esta funcion se usa para listar propuestas en el la WEB
+     * @return 
+     */
+    public List<dtPropuesta> listarpropuestasenlaweb(){
+        List<dtPropuesta> retorno= new ArrayList<>();
+        for(String key: this.usuarios.keySet()){
+            if(this.usuarios.get(key) instanceof proponente){
+                proponente p=(proponente) this.usuarios.get(key);
+                for(String keyp: p.propuestasUsuario.keySet()){
+                    dtPropuesta dtp=new dtPropuesta(keyp,key);
+                    retorno.add(dtp);
+                }
+            }
+        }
+        return retorno;
     }
     
 }
