@@ -1124,6 +1124,15 @@ public class ContUsuario implements iConUsuario {
         return retorno;
     }
     
+    public List<String> cargarlosseguidospor(String nickusuario){
+        List<String> retorno= new ArrayList<>();
+        usuario u=this.usuarios.get(nickusuario);
+        for(String key: u.seguidos.keySet()){
+            retorno.add(key);
+        }
+        return retorno;
+    }
+    
 }
 
 
