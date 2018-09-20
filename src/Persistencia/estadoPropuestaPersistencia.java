@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import Logica.dtEstadosPropuestas;
 import Logica.dtPropuestaEstado;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -67,4 +68,9 @@ public class estadoPropuestaPersistencia {
             return null;
         }
     }
+    /**
+     *
+     * Actualiza en la bd los estados 
+     */
+    
 }

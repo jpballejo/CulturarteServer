@@ -623,4 +623,55 @@ public class BDCulturarte {
             return false;
         }
     }
+  public String levantarRutaImgUsu(){
+  String ruta=null;
+      try {
+          String sql="SELECT `tipo`, `ubicacion` FROM `ubicacionImagenes` WHERE tipo= 'USUARIO'";
+          Connection conn = conexion.getConexion();
+          Statement st = conn.createStatement();
+          ResultSet rs = st.executeQuery(sql);
+          ruta = (String) rs.getString(2);
+          
+      } catch (Exception e) {
+          System.err.println(e.getMessage());
+      }
+  
+  
+  return ruta;
+  }  
+    public void setearRutaImgUsu(String rutaNew){
+        try { 
+            String sql="";
+            Connection conn = conexion.getConexion();
+            Statement st= conn.createStatement();
+            st.executeUpdate(sql);
+            
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    public String levantarRutaImgPropuesta(){String ruta=null;
+        try {
+            String sql="SELECT `tipo`, `ubicacion` FROM `ubicacionImagenes` WHERE tipo= 'PROPUESTA'";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            ruta = rs.getString(2);
+        } catch (Exception e) {
+        }
+    
+    
+    return ruta;}
+public void setearRutaImgPropuestas(String rutaNew){
+    try {
+        String sql="";
+        Connection conn = conexion.getConexion();
+        Statement st = conn.createStatement();
+        st.executeUpdate(sql);
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+    }
+
+}
+
 }
