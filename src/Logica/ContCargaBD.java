@@ -43,7 +43,7 @@ public class ContCargaBD implements iContCargaBD {
 
 //Variables movimiento de imagenes --
     
-    private String imagenUSU=null, imagenPropuesta=null;
+    private String imagenUSU=null, imagenPropuesta=null, imagenLevantar=null;
     
     public static ContCargaBD getInstance() {
         if (instance == null) {
@@ -482,31 +482,45 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     /**
-     * @return the imagenUSU
+     * Retorna un String con la ruta de las imagenes del usuario
      */
     public String getImagenUSU() {
         return imagenUSU;
     }
 
     /**
-     * @param imagenUSU the imagenUSU to set
+     * Setea la ruta de las imagenes del usuario
      */
     public void setImagenUSU(String imagenUSU) {
         this.imagenUSU = imagenUSU;
     }
 
     /**
-     * @return the imagenPropuesta
+     * Retorna un string con la ruta de las imagenes de propuesta
      */
     public String getImagenPropuesta() {
         return imagenPropuesta;
     }
 
     /**
-     * @param imagenPropuesta the imagenPropuesta to set
+     * Setea la ruta de las imagenes de las propuestas
      */
     public void setImagenPropuesta(String imagenPropuesta) {
         this.imagenPropuesta = imagenPropuesta;
+    }
+
+    /**
+     * @return the imagenLevantar
+     */
+    public String getImagenLevantar() {
+        return imagenLevantar;
+    }
+
+    /**
+     * @param imagenLevantar the imagenLevantar to set
+     */
+    public void setImagenLevantar(String imagenLevantar) {
+        this.imagenLevantar = imagenLevantar;
     }
 
 }

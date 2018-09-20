@@ -9,6 +9,7 @@ import Logica.ContPropuesta;
 import Logica.dtPropuestasBD;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +28,7 @@ public class Evaluar_Prop extends javax.swing.JFrame {
     public Evaluar_Prop() {
         initComponents();
         btn_aceptar.setEnabled(false);
+        jT_propuesta.setEditable(false);
         propuestas = (ArrayList<dtPropuestasBD>) contP.getdtPropIngr();
         llenaGrilla(propuestas);
     }
@@ -50,7 +52,6 @@ public class Evaluar_Prop extends javax.swing.JFrame {
         btn_aceptar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         jT_propuesta = new javax.swing.JTextField();
-        jT_proponente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,6 +103,11 @@ public class Evaluar_Prop extends javax.swing.JFrame {
         getContentPane().add(jR_cancelada, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
 
         btn_aceptar.setText("Aceptar");
+        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 100, -1));
 
         btn_cancelar.setText("Cancelar");
@@ -114,9 +120,6 @@ public class Evaluar_Prop extends javax.swing.JFrame {
 
         jT_propuesta.setText("Propuesta");
         getContentPane().add(jT_propuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 210, -1));
-
-        jT_proponente.setText("Proponente");
-        getContentPane().add(jT_proponente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 210, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,16 +141,16 @@ public class Evaluar_Prop extends javax.swing.JFrame {
     }//GEN-LAST:event_jR_canceladaActionPerformed
 
     private void tabla_propuestasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_propuestasMouseClicked
-     
+
         int row = tabla_propuestas.rowAtPoint(evt.getPoint());
         int col = tabla_propuestas.columnAtPoint(evt.getPoint());
         System.out.println("fila" + row);
         System.out.println("columna" + col);
-        jT_propuesta.setText((String) tabla_propuestas.getValueAt(row, 1));
-        jT_proponente.setText((String) tabla_propuestas.getValueAt(row, 2));
+        jT_propuesta.setText((String) tabla_propuestas.getValueAt(row, 0));
     }//GEN-LAST:event_tabla_propuestasMouseClicked
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+      
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
@@ -155,10 +158,33 @@ public class Evaluar_Prop extends javax.swing.JFrame {
         buscarTXT(jT_busqueda.getText());
     }//GEN-LAST:event_jT_busquedaKeyPressed
 
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+        int res = JOptionPane.showConfirmDialog(null, "Desea cambiar el estado de la propuesta: " + jT_propuesta.getText(), "Consulta", JOptionPane.YES_NO_OPTION);
+        if (res == 0) {
+            if (altaEstado()) {
+                JOptionPane.showMessageDialog(null, "El nuevo estado " + cancel_publicada + " se a agregado con exito!");
+            }
+        }
+
+
+    }//GEN-LAST:event_btn_aceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    private void altaEstado() {
+    private boolean altaEstado() {
+        if (jT_propuesta.getText() != null) {
+            limpiar();
+
+            return contP.nuevoEstadoProp(jT_propuesta.getText(), cancel_publicada);
+
+        }
+        return false;
+    }
+
+    private void limpiar() {
+        jT_propuesta.setText("Propuesta");
+        llenaGrilla(propuestas);
 
     }
 
@@ -201,6 +227,14 @@ public class Evaluar_Prop extends javax.swing.JFrame {
      *
      *
      */
+    private void bloquear(){
+    jT_busqueda.setEnabled(false);
+    jT_propuesta.setEnabled(false);
+    tabla_propuestas.setEnabled(false);
+    jR_cancelada.setEnabled(false);
+    jR_publicada.setEnabled(false);
+    
+    }
     private void llenaGrilla(ArrayList<dtPropuestasBD> prop) {
         try {
             DefaultTableModel modelo;
@@ -208,6 +242,9 @@ public class Evaluar_Prop extends javax.swing.JFrame {
             vect.add("Titulo");
             vect.add("Proponente");
             modelo = new DefaultTableModel(vect, prop.size());
+            if(prop.isEmpty()){JOptionPane.showMessageDialog(null, "No hay propuestas con estado Ingresada");
+            bloquear();
+            return;}
             for (int i = 0; i < prop.size(); i++) {
                 dtPropuestasBD p = (dtPropuestasBD) prop.get(i);
                 modelo.setValueAt(p.getTitulo(), i, 0);
@@ -276,7 +313,6 @@ public class Evaluar_Prop extends javax.swing.JFrame {
     private javax.swing.JRadioButton jR_publicada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_busqueda;
-    private javax.swing.JTextField jT_proponente;
     private javax.swing.JTextField jT_propuesta;
     private javax.swing.JTable tabla_propuestas;
     // End of variables declaration//GEN-END:variables

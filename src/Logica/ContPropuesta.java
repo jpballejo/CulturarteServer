@@ -43,6 +43,8 @@ public class ContPropuesta implements iConPropuesta {
     ArrayList<propuesta> propuestas = new ArrayList<>();
     private Map<String, Integer> idEstado = new HashMap<String, Integer>();
     private ContCargaBD contCarga = ContCargaBD.getInstance();
+    ArrayList<propuesta> propFiltradaING = new ArrayList<>();
+    utilidades util = new utilidades();
 
     private void cargaridEstado(ArrayList<dtEstado> nomEstados) {
         try {
@@ -74,10 +76,10 @@ public class ContPropuesta implements iConPropuesta {
                 String inicio = null;
                 String destino = null;
                 String imagen = listaImagenes.get(i);
-                inicio = "/home/juan/ProgAplicaciones2018/progAplicaciones/Imagenes_mover/imagenesProp/" + imagen;
-                destino = "/home/juan/ProgAplicaciones2018/progAplicaciones/imagenesProp/" + imagen;
+                inicio = "/home/juan/ProgAplicaciones2018/Servidor/Imagenes_mover/imagenesProp/" + imagen;
+                destino = "/home/juan/ProgAplicaciones2018/Servidor/imagenesProp/" + imagen;
                 System.out.println(destino);
-                copiarArchivo(inicio, destino);
+                util.copiarArchivo(inicio, destino);
             }
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
@@ -85,29 +87,6 @@ public class ContPropuesta implements iConPropuesta {
         }
 
         return true;
-    }
-
-    public boolean copiarArchivo(String origen, String destino) throws IOException {
-        File imagen = new File(origen);
-        File va = new File(destino);
-        if (imagen.exists()) {
-            try {
-                InputStream inp = new FileInputStream(imagen);
-                OutputStream out = new FileOutputStream(va);
-                byte[] bufer = new byte[1024];
-                int largo;
-                while ((largo = inp.read(bufer)) > 0) {
-                    out.write(bufer, 0, largo);
-                }
-                inp.close();
-                out.close();
-                return true;
-            } catch (FileNotFoundException e) {
-                System.err.println(e.getMessage());
-                return false;
-            }
-        }
-        return false;
     }
 
     public void sacarRutaImagen(dtPropuestasBD prop) {
@@ -482,6 +461,10 @@ public class ContPropuesta implements iConPropuesta {
                     categoria categ = new categoria(catP, cate.getNombre());
                     categorias.put(cate.getNombre(), catP);
                     catPer.altaCategoria(cate.getNombre(), cate.getPadre());
+                } else {
+                    categoria categ = new categoria(null, cate.getNombre());
+                    categorias.put(cate.getNombre(), categ);
+                    catPer.altaCategoria(cate.getNombre(), null);
                 }
 
             }
@@ -494,76 +477,85 @@ public class ContPropuesta implements iConPropuesta {
     @Override
     /**
      *
-     * retorna un arreglo de dtPropuestasBD con las propuestas
-     * con estado ingresado solamente
+     * retorna un arreglo de dtPropuestasBD con las propuestas con estado
+     * ingresado solamente
      */
     public ArrayList<dtPropuestasBD> getdtPropIngr() {
         ArrayList<dtPropuestasBD> propu = new ArrayList<>();
         ArrayList<proponente> proponentes = (ArrayList<proponente>) cUsuario.getProponentes();
-        for (int i=0;i<proponentes.size();i++){
-        proponente pro= (proponente)proponentes.get(i);
-        if(pro.noPropuestas()!=true){
-            cargaPropEstIngDt(propu, pro);
+        for (int i = 0; i < proponentes.size(); i++) {
+            proponente pro = (proponente) proponentes.get(i);
+            if (pro.noPropuestas() != true) {
+                cargaPropEstIngDt(propu, pro);
+            }
         }
-        }
-        
+
         return propu;
     }
+
     /**
      *
-     * carga un arreglo de dtPropuestaBD con las propuestas con estado
-     * ingresado del proponente
-     * by Jp
+     * carga un arreglo de dtPropuestaBD con las propuestas con estado ingresado
+     * del proponente by Jp
      */
-    private void cargaPropEstIngDt(ArrayList<dtPropuestasBD> propu,proponente prop){
-    ArrayList<propuesta> propuestas= (ArrayList<propuesta>)prop.getPropuestasObj();
-    for (int i =0;i<propuestas.size();i++){
-    propuesta pro=(propuesta)propuestas.get(i);
-    if(pro.getEstadoActual().equals("Ingresada")){
-        dtPropuestasBD dtprop = new dtPropuestasBD(pro.getTitulo(), prop.getNickname());
-        propu.add(dtprop);
-    //dtPropuestaComp dtprop=new dtPropuestaComp(titulo, descripcion, imagen, lugar, fechaPublicada, estado, categoria, fechaRealizacion, i, i, i)
-    }
-    
-    }
-    
-    }
-    /**
-     *
-     * setea el estado a la propuesta, recibe dos string: el titulo y el estado by jp
-     */
-    public boolean nuevoEstadoProp(String idProp, String estado){
-        try {
-            for (int i =0;i<propuestas.size();i++){
-            propuesta p=(propuesta)propuestas.get(i);
-            if(p.getTitulo().equals(idProp)){
-                estado est = (estado)retornaEstado(estado);
-                dtFecha fecha = getFecha();
-                dtHora hora = getHora();
-                propEstado pE =new propEstado(fecha, hora, est);
-            p.setEstado(pE, getIdEstado(estado));
+    private void cargaPropEstIngDt(ArrayList<dtPropuestasBD> propu, proponente prop) {
+        ArrayList<propuesta> propING = (ArrayList<propuesta>) prop.getPropuestasObj();
+        for (int i = 0; i < propING.size(); i++) {
+            propuesta pro = (propuesta) propING.get(i);
+            if (pro.getEstadoActual().equals("Ingresada")) {
+                propFiltradaING.add(pro);
+                dtPropuestasBD dtprop = new dtPropuestasBD(pro.getTitulo(), prop.getNickname());
+                propu.add(dtprop);
+                //dtPropuestaComp dtprop=new dtPropuestaComp(titulo, descripcion, imagen, lugar, fechaPublicada, estado, categoria, fechaRealizacion, i, i, i)
             }
-            
+
+        }
+
+    }
+
+    /**
+     *
+     * setea el estado a la propuesta, recibe dos string: el titulo y el estado
+     * by jp
+     */
+    public boolean nuevoEstadoProp(String idProp, String estado) {
+        try {
+            for (int i = 0; i < propFiltradaING.size(); i++) {
+                propuesta p = (propuesta) propFiltradaING.get(i);
+                System.out.println(p.getTitulo());
+                System.out.println(idProp);
+                if (p.getTitulo().equals(idProp)) {
+                    estado est = (estado) retornaEstado(estado);
+                    dtFecha fecha = getFecha();
+                    dtHora hora = getHora();
+                    propEstado pE = new propEstado(fecha, hora, est);
+                    p.setEstado(pE, getIdEstado(estado));
+                    estPropPer.agregarPropEstado(idProp, estado, fecha.getFecha(), hora.getHora());
+                    return true;
+                }
+
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-    return true;
+        return false;
     }
+
     /**
      *
      * retorna el estado que le pases by jp
      */
-    private estado retornaEstado(String estado){
-    
+    private estado retornaEstado(String estado) {
+
         estado get = estados.get(estado);
         return get;
     }
+
     /**
      *
-     * retorna un dtFecha con la fecha actual del sistema 
+     * retorna un dtFecha con la fecha actual del sistema
      */
-       private dtFecha getFecha() {
+    private dtFecha getFecha() {
         dtFecha fecha = null;
         Calendar cal = Calendar.getInstance();
         Date da = cal.getTime();
@@ -571,9 +563,10 @@ public class ContPropuesta implements iConPropuesta {
         fecha = new dtFecha(Integer.toString(da.getDay()), Integer.toString(da.getMonth()), Integer.toString(da.getYear()));
         return fecha;
     }
-     /**
+
+    /**
      *
-     * retorna un dtHora con la hora actual del sistema 
+     * retorna un dtHora con la hora actual del sistema
      */
     private dtHora getHora() {
         dtHora hora = null;
