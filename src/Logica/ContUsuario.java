@@ -519,7 +519,7 @@ public class ContUsuario implements iConUsuario {
 
     public void agregarEstadoAPropuesta(estado e, String titulo, dtFecha dtf, dtHora dth, int orden) {
         propuesta p = this.damePropuesta(titulo);
-        if (p.getTitulo() == titulo) {
+        if (p.getTitulo().equals(titulo)) {
             boolean agrego = p.agregarNuevoEstado(e, dtf, dth, orden);
             if (agrego) {
                 estadopropper.agregarPropEstado(titulo, e.getNombre(), dtf.getFecha(), dth.getHora());
@@ -1124,6 +1124,37 @@ public class ContUsuario implements iConUsuario {
     @Override
     public ArrayList<dtUsuario> getDtUsus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List<String> listarpropuestasparacancelar(String nickp){
+        List<String> retorno= new ArrayList<>();
+        if(this.usuarios.get(nickp) instanceof proponente){
+            proponente p=(proponente) this.usuarios.get(nickp);
+            for(String key: p.propuestasUsuario.keySet()){
+                propuesta prop= p.propuestasUsuario.get(key);
+                if(prop.getEstadoActual().equals("Financiada")){
+                    retorno.add(key);
+                }
+            }
+        }
+        return retorno;
+    }
+    
+    
+    public void agregarpropuestacomofav(String nickusuario, String titulo){
+        propuesta p=this.damePropuesta(titulo);
+        usuario u=this.usuarios.get(nickusuario);
+        u.favoritas.put(titulo, p);
+        usuPer.agregarpropcomofav(nickusuario, titulo);
+    }
+    
+    public List<String> listarmispropsfavs(String nickusuario){
+        List<String> retorno= new ArrayList<>();
+        usuario u= this.usuarios.get(nickusuario);
+        for(String key: u.favoritas.keySet()){
+            retorno.add(key);
+        }
+        return retorno;
     }
     
 }

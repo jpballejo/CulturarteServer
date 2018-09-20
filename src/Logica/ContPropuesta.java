@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -364,7 +367,6 @@ public class ContPropuesta implements iConPropuesta {
             }
         }
         return retorno;
-
     }
 
     @Override
@@ -576,4 +578,27 @@ public class ContPropuesta implements iConPropuesta {
         hora = new dtHora(da.getHours(), da.getMinutes());
         return hora;
     }
+    
+    public void agregarestadoapropWEB(String estado, String titulo){
+        Date date= new Date();
+        DateFormat dt=new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dt2=new SimpleDateFormat("hh:mm");
+        String f=dt.format(date);
+        String h=dt2.format(date);
+        String[] fp=f.split("/");
+        String dia=fp[0];
+        String mes=fp[1];
+        String anio=fp[2];
+        String[] hp=h.split(":");
+        int hs= Integer.parseInt(hp[0]);
+        int ms= Integer.parseInt(hp[1]);
+        
+        dtFecha dtf= new dtFecha(dia,mes,anio);
+        dtHora dth= new dtHora(hs,ms);
+        
+        agregarEstadoAPropuesta(estado,titulo,dtf,dth); //estado titulo fecha hora
+    }
+    
+    
 }
+
