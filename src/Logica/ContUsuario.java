@@ -902,7 +902,48 @@ public class ContUsuario implements iConUsuario {
         return propo;
     }
 
-   
+
+
+    public dtUsuario usuarioLogin(String usu) {
+        dtUsuario retorno = null;
+        if(usu.contains("@")==false){ //Busqueda por Nick
+            if(this.usuarios.containsKey(usu)){
+                if(this.usuarios.get(usu) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usu);
+                    retorno=p.getDtProponente();
+                    retorno.setRol("Proponente");
+                }
+                else{
+                    colaborador c=(colaborador) this.usuarios.get(usu);
+                    retorno=c.getColaborador();
+                    retorno.setRol("Colaborador");
+                }
+            }       
+        }
+        if(usu.contains("@")==true){ //Busqueda por Correo
+            for(String key: this.usuarios.keySet()){
+                if(this.usuarios.get(key) instanceof proponente){
+                    proponente p=(proponente) this.usuarios.get(usu);
+                    if(p.getEmail().equals(usu)){
+                        retorno=p.getDtProponente();
+                    }
+                }
+                else{
+                    colaborador c=(colaborador) this.usuarios.get(usu);
+                    if(c.getEmail().equals(usu)){
+                        retorno=c.getColaborador();
+                    }
+                }
+            }
+        }
+        return retorno; 
+    
+        }
+
+    public void pruebabasica() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     /**
      * Esta funcion se usa para tener informacion sin importar si es Colaborador
@@ -1051,6 +1092,7 @@ public class ContUsuario implements iConUsuario {
         }
 
         return ret;
+        
     }
     /**
      * Esta funcion se usa para listar propuestas en el la WEB
@@ -1080,19 +1122,18 @@ public class ContUsuario implements iConUsuario {
     }
 
     @Override
-    public dtUsuario usuarioLogin(String usu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ArrayList<dtUsuario> getDtUsus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+}
+
+  
     
 
 
     
    
 
-}
+
 
