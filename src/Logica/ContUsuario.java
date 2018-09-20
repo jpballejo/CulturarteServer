@@ -1052,30 +1052,28 @@ public class ContUsuario implements iConUsuario {
 
         return ret;
     }
-
     /**
      * Esta funcion se usa para listar propuestas en el la WEB
-     *
-     * @return
+     * @return 
      */
-    public List<dtPropuesta> listarpropuestasenlaweb() {
-        List<dtPropuesta> retorno = new ArrayList<>();
-        for (String key : this.usuarios.keySet()) {
-            if (this.usuarios.get(key) instanceof proponente) {
-                proponente p = (proponente) this.usuarios.get(key);
-                for (String keyp : p.propuestasUsuario.keySet()) {
-                    dtPropuesta dtp = new dtPropuesta(keyp, key);
+    public List<dtPropuesta> listarpropuestasenlaweb(){
+        List<dtPropuesta> retorno= new ArrayList<>();
+        for(String key: this.usuarios.keySet()){
+            if(this.usuarios.get(key) instanceof proponente){
+                proponente p=(proponente) this.usuarios.get(key);
+                for(String keyp: p.propuestasUsuario.keySet()){
+                    dtPropuesta dtp=new dtPropuesta(keyp,key);
                     retorno.add(dtp);
                 }
             }
         }
         return retorno;
     }
-
-    public List<String> cargarlosseguidospor(String nickusuario) {
-        List<String> retorno = new ArrayList<>();
-        usuario u = this.usuarios.get(nickusuario);
-        for (String key : u.seguidos.keySet()) {
+    
+    public List<String> cargarlosseguidospor(String nickusuario){
+        List<String> retorno= new ArrayList<>();
+        usuario u=this.usuarios.get(nickusuario);
+        for(String key: u.seguidos.keySet()){
             retorno.add(key);
         }
         return retorno;
@@ -1090,6 +1088,11 @@ public class ContUsuario implements iConUsuario {
     public ArrayList<dtUsuario> getDtUsus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+
+
+    
+   
 
 }
 
