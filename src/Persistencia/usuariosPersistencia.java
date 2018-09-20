@@ -177,5 +177,16 @@ public class usuariosPersistencia {
         }    
     }
     
+    public void agregarpropcomofav(String nickusuario, String titulo){
+        try{
+            String sql=null;
+            Connection con= conexion.getConexion();
+            Statement st= (Statement) con.createStatement();
+            sql="INSERT INTO `cultuRarte`.`Favoritos`(`nickusuario`,`tituloprop`) VALUES ('"+nickusuario+"','"+titulo+"')";
+            st.executeUpdate(sql);
+        }catch (Exception e) {      
+            System.err.println(e.getMessage());
+        } 
+    }
 
 }
