@@ -38,6 +38,13 @@ public class dtPropuesta {
         this.colaboradores= new ArrayList<String>();
     }
 
+    public dtPropuesta(String titulo, String proponente) {
+        this.titulo = titulo;
+        this.proponente = proponente;
+    }
+    
+    
+
 //GETTERS//
     public String getTitulo() {
         return titulo;

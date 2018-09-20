@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -211,5 +212,16 @@ public class proponente extends usuario {
         }
         return propuestas;
 
+    }
+
+    public List<String> listarmispropuestasmenosingresadas() {
+        List<String> retorno = new ArrayList();
+        for(String key: this.propuestasUsuario.keySet()){
+            propuesta p=this.propuestasUsuario.get(key);
+            if(p.getEstadoActual().equals("Ingresada")==false){
+                retorno.add(key);
+            }
+        }
+        return retorno;        
     }
 }

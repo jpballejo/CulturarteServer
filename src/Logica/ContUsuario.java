@@ -902,41 +902,7 @@ public class ContUsuario implements iConUsuario {
         return propo;
     }
 
-    public dtUsuario usuarioLogin(String usu) {
-        dtUsuario retorno = null;
-        if (usu.contains("@") == false) { //Busqueda por Nick
-            if (this.usuarios.containsKey(usu)) {
-                if (this.usuarios.get(usu) instanceof proponente) {
-                    proponente p = (proponente) this.usuarios.get(usu);
-                    retorno = p.getDtProponente();
-                } else {
-                    colaborador c = (colaborador) this.usuarios.get(usu);
-                    retorno = c.getColaborador();
-                }
-            }
-        }
-        if (usu.contains("@") == true) { //Busqueda por Correo
-            for (String key : this.usuarios.keySet()) {
-                if (this.usuarios.get(key) instanceof proponente) {
-                    proponente p = (proponente) this.usuarios.get(usu);
-                    if (p.getEmail().equals(usu)) {
-                        retorno = p.getDtProponente();
-                    }
-                } else {
-                    colaborador c = (colaborador) this.usuarios.get(usu);
-                    if (c.getEmail().equals(usu)) {
-                        retorno = c.getColaborador();
-                    }
-                }
-            }
-        }
-        return retorno;
-
-    }
-
-    public void pruebabasica() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     /**
      * Esta funcion se usa para tener informacion sin importar si es Colaborador
@@ -1064,25 +1030,66 @@ public class ContUsuario implements iConUsuario {
         return retorno;
     }
 
-    public ArrayList<dtUsuario> getDtUsus() {
-        ArrayList<dtUsuario> usus = new ArrayList<>();
-        Iterator it = usuarios.keySet().iterator();
-        while (it.hasNext()) {
-            String key = (String) it.next();
+    public List<String> listarpropuestasmenosingresadas(String titulo) {
+        List<String> ret = new ArrayList();
 
-            if ((usuario) usuarios.get(key) instanceof proponente) {
-                proponente p = (proponente) usuarios.get(key);
-                dtUsuario usu = p.getDtProponente();
-                usus.add(usu);
+        if (titulo.isEmpty()) {
+            for (String key : this.usuarios.keySet()) {
+                if (this.usuarios.get(key) instanceof proponente) {
+                    proponente p = (proponente) this.usuarios.get(key);
+                    ret.addAll(p.listarmispropuestasmenosingresadas());
+
+                }
             }
-
-            if ((usuario) usuarios.get(key) instanceof colaborador) {
-                colaborador c = (colaborador) usuarios.get(key);
-                dtUsuario usu = c.getColaborador();
-                usus.add(usu);
+        } else {
+            for (String key : this.usuarios.keySet()) {
+                if (this.usuarios.get(key) instanceof proponente) {
+                    proponente p = (proponente) this.usuarios.get(key);
+                    ret.addAll(p.listarmispropuestaslike(titulo));
+                }
             }
         }
-        return usus;
+
+        return ret;
+    }
+
+    /**
+     * Esta funcion se usa para listar propuestas en el la WEB
+     *
+     * @return
+     */
+    public List<dtPropuesta> listarpropuestasenlaweb() {
+        List<dtPropuesta> retorno = new ArrayList<>();
+        for (String key : this.usuarios.keySet()) {
+            if (this.usuarios.get(key) instanceof proponente) {
+                proponente p = (proponente) this.usuarios.get(key);
+                for (String keyp : p.propuestasUsuario.keySet()) {
+                    dtPropuesta dtp = new dtPropuesta(keyp, key);
+                    retorno.add(dtp);
+                }
+            }
+        }
+        return retorno;
+    }
+
+    public List<String> cargarlosseguidospor(String nickusuario) {
+        List<String> retorno = new ArrayList<>();
+        usuario u = this.usuarios.get(nickusuario);
+        for (String key : u.seguidos.keySet()) {
+            retorno.add(key);
+        }
+        return retorno;
+    }
+
+    @Override
+    public dtUsuario usuarioLogin(String usu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<dtUsuario> getDtUsus() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
+

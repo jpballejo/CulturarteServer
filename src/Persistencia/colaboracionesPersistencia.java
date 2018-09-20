@@ -48,6 +48,7 @@ public class colaboracionesPersistencia {
             // conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
+            System.out.println(ex);
             ex.printStackTrace();
             return false;
         }

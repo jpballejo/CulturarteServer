@@ -13,6 +13,7 @@ public class dtUsuario {
 
     private String nombre, apellido, nickname, imagen, email,pass;
     private dtFecha fechaNac;
+    private String rol;
 
     public dtUsuario(String nombre, String apellido, String nickname, String imagen, String email, dtFecha fechaNac,String pass) {
         this.nombre = nombre;
@@ -71,6 +72,14 @@ public class dtUsuario {
      */
     public String getPass() {
         return pass;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     
