@@ -9,24 +9,14 @@ import Persistencia.categoriaPersistencia;
 import Persistencia.estadoPersistencia;
 import Persistencia.estadoPropuestaPersistencia;
 import Persistencia.propuestasPersistencia;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 
 /**
  *
@@ -47,6 +37,9 @@ public class ContPropuesta implements iConPropuesta {
     private Map<String, Integer> idEstado = new HashMap<String, Integer>();
     private ContCargaBD contCarga = ContCargaBD.getInstance();
     ArrayList<propuesta> propFiltradaING = new ArrayList<>();
+    ArrayList<propuesta> propCambioEstadoAuto = new ArrayList<>();
+
+    ArrayList<dtEstadosPropuestas> arregloDtEstProp = new ArrayList<>();
     utilidades util = new utilidades();
 
     private void cargaridEstado(ArrayList<dtEstado> nomEstados) {
@@ -56,6 +49,7 @@ public class ContPropuesta implements iConPropuesta {
                 idEstado.put(est.getNombre(), est.getNumero());
             }
             contCarga.setearEstado(nomEstados);
+            util.setearidEstado(idEstado);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -100,7 +94,7 @@ public class ContPropuesta implements iConPropuesta {
 
     }
 
-    private Integer getNumEstado(String estado) {
+    private int getNumEstado(String estado) {
         return this.idEstado.get(estado);
 
     }
@@ -118,6 +112,7 @@ public class ContPropuesta implements iConPropuesta {
         cargaEstados();
         cargaPropuestas();
         moverImagenesProp();
+
     }
 
     @Override
@@ -256,14 +251,17 @@ public class ContPropuesta implements iConPropuesta {
         ArrayList<dtEstadosPropuestas> estProp = new ArrayList<>();
         estPer.CargarEstadosPropuestas(estProp);
         llenaEstadosCarga(estProp);
+
         for (int i = 0; i < dtpropuestasDb.size(); i++) {
             dtPropuestasBD dtProp = (dtPropuestasBD) dtpropuestasDb.get(i);
             sacarRutaImagen(dtProp);
 
             propuesta prop = armarPropuesta(dtProp);
+            filtraPropuestas(prop);
             cargarEstadosProp(prop, estProp);//revisar if ==true
             String nick = dtProp.getNickproponente();
             cUsuario.esteUsuariopropusoestaProp(nick, prop);
+
         }
     }
 
@@ -313,7 +311,7 @@ public class ContPropuesta implements iConPropuesta {
         propEstado estaprop = null;
         try {
             estado est = getEstado(dtestProp.getEstado());
-            estaprop = new propEstado(dtestProp.getFecha(), dtestProp.getHora(), est);
+            estaprop = new propEstado(dtestProp.getFecha(), dtestProp.getHora(), est, null);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -528,11 +526,12 @@ public class ContPropuesta implements iConPropuesta {
                 System.out.println(idProp);
                 if (p.getTitulo().equals(idProp)) {
                     estado est = (estado) retornaEstado(estado);
-                    dtFecha fecha = getFecha();
-                    dtHora hora = getHora();
-                    propEstado pE = new propEstado(fecha, hora, est);
+                    dtFecha fecha = (dtFecha) util.getFecha();
+                    dtHora hora = (dtHora) util.getHora();
+                    //  dtFecha fechaFin = getFechaFin(fecha, 30);
+                    propEstado pE = new propEstado(fecha, hora, est, null);
                     p.setEstado(pE, getIdEstado(estado));
-                    estPropPer.agregarPropEstado(idProp, estado, fecha.getFecha(), hora.getHora());
+                    estPropPer.agregarPropEstado(idProp, estado, fecha.getFecha(), hora.getHora(), (String) pE.getFechaFin().getFecha());
                     return true;
                 }
 
@@ -553,52 +552,160 @@ public class ContPropuesta implements iConPropuesta {
         return get;
     }
 
-    /**
-     *
-     * retorna un dtFecha con la fecha actual del sistema
+    public void agregarestadoapropWEB(String estado, String titulo) {
+        dtFecha dtf = util.getFecha();
+        dtHora dth = util.getHora();
+
+        agregarEstadoAPropuesta(estado, titulo, dtf, dth); //estado titulo fecha hora
+    }
+////////////////////PROCEDIMIENTO estado Automatico-----------------
+/**
+ *
+ * Funcion que recibe una propuesta y verifica el estado, la fecha y la hora
+ * Si la fecha es anterior a la actual actualiza de inmediato el estado al que le sigue
+ * Si la fecha es igual a la actual verifica la hora, si la hora es inferior o igual a la actual cambia el estado al que le sigue
+ * Si la hora es superior a la actual almacena la propuesta en una coleccion que se verifica durante el uso del programa y se encarga comprobar 
+ * la hora hasta que coincida y cambia el estado 
+ */
+    public void filtraPropuestas(propuesta p) {
+
+        if (comparaEstado(p.getEstadoActual())) {
+            if (verificaFecha(p) == 0) {
+                propCambioEstadoAuto.add(p);
+            }
+            if (verificaFecha(p) == -1) {
+                cambiaPropEstadoAuto(p);
+            }
+        }
+    }
+
+    public void verificarPropHora() {
+
+        for (int i = 0; i < propCambioEstadoAuto.size(); i++) {
+            propuesta p = propCambioEstadoAuto.get(i);
+            if (verificaHora(p) == -1) {
+                cambiaPropEstadoAuto(p);
+            }
+            if (verificaHora(p) == 0) {
+                cambiaPropEstadoAuto(p);
+            }
+        }
+    }
+
+    /*
+ *cambiaPropEstadoAuto recibe una propuesta y verifica si el estado es Publicada o En Financiacion
+ * si es publicada cambia el estado a En Financiacion 
+ * Si es En Financiacion verifica los montos y selecciona Financiada o No Financiada
+ * 
      */
-    private dtFecha getFecha() {
-        dtFecha fecha = null;
-        Calendar cal = Calendar.getInstance();
-        Date da = cal.getTime();
-        da.setYear(2018);
-        fecha = new dtFecha(Integer.toString(da.getDay()), Integer.toString(da.getMonth()), Integer.toString(da.getYear()));
-        return fecha;
+    private void cambiaPropEstadoAuto(propuesta p) {
+        int m;
+        String estado = p.getEstadoActual();
+        if (estado.equals("Publicada")) {
+            nuevoEstPropAUTO(p, "En Financiacion");
+        }
+        if (estado.equals("En Financiacion")) {
+            int montoReq = p.getMontoRequerido();
+            m = cUsuario.getMontoColaborado(p.getTitulo());
+            if (m >= montoReq) {
+                nuevoEstPropAUTO(p, "Financiada");
+            }
+            if (m < montoReq) {
+                nuevoEstPropAUTO(p, "No Financiada");
+            }
+        }
     }
 
     /**
      *
-     * retorna un dtHora con la hora actual del sistema
+     *
      */
-    private dtHora getHora() {
-        dtHora hora = null;
-        Calendar cal = Calendar.getInstance();
-        Date da = cal.getTime();
-        da.setYear(2018);
-        hora = new dtHora(da.getHours(), da.getMinutes());
-        return hora;
+    private void nuevoEstPropAUTO(propuesta p, String estado) {
+        try {
+            estado est = (estado) retornaEstado(estado);
+            dtFecha fecha = (dtFecha) util.getFecha();
+            dtHora hora = (dtHora) util.getHora();
+            propEstado pE = new propEstado(fecha, hora, est, null);
+            int posicion = getNumEstado(estado);
+            p.setEstado(pE, posicion);
+            estPropPer.agregarPropEstado(p.getTitulo(), estado, fecha.getFecha(), hora.getHora(), p.getFechaFinEstadoActual());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
     }
-    
-    public void agregarestadoapropWEB(String estado, String titulo){
-        Date date= new Date();
-        DateFormat dt=new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat dt2=new SimpleDateFormat("hh:mm");
-        String f=dt.format(date);
-        String h=dt2.format(date);
-        String[] fp=f.split("/");
-        String dia=fp[0];
-        String mes=fp[1];
-        String anio=fp[2];
-        String[] hp=h.split(":");
-        int hs= Integer.parseInt(hp[0]);
-        int ms= Integer.parseInt(hp[1]);
-        
-        dtFecha dtf= new dtFecha(dia,mes,anio);
-        dtHora dth= new dtHora(hs,ms);
-        
-        agregarEstadoAPropuesta(estado,titulo,dtf,dth); //estado titulo fecha hora
+
+    /**
+     *
+     * verificarFecha: funcion que retorna un int (-1, 0, 1)
+     *
+     * (-1) si la fecha es anterior a la del sistema (0) si la fecha es igual a
+     * la del sistema (1) si es posterior a la del sistema
+     */
+    private int verificaFecha(propuesta p) {
+
+        try {
+            Date fechaFin = (Date) util.fechaDate(p.getFechaFinEstadoActual(), null);
+            dtFecha dtf = util.getFecha();
+            Date fechaAc = util.fechaDate((String) dtf.getFecha(), null);
+            if (fechaFin.equals(fechaAc)) {
+                return 0;
+            }
+            if (fechaAc.before(fechaFin)) {
+                return -1;
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return 1;
     }
-    
-    
+
+    /**
+     *
+     * verificarHora: funcion que retorna un int (-1, 0, 1)
+     *
+     * (-1) si la hora es anterior a la del sistema (0) si la hora es igual a la
+     * del sistema (1) si es posterior a la del sistema
+     */
+    private int verificaHora(propuesta p) {
+
+        try {
+            Date hora = (Date) util.fechaDate(null, (String) p.getPropEstadoActual().getHora().getHora());
+            dtHora dth = (dtHora) util.getHora();
+            Date horaSis = (Date) util.fechaDate(null, (String) dth.getHora());
+            if (horaSis.equals(hora)) {
+                return 0;
+            }
+            if (horaSis.before(hora)) {
+                return -1;
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return 1;
+    }
+
+    /**
+     * comparaEstado: funcion que compara los estados
+     *
+     * false: si el estado es: Ingresada - No Financiada - Financiada true: si
+     * es otro estado
+     */
+    private boolean comparaEstado(String stado) {
+        if (stado.equals("Cancelada")) {
+            return false;
+        }
+        if (stado.equals("Ingresada")) {
+            return false;
+        }
+        if (stado.equals("No Financiada")) {
+            return false;
+        }
+        if (stado.equals("Financiada")) {
+            return false;
+        }
+        return true;
+    }
 }
-

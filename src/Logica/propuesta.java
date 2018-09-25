@@ -19,6 +19,7 @@ import java.util.TreeMap;
  */
 public class propuesta {
 
+    utilidades util = new utilidades();
     private String titulo, descripcion, imagen, lugar, retorno;
     private dtFecha fecharealizacion;
     private TreeMap<Integer, propEstado> estados;
@@ -41,10 +42,12 @@ public class propuesta {
         this.categoria = cat;
 
         if (est != null) {
-            Calendar cal = Calendar.getInstance();
+
+            /*Calendar cal = Calendar.getInstance();
             Date da = cal.getTime();
-            dtHora dth = new dtHora(da.getHours(), da.getMinutes());
-            propEstado e = new propEstado(fechapublicada, dth, est);
+            dtHora dth = new dtHora(da.getHours(), da.getMinutes());*/
+            dtHora dth = (dtHora) util.getHora();
+            propEstado e = new propEstado(fechapublicada, dth, est, null);
             this.estados.put(1, e);
         }
     }
@@ -85,22 +88,35 @@ public class propuesta {
         }
 
     }
-/**
- *
- * retorna un string con el estado actual de la propuesta comment by Jp
- */
-    public String getEstadoActual() {
-        String est= "Ingresada";
-        propEstado propEst=null;
-        for(int key: estados.keySet()){
-             propEst = estados.get(key);
-        }
-        if(propEst!=null && propEst.getEstado().getNombre().isEmpty()==false)
-            est=propEst.getEstado().getNombre();
-            
-        return est;
-        
 
+    /**
+     *
+     * retorna un string con el estado actual de la propuesta comment by Jp
+     */
+    public String getEstadoActual() {
+        String est = "Ingresada";
+        propEstado propEst = null;
+        for (int key : estados.keySet()) {
+            propEst = estados.get(key);
+        }
+        if (propEst != null && propEst.getEstado().getNombre().isEmpty() == false) {
+            est = propEst.getEstado().getNombre();
+        }
+
+        return est;
+
+    }
+/**
+ *retorna la fecha de finalizacion del estado actual
+ * by jp
+ */
+    public String getFechaFinEstadoActual() {
+        String fecha = null;
+        String estAct = getEstadoActual();
+        int posicion = util.getIdEstado(estAct);
+        propEstado pe = (propEstado) estados.get(posicion);
+        fecha = (String) pe.getFechaFin().getFecha();
+        return fecha;
     }
 
     public TreeMap<Integer, propEstado> getEstados() {
@@ -108,13 +124,26 @@ public class propuesta {
     }
 
     public boolean agregarNuevoEstado(estado e, dtFecha dtf, dtHora dth, int orden) {
-        if(estados.containsKey(orden))
+        if (estados.containsKey(orden)) {
             return false;
-        propEstado pe = new propEstado(dtf, dth, e);
+        }
+        propEstado pe = new propEstado(dtf, dth, e, null);
         this.estados.put(orden, pe);
         return this.estados.containsKey(orden);
     }
+public propEstado getPropEstadoActual(){
+propEstado pE=null;
+    try {
+        String estado = getEstadoActual();
+        int codigo = util.getIdEstado(estado);
+        pE = (propEstado)estados.get(codigo);
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+    }
 
+
+return pE;
+}
     /**
      * @param titulo the titulo to set
      */
@@ -285,9 +314,8 @@ public class propuesta {
         this.categoria = null;
         this.fechapublicada = null;
         this.fecharealizacion = null;
-        this.estados=null;
+        this.estados = null;
 
     }
-
 
 }

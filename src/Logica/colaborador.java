@@ -39,8 +39,6 @@ String s = "retorno";
 return s;
 }
 
-public void darAltaColaboracion(String tipoRetorno,int montoColaboracion ){
-}
 
   //  @Override
     public colProp seleccioonarColaboracion(String titulo){

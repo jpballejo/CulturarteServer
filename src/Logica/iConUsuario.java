@@ -60,6 +60,6 @@ public interface iConUsuario {
 
     public dtUsuario usuarioLogin(String usu);
 
-    public abstract ArrayList<dtUsuario> getDtUsus();
+    public abstract int getMontoColaborado(String idProp);
 
 }

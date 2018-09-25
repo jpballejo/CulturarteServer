@@ -10,6 +10,7 @@ import Logica.dtEstado;
 import Logica.dtEstadosPropuestas;
 import Logica.dtFecha;
 import Logica.dtHora;
+import Logica.utilidades;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ import java.util.List;
 public class estadoPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
+    utilidades util = new utilidades();
 //    ContCargaBD contCarga = ContCargaBD.getInstance();
 
     private ArrayList<dtEstadosPropuestas> estados = new ArrayList<>();
@@ -77,7 +79,7 @@ public class estadoPersistencia {
     public static void agregarEstadosPropuestas(dtEstadosPropuestas dtep) {
         try {
             String sql = null;
-            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`,`estado`,`fecha`,`hora`)VALUES('" + dtep.getTituloprop() + "','" + dtep.getEstado() + "','" + dtep.getFecha().getFecha() + "','" + dtep.getHora().getHora() + "')";
+            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`,`estado`,`fecha`,`hora`,, `fechaFinal`)VALUES('" + dtep.getTituloprop() + "','" + dtep.getEstado() + "','" + dtep.getFecha().getFecha() + "','" + dtep.getHora().getHora() + "','" + dtep.getFechaFin().getFecha() + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -89,19 +91,7 @@ public class estadoPersistencia {
         }
     }
 
-    public dtFecha construirFecha(String fecha) {
-        String[] splited = fecha.split("/");
-        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
-        return fec;
-    }
-
-    public dtHora construirHora(String hora) {
-
-        String[] h = hora.split(":");
-        dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
-        return dth;
-    }
-
+   
     private void setearEstadoPropuesta(dtEstadosPropuestas dt) {
         estados.add(dt);
 
@@ -116,10 +106,11 @@ public class estadoPersistencia {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                dtFecha dtf = construirFecha(rs.getString(3));
+                dtFecha dtf = (dtFecha)util.construirFecha(rs.getString(3));
                 System.out.println(rs.getString(1) + " " + rs.getString(4));
-                dtHora dth = construirHora(rs.getString(4));
-                dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth);
+                dtHora dth = (dtHora)util.construirHora(rs.getString(4));
+                dtFecha dtff = (dtFecha)util.construirFecha(rs.getString(5));
+                dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth,dtff);
                 setearEstadoPropuesta(dt);
                 estados.add(dt);
             }

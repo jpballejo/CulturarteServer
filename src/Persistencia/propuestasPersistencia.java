@@ -7,8 +7,7 @@ package Persistencia;
 
 import Logica.dtFecha;
 import Logica.dtPropuestasBD;
-import Logica.propuesta;
-import static Persistencia.usuariosPersistencia.conexion;
+import Logica.utilidades;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +23,7 @@ import java.util.Map;
 public class propuestasPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
-
+utilidades util = new utilidades();
     public static void altaPropuesta(dtPropuestasBD dtp) throws SQLException {
         try {
             String sql = null;
@@ -44,11 +43,7 @@ public class propuestasPersistencia {
     
     
 
-    public dtFecha construirFecha(String fecha) {
-        String[] splited = fecha.split("/");
-        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
-        return fec;
-    }
+  
 
     public void cargarPropuestas(ArrayList<dtPropuestasBD> propuestas) {
         try {
@@ -58,8 +53,8 @@ public class propuestasPersistencia {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 String imagen = rs.getString(3);
-                dtFecha dtf = construirFecha(rs.getString(5));
-                dtFecha dtfp = construirFecha(rs.getString(8));
+                dtFecha dtf = (dtFecha)util.construirFecha(rs.getString(5));
+                dtFecha dtfp = (dtFecha)util.construirFecha(rs.getString(8));
                 int precio=0; int monto=0;
                 precio=Integer.parseInt(rs.getString(6));
                 monto=Integer.parseInt(rs.getString(7));

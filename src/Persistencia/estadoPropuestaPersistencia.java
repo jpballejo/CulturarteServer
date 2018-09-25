@@ -5,8 +5,8 @@
  */
 package Persistencia;
 
-import Logica.dtEstadosPropuestas;
 import Logica.dtPropuestaEstado;
+import Logica.utilidades;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,15 +21,21 @@ import java.util.List;
 public class estadoPropuestaPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
+    utilidades util = new utilidades();
 
-    public boolean agregarPropEstado(String titulo, String estado, String fecha, String hora) {
+    public boolean agregarPropEstado(String titulo, String estado, String fecha, String hora, String fechaFin) {
         try {
             String sql = null;
-            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "')";
+            if (fechaFin != null) {
+                sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fechaInicial`, `hora`, `fechaFinal`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "','" + fechaFin + "')";
+            }
+            if (fechaFin == null) {
+                sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fechaInicial`, `hora`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "')";
+            }
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-       //     conexion.cerrar(conn);
+            //     conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             return false;
@@ -43,7 +49,7 @@ public class estadoPropuestaPersistencia {
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-       //     conexion.cerrar(conn);
+            //     conexion.cerrar(conn);
             return true;
         } catch (SQLException ex) {
             return false;
@@ -56,13 +62,18 @@ public class estadoPropuestaPersistencia {
             String sql = "SELECT * FROM estadoPropuesta";
             List<dtPropuestaEstado> lista = new ArrayList<>();
             Connection conn = conexion.getConexion();
-            Statement st= conn.createStatement();
+            Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                dtPropuestaEstado e = new dtPropuestaEstado(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                String fechaFin = null;
+                if (rs.getString(5) != null) {
+                    fechaFin = rs.getString(5);
+                }
+
+                dtPropuestaEstado e = new dtPropuestaEstado(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), fechaFin);
                 lista.add(e);
             }
-       //     conexion.cerrar(conn);
+            //     conexion.cerrar(conn);
             return lista;
         } catch (SQLException ex) {
             return null;
@@ -70,7 +81,7 @@ public class estadoPropuestaPersistencia {
     }
     /**
      *
-     * Actualiza en la bd los estados 
+     * Actualiza en la bd los estados
      */
-    
+
 }
