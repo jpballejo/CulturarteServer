@@ -37,16 +37,31 @@ public class ContUsuario implements iConUsuario {
     colaboracionesPersistencia colabPer = new colaboracionesPersistencia();
     estadoPropuestaPersistencia estadopropper = new estadoPropuestaPersistencia();
     propuestasPersistencia propPersis = new propuestasPersistencia();
-    utilidades util = new utilidades();
+    utilidades util = utilidades.getInstance();
     ArrayList<dtFavoritos> favo = new ArrayList<>();
-    ContPropuesta contProp = ContPropuesta.getInstance();
+    
     
     public boolean existeUsuario(String nickName) {
+        
         if (usuarios.containsKey(nickName) == true) {
             return true;
         }
+      
         return false;
         
+    }
+    public boolean existeMail(String mail){
+        try {
+            Iterator it = usuarios.keySet().iterator();
+            while (it.hasNext()) {
+               String key= (String) it.next();
+               usuario u=null;
+               u= usuarios.get(key);
+               if(u.getEmail().equals(mail)){return true;}
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
     private ContCargaBD contCarga = ContCargaBD.getInstance();
     private static ContUsuario instance;
@@ -154,7 +169,7 @@ public class ContUsuario implements iConUsuario {
                 
             }
         } catch (Exception ex) {
-            Logger.getLogger(ContUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
     
@@ -166,6 +181,7 @@ public class ContUsuario implements iConUsuario {
             usaseg = (usuario) usuarios.get(dtseg.getNickaseguir());
             ussig.seguir(usaseg);
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         
     }
@@ -1165,10 +1181,12 @@ public class ContUsuario implements iConUsuario {
         int monto = 0;
         
         try {
-            Iterator it = usuarios.keySet().iterator();
-            while (it.hasNext()) {
-                if ((usuario) usuarios.get(it.next()) instanceof colaborador) {
-                    colaborador cola = (colaborador) usuarios.get(it.next());
+           for (String key : this.usuarios.keySet()) {
+             System.out.println(key);
+               usuario usu=    (usuario) usuarios.get(key);
+              
+                if ( usu instanceof colaborador) {
+                    colaborador cola = (colaborador) usu;
                     if (cola.colaborasconpropuesta(idProp)) {
                         monto += cola.getmontocolaboracion(idProp);
                     }
@@ -1176,9 +1194,25 @@ public class ContUsuario implements iConUsuario {
             }
             
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         
         return monto;
     }
     
+public void getPropuestas(ArrayList<propuesta>prop){
+    try {
+        Iterator it = usuarios.keySet().iterator();
+        while(it.hasNext()){
+        usuario usu=usuarios.get((String)it.next());
+        if(usu instanceof proponente){
+        proponente p=(proponente)usu;
+       prop.addAll((ArrayList<propuesta>)p.getPropuestasObj());
+        }
+        }
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+    }
 }
+}
+

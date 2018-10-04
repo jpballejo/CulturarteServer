@@ -16,7 +16,7 @@ public class propEstado {
     private dtFecha fechaIni, fechaFin;
     private dtHora hora;
     private estado estado;
-    utilidades util = new utilidades();
+    utilidades util = utilidades.getInstance();
 //METODOS//
 
     /**
@@ -39,7 +39,7 @@ public class propEstado {
 
         dtFecha dtf = null;
         try {
-            Date f = (Date) util.fechaDate(ini.getFecha(), null);
+            Date f = (Date) utilidades.fechaDate(ini.getFecha(), null);
             Date ffin = (Date) utilidades.sumaRestaDias(f, 30);
             dtf = (dtFecha) util.construirFecha((String) util.fechaString(ffin, 0));
         } catch (Exception e) {

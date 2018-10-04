@@ -20,10 +20,7 @@ public class ContCargaBD implements iContCargaBD {
 
     private static ContCargaBD instance;
     private BDCulturarte bdCul = new BDCulturarte();
-    private usuariosPersistencia usuPersistencia = new usuariosPersistencia();
-    private propuestasPersistencia propPersistencia = new propuestasPersistencia();
-    private estadoPersistencia estadoPersistencia = new estadoPersistencia();
-    private utilidades util = new utilidades();
+    private utilidades util = utilidades.getInstance();
 //arreglos dt para carga -- filtrados!
     private ArrayList<dtUsuario> usuariosPer = new ArrayList<>();
     private ArrayList<dtCategoria> categoriasPer = new ArrayList<>();
@@ -192,14 +189,20 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private boolean compruebaSeguidores(dtSeguidores ori, dtSeguidores comparar) {
-        String nickusuarioORI = ori.getNickusuario(), nickaseguirORI = ori.getNickaseguir();
-        String nickusuarioCOMP = comparar.getNickusuario(), nickaseguirCOMP = comparar.getNickaseguir();
-        if (nickusuarioORI.equals(nickusuarioCOMP)) {
-            if (nickaseguirORI.equals(nickaseguirCOMP)) {
-                return true;
+
+        try {
+            String nickusuarioORI = ori.getNickusuario(), nickaseguirORI = ori.getNickaseguir();
+            String nickusuarioCOMP = comparar.getNickusuario(), nickaseguirCOMP = comparar.getNickaseguir();
+            if (nickusuarioORI.equals(nickusuarioCOMP)) {
+                if (nickaseguirORI.equals(nickaseguirCOMP)) {
+                    return true;
+                }
             }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         return false;
+
     }
 
     public void seteardtSeguidores(dtSeguidores dtseg) {

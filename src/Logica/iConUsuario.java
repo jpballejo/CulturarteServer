@@ -61,5 +61,9 @@ public interface iConUsuario {
     public dtUsuario usuarioLogin(String usu);
 
     public abstract int getMontoColaborado(String idProp);
+    
+    public abstract void getPropuestas(ArrayList<propuesta> prop);
+    
+    public abstract boolean existeMail(String mail);
 
 }

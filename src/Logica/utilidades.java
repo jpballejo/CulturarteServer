@@ -5,7 +5,6 @@
  */
 package Logica;
 
-import static com.sun.javafx.fxml.expression.Expression.and;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,12 +16,11 @@ import java.text.DateFormat;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import static javafx.beans.binding.Bindings.and;
-import static javax.management.Query.and;
 
 /**
  *
@@ -30,7 +28,33 @@ import static javax.management.Query.and;
  */
 public class utilidades {
 
+    private static utilidades instance;
     private Map<String, Integer> idEstado = new HashMap<String, Integer>();
+
+    public static utilidades getInstance() {
+        if (instance == null) {
+            instance = new utilidades();
+        }
+        return instance;
+    }
+
+    public void setearidEstado(ArrayList<dtEstado> nomEstados) {
+        try {
+            for (int i = 0; i < nomEstados.size(); i++) {
+                dtEstado est = (dtEstado) nomEstados.get(i);
+                idEstado.put(est.getNombre(), est.getNumero());
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public int getIdEstado(String estadoNom) {
+        int id = 0;
+        id = idEstado.get(estadoNom);
+        return id;
+
+    }
 
     /**
      *
@@ -83,10 +107,6 @@ public class utilidades {
          */
     }
 
-    public void setearidEstado(Map<String, Integer> id) {
-        idEstado = (Map<String, Integer>) id;
-    }
-
     /**
      * Funcion que retorna un dtFecha con la fecha actual
      *
@@ -132,6 +152,10 @@ public class utilidades {
      *
      * Funcion que recibe un objeto date "fecha" y la contidad de dias a
      * incrementar (dias>0) o restar (dias<0)
+     *
+     * @param fecha
+     * @param dias
+     * @return
      */
     public static Date sumaRestaDias(Date fecha, int dias) {
         if (dias == 0) {//si viene 0 se retorna la fecha sin cambios
@@ -175,13 +199,6 @@ public class utilidades {
 
     }
 
-    public int getIdEstado(String estadoNom) {
-        int id = 0;
-        id = idEstado.get(estadoNom);
-        return id;
-
-    }
-
     /**
      * funcion para retornar una fecha incrementada by jp
      */
@@ -193,35 +210,38 @@ public class utilidades {
     }
 
     /**
-     * Funcion que retorna un objeto date (dd/MM/yyyy HH:mm) y recibe como parametros dos String
-     *      
-     * 
-     * f String - si es null se setea solo la hora date (HH:mm)
-     * h String - si es null se setea solo la fecha date (dd/MM/yyyy)
+     * Funcion que retorna un objeto date (dd/MM/yyyy HH:mm) y recibe como
+     * parametros dos String
+     *
+     *
+     * f String - si es null se setea solo la hora date (HH:mm) h String - si es
+     * null se setea solo la fecha date (dd/MM/yyyy)
+     *
      * @return:
      * @null si f == null y h == null
-     * 
+     *
      */
-    public Date fechaDate(String f, String h) {
+    public static Date fechaDate(String f, String h) {
 
         Date fecha = null;
         try {
-     
+
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             SimpleDateFormat formato3 = new SimpleDateFormat("HH:mm");
-           if(f!=null){
-            if (h != null) {
-                fecha = formato2.parse(f + " " + h);
+            if (f != null) {
+                if (h != null) {
+                    fecha = formato2.parse(f + " " + h);
 
+                }
+                if (h == null) {
+                    fecha = formato.parse(f);
+
+                }
             }
-            if (h == null) {
-                fecha = formato.parse(f);
-
-            }}
-           if(f==null){
-           fecha = formato3.parse(h);
-           }
+            if (f == null) {
+                fecha = formato3.parse(h);
+            }
 
         } catch (ParseException ex) {
             System.err.println(ex.getMessage());

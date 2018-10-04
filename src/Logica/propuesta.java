@@ -19,7 +19,7 @@ import java.util.TreeMap;
  */
 public class propuesta {
 
-    utilidades util = new utilidades();
+    utilidades util = utilidades.getInstance();
     private String titulo, descripcion, imagen, lugar, retorno;
     private dtFecha fecharealizacion;
     private TreeMap<Integer, propEstado> estados;
@@ -106,10 +106,10 @@ public class propuesta {
         return est;
 
     }
-/**
- *retorna la fecha de finalizacion del estado actual
- * by jp
- */
+
+    /**
+     * retorna la fecha de finalizacion del estado actual by jp
+     */
     public String getFechaFinEstadoActual() {
         String fecha = null;
         String estAct = getEstadoActual();
@@ -117,6 +117,15 @@ public class propuesta {
         propEstado pe = (propEstado) estados.get(posicion);
         fecha = (String) pe.getFechaFin().getFecha();
         return fecha;
+    }
+
+    public String getHoraFinEstadoActual() {
+        String hora = null;
+        String estAct = getEstadoActual();
+        int posicion = util.getIdEstado(estAct);
+        propEstado pe = (propEstado) estados.get(posicion);
+        hora = (String) pe.getHora().getHora();
+        return hora;
     }
 
     public TreeMap<Integer, propEstado> getEstados() {
@@ -131,19 +140,20 @@ public class propuesta {
         this.estados.put(orden, pe);
         return this.estados.containsKey(orden);
     }
-public propEstado getPropEstadoActual(){
-propEstado pE=null;
-    try {
-        String estado = getEstadoActual();
-        int codigo = util.getIdEstado(estado);
-        pE = (propEstado)estados.get(codigo);
-    } catch (Exception e) {
-        System.err.println(e.getMessage());
+
+    public propEstado getPropEstadoActual() {
+        propEstado pE = null;
+        try {
+            String estado = getEstadoActual();
+            int codigo = util.getIdEstado(estado);
+            pE = (propEstado) estados.get(codigo);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return pE;
     }
 
-
-return pE;
-}
     /**
      * @param titulo the titulo to set
      */

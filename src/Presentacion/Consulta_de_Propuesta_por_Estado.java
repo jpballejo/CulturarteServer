@@ -26,7 +26,7 @@ public class Consulta_de_Propuesta_por_Estado extends javax.swing.JInternalFrame
      */
     public Consulta_de_Propuesta_por_Estado() {
         initComponents();
-        contProp.verificarPropHora();
+        contProp.propAutomaticas();
         this.setSize(844, 580);
         
         jLabel1.setText("Estados");

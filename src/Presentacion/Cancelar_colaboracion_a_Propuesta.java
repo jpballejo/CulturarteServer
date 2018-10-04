@@ -6,7 +6,9 @@
 package Presentacion;
 
 import Logica.ContColaboracion;
+import Logica.ContPropuesta;
 import Logica.ContUsuario;
+import Logica.culturarteFabrica;
 import Logica.dtColProp;
 import Logica.dtCola;
 import java.util.Iterator;
@@ -21,16 +23,16 @@ import javax.swing.table.DefaultTableModel;
  * @author nicolasgutierrez
  */
 public class Cancelar_colaboracion_a_Propuesta extends javax.swing.JInternalFrame {
-
+private culturarteFabrica CF = culturarteFabrica.getInstance();
     private ContUsuario ICU = ContUsuario.getInstance();
     private ContColaboracion ICC= ContColaboracion.getInstance();    
-
+private ContPropuesta contP=ContPropuesta.getInstance();
     /**
      * Creates new form Cancelar_colaboracion_a_Propuesta
      */
     public Cancelar_colaboracion_a_Propuesta() {
         initComponents();
-        
+        contP.propAutomaticas();
         this.setSize(775, 567);
         
         jLabel1.setText("Colaboradores");

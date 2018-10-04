@@ -43,7 +43,7 @@ public class Modificar_datos_de_Propuesta extends javax.swing.JInternalFrame {
         
         
         initComponents();
-        contProp.verificarPropHora();
+        contProp.propAutomaticas();
         this.setSize(801, 620);
         
         

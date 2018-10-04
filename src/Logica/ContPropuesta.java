@@ -40,7 +40,7 @@ public class ContPropuesta implements iConPropuesta {
     ArrayList<propuesta> propCambioEstadoAuto = new ArrayList<>();
 
     ArrayList<dtEstadosPropuestas> arregloDtEstProp = new ArrayList<>();
-    utilidades util = new utilidades();
+    utilidades util = utilidades.getInstance();
 
     private void cargaridEstado(ArrayList<dtEstado> nomEstados) {
         try {
@@ -49,7 +49,7 @@ public class ContPropuesta implements iConPropuesta {
                 idEstado.put(est.getNombre(), est.getNumero());
             }
             contCarga.setearEstado(nomEstados);
-            util.setearidEstado(idEstado);
+            util.setearidEstado(nomEstados);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -257,8 +257,8 @@ public class ContPropuesta implements iConPropuesta {
             sacarRutaImagen(dtProp);
 
             propuesta prop = armarPropuesta(dtProp);
-            filtraPropuestas(prop);
             cargarEstadosProp(prop, estProp);//revisar if ==true
+            //filtraPropuestas(prop);
             String nick = dtProp.getNickproponente();
             cUsuario.esteUsuariopropusoestaProp(nick, prop);
 
@@ -311,7 +311,7 @@ public class ContPropuesta implements iConPropuesta {
         propEstado estaprop = null;
         try {
             estado est = getEstado(dtestProp.getEstado());
-            estaprop = new propEstado(dtestProp.getFecha(), dtestProp.getHora(), est, null);
+            estaprop = new propEstado(dtestProp.getFecha(), dtestProp.getHora(), est, dtestProp.getFechaFin());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -558,20 +558,42 @@ public class ContPropuesta implements iConPropuesta {
 
         agregarEstadoAPropuesta(estado, titulo, dtf, dth); //estado titulo fecha hora
     }
+    
+    
 ////////////////////PROCEDIMIENTO estado Automatico-----------------
-/**
- *
- * Funcion que recibe una propuesta y verifica el estado, la fecha y la hora
- * Si la fecha es anterior a la actual actualiza de inmediato el estado al que le sigue
- * Si la fecha es igual a la actual verifica la hora, si la hora es inferior o igual a la actual cambia el estado al que le sigue
- * Si la hora es superior a la actual almacena la propuesta en una coleccion que se verifica durante el uso del programa y se encarga comprobar 
- * la hora hasta que coincida y cambia el estado 
- */
+public void propAutomaticas(){
+    try {
+    cUsuario.getPropuestas(propCambioEstadoAuto);
+        for(int i =0;i<propCambioEstadoAuto.size();i++){
+            propuesta p = (propuesta)propCambioEstadoAuto.get(i);
+            filtraPropuestas(p);
+        }
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+    }
+
+}
+    
+    /**
+     *
+     * Funcion que recibe una propuesta y verifica el estado, la fecha y la hora
+     * Si la fecha es anterior a la actual actualiza de inmediato el estado al
+     * que le sigue Si la fecha es igual a la actual verifica la hora, si la
+     * hora es inferior o igual a la actual cambia el estado al que le sigue Si
+     * la hora es superior a la actual almacena la propuesta en una coleccion
+     * que se verifica durante el uso del programa y se encarga comprobar la
+     * hora hasta que coincida y cambia el estado
+     */
     public void filtraPropuestas(propuesta p) {
 
         if (comparaEstado(p.getEstadoActual())) {
             if (verificaFecha(p) == 0) {
-                propCambioEstadoAuto.add(p);
+               if (verificaHora(p) == -1) {
+                cambiaPropEstadoAuto(p);
+            }
+            if (verificaHora(p) == 0) {
+                cambiaPropEstadoAuto(p);
+            }
             }
             if (verificaFecha(p) == -1) {
                 cambiaPropEstadoAuto(p);
@@ -583,12 +605,7 @@ public class ContPropuesta implements iConPropuesta {
 
         for (int i = 0; i < propCambioEstadoAuto.size(); i++) {
             propuesta p = propCambioEstadoAuto.get(i);
-            if (verificaHora(p) == -1) {
-                cambiaPropEstadoAuto(p);
-            }
-            if (verificaHora(p) == 0) {
-                cambiaPropEstadoAuto(p);
-            }
+           
         }
     }
 
@@ -602,16 +619,16 @@ public class ContPropuesta implements iConPropuesta {
         int m;
         String estado = p.getEstadoActual();
         if (estado.equals("Publicada")) {
-            nuevoEstPropAUTO(p, "En Financiacion");
+            nuevoEstPropAUTO(p, "En financiacion");
         }
-        if (estado.equals("En Financiacion")) {
+        if (estado.equals("En financiacion")) {
             int montoReq = p.getMontoRequerido();
             m = cUsuario.getMontoColaborado(p.getTitulo());
             if (m >= montoReq) {
                 nuevoEstPropAUTO(p, "Financiada");
             }
             if (m < montoReq) {
-                nuevoEstPropAUTO(p, "No Financiada");
+                nuevoEstPropAUTO(p, "No financiada");
             }
         }
     }
@@ -639,26 +656,27 @@ public class ContPropuesta implements iConPropuesta {
      *
      * verificarFecha: funcion que retorna un int (-1, 0, 1)
      *
-     * (-1) si la fecha es anterior a la del sistema (0) si la fecha es igual a
-     * la del sistema (1) si es posterior a la del sistema
+     * (1) si la fecha es anterior a la del sistema (0) si la fecha es igual a
+     * la del sistema (-1) si es posterior a la del sistema
      */
     private int verificaFecha(propuesta p) {
 
         try {
-            Date fechaFin = (Date) util.fechaDate(p.getFechaFinEstadoActual(), null);
+            Date fechaFin = (Date) util.fechaDate(p.getFechaFinEstadoActual(), p.getHoraFinEstadoActual());
             dtFecha dtf = util.getFecha();
-            Date fechaAc = util.fechaDate((String) dtf.getFecha(), null);
-            if (fechaFin.equals(fechaAc)) {
-                return 0;
+            dtHora dtH = util.getHora();
+            Date fechaAc = util.fechaDate((String) dtf.getFecha(), dtH.getHora());
+            if (fechaFin.before(fechaAc)) {
+                return -1;
             }
             if (fechaAc.before(fechaFin)) {
-                return -1;
+                return 1;
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
-        return 1;
+        return 0;
     }
 
     /**
@@ -674,17 +692,17 @@ public class ContPropuesta implements iConPropuesta {
             Date hora = (Date) util.fechaDate(null, (String) p.getPropEstadoActual().getHora().getHora());
             dtHora dth = (dtHora) util.getHora();
             Date horaSis = (Date) util.fechaDate(null, (String) dth.getHora());
-            if (horaSis.equals(hora)) {
-                return 0;
-            }
             if (horaSis.before(hora)) {
+                return 1;
+            }
+            if (hora.before(horaSis)) {
                 return -1;
             }
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        return 1;
+        return 0;
     }
 
     /**

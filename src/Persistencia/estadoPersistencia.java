@@ -99,7 +99,6 @@ public class estadoPersistencia {
 
     public void CargarEstadosPropuestas(ArrayList<dtEstadosPropuestas> estados) {
         try {
-            List<dtEstadosPropuestas> list = new ArrayList<>();
             String sql = null;
             sql = "SELECT * FROM cultuRarte.estadoPropuesta";
             Connection conn = conexion.getConexion();
@@ -109,7 +108,9 @@ public class estadoPersistencia {
                 dtFecha dtf = (dtFecha)util.construirFecha(rs.getString(3));
                 System.out.println(rs.getString(1) + " " + rs.getString(4));
                 dtHora dth = (dtHora)util.construirHora(rs.getString(4));
-                dtFecha dtff = (dtFecha)util.construirFecha(rs.getString(5));
+                dtFecha dtff =null;
+                if(rs.getString(5)!=null){
+                dtff= (dtFecha)util.construirFecha(rs.getString(5));}
                 dtEstadosPropuestas dt = new dtEstadosPropuestas(rs.getString(1), rs.getString(2), dtf, dth,dtff);
                 setearEstadoPropuesta(dt);
                 estados.add(dt);

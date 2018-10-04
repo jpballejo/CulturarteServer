@@ -26,7 +26,9 @@ public class Evaluar_Prop extends javax.swing.JFrame {
      * Creates new form Evaluar_Prop
      */
     public Evaluar_Prop() {
+        
         initComponents();
+        contP.propAutomaticas();
         btn_aceptar.setEnabled(false);
         jT_propuesta.setEditable(false);
         propuestas = (ArrayList<dtPropuestasBD>) contP.getdtPropIngr();
@@ -163,6 +165,7 @@ public class Evaluar_Prop extends javax.swing.JFrame {
         if (res == 0) {
             if (altaEstado()) {
                 JOptionPane.showMessageDialog(null, "El nuevo estado " + cancel_publicada + " se a agregado con exito!");
+                 limpiar();
             }
         }
 
@@ -174,7 +177,7 @@ public class Evaluar_Prop extends javax.swing.JFrame {
      */
     private boolean altaEstado() {
         if (jT_propuesta.getText() != null) {
-            limpiar();
+           
 
             return contP.nuevoEstadoProp(jT_propuesta.getText(), cancel_publicada);
 

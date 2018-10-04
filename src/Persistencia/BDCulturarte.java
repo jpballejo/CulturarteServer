@@ -155,7 +155,7 @@ public class BDCulturarte {
     public void levantarFavoritosOrigin(ArrayList<dtFavoritos> fav) {
         
         try {
-        String sql="SELECT * FROM `propEstPer` ";
+        String sql="SELECT * FROM `favoritosPer`";
         Connection con = conexion.getConexion();
         Statement st = con.createStatement();
         ResultSet rs=st.executeQuery(sql);

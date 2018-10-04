@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Logica.ContColaboracion;
+import Logica.ContPropuesta;
 import Logica.ContUsuario;
 import Logica.dtColProp;
 import Logica.dtCola;
@@ -21,13 +22,14 @@ public class Consulta_de_Colaboracion_a_Propuesta extends javax.swing.JInternalF
 
     private ContUsuario ICU = ContUsuario.getInstance();
     private ContColaboracion ICC= ContColaboracion.getInstance();
+    private ContPropuesta contP = ContPropuesta.getInstance();
     /**
      * Creates new form Consulta_de_Colaboracion_a_Propuesta
      * 
      */
     public Consulta_de_Colaboracion_a_Propuesta() {
         initComponents();
-        
+        contP.propAutomaticas();
         this.setSize(626, 582);
         
         jLabel1.setText("Colaboradores");
