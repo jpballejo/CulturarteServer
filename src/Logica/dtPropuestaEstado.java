@@ -10,16 +10,26 @@ package Logica;
  * @author nicolasgutierrez
  */
 public class dtPropuestaEstado {
-    String titulo, estado;
-    String fecha, hora;
+   private String titulo, estado;
+   private String fecha, hora;
+
+    public dtPropuestaEstado(String titulo, String estado, String fecha, String hora, String fechaFin) {
+        this.titulo = titulo;
+        this.estado = estado;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.fechaFin = fechaFin;
+    }
+    private String fechaFin;
     
+   /* 
     public dtPropuestaEstado(String titulo, String estado, String fecha, String hora){
         this.estado=estado;
         this.titulo=titulo;
         this.fecha=fecha;
         this.hora=hora;
     }
-    
+    */
     public String getEstado(){
         return this.estado;
     }
@@ -34,5 +44,12 @@ public class dtPropuestaEstado {
     
     public String getHora(){
         return this.hora;
+    }
+
+    /**
+     * @return the fechaFin
+     */
+    public String getFechaFin() {
+        return fechaFin;
     }
 }

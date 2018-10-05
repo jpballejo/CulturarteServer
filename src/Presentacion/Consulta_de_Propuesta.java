@@ -24,7 +24,7 @@ public class Consulta_de_Propuesta extends javax.swing.JInternalFrame {
     
     public Consulta_de_Propuesta() {
         initComponents();
-        
+        ICP.propAutomaticas();
         this.setSize(774, 579);
         
         jLabel1.setText("Propuestas");

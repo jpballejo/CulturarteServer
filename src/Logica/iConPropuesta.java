@@ -45,6 +45,7 @@ public interface iConPropuesta {
     public abstract void altaCategoria(dtCategoria cate);
     public abstract ArrayList<dtPropuestasBD> getdtPropIngr();
     public abstract boolean nuevoEstadoProp(String idProp, String estado);
+    public abstract void propAutomaticas();
 
 }
     

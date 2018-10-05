@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.Date;
+
 /**
  *
  * @author Esteban Menendez
@@ -12,13 +14,25 @@ package Logica;
 public class dtFecha {
 
     private String dia, mes, anio;
+   
 
 //CONSTRUCTOR//
+    /**
+     *
+     * Constructor de 3 parametros String dia/mes/año
+     */
     public dtFecha(String dia, String mes, String anio) {
         this.dia = dia;
         this.mes = mes;
         this.anio = anio;
     }
+
+    /**
+     *
+     * Constructor de 4 parametros String dia/mes/año Date fecha - recibe un
+     * objeto date
+     */
+   
 
 //GETTERS//
     public String getDia() {
@@ -32,14 +46,16 @@ public class dtFecha {
     public String getAnio() {
         return anio;
     }
-    
-    public String getFecha(){
-    String fecha=null;
-    fecha = this.dia+"/"+this.mes+"/"+this.anio;
-    
-    
-    
-    return fecha;
+
+    public String getFecha() {
+        String fecha = null;
+        fecha = this.dia + "/" + this.mes + "/" + this.anio;
+
+        return fecha;
     }
 
+    /**
+     * retorna un objeto date
+     */
+    
 }

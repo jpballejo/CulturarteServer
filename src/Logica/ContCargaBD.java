@@ -20,10 +20,7 @@ public class ContCargaBD implements iContCargaBD {
 
     private static ContCargaBD instance;
     private BDCulturarte bdCul = new BDCulturarte();
-    private usuariosPersistencia usuPersistencia = new usuariosPersistencia();
-    private propuestasPersistencia propPersistencia = new propuestasPersistencia();
-    private estadoPersistencia estadoPersistencia = new estadoPersistencia();
-
+    private utilidades util = utilidades.getInstance();
 //arreglos dt para carga -- filtrados!
     private ArrayList<dtUsuario> usuariosPer = new ArrayList<>();
     private ArrayList<dtCategoria> categoriasPer = new ArrayList<>();
@@ -32,7 +29,7 @@ public class ContCargaBD implements iContCargaBD {
     private ArrayList<dtColaboracionCompleto> colaboracionesPer = new ArrayList<>();
     private ArrayList<dtEstadosPropuestas> estadosPropuestaPer = new ArrayList<>();
     private ArrayList<dtSeguidores> seguidoresUPer = new ArrayList<>();
-
+    private ArrayList<dtFavoritos> favoritosPer = new ArrayList<>();
 //arreglos primitivos para carga -- bruto
     private ArrayList<String> usuPer = new ArrayList<>();
     private ArrayList<String> propPer = new ArrayList<>();
@@ -40,11 +37,11 @@ public class ContCargaBD implements iContCargaBD {
     private ArrayList<dtEstadosPropuestas> estaPropPer = new ArrayList<>();
     private ArrayList<dtSeguidores> seguidoresPer = new ArrayList<>();
     private ArrayList<dtCategoria> catPer = new ArrayList<>();
-
+    private ArrayList<dtFavoritos> favPer = new ArrayList<>();
 //Variables movimiento de imagenes --
-    
-    private String imagenUSU=null, imagenPropuesta=null, imagenLevantar=null;
-    
+
+    private String imagenUSU = null, imagenPropuesta = null, imagenLevantar = null;
+
     public static ContCargaBD getInstance() {
         if (instance == null) {
             instance = new ContCargaBD();
@@ -79,6 +76,10 @@ public class ContCargaBD implements iContCargaBD {
 
     public void levantarBDCategoriasPer() {
         bdCul.levantarCategoriasOrigin(catPer);
+    }
+
+    public void levantarBDfavoritosPer() {
+        bdCul.levantarFavoritosOrigin(favPer);
     }
 
     public boolean limpiarCargar() {
@@ -120,30 +121,29 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     public boolean comparaCadenas(String cad1, String cad2) {
-        
+
         return cad1.equals(cad2);
 
     }
 
     public void setearCategoria(ArrayList<dtCategoria> dtcate) {
         try {
-        for (int i = 0; i < dtcate.size(); i++) {
-            dtCategoria dtcat = dtcate.get(i);
-          for (int p = 0; p < catPer.size(); p++) {
-                dtCategoria control = catPer.get(p);
-                System.err.println(dtcat.getNombre() + "  "+control.getNombre());
-               if (comparaCadenas(dtcat.getNombre(), control.getNombre())) {
-                    categoriasPer.add(dtcat);
+            for (int i = 0; i < dtcate.size(); i++) {
+                dtCategoria dtcat = dtcate.get(i);
+                for (int p = 0; p < catPer.size(); p++) {
+                    dtCategoria control = catPer.get(p);
+                    System.err.println(dtcat.getNombre() + "  " + control.getNombre());
+                    if (comparaCadenas(dtcat.getNombre(), control.getNombre())) {
+                        categoriasPer.add(dtcat);
+
+                    }
 
                 }
 
             }
-
-        }    
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
 
     }
 
@@ -189,14 +189,20 @@ public class ContCargaBD implements iContCargaBD {
     }
 
     private boolean compruebaSeguidores(dtSeguidores ori, dtSeguidores comparar) {
-        String nickusuarioORI = ori.getNickusuario(), nickaseguirORI = ori.getNickaseguir();
-        String nickusuarioCOMP = comparar.getNickusuario(), nickaseguirCOMP = comparar.getNickaseguir();
-        if (nickusuarioORI.equals(nickusuarioCOMP)) {
-            if (nickaseguirORI.equals(nickaseguirCOMP)) {
-                return true;
+
+        try {
+            String nickusuarioORI = ori.getNickusuario(), nickaseguirORI = ori.getNickaseguir();
+            String nickusuarioCOMP = comparar.getNickusuario(), nickaseguirCOMP = comparar.getNickaseguir();
+            if (nickusuarioORI.equals(nickusuarioCOMP)) {
+                if (nickaseguirORI.equals(nickaseguirCOMP)) {
+                    return true;
+                }
             }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         return false;
+
     }
 
     public void seteardtSeguidores(dtSeguidores dtseg) {
@@ -264,17 +270,47 @@ public class ContCargaBD implements iContCargaBD {
         }
     }
 
+    public void setearFavoritos(dtFavoritos fav) {
+        try {
+            for (int i = 0; i < favPer.size(); i++) {
+                dtFavoritos f = favPer.get(i);
+                if (f.getUsuario().equals(fav.getUsuario())) {
+                    if (f.getPropuestaTitulo().equals(fav.getPropuestaTitulo())) {
+                        favoritosPer.add(fav);
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
     /**
      *
      */
     private void cargarUsuarios() {
-        for (int i = 0; i < usuariosPer.size(); i++) {
-            try {
+
+        try {
+            for (int i = 0; i < usuariosPer.size(); i++) {
                 dtUsuario usuAlta = (dtUsuario) usuariosPer.get(i);
                 bdCul.altaUsuario(usuAlta);
-            } catch (Exception ex) {
-                System.err.println(ex.getMessage());
             }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    private void cargarFavoritos() {
+        try {
+            for (int i = 0; i < favoritosPer.size(); i++) {
+                dtFavoritos f = favoritosPer.get(i);
+                bdCul.agregarFavoritosCD(f.getUsuario(), f.getPropuestaTitulo());
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -477,6 +513,11 @@ public class ContCargaBD implements iContCargaBD {
         System.out.println("vacio usuPer");
         this.usuariosPer.clear();
         System.out.println("vacio usuariosPer");
+        this.favPer.clear();
+        System.out.println("vacio favPer");
+        this.favoritosPer.clear();
+        System.out.println("vacion favoritosPer");
+
         System.out.println("vacio TODO");
 
     }

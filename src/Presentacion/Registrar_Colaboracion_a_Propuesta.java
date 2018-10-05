@@ -37,6 +37,7 @@ public class Registrar_Colaboracion_a_Propuesta extends javax.swing.JInternalFra
      */
     public Registrar_Colaboracion_a_Propuesta() {
         initComponents();
+        contProp.propAutomaticas();
         this.setSize(666, 553);
         //String titulo[]={"nickName"};
         // llenarGrilla(jTable_proponente, titulo, proponentes);

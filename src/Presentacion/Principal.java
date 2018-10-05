@@ -41,8 +41,12 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setVisible(true);
         contUsuario.cargarUsuarios();
+       
         contPropuesta.cargarPropuestas();
-        contColaboracion.cargarColaboracion();
+       contColaboracion.cargarColaboracion();
+       
+        contUsuario.cargarFavoritos();
+        contPropuesta.propAutomaticas();
         //fabrica.cargarDesdeBD();
         
         //Mandando fruta

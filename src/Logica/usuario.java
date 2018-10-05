@@ -15,28 +15,26 @@ import java.util.Map;
  */
 public class usuario {
 
-
-    protected 
-            String nickname
-            ,nombre, 
-            apellido, 
-            email, 
+    protected String nickname, nombre,
+            apellido,
+            email,
             imagen;
     protected String password;
-    
-   protected dtFecha nacimiento;
+
+    protected dtFecha nacimiento;
 
     protected Map<String, usuario> seguidos;
     protected Map<String, propuesta> favoritas;
-    
+
     //METODOS
     public List<dtPropuestasProponente> getPropuestas() {
         return null;
-       
+
     }
 
     //CONSTRUCTORES//
-    public usuario() {}
+    public usuario() {
+    }
 
     public usuario(String nickname, String nombre, String apellido, String email, String imagen, dtFecha nacimiento, String password) {
         this.nickname = nickname;
@@ -45,9 +43,9 @@ public class usuario {
         this.email = email;
         this.imagen = imagen;
         this.nacimiento = nacimiento;
-        this.seguidos=new HashMap<String, usuario>();
-        this.favoritas=new HashMap<String, propuesta>();
-        this.password =password;
+        this.seguidos = new HashMap<String, usuario>();
+        this.favoritas = new HashMap<String, propuesta>();
+        this.password = password;
     }
 
     //GETTERS//
@@ -100,48 +98,47 @@ public class usuario {
         this.nacimiento = nacimiento;
     }
 
-    
     //OPERACIONES
-    
     public boolean loSigue(String nick) {
         return this.seguidos.containsKey(nick);
     }
-    
+
     public void seguir(usuario us) {
-        String usu= us.getNickname();
+        String usu = us.getNickname();
         this.seguidos.put(usu, us);
     }
 
-   
     public String getNacimientoString() {
-        String retorno= this.nacimiento.getDia()+"/"+this.nacimiento.getMes()+"/"+this.nacimiento.getAnio();
+        String retorno = this.nacimiento.getDia() + "/" + this.nacimiento.getMes() + "/" + this.nacimiento.getAnio();
         return retorno;
     }
 
-   
-    
-    public void dejardeSeguir(usuario us){
+    public void dejardeSeguir(usuario us) {
         this.seguidos.remove(us.getNickname(), us);
     }
 
+    public void eliminarColaboracion(colProp c) {
 
-    public void eliminarColaboracion(colProp c){
-        
     }
-    
-    public void eliminartodoslosseguidos(){
-       this.seguidos.clear();
-       this.nacimiento=null;
+
+    public void eliminartodoslosseguidos() {
+        this.seguidos.clear();
+        this.nacimiento = null;
     }
-    
-    public boolean seguisaalguien(){
+
+    public boolean seguisaalguien() {
         return this.seguidos.isEmpty();
     }
-    
-    public void NoSigasAlosQueNoEstenAca(Map<String, String> anoborrar){
-        for(String key: this.seguidos.keySet()){
-            if(anoborrar.containsKey(key)==false)
+
+    public void eliminarFavoritos() {
+        this.favoritas.clear();
+    }
+
+    public void NoSigasAlosQueNoEstenAca(Map<String, String> anoborrar) {
+        for (String key : this.seguidos.keySet()) {
+            if (anoborrar.containsKey(key) == false) {
                 this.seguidos.remove(key);
+            }
         }
     }
 
@@ -158,6 +155,19 @@ public class usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 
+    public void setFavorita(propuesta p) {
+        String pT = p.getTitulo();
+        favoritas.put(pT, p);
+    }
+
+    public propuesta getPropFavorita(String tituloP) {
+        propuesta p = favoritas.get(tituloP);
+        return p;
+    }
+
+    public boolean meGustaEstaPropuesta(String titutloP) {
+        return favoritas.containsKey(titutloP);
+
+    }
 }

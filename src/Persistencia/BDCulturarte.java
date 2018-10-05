@@ -11,38 +11,32 @@ import Logica.dtColaboraciones;
 import Logica.dtColaborador;
 import Logica.dtEstado;
 import Logica.dtEstadosPropuestas;
+import Logica.dtFavoritos;
 import Logica.dtFecha;
 import Logica.dtHora;
 import Logica.dtProponente;
 import Logica.dtPropuestasBD;
 import Logica.dtSeguidores;
 import Logica.dtUsuario;
+import Logica.utilidades;
+import static Persistencia.usuariosPersistencia.conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
+ * Clase del controlador de carga, se encarga de levantar datos a persistir y la
+ * carga de datos...
  *
- * @author nicolasgutierrez
+ * @author jp
  */
 public class BDCulturarte {
 
     static ConexionDB conexion = new ConexionDB();
-
-    public dtFecha construirFecha(String fecha) {
-        String[] splited = fecha.split("/");
-        dtFecha fec = new dtFecha(splited[0], splited[1], splited[2]);
-        return fec;
-    }
-
-    public dtHora construirHora(String hora) {
-
-        String[] h = hora.split(":");
-        dtHora dth = new dtHora(Integer.parseInt(h[0]), Integer.parseInt(h[1]));
-        return dth;
-    }
+    utilidades util = new utilidades();
 
     public void levantaUsusOrigin(ArrayList<String> usus) {
         String sql = null;
@@ -88,7 +82,7 @@ public class BDCulturarte {
             Statement st = conn.createStatement();
             ResultSet rsCol = st.executeQuery(sql);
             while (rsCol.next()) {
-                dtFecha fecha = construirFecha(rsCol.getString(3));
+                dtFecha fecha = (dtFecha) util.construirFecha(rsCol.getString(3));
                 dtColaboraciones dtcola = new dtColaboraciones(rsCol.getString(1), rsCol.getString(2), fecha);
                 dtcol.add(dtcola);
             }
@@ -105,9 +99,10 @@ public class BDCulturarte {
             Statement st = conn.createStatement();
             ResultSet rsEstado = st.executeQuery(sql);
             while (rsEstado.next()) {
-                dtFecha fecha = construirFecha(rsEstado.getString(3));
+                dtFecha fecha = (dtFecha) util.construirFecha(rsEstado.getString(3));
                 String propid = rsEstado.getString(1);
                 String estado = rsEstado.getString(2);
+
                 dtEstadosPropuestas nuevo = new dtEstadosPropuestas(propid, estado, fecha, null);
 
                 estadosProp.add(nuevo);
@@ -153,7 +148,26 @@ public class BDCulturarte {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            
+
+        }
+    }
+
+    public void levantarFavoritosOrigin(ArrayList<dtFavoritos> fav) {
+        
+        try {
+        String sql="SELECT * FROM `favoritosPer`";
+        Connection con = conexion.getConexion();
+        Statement st = con.createStatement();
+        ResultSet rs=st.executeQuery(sql);
+        while (rs.next()){
+        String usuario =null, propuesta = null;
+        usuario=rs.getString(1);
+        propuesta=rs.getString(2);
+        dtFavoritos dtfav= new dtFavoritos(usuario, propuesta, null, null);
+        fav.add(dtfav);
+        }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -247,7 +261,7 @@ public class BDCulturarte {
                 dtProponente dtProp = (dtProponente) dtUsu;
                 String pagWeb = dtProp.getSitioWeb();
                 String bio = dtProp.getBiografia();
-                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`,`password`)VALUES('" + dtProp.getNickname() + "','" + dtProp.getNombre() + "','" + dtProp.getApellido() + "','" + dtProp.getEmail() + "','" + dtProp.getFechaNac().getFecha() + "','" + dtProp.getImagen() + "','"+dtProp.getPass()+"')";
+                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`,`password`)VALUES('" + dtProp.getNickname() + "','" + dtProp.getNombre() + "','" + dtProp.getApellido() + "','" + dtProp.getEmail() + "','" + dtProp.getFechaNac().getFecha() + "','" + dtProp.getImagen() + "','" + dtProp.getPass() + "')";
                 sqlProp = "INSERT INTO `Proponente` (`id_usuario`,`direccion`,`pag_web`,`biografia`) VALUES ('" + dtProp.getNickname() + "','" + dtProp.getDireccion() + "','" + pagWeb + "','" + bio + "')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlProp);
@@ -258,7 +272,7 @@ public class BDCulturarte {
 //acomodar estos 
             if (dtUsu instanceof dtColaborador) {
                 dtColaborador dtCol = (dtColaborador) dtUsu;
-                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`,`password`)VALUES('" + dtCol.getNickname() + "','" + dtCol.getNombre() + "','" + dtCol.getApellido() + "','" + dtCol.getEmail() + "','" + dtCol.getFechaNac().getFecha() + "','" + dtCol.getImagen() + "','"+dtCol.getPass()+"')";
+                sqlUsu = "INSERT INTO `usuario`(`idUsuario`, `nombre`, `apellido`, `email`, `fechaNacimiento`, `imagen`,`password`)VALUES('" + dtCol.getNickname() + "','" + dtCol.getNombre() + "','" + dtCol.getApellido() + "','" + dtCol.getEmail() + "','" + dtCol.getFechaNac().getFecha() + "','" + dtCol.getImagen() + "','" + dtCol.getPass() + "')";
                 sqlCol = "INSERT INTO `colaborador` (`idUsuario`) VALUES ('" + dtCol.getNickname() + "')";
                 st.executeUpdate(sqlUsu);
                 st.executeUpdate(sqlCol);
@@ -354,12 +368,15 @@ public class BDCulturarte {
 
     public boolean agregarPropEstadoCD(dtEstadosPropuestas dtestaprop) {
         try {
-            String titulo = null, estado = null, fecha = null, hora = null, sql = null;
+            String titulo = null, estado = null, fecha = null, hora = null, fechafin = null, sql = null;
             titulo = dtestaprop.getTituloprop();
             estado = dtestaprop.getEstado();
             fecha = dtestaprop.getFecha().getFecha();
             hora = dtestaprop.getHora().getHora();
-            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fecha`, `hora`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "')";
+            //fechafin = dtestaprop.getFechaFin().getFecha();
+            fechafin = (String) util.getFechaInc(fecha, hora, 30);
+
+            sql = "INSERT INTO `cultuRarte`.`estadoPropuesta`(`propuesta`, `estado`, `fechaInicial`, `hora`, `fechaFinal`) VALUES ('" + titulo + "','" + estado + "','" + fecha + "','" + hora + "','" + fechafin + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
@@ -384,6 +401,18 @@ public class BDCulturarte {
             System.err.println(ex.getMessage());
             return false;
         }
+    }
+    
+    public void agregarFavoritosCD(String nickusuario, String titulo){
+        try{
+            String sql=null;
+            Connection con= conexion.getConexion();
+            Statement st= (Statement) con.createStatement();
+            sql="INSERT INTO `cultuRarte`.`Favoritos`(`nickusuario`,`tituloprop`) VALUES ('"+nickusuario+"','"+titulo+"')";
+            st.executeUpdate(sql);
+        }catch (Exception e) {      
+            System.err.println(e.getMessage());
+        } 
     }
 
     public boolean truncarCategoria() {
@@ -611,6 +640,7 @@ public class BDCulturarte {
             truncarSeguidores();
             truncarProponente();
             truncarColaborador();
+            truncarFavoritos();
             //previamente
             Connection conn = conexion.getConexion();
             String sql = "TRUNCATE `cultuRarte`.`usuario`";
@@ -623,55 +653,59 @@ public class BDCulturarte {
             return false;
         }
     }
-  public String levantarRutaImgUsu(){
-  String ruta=null;
-      try {
-          String sql="SELECT `tipo`, `ubicacion` FROM `ubicacionImagenes` WHERE tipo= 'USUARIO'";
-          Connection conn = conexion.getConexion();
-          Statement st = conn.createStatement();
-          ResultSet rs = st.executeQuery(sql);
-          ruta = (String) rs.getString(2);
-          
-      } catch (Exception e) {
-          System.err.println(e.getMessage());
-      }
-  
-  
-  return ruta;
-  }  
-    public void setearRutaImgUsu(String rutaNew){
-        try { 
-            String sql="";
+
+    public String levantarRutaImgUsu() {
+        String ruta = null;
+        try {
+            String sql = "SELECT `tipo`, `ubicacion` FROM `ubicacionImagenes` WHERE tipo= 'USUARIO'";
             Connection conn = conexion.getConexion();
-            Statement st= conn.createStatement();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            ruta = (String) rs.getString(2);
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return ruta;
+    }
+
+    public void setearRutaImgUsu(String rutaNew) {
+        try {
+            String sql = "";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
-    public String levantarRutaImgPropuesta(){String ruta=null;
+
+    public String levantarRutaImgPropuesta() {
+        String ruta = null;
         try {
-            String sql="SELECT `tipo`, `ubicacion` FROM `ubicacionImagenes` WHERE tipo= 'PROPUESTA'";
+            String sql = "SELECT `tipo`, `ubicacion` FROM `ubicacionImagenes` WHERE tipo= 'PROPUESTA'";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             ruta = rs.getString(2);
         } catch (Exception e) {
         }
-    
-    
-    return ruta;}
-public void setearRutaImgPropuestas(String rutaNew){
-    try {
-        String sql="";
-        Connection conn = conexion.getConexion();
-        Statement st = conn.createStatement();
-        st.executeUpdate(sql);
-    } catch (Exception e) {
-        System.err.println(e.getMessage());
+
+        return ruta;
     }
 
-}
+    public void setearRutaImgPropuestas(String rutaNew) {
+        try {
+            String sql = "";
+            Connection conn = conexion.getConexion();
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
 
 }

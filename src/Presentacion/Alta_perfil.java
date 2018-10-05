@@ -338,6 +338,12 @@ public class Alta_perfil extends javax.swing.JFrame {
             jT_nick.requestFocus();
             return false;
         }
+        if(contUsu.existeUsuario(jT_nick.getText())){
+        JOptionPane.showMessageDialog(null, "Ya existe un otro usuario con este nickname");
+            jT_nick.selectAll();
+            jT_nick.requestFocus();
+            return false;
+        }
         if (jP_contra.getText() == null) {
             JOptionPane.showMessageDialog(null, "Debe ingresar una contraseña");
             jP_contra.selectAll();
@@ -350,7 +356,10 @@ public class Alta_perfil extends javax.swing.JFrame {
             jP_contraVS.requestFocus();
             return false;
         }
-        if (jP_contra.getPassword().equals(jP_contraVS.getPassword()) != true) {
+      
+       
+        
+        if (jP_contra.getText().equals(jP_contraVS.getText()) != true) {
             JOptionPane.showMessageDialog(null, "Contraseñas diferentes!");
             jP_contra.selectAll();
             jP_contra.requestFocus();
@@ -376,6 +385,12 @@ public class Alta_perfil extends javax.swing.JFrame {
         }
         if (compruebaEmail(jT_email.getText()) != true) {
             JOptionPane.showMessageDialog(null, "Email incorrecto");
+            jT_email.selectAll();
+            jT_email.requestFocus();
+            return false;
+        }
+        if(contUsu.existeMail(jT_email.getText())){
+        JOptionPane.showMessageDialog(null, "Ya existe otro usuario registrado con este mail");
             jT_email.selectAll();
             jT_email.requestFocus();
             return false;
@@ -436,6 +451,8 @@ public class Alta_perfil extends javax.swing.JFrame {
         jtp_biografia.disable();
         jb_aceptar.disable();
         jL_imagenP.setIcon(null);
+        jP_contra.setText(" ");
+        jP_contraVS.setText(" ");
 
     }
 
@@ -444,7 +461,7 @@ public class Alta_perfil extends javax.swing.JFrame {
         try {
 
             if (controlDatos() == true) {
-                if (contUsu.existeUsuario(jT_nick.getText()) == false) {
+              
                     if (usuTipo == false) {
 
                         dtColaborador dtCola = new dtColaborador((jT_nombre.getText()), jT_apellido.getText(), jT_nick.getText(),
@@ -459,15 +476,11 @@ public class Alta_perfil extends javax.swing.JFrame {
                         return true;
                     }
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nickname");
-                    return false;
-                }
             } else {
                 return false;
             }
         } catch (Exception ex) {
-            Logger.getLogger(Alta_perfil.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
         return false;
 
