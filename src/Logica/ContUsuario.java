@@ -836,7 +836,8 @@ public class ContUsuario implements iConUsuario {
                     dtHora dth = new dtHora(da.getHours(), da.getMinutes());
                     colProp cp = new colProp(dtf, dth, monto, retorno, p, comentario);
                     c.colaboracionesUsuario.put(p.getTitulo(), cp);
-                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno, comentario);
+                    boolean h=colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno, comentario);                   
+                        
                     return true;
                 } else {
                     return false;
@@ -1299,5 +1300,7 @@ public void getPropuestas(ArrayList<propuesta>prop){
         }
         return lst;
     }
+    
+    
 }
 
