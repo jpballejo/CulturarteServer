@@ -69,6 +69,7 @@ public class culturarteFabrica {
         ip.cargarPropuestas();
         ic.cargarColaboracion();
         iu.cargarFavoritos();
+        ip.propAutomaticas();
     }
 
     public String funcionprueba() {

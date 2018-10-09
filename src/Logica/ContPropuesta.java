@@ -407,6 +407,10 @@ public class ContPropuesta implements iConPropuesta {
         this.categorias.clear();
         this.estados.clear();
         this.idEstado.clear();
+        this.propCambioEstadoAuto.clear();
+        this.propFiltradaING.clear();
+        this.arregloDtEstProp.clear();
+        
 
     }
 
@@ -563,6 +567,7 @@ public class ContPropuesta implements iConPropuesta {
 ////////////////////PROCEDIMIENTO estado Automatico-----------------
 public void propAutomaticas(){
     try {
+        this.propCambioEstadoAuto.clear();
     cUsuario.getPropuestas(propCambioEstadoAuto);
         for(int i =0;i<propCambioEstadoAuto.size();i++){
             propuesta p = (propuesta)propCambioEstadoAuto.get(i);
@@ -601,13 +606,7 @@ public void propAutomaticas(){
         }
     }
 
-    public void verificarPropHora() {
-
-        for (int i = 0; i < propCambioEstadoAuto.size(); i++) {
-            propuesta p = propCambioEstadoAuto.get(i);
-           
-        }
-    }
+ 
 
     /*
  *cambiaPropEstadoAuto recibe una propuesta y verifica si el estado es Publicada o En Financiacion

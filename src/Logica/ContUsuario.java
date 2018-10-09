@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -40,6 +42,19 @@ public class ContUsuario implements iConUsuario {
     utilidades util = utilidades.getInstance();
     ArrayList<dtFavoritos> favo = new ArrayList<>();
     
+    public dtFecha creadtFecha(String fecha){
+    return (dtFecha)util.construirFecha(fecha);
+    }
+    
+    public boolean emailValido(String email){
+    
+            // Patrón para validar el email
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mather = pattern.matcher(email);
+
+        return mather.find();
+    }
     
     public boolean existeUsuario(String nickName) {
         
@@ -60,6 +75,7 @@ public class ContUsuario implements iConUsuario {
                if(u.getEmail().equals(mail)){return true;}
             }
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         return false;
     }
@@ -637,7 +653,7 @@ public class ContUsuario implements iConUsuario {
         
     }
     
-    @Override
+   /* @Override
     public void levantarBDdesdeMemoria() {
         cargarUsuariosaBD();
         cargarSeguidoresaBD();
@@ -689,7 +705,7 @@ public class ContUsuario implements iConUsuario {
                 for (String k : c.colaboracionesUsuario.keySet()) {
                     colProp cp;
                     cp = c.colaboracionesUsuario.get(k);
-                    colabPer.registrarColaboracion(c.nickname, cp.getPropColaborada().getTitulo(), cp.getFecha().getFecha(), cp.getHora().getHora(), Integer.toString(cp.getMontocolaborado()), cp.getRetorno());
+                    colabPer.registrarColaboracion(c.nickname, cp.getPropColaborada().getTitulo(), cp.getFecha().getFecha(), cp.getHora().getHora(), Integer.toString(cp.getMontocolaborado()), cp.getRetorno(),cp.getComentario());
                 }
             }
         }
@@ -739,8 +755,8 @@ public class ContUsuario implements iConUsuario {
                     }
                 }
             }
-        }*/
-    }
+        }
+    }*/
     
     @Override
     public List<String> listarColaboradoresporNick(String nick) {
@@ -820,7 +836,7 @@ public class ContUsuario implements iConUsuario {
                     dtHora dth = new dtHora(da.getHours(), da.getMinutes());
                     colProp cp = new colProp(dtf, dth, monto, retorno, p, comentario);
                     c.colaboracionesUsuario.put(p.getTitulo(), cp);
-                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno);
+                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno, comentario);
                     return true;
                 } else {
                     return false;

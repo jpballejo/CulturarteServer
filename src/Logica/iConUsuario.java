@@ -48,7 +48,7 @@ public interface iConUsuario {
 
     public abstract List<String> listarProponentes(String text);
 
-    public abstract void levantarBDdesdeMemoria();
+    
 
     public abstract List<String> listarColaboradoresLike(String nick);
 
@@ -61,9 +61,12 @@ public interface iConUsuario {
     public dtUsuario usuarioLogin(String usu);
 
     public abstract int getMontoColaborado(String idProp);
-    
+
     public abstract void getPropuestas(ArrayList<propuesta> prop);
-    
+
     public abstract boolean existeMail(String mail);
 
+    public boolean emailValido(String email);
+    
+    public dtFecha creadtFecha(String fecha);
 }
