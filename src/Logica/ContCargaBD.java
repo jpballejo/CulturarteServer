@@ -113,6 +113,7 @@ public class ContCargaBD implements iContCargaBD {
             cargarColaboraciones();
             cargarEstadosPropuestas();
             cargarSeguidores();
+            cargarFavoritos();
             return true;
         } catch (Exception e) {
             return false;

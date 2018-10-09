@@ -652,7 +652,7 @@ public class ContUsuario implements iConUsuario {
         
     }
     
-    @Override
+   /* @Override
     public void levantarBDdesdeMemoria() {
         cargarUsuariosaBD();
         cargarSeguidoresaBD();
@@ -704,7 +704,7 @@ public class ContUsuario implements iConUsuario {
                 for (String k : c.colaboracionesUsuario.keySet()) {
                     colProp cp;
                     cp = c.colaboracionesUsuario.get(k);
-                    colabPer.registrarColaboracion(c.nickname, cp.getPropColaborada().getTitulo(), cp.getFecha().getFecha(), cp.getHora().getHora(), Integer.toString(cp.getMontocolaborado()), cp.getRetorno());
+                    colabPer.registrarColaboracion(c.nickname, cp.getPropColaborada().getTitulo(), cp.getFecha().getFecha(), cp.getHora().getHora(), Integer.toString(cp.getMontocolaborado()), cp.getRetorno(),cp.getComentario());
                 }
             }
         }
@@ -754,8 +754,8 @@ public class ContUsuario implements iConUsuario {
                     }
                 }
             }
-        }*/
-    }
+        }
+    }*/
     
     @Override
     public List<String> listarColaboradoresporNick(String nick) {
@@ -835,7 +835,7 @@ public class ContUsuario implements iConUsuario {
                     dtHora dth = new dtHora(da.getHours(), da.getMinutes());
                     colProp cp = new colProp(dtf, dth, monto, retorno, p, comentario);
                     c.colaboracionesUsuario.put(p.getTitulo(), cp);
-                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno);
+                    colabPer.registrarColaboracion(colab, titulo, dtf.getFecha(), dth.getHora(), Integer.toString(monto), retorno, comentario);
                     return true;
                 } else {
                     return false;

@@ -22,10 +22,10 @@ public class colaboracionesPersistencia {
 
     static ConexionDB conexion = new ConexionDB();
 
-    public boolean registrarColaboracion(String colaborador, String titulo, String fecha, String hora, String monto, String retorno) {
+    public boolean registrarColaboracion(String colaborador, String titulo, String fecha, String hora, String monto, String retorno, String comentario) {
         try {
             String sql = null;
-            sql = "INSERT INTO `cultuRarte`.`Colaboraciones` (`nickusuario`, `tituloprop`, `fecha`, `hora`, `monto`, `retorno`) VALUES ('" + colaborador + "','" + titulo + "','" + fecha + "','" + hora + "','" + monto + "','" + retorno + "')";
+            sql = "INSERT INTO `cultuRarte`.`Colaboraciones` (`nickusuario`, `tituloprop`, `fecha`, `hora`, `monto`, `retorno`,`comentario`) VALUES ('" + colaborador + "','" + titulo + "','" + fecha + "','" + hora + "','" + monto + "','" + retorno + "','" + comentario + "')";
             Connection conn = conexion.getConexion();
             Statement st = conn.createStatement();
             st.executeUpdate(sql);

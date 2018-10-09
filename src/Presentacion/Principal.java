@@ -415,7 +415,8 @@ culturarteFabrica fabrica=culturarteFabrica.getInstance();
         contUsuario.cargarUsuarios();
         contPropuesta.cargarPropuestas();
         contColaboracion.cargarColaboracion();       
-
+contUsuario.cargarFavoritos();
+contPropuesta.propAutomaticas();
         JOptionPane.showMessageDialog(null, "Datos de prueba cargados con exito");
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
