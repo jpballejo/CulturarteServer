@@ -61,6 +61,7 @@ public class colProp {
         return retorno;
     }
     
+    
     //SETTERS//
     public void setFecha(dtFecha fecha) {
         this.fecha = fecha;

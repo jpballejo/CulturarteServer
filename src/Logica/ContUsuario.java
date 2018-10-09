@@ -1187,6 +1187,43 @@ public class ContUsuario implements iConUsuario {
         }
         return retorno;
     }
+
+    public List<dtPropuesta> listarpropuestasencategoria(String cat) throws Exception {
+        List<dtPropuesta> retorno= new ArrayList<>();
+        for(String usus: this.usuarios.keySet()){
+            if(this.usuarios.get(usus) instanceof proponente){
+                proponente p=(proponente) this.usuarios.get(usus);
+                for(String key: p.propuestasUsuario.keySet()){
+                    propuesta prop=p.propuestasUsuario.get(key);
+                    if(prop.getCategoria().equals(cat)){
+                        retorno.add(infoPropuesta(key));
+                    }
+                }
+            }
+        }
+        return retorno;
+    }
+    
+    public List<dtColProp> listarcolaboradasfinanciadas(String nickusuario){
+        List<dtColProp> retorno= new ArrayList<>();
+        for(String usus: this.usuarios.keySet()){
+            if(this.usuarios.get(usus) instanceof colaborador){
+                colaborador c=(colaborador) this.usuarios.get(usus);
+                for(String key: c.colaboracionesUsuario.keySet()){
+                    propuesta p=this.damePropuesta(key);
+                    if(p.getCategoria().equals("Financiada")){
+                    colProp cp=c.colaboracionesUsuario.get(key);
+                    dtColProp dtcp= new dtColProp(usus,cp.getRetorno(),cp.getFecha(),cp.getHora(),cp.getMontocolaborado(),cp.getComentario());
+                    dtcp.setTitulo(key);
+                        if(dtcp.getComentario().isEmpty()){
+                            retorno.add(dtcp);
+                        }
+                    }
+                }
+            }
+        }
+        return retorno;
+    }
     
     @Override
     /**

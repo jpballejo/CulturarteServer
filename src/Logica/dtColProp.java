@@ -91,6 +91,10 @@ public class dtColProp {
     public String getComentario() {
         return comentario;
     }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
     
     
     
