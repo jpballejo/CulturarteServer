@@ -478,6 +478,7 @@ public class ContUsuario implements iConUsuario {
         if (nick.isEmpty() == false) {
             for (String key : this.usuarios.keySet()) {
                 if (key.contains(nick)) {
+                    
                     lst.add(key);
                 }
                 
@@ -1249,7 +1250,38 @@ public void getPropuestas(ArrayList<propuesta>prop){
         }
     } catch (Exception e) {
         System.err.println(e.getMessage());
-    }
+    }   
 }
+
+
+    public String armarretorno(String cbe, String cbp) {
+        String re = null;
+        if (cbe != null && cbp == null) {
+            re = cbe;
+        } else if (cbe != null && cbp != null) {
+            re = cbe + "/" + cbp;
+        } else if (cbe == null && cbp != null) {
+            re = cbp;
+        }
+        return re;
+
+    }
+    
+    public List<dtUsuario> listarusuariosweb(String nick) {
+        List<dtUsuario> lst = new ArrayList<dtUsuario>();
+        if (nick.isEmpty() == false) {
+            for (String key : this.usuarios.keySet()) {
+                if (key.contains(nick)) {   
+                    lst.add(this.infoUsuarioGeneral(key));
+                }
+                
+            }
+        } else {
+            for (String key : this.usuarios.keySet()) {
+                lst.add(this.infoUsuarioGeneral(key));
+            }
+        }
+        return lst;
+    }
 }
 
