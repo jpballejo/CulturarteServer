@@ -601,13 +601,7 @@ public void propAutomaticas(){
         }
     }
 
-    public void verificarPropHora() {
-
-        for (int i = 0; i < propCambioEstadoAuto.size(); i++) {
-            propuesta p = propCambioEstadoAuto.get(i);
-           
-        }
-    }
+ 
 
     /*
  *cambiaPropEstadoAuto recibe una propuesta y verifica si el estado es Publicada o En Financiacion

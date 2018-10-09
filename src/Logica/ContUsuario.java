@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -40,6 +42,19 @@ public class ContUsuario implements iConUsuario {
     utilidades util = utilidades.getInstance();
     ArrayList<dtFavoritos> favo = new ArrayList<>();
     
+    public dtFecha creadtFecha(String fecha){
+    return (dtFecha)util.construirFecha(fecha);
+    }
+    
+    public boolean emailValido(String email){
+    
+            // Patrón para validar el email
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mather = pattern.matcher(email);
+
+        return mather.find();
+    }
     
     public boolean existeUsuario(String nickName) {
         
@@ -60,6 +75,7 @@ public class ContUsuario implements iConUsuario {
                if(u.getEmail().equals(mail)){return true;}
             }
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
         return false;
     }
