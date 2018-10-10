@@ -1009,12 +1009,13 @@ public class ContUsuario implements iConUsuario {
      * @param nick
      * @return
      */
-    public List<String> listarmisseguidores(String nick) {
-        ArrayList<String> retorno = new ArrayList<>();
+    public List<dtUsuario> listarmisseguidores(String nick) {
+        ArrayList<dtUsuario> retorno = new ArrayList<>();
         for (String key : this.usuarios.keySet()) {
             usuario u = this.usuarios.get(key);
             if (u.seguidos.containsKey(nick)) {
-                retorno.add(key);
+                dtUsuario dtu= this.infoUsuarioGeneral(u.getNickname());
+                retorno.add(dtu);
             }
         }
         return retorno;
@@ -1031,11 +1032,13 @@ public class ContUsuario implements iConUsuario {
         usuario u = this.usuarios.get(nick);
         for (String key : u.seguidos.keySet()) {
             if (u.seguidos.get(key) instanceof proponente) {
-                dtSigoA dtsa = new dtSigoA(key, "Proponente");
+                proponente aux=(proponente) this.usuarios.get(key);
+                dtSigoA dtsa = new dtSigoA(key, "Proponente", aux.getNombre()+" "+aux.getApellido());
                 retorno.add(dtsa);
             }
             if (u.seguidos.get(key) instanceof colaborador) {
-                dtSigoA dtsa = new dtSigoA(key, "Colaborador");
+                colaborador aux=(colaborador) this.usuarios.get(key);
+                dtSigoA dtsa = new dtSigoA(key, "Colaborador", aux.getNombre()+" "+aux.getApellido());
                 retorno.add(dtsa);
             }
         }

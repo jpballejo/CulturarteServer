@@ -10,11 +10,16 @@ package Logica;
  * @author nicolasgutierrez
  */
 public class dtSigoA {
-    private String nickusuario,rol;
+    private String nickusuario,rol,nombrecompleto;
 
-    public dtSigoA(String nickusuario, String rol) {
+    public String getNombrecompleto() {
+        return nombrecompleto;
+    }
+
+    public dtSigoA(String nickusuario, String rol, String nc) {
         this.nickusuario = nickusuario;
         this.rol = rol;
+        this.nombrecompleto=nc;
     }
 
     public String getNickusuario() {
